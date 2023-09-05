@@ -34,7 +34,7 @@ namespace SVG_Restaurants.Controllers
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index(UserCredentialsVM vm, String u, String p)
+        public async Task<IActionResult> Index(UserCredentialsVM vm)
         {
 
             // Check if a user with the provided username and password exists
