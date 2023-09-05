@@ -1,2 +1,22 @@
-﻿<h1>Restaurant Worker's Login</h1>
-<a type="button" asp-action="Create" class="btn btn-outline-primary">Create Account</a>
+﻿<body class="text-center">
+    <form>
+        <div class="row justify-content-center">
+            <h1 class="h3 mb-3 font-weight-normal">Restaurant Worker's Login</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-5 m-1">
+                <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus />
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-5 m-1">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required />
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-5 m-1">
+                <a asp-controller="RestaurantWorkers" asp-action="Index" type="submit" class="w-100 btn btn-lg btn-primary">Sign in</a>
+            </div>
+        </div>
+    </form>
+</body>
