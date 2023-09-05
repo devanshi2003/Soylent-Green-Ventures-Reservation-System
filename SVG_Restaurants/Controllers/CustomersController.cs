@@ -45,7 +45,6 @@ namespace SVG_Restaurants.Controllers
             if (user != null)
             {
                 // Redirect to a specific page upon successful login
-                //NEED TO CHANGE THIS
                 return RedirectToAction("Index", "Home");
             }
             else
