@@ -13,8 +13,8 @@
     <div class="col-auto" id="staffLogintDiv">
         <a asp-controller="RestaurantWorkers" asp-action="Login" class="btn btn-secondary">Login as Staff</a>
     </div>
-    <div class="col-auto" id="logoutDiv" style="display: none;">
-        <a asp-controller="RestaurantWorkers" asp-action="Login" class="btn btn-secondary">Log out</a>
+    <div class="col-auto" id="logoutDiv">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Log out</a>
     </div>
 </div>
 
@@ -41,5 +41,12 @@
         document.getElementById("logoutDiv").style.display = "block";
         document.getElementById("customerLoginDiv").style.display = "none";
         document.getElementById("staffLogintDiv").style.display = "none";
-    }</script>
+    }
+    else
+    {
+        document.getElementById("logoutDiv").style.display = "none";
+        document.getElementById("customerLoginDiv").style.display = "block";
+        document.getElementById("staffLogintDiv").style.display = "block";
+    }
+    </script>
 }
