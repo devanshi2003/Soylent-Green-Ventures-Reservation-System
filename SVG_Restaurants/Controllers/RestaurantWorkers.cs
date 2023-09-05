@@ -22,9 +22,13 @@ namespace SVG_Restaurants.Controllers
         // Customers Login
         public async Task<IActionResult> Login(UserCredentialsVM vm)
         {
-            
+            // Retrieve the error message from TempData, if it exists
+            string errorMessage = TempData["ErrorMessage"] as string;
 
-            return View("Login");
+            // Create a view model to pass the error message to the view
+            vm.errorMessage = errorMessage;
+
+            return View(vm);
         }
 
         // GET: RestaurantWorkers
