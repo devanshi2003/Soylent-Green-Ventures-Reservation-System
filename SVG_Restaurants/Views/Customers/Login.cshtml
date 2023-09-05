@@ -1,22 +1,23 @@
-﻿
+﻿@model SVG_Restaurants.ViewModels.UserCredentialsVM;
+
 <body class="text-center">
-    <form>
+    <form method="post" asp-controller="Customers" asp-action="Index">
         <div class="row justify-content-center">
             <h1 class="h3 mb-3 font-weight-normal">Customers Login</h1>
         </div>
         <div class="row justify-content-center">
             <div class="col-5 m-1">
-                <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus />
+                <input type="text" asp-for="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus />
             </div>
         </div>
         <div class="row justify-content-center">
              <div class="col-5 m-1">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required/>
+                <input type="text"asp-for="password" id="inputPassword" class="form-control" placeholder="Password" required />
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-5 m-1">
-                <a asp-controller="Home" asp-action="Index" type="submit" class="w-100 btn btn-lg btn-primary">Sign in</a>
+                <button asp-controller="Customers" asp-action="Index" type="submit" class="w-100 btn btn-lg btn-primary">Sign in</button>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -26,3 +27,10 @@
         </div>
     </form>
 </body>
+
+@if (!string.IsNullOrEmpty(Model.errorMessage))
+{
+    <div class="alert alert-danger">
+        @Model.errorMessage
+    </div>
+}
