@@ -18,6 +18,12 @@ namespace SVG_Restaurants.Controllers
             _context = context;
         }
 
+        // Customers Login
+        public async Task<IActionResult> Login()
+        {
+            return View("Login");
+        }
+
         // GET: Customers
         public async Task<IActionResult> Index()
         {
