@@ -45,7 +45,7 @@ namespace SVG_Restaurants.Controllers
             if (user != null)
             {
                 // Redirect to a specific page upon successful login
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home", new { CustomerID = user.CustomerId });
             }
             else
             {
