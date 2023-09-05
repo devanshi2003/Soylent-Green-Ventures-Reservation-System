@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SVG_Restaurants.Models;
+using SVG_Restaurants.ViewModels;
 
 namespace SVG_Restaurants.Controllers
 {
@@ -19,16 +20,37 @@ namespace SVG_Restaurants.Controllers
         }
 
         // Customers Login
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(UserCredentialsVM vm)
         {
-            return View("Login");
+            // Retrieve the error message from TempData, if it exists
+            string errorMessage = TempData["ErrorMessage"] as string;
+
+            // Create a view model to pass the error message to the view
+            vm.errorMessage = errorMessage;
+
+            return View(vm);
         }
 
         // GET: RestaurantWorkers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(UserCredentialsVM vm)
         {
-            var sGVContext = _context.RestaurantWorkers.Include(r => r.Restaurant);
-            return View(await sGVContext.ToListAsync());
+
+            // Check if a user with the provided username and password exists
+            var user = await _context.RestaurantWorkers
+                .FirstOrDefaultAsync(c => c.Username == vm.username && c.Password == vm.password);
+
+
+            if (user != null)
+            {
+                // Redirect to a specific page upon successful login
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                // Handle the case where the credentials do not match
+                TempData["ErrorMessage"] = "Invalid username or password.";
+                return RedirectToAction("Login");
+            }
         }
 
         // GET: RestaurantWorkers/Details/5
