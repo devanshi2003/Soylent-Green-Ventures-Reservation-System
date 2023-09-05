@@ -25,12 +25,24 @@ namespace SVG_Restaurants.Controllers
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string username, string password)
         {
-              return _context.Customers != null ? 
-                          View(await _context.Customers.ToListAsync()) :
-                          Problem("Entity set 'SGVContext.Customers'  is null.");
+            // Check if a user with the provided username and password exists
+            var user = await _context.Customers.FirstOrDefaultAsync(c => c.Username == username && c.Password == password);
+
+            if (user != null)
+            {
+                // Redirect to a specific page upon successful login
+                //NEED TO CHANGE THIS
+                return RedirectToAction("Create", "Customers");
+            }
+            else
+            {
+                // Handle the case where the credentials do not match
+                return Problem("Invalid username or password.");
+            }
         }
+
 
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
