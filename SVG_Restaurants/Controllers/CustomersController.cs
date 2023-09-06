@@ -97,14 +97,14 @@ namespace SVG_Restaurants.Controllers
         }
 
         // GET: Customers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(CustomerDetailsVM vm)
         {
-            if (id == null || _context.Customers == null)
+            if (_context.Customers == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers.FindAsync(vm.CustomerID);
             if (customer == null)
             {
                 return NotFound();
