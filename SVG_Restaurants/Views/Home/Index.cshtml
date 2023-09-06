@@ -34,7 +34,7 @@
                 <a asp-controller="Customers" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-secondary">Edit Profile</a>
             </div>
             <div class="col-auto">
-                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Log out</a>
+                <a  id="LogOut" asp-controller="Home" asp-action="Index" class="btn btn-secondary">Log out</a>
             </div>
         }
     }
@@ -170,6 +170,15 @@
         allCards.style.display = 'block';
         upcomingBookings.style.display = 'none';
     });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var logOutButton = document.getElementById('LogOut');
+
+            logOutButton.addEventListener('click', function () {
+                // Show an alert when the button is clicked
+                alert('You have been logged out.');
+            });
+        });
 
     allCards.style.display = 'block';
     upcomingBookings.style.display = 'none';</script>
