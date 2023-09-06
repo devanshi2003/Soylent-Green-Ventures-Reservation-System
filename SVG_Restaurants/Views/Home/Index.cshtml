@@ -23,14 +23,21 @@
 <body>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Restaurants</a>
+            <a id="restaurantsLink" class="nav-link active" aria-current="page" href="#">Restaurants</a>
+        </li>
+        <li class="nav-item">
+            <a id="upcomingBookingsLink" class="nav-link active" aria-current="page" href="#">Upcoming Bookings</a>
         </li>
     </ul>
 
 </body>
 
+<div id="upcomingBookings">
+    <p>You have no upcoming bookings.</p>
+</div>
+
 <!-- Card Blog -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+<div id="allCards" class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <!-- Grid -->
     <div class="row">
         <!-- Card -->
@@ -113,6 +120,31 @@
     <!-- End Grid -->
 </div>
 <!-- End Card Blog -->
+
+<script>
+    // Event listener for the "Upcoming Bookings" link
+    const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
+    const allCards = document.getElementById('allCards');
+    const upcomingBookings = document.getElementById('upcomingBookings');
+
+    upcomingBookingsLink.addEventListener('click', function (event) {
+        
+        allCards.style.display = 'none';
+        upcomingBookings.style.display = 'block';
+
+    });
+
+    // Event listener for the "Restaurants" link
+    const restaurantsLink = document.getElementById('restaurantsLink');
+    restaurantsLink.addEventListener('click', function (event) {
+        allCards.style.display = 'block';
+        upcomingBookings.style.display = 'none';
+    });
+
+    allCards.style.display = 'block';
+    upcomingBookings.style.display = 'none';
+
+</script>
 
 
 @section Scripts {
