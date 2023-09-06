@@ -25,6 +25,8 @@ namespace SVG_Restaurants.Controllers
             .Where(c => c.RestaurantId == restaurantID)
             .FirstOrDefaultAsync();
 
+
+
             if (restaurant != null)
             {
                 // Restaurant with the specified ID was found, you can use it
@@ -59,8 +61,27 @@ namespace SVG_Restaurants.Controllers
                 .FirstOrDefaultAsync(c => c.Username == vm.username && c.Password == vm.password);
 
 
+            var admin = await _context.RestaurantWorkers
+                         .FirstOrDefaultAsync(c => c.Username == "admin1");
+
+
+
             if (user != null)
             {
+                if (user.Username == admin.Username)
+                {
+                    if (admin.Password != vm.password)
+                    {
+                        // Handle the case where the credentials do not match
+                        TempData["ErrorMessage"] = "Invalid username or password.";
+                        return RedirectToAction("Login");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Create", "RestaurantWorkers", new { restaurantID = user.RestaurantId });
+                    }
+                }
+
                 // Redirect to a specific page upon successful login
                 //return RedirectToAction("Index", "Home");
                 return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = user.RestaurantId});
