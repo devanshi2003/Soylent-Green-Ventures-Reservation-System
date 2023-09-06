@@ -4,18 +4,17 @@
     ViewData["Title"] = "Home Page";
 }
 
-
-<body>
-    <style type="text/css">
-        div {
-            background-color: #531414;
+   <style type="text/css">
+        body {
+            background-color: #9C4747;
         }
     </style>
-</body>
-
-
-
-
+<div class="text-center">
+<h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
+    Soylent Green Ventures
+</h1>
+</div>
+<body>
 <div class="row justify-content-end">
     @{
         string customerID = Context.Request.Query["CustomerID"];
@@ -39,14 +38,13 @@
                 <a asp-controller="Customers" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-secondary">Edit Profile</a>
             </div>
             <div class="col-auto">
-                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Log out</a>
+                <a  id="LogOut" asp-controller="Home" asp-action="Index" class="btn btn-secondary">Log out</a>
             </div>
         }
     }
 </div>
 
 
-<body>
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a id="restaurantsLink" class="nav-link active btn-outline" aria-current="page" href="#">Restaurants</a>
@@ -55,12 +53,26 @@
             <a id="upcomingBookingsLink" class="nav-link active btn-outline" aria-current="page" href="#">Upcoming Bookings</a>
         </li>
     </ul>
-
-</body>
-
-<div id="upcomingBookings">
-    <p>You have no upcoming bookings.</p>
-</div>
+    @{
+        if (string.IsNullOrEmpty(customerID))
+        {
+            <div class="text-center">
+            <div id="upcomingBookings">
+                    <h2 class="font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">
+                    Log in to see your upcoming bookings!
+                </h2>
+            </div>
+            </div>
+        }
+        else
+        {
+            <div class="text-center">
+            <div id="upcomingBookings">
+                <h2 class="font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">No upcoming bookings :(</h2>
+            </div>
+            </div>
+        }
+    }
 
 <!-- Card Blog -->
 <div id="allCards" class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -71,7 +83,7 @@
             <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
                 <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Bamboo Restaurant.jpg" alt="Image Description">
                 <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
-                    Special Banquet Avaliable!
+                    Special Banquet Available!
                 </span>
             </div>
 
@@ -97,7 +109,7 @@
         <!-- Card -->
         <a class="col-4 group rounded-xl overflow-hidden" href="#">
             <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
-                <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/BrazilianRes.jpg" alt="Image Description">
+                <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Brazilian Restaurant.jpg" alt="Image Description">
             </div>
 
             <div class="mt-7">
@@ -122,7 +134,7 @@
             <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
                 <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Mexican Restaurant.jpg" alt="Image Description">
                 <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
-                    Special Banquet Avaliable!
+                    Special Banquet Available!
                 </span>
             </div>
 
@@ -167,5 +179,15 @@
         upcomingBookings.style.display = 'none';
     });
 
+        document.addEventListener('DOMContentLoaded', function () {
+            var logOutButton = document.getElementById('LogOut');
+
+            logOutButton.addEventListener('click', function () {
+                // Show an alert when the button is clicked
+                alert('You have been logged out.');
+            });
+        });
+
     allCards.style.display = 'block';
     upcomingBookings.style.display = 'none';</script>
+</body>
