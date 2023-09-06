@@ -176,6 +176,16 @@ namespace SVG_Restaurants.Controllers
                 var customer = _context.Customers.Single(c => c.CustomerId == CustomerID);
 
                 // Remove the customer entity
+                var customerReservation = _context.Reservations.Where(c => c.CustomerId == CustomerID);
+
+                var customerReservations = _context.Reservations.Where(r => r.CustomerId == CustomerID).ToList();
+
+                if (customerReservations.Count > 0)
+                {
+                    _context.Reservations.RemoveRange(customerReservations);
+                    _context.SaveChanges();
+                }
+
                 _context.Customers.Remove(customer);
 
                 // Save the changes to the database
