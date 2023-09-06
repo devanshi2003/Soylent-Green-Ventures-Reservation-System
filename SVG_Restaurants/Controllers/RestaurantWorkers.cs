@@ -27,7 +27,9 @@ namespace SVG_Restaurants.Controllers
 
         public async Task<IActionResult> WorkerDetails()
         {
-            var query = await _context.RestaurantWorkers.ToListAsync();
+            var query = await _context.RestaurantWorkers
+        .Where(worker => worker.RestaurantId != null) // Replace SomeProperty with the actual property name
+        .ToListAsync();
 
             return View(query);
 

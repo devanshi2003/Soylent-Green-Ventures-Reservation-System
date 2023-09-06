@@ -19,6 +19,13 @@
                             </h2>
                         </div>
                     </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
                     <!-- End Header -->
 
                     <!-- Table -->
@@ -96,9 +103,11 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.PhoneNumber</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.Username</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.RestaurantId</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <a class="text-blue-500 hover:text-blue-700" href="#">Edit</a></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <a class="text-blue-500 hover:text-blue-700" href="#">Delete</a></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <a type="button" asp-action="Edit" asp-route-workerID="@user.WorkerId" class="btn btn-outline-primary">Edit</a></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                        <a type="button" asp-action="Delete" asp-route-workerID="@user.WorkerId" class="btn btn-outline-primary">Delete</a>
+                                    </td>
                         </tr>
                         }
                     </tbody>
-
+                    </table>

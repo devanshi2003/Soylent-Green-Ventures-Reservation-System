@@ -16,11 +16,11 @@
                 Profile
             </h2>
             <p class="text-sm text-gray-600 dark:text-gray-400">
-                Manage your name, password and account settings.
+                Manage staff name, password and account settings.
             </p>
         </div>
 
-        <form asp-action="Edit">
+        <form method="post" asp-action="Edit">
             <!-- Grid -->
             <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
