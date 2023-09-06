@@ -18,6 +18,13 @@ namespace SVG_Restaurants.Controllers
         {
             _context = context;
         }
+        public async Task<IActionResult> Admin()
+        {
+
+            return View("Admin");
+
+        }
+
         public async Task<IActionResult> Home(int restaurantID)
         {
 
@@ -78,7 +85,7 @@ namespace SVG_Restaurants.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Create", "RestaurantWorkers", new { restaurantID = user.RestaurantId });
+                        return RedirectToAction("Admin", "RestaurantWorkers");
                     }
                 }
 

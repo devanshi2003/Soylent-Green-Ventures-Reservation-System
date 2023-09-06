@@ -1,0 +1,15 @@
+﻿@model SVG_Restaurants.Models.RestaurantWorker
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+
+<div class="col-auto">
+    <a asp-controller="RestaurantWorkers" asp-action="Create" asp-route-restaurantID=1 class="btn btn-secondary">Create Staff Account</a>
+</div>
+
+<div class="col-auto">
+    <a asp-controller="RestaurantWorkers" asp-action="Details" class="btn btn-secondary">Edit Staff Account</a>
+</div>
+
