@@ -18,8 +18,27 @@ namespace SVG_Restaurants.Controllers
         {
             _context = context;
         }
+        public async Task<IActionResult> Home(int restaurantID)
+        {
 
-        // Customers Login
+            var restaurant = await _context.Restaurants
+            .Where(c => c.RestaurantId == restaurantID)
+            .FirstOrDefaultAsync();
+
+            if (restaurant != null)
+            {
+                // Restaurant with the specified ID was found, you can use it
+                return View(restaurant);
+            }
+            else
+            {
+                // No matching restaurant was found, handle it accordingly
+                return NotFound(); // or any other action/result
+            }
+
+        }
+
+        // Restaurant staff Login
         public async Task<IActionResult> Login(UserCredentialsVM vm)
         {
             // Retrieve the error message from TempData, if it exists
@@ -43,7 +62,8 @@ namespace SVG_Restaurants.Controllers
             if (user != null)
             {
                 // Redirect to a specific page upon successful login
-                return RedirectToAction("Index", "Home");
+                //return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = user.RestaurantId});
             }
             else
             {
