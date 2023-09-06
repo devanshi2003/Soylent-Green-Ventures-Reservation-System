@@ -3,7 +3,7 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">SGV</h1>
+    <h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-black">SGV</h1>
 </div>
 
 <div class="row justify-content-end">
@@ -23,45 +23,42 @@
 <body>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Restaurants</a>
+            <a id="restaurantsLink" class="nav-link active" aria-current="page" href="#">Restaurants</a>
+        </li>
+        <li class="nav-item">
+            <a id="upcomingBookingsLink" class="nav-link active" aria-current="page" href="#">Upcoming Bookings</a>
         </li>
     </ul>
 
 </body>
 
-<!-- Card Blog -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-    <!-- Title -->
-    <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
-        <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">Insights</h2>
-        <p class="mt-1 text-gray-600 dark:text-gray-400">Our Restaurants</p>
-    </div>
-    <!-- End Title -->
+<div id="upcomingBookings">
+    <p>You have no upcoming bookings.</p>
+</div>
 
-    
+<!-- Card Blog -->
+<div id="allCards" class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <!-- Grid -->
     <div class="row">
-
         <!-- Card -->
         <a class="col-4 group rounded-xl overflow-hidden" href="#">
             <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
-                <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="https://images.unsplash.com/photo-1586232702178-f044c5f4d4b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80" alt="Image Description">
+                <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Bamboo Restaurant.jpg" alt="Image Description">
                 <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
                     Special Banquet Avaliable!
                 </span>
             </div>
 
             <div class="mt-7">
-
-                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">
+                <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black">
                     Bamboo Leaf
                 </h3>
-                <p class="mt-3 text-gray-800 dark:text-gray-200">
-                    Discover a modern twist on Asian fusion cuisine, bringing you a harmonious blend of flavors, textures, and traditions, drawing inspiration from the simplicity of bamboo leaves. Join us at 25 Gouger Street, Adelaide!
+                <p class="mt-3 mb-2 dark:text-black">
+                    Discover a modern twist on Asian fusion cuisine, drawing inspiration from the simplicity of bamboo leaves. Join us at 25 Gouger Street, Adelaide!
                 </p>
-
+                <p></p>
                 <p class="mt-5 inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 group-hover:underline font-medium">
-                    menu
+                    Make a reservation
                     <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
@@ -73,20 +70,19 @@
         <!-- Card -->
         <a class="col-4 group rounded-xl overflow-hidden" href="#">
             <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
-                <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="https://images.unsplash.com/photo-1586232702178-f044c5f4d4b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80" alt="Image Description">
-
-                <!-- img ="wwwroot/img/Bamboo Restaurant.jpg" -->
+                <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/BrazilianRes.jpg" alt="Image Description">
             </div>
 
             <div class="mt-7">
-                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">
+                <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black">
                     La Oeste De La Mar
                 </h3>
-                <p class="mt-3 text-gray-800 dark:text-gray-200">
+                <p class="mt-3 mb-2 dark:text-black">
                     La Oeste De La Mar: Sizzling Brazilian flavors in the heart of Adelaide. Discover our stunning restaurant at 40 120 North Terrace. Join us for an unforgettable taste of Brazil!
                 </p>
+                <p></p>
                 <p class="mt-5 inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 group-hover:underline font-medium">
-                    Read more
+                    Make a reservation
                     <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
@@ -97,18 +93,21 @@
         <!-- Card -->
         <a class="col-4 group rounded-xl overflow-hidden" href="#">
             <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
-                <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="https://images.unsplash.com/photo-1542125387-c71274d94f0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Image Description">
+                <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Mexican Restaurant.jpg" alt="Image Description">
+                <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
+                    Special Banquet Avaliable!
+                </span>
             </div>
 
             <div class="mt-7">
-                <h3 class="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">
+                <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black">
                     Mexikana
                 </h3>
-                <p class="mt-3 text-gray-800 dark:text-gray-200">
+                <p class="mt-3 mb-2 dark:text-black">
                     Indulge in a delicious fusion of Korean and Mexican flavors designed with hipsters in mind! Join us at 40 Fullarton Road in Norwood, where culinary creativity meets cool vibes.
                 </p>
                 <p class="mt-5 inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 group-hover:underline font-medium">
-                    Read more
+                    Make a reservation
                     <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
@@ -121,6 +120,31 @@
     <!-- End Grid -->
 </div>
 <!-- End Card Blog -->
+
+<script>
+    // Event listener for the "Upcoming Bookings" link
+    const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
+    const allCards = document.getElementById('allCards');
+    const upcomingBookings = document.getElementById('upcomingBookings');
+
+    upcomingBookingsLink.addEventListener('click', function (event) {
+        
+        allCards.style.display = 'none';
+        upcomingBookings.style.display = 'block';
+
+    });
+
+    // Event listener for the "Restaurants" link
+    const restaurantsLink = document.getElementById('restaurantsLink');
+    restaurantsLink.addEventListener('click', function (event) {
+        allCards.style.display = 'block';
+        upcomingBookings.style.display = 'none';
+    });
+
+    allCards.style.display = 'block';
+    upcomingBookings.style.display = 'none';
+
+</script>
 
 
 @section Scripts {
