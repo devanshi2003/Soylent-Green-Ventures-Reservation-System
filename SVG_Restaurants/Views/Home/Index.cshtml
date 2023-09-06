@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SVG_Restaurants.ViewModels.CustomerDetailsVM
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -15,18 +17,29 @@
 
 
 <div class="row justify-content-end">
+    @{
+        string customerID = Context.Request.Query["CustomerID"];
 
-    <div class="col-auto" id="customerLoginDiv">
-        <a asp-controller="Customers" asp-action="Login" class="btn btn-outline" : #E4BDBD">Login as Customer</a>
-
-    </div>
-    <div class="col-auto" id="staffLogintDiv">
-        <a asp-controller="RestaurantWorkers" asp-action="Login" class="btn btn-outline">Login as Staff</a>
-    </div>
-    <div class="col-auto" id="logoutDiv">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-dark">Log out</a>
-    </div>
-
+        // Display Login buttons if customerID is not present
+        if (string.IsNullOrEmpty(customerID))
+        {
+            <div class="col-auto">
+                <a asp-controller="Customers" asp-action="Login" class="btn btn-secondary">Login as Customer</a>
+            </div>
+            <div class="col-auto">
+                <a asp-controller="RestaurantWorkers" asp-action="Login" class="btn btn-secondary">Login as Staff</a>
+            </div>
+        }
+        else
+        {
+            <div class="col-auto">
+                <a asp-controller="Customers" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-secondary">Edit Profile</a>
+            </div>
+            <div class="col-auto">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Log out</a>
+            </div>
+        }
+    }
 </div>
 
 
@@ -153,27 +166,3 @@
 
     allCards.style.display = 'block';
     upcomingBookings.style.display = 'none';</script>
-
-
-@section Scripts {
-    <script>// Function to check if a query parameter exists in the URL
-        function getQueryParam(parameterName) {
-            var urlParams = new URLSearchParams(window.location.search);
-            return urlParams.has(parameterName);
-        }
-
-        // Check if "CustomerID" parameter is present in the URL
-        var customerIdPresent = getQueryParam("CustomerID");
-
-        // Display the logoutDiv if CustomerID is present
-        if (customerIdPresent) {
-            document.getElementById("logoutDiv").style.display = "block";
-            document.getElementById("customerLoginDiv").style.display = "none";
-            document.getElementById("staffLogintDiv").style.display = "none";
-        }
-        else {
-            document.getElementById("logoutDiv").style.display = "none";
-            document.getElementById("customerLoginDiv").style.display = "block";
-            document.getElementById("staffLogintDiv").style.display = "block";
-        }</script>
-}
