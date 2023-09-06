@@ -91,7 +91,7 @@ namespace SVG_Restaurants.Controllers
             {
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Login", "Customers");
             }
             return View(customer);
         }
