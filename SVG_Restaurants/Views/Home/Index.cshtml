@@ -9,7 +9,11 @@
             background-color: #9C4747;
         }
     </style>
-
+<div class="text-center">
+<h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
+    Soylent Green Ventures
+</h1>
+</div>
 <body>
 <div class="row justify-content-end">
     @{
@@ -52,16 +56,20 @@
     @{
         if (string.IsNullOrEmpty(customerID))
         {
+            <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
             <div id="upcomingBookings">
-                <h2 class="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-gray-200" style="font-family: Baskerville">
-                    Log in to see your upcoming bookings
+                    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
+                    Log in to see your upcoming bookings!
                 </h2>
+            </div>
             </div>
         }
         else
         {
+            <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
             <div id="upcomingBookings">
-                <p>No upcoming bookings</p>
+                <p>No upcoming bookings :(</p>
+            </div>
             </div>
         }
     }
@@ -75,7 +83,7 @@
             <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
                 <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Bamboo Restaurant.jpg" alt="Image Description">
                 <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
-                    Special Banquet Avaliable!
+                    Special Banquet Available!
                 </span>
             </div>
 
@@ -126,7 +134,7 @@
             <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
                 <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Mexican Restaurant.jpg" alt="Image Description">
                 <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
-                    Special Banquet Avaliable!
+                    Special Banquet Available!
                 </span>
             </div>
 
