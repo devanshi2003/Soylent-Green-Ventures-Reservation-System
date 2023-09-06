@@ -1,32 +1,38 @@
 ﻿@model SVG_Restaurants.ViewModels.UserCredentialsVM;
 
-<body class="text-center">
+<body class="dark:bg-slate-900 text-center bg-gray-100">
+    <main class="w-full max-w-md mx-auto p-6">
+        <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-4 sm:p-7">
+                <div class="text-center">
+    <div class="mt-5">
+    <!--FORM-->
     <form method="post" asp-controller="Customers" asp-action="Index">
+        <div class="grid gap-y-4">
         <div class="row justify-content-center">
-            <h1 class="h3 mb-3 font-weight-normal">Customers Login</h1>
+            <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Customers Login</h1>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-5 m-1">
-                <input type="text" asp-for="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus />
+        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              Don't have an account?
+              <a class="text-blue-600 decoration-2 hover:underline font-medium" asp-action="Create">
+                Sign up here
+              </a>
+            </p>
+            <div class="relative">
+                <input type="text" asp-for="username" id="inputUsername" class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400" placeholder="Username" required autofocus />
             </div>
-        </div>
-        <div class="row justify-content-center">
-             <div class="col-5 m-1">
-                <input type="password"asp-for="password" id="inputPassword" class="form-control" placeholder="Password" required />
+             <div class="relative">
+                <input type="password"asp-for="password" id="inputPassword" class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400" placeholder="Password" required />
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-5 m-1">
-                <button asp-controller="Customers" asp-action="Index" type="submit" class="w-100 btn btn-lg btn-primary">Sign in</button>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-5 m-1">
-                <a type="button" asp-action="Create" class="btn btn-outline-primary">Create account</a>
-            </div>
+
+            <button asp-controller="Customers" asp-action="Index" type="submit" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">Sign in</button>
         </div>
     </form>
-</body>
+    </div>
+    </div>
+    </div>
+    </div>
+    </main>
 
 @if (!string.IsNullOrEmpty(Model.errorMessage))
 {
@@ -34,3 +40,4 @@
         @Model.errorMessage
     </div>
 }
+</body>
