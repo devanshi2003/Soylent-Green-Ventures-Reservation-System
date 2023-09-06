@@ -25,6 +25,14 @@ namespace SVG_Restaurants.Controllers
 
         }
 
+        public async Task<IActionResult> WorkerDetails()
+        {
+            var query = await _context.RestaurantWorkers.ToListAsync();
+
+            return View(query);
+
+        }
+
         public async Task<IActionResult> Home(int restaurantID)
         {
 
