@@ -181,7 +181,7 @@ namespace SVG_Restaurants.Controllers
                 // Save the changes to the database
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             catch (InvalidOperationException)
             {
