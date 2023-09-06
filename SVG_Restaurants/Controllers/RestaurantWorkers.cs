@@ -176,12 +176,9 @@ namespace SVG_Restaurants.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WorkerId,FirstName,LastName,Email,PhoneNumber,Username,Password,RestaurantId")] RestaurantWorker restaurantWorker)
+        public async Task<IActionResult> Edit([Bind("WorkerId,FirstName,LastName,Email,PhoneNumber,Username,Password,RestaurantId")] RestaurantWorker restaurantWorker)
         {
-            if (id != restaurantWorker.WorkerId)
-            {
-                return NotFound();
-            }
+           
 
             if (ModelState.IsValid)
             {

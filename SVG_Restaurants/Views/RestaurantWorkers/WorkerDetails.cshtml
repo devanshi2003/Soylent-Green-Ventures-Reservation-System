@@ -96,18 +96,23 @@
 
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                           @foreach (var user in Model)
-                         {       
+                         { 
+                        <form method="post" asp-action="Edit">
+
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">@user.FirstName</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.LastName</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.PhoneNumber</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.Username</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.RestaurantId</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <a type="button" asp-action="Edit" asp-route-workerID="@user.WorkerId" class="btn btn-outline-primary">Edit</a></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <a type="button" asp-action="Edit" asp-route-id ="@user.WorkerId" class="btn btn-outline-primary">Edit</a></td>
+                        <input type="hidden" name="workerID" value="@user.WorkerId" />         
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                         <a type="button" asp-action="Delete" asp-route-workerID="@user.WorkerId" class="btn btn-outline-primary">Delete</a>
                                     </td>
                         </tr>
+                        </form>
+
                         }
                     </tbody>
                     </table>
