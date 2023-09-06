@@ -168,20 +168,25 @@ namespace SVG_Restaurants.Controllers
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int CustomerID)
         {
-            if (_context.Customers == null)
+            try
             {
-                return Problem("Entity set 'SGVContext.Customers'  is null.");
-            }
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer != null)
-            {
+                // Attempt to find the customer with the specified CustomerId
+                var customer = _context.Customers.Single(c => c.CustomerId == CustomerID);
+
+                // Remove the customer entity
                 _context.Customers.Remove(customer);
+
+                // Save the changes to the database
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            catch (InvalidOperationException)
+            {
+                return NotFound(); // Handle the case where the customer is not found.
+            }
         }
 
         private bool CustomerExists(int id)
