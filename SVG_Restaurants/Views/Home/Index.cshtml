@@ -56,9 +56,9 @@
     @{
         if (string.IsNullOrEmpty(customerID))
         {
-            <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+            <div class="text-center">
             <div id="upcomingBookings">
-                    <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
+                    <h2 class="font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">
                     Log in to see your upcoming bookings!
                 </h2>
             </div>
@@ -66,9 +66,9 @@
         }
         else
         {
-            <div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
+            <div class="text-center">
             <div id="upcomingBookings">
-                <p>No upcoming bookings :(</p>
+                <h2 class="font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">No upcoming bookings :(</h2>
             </div>
             </div>
         }
