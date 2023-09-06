@@ -33,6 +33,9 @@
         else
         {
             <div class="col-auto">
+                <a asp-controller="Customers" asp-action="Delete" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-secondary">Delete Account</a>
+            </div>
+            <div class="col-auto">
                 <a asp-controller="Customers" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-secondary">Edit Profile</a>
             </div>
             <div class="col-auto">

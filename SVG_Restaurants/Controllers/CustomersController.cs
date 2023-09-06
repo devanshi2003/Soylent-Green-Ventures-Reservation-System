@@ -148,15 +148,15 @@ namespace SVG_Restaurants.Controllers
         }
 
         // GET: Customers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int customerID)
         {
-            if (id == null || _context.Customers == null)
+            if (customerID == null || _context.Customers == null)
             {
                 return NotFound();
             }
 
             var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+                .FirstOrDefaultAsync(m => m.CustomerId == customerID);
             if (customer == null)
             {
                 return NotFound();
