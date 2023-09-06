@@ -4,72 +4,101 @@
     ViewData["Title"] = "Worker Details";
 }
 
+<!-- Table Section -->
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <!-- Card -->
+    <div class="flex flex-col">
+        <div class="-m-1.5 overflow-x-auto">
+            <div class="p-1.5 min-w-full inline-block align-middle">
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-slate-900 dark:border-gray-700">
+                    <!-- Header -->
+                    <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                                Staff Details
+                            </h2>
+                        </div>
+                    </div>
+                    <!-- End Header -->
+
+                    <!-- Table -->
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-slate-800">
+                            <tr>
+
+                                <th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
+                                            @Html.DisplayNameFor(model => model.FirstName)
+                                        </span>
+                                    </div>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            @Html.DisplayNameFor(model => model.LastName)
+                                        </span>
+                                    </div>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            @Html.DisplayNameFor(model => model.PhoneNumber)
+
+                                        </span>
+                                    </div>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            @Html.DisplayNameFor(model => model.Username)
+                                        </span>
+                                    </div>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            @Html.DisplayNameFor(model => model.RestaurantId)
+                                        </span>
+                                    </div>
+                                </th>
+
+                                 <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            Edit
+                                        </span>
+                                    </div>
+                                </th>
+
+                                 <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            Delete
+                                        </span>
+                                    </div>
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-right"></th>
+                            </tr>
+                        </thead>
 
 
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                          @foreach (var user in Model)
+                         {       
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">@user.FirstName</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.LastName</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.PhoneNumber</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.Username</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.RestaurantId</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <a class="text-blue-500 hover:text-blue-700" href="#">Edit</a></td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <a class="text-blue-500 hover:text-blue-700" href="#">Delete</a></td>
+                        </tr>
+                        }
+                    </tbody>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Username)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Restaurant)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Username)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Password)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Restaurant.RestaurantId)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.WorkerId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.WorkerId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.WorkerId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
