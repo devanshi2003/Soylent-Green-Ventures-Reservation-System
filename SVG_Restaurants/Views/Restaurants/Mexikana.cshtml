@@ -9,25 +9,84 @@
     body {
         background-color: #dae1e6;
     }
+
+
+    .row {
+        display: flex;
+    }
+
+    .column {
+        padding: 20px;
+    }
+
+        .column:nth-child(odd) {
+            background-color: #c4ccd2;
+        }
+
+        /* Adjust the width of the left column */
+        .column:nth-child(1) {
+            flex: 1; /* Right column will take the remaining space */
+        }
+
+        .column:nth-child(2) {
+            flex: 2; /* Adjust the flex value to make it wider */
+        }
 </style>
 
 <body>
 
-    <!-- Container for the page content -->
-    <div class="relative">
         <!-- Your image is placed within this container -->
-        <img src="/img/Mexikana.png" alt="Image of Mexicana Restaurant Logo" class="h-32" />
-
-    </div>
+    <img src="/img/Mexikana.png" alt="Image of Mexicana Restaurant Logo" style="height: 9rem;" />
 
     <div class="text-center">
         <h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
-            Welcome to Mexicana!
+            Welcome to Mexikana!
         </h1>
+        <p class="mt-6 text-xl leading-8 text-gray-700"><i>Korean Mexican fusion for the hipsters.</i></p>
     </div>
     <!-- Rest of your page content goes here -->
-    <div>
-        <!-- Your page content -->
+    <div class="row">
+        <div class="column text-center">
+            <img src="/img/Brazilian Restaurant.jpg" />
+            <h2 class="text-xl leading-8 text-gray-700"><b>FAQs</b></h2>
+            <p class="text-l leading-8 text-gray-700">
+                40 Fullarton Road
+                Norwood
+            </p>
+
+            <br />
+            <p class="text-l leading-8 text-gray-700">
+                <b>Sittings:</b>
+            </p>
+            <p class="text-l leading-6 text-gray-700">
+                First dinner 5-7PM <br />
+                Second dinner 7-9PM <br />
+                Late night dinner 9-11PM <br />
+
+            </p>
+            <br />
+            <p class="text-l leading-8 text-gray-700"><b>Open:</b> Monday to Saturday</p>
+            <br />
+            <p class="text-2xl leading-8 text-gray-700"><b>Special Banquets</b></p>
+            <br />
+            <p class="text-xl leading-8 text-gray-700">
+                <b>Share Banquet $35PP</b>
+            </p>
+
+            <p class="text-l leading-6 text-gray-700">
+                (min 4 people)
+                <br />
+                <br />
+                Papas Fritas <br />
+                Korean Fried Chicken Tacos <br />
+                Smokey chicken <br />
+                Taquitos dorados <br />
+                Nachos <br />
+            </p>
+        </div>
+        <div class="column text-center">
+            <h2 class="text-3xl leading-8 text-gray-700"><b>Make a reservation</b></h2>
+        </div>
     </div>
 
 </body>
