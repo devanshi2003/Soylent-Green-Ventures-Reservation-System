@@ -198,7 +198,7 @@ namespace SVG_Restaurants.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("WorkerDetails", "RestaurantWorkers");
             }
             ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", restaurantWorker.RestaurantId);
             return View(restaurantWorker);
