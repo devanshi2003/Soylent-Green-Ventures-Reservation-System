@@ -3,7 +3,11 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
+<style type="text/css">
+    body {
+        background-color: #A9927D;
+    }
+</style>
 <!-- Card Section -->
 <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <!-- Card -->
@@ -22,7 +26,7 @@
             <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <!--Hidden ID-->
-                <input type="hidden" name="CustomerId" value="@Model.CustomerId"/>
+                <input type="hidden" name="CustomerId" value="@Model.CustomerId" />
 
                 <!-- First Name -->
                 <div class="sm:col-span-3">

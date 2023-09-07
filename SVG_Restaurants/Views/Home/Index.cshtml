@@ -32,13 +32,13 @@
         else
         {
             <div class="col-auto">
-                <a asp-controller="Customers" asp-action="Delete" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-secondary">Delete Account</a>
+                <a asp-controller="Customers" asp-action="Delete" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">Delete Account</a>
             </div>
             <div class="col-auto">
-                <a asp-controller="Customers" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-secondary">Edit Profile</a>
+                <a asp-controller="Customers" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">Edit Profile</a>
             </div>
             <div class="col-auto">
-                <a  id="LogOut" asp-controller="Home" asp-action="Index" class="btn btn-secondary">Log out</a>
+                <a  id="LogOut" asp-controller="Home" asp-action="Index" class="btn btn-outline">Log out</a>
             </div>
         }
     }
