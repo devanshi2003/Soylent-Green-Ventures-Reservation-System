@@ -38,3 +38,10 @@ body {
 #restaurantCard:hover{
     color:black;
 }
+
+#restaurantsLink, #upcomingBookingsLink {
+    color: #F2F4F3;
+    background-color: rgba(94,80,63, 1);
+    border-color: #362417;
+    letter-spacing: 0.05em;
+}
