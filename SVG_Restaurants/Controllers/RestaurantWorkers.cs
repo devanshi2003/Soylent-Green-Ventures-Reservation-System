@@ -239,7 +239,8 @@ namespace SVG_Restaurants.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("WorkerDetails", "RestaurantWorkers");
+
         }
 
         private bool RestaurantWorkerExists(int id)
