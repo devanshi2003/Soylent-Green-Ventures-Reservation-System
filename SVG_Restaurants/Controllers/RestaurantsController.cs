@@ -18,6 +18,29 @@ namespace SVG_Restaurants.Controllers
             _context = context;
         }
 
+        // GET: BambooLeaf
+        public async Task<IActionResult> BambooLeaf()
+        {
+            var restaurant = await _context.Restaurants
+                .FirstOrDefaultAsync();
+            return View(restaurant);
+        }
+        // GET: LaOeste
+        public async Task<IActionResult> LaOeste()
+        {
+            var restaurant = await _context.Restaurants
+                .FirstOrDefaultAsync();
+            return View(restaurant);
+        }
+
+        // GET: Mexikana
+        public async Task<IActionResult> Mexikana()
+        {
+            var restaurant = await _context.Restaurants
+                .FirstOrDefaultAsync();
+            return View(restaurant);
+        }
+
         // GET: Restaurants
         public async Task<IActionResult> Index()
         {
