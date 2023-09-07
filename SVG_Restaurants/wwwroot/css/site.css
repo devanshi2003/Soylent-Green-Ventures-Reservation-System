@@ -45,3 +45,30 @@ body {
     border-color: #362417;
     letter-spacing: 0.05em;
 }
+
+#formButton {
+    color: #F2F4F3;
+    background-color: rgba(94,80,63, 1);
+    border-color: #5E503F;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+    #formButton:hover {
+        background: #362417;
+        color: #F2F4F3;
+        border-color: #A9927D;
+    }
+
+#returnButton {
+    color: #F2F4F3;
+    background-color: rgba(169,146,125, 0.8);
+    border-color: #5E503F;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+    #returnButton:hover {
+        background: #A9927D;
+        color: #F2F4F3;
+        border-color: #A9927D;
+    }
