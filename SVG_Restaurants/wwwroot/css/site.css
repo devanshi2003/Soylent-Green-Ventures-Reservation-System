@@ -34,3 +34,7 @@ body {
         color: #F2F4F3;
         border-color: #A9927D;
     }
+
+#restaurantCard:hover{
+    color:black;
+}
