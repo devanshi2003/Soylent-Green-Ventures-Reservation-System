@@ -18,12 +18,31 @@ namespace SVG_Restaurants.Controllers
         {
             _context = context;
         }
+        public async Task<IActionResult> Admin()
+        {
+
+            return View("Admin");
+
+        }
+
+        public async Task<IActionResult> WorkerDetails()
+        {
+            var query = await _context.RestaurantWorkers
+        .Where(worker => worker.RestaurantId != null) // Replace SomeProperty with the actual property name
+        .ToListAsync();
+
+            return View(query);
+
+        }
+
         public async Task<IActionResult> Home(int restaurantID)
         {
 
             var restaurant = await _context.Restaurants
             .Where(c => c.RestaurantId == restaurantID)
             .FirstOrDefaultAsync();
+
+
 
             if (restaurant != null)
             {
@@ -59,8 +78,27 @@ namespace SVG_Restaurants.Controllers
                 .FirstOrDefaultAsync(c => c.Username == vm.username && c.Password == vm.password);
 
 
+            var admin = await _context.RestaurantWorkers
+                         .FirstOrDefaultAsync(c => c.Username == "admin1");
+
+
+
             if (user != null)
             {
+                if (user.Username == admin.Username)
+                {
+                    if (admin.Password != vm.password)
+                    {
+                        // Handle the case where the credentials do not match
+                        TempData["ErrorMessage"] = "Invalid username or password.";
+                        return RedirectToAction("Login");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Admin", "RestaurantWorkers");
+                    }
+                }
+
                 // Redirect to a specific page upon successful login
                 //return RedirectToAction("Index", "Home");
                 return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = user.RestaurantId});
@@ -138,12 +176,9 @@ namespace SVG_Restaurants.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WorkerId,FirstName,LastName,Email,PhoneNumber,Username,Password,RestaurantId")] RestaurantWorker restaurantWorker)
+        public async Task<IActionResult> Edit([Bind("WorkerId,FirstName,LastName,Email,PhoneNumber,Username,Password,RestaurantId")] RestaurantWorker restaurantWorker)
         {
-            if (id != restaurantWorker.WorkerId)
-            {
-                return NotFound();
-            }
+           
 
             if (ModelState.IsValid)
             {
@@ -204,7 +239,8 @@ namespace SVG_Restaurants.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("WorkerDetails", "RestaurantWorkers");
+
         }
 
         private bool RestaurantWorkerExists(int id)

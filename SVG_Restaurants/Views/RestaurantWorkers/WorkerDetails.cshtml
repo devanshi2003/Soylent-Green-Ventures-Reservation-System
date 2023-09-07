@@ -1,0 +1,118 @@
+﻿@model IEnumerable<SVG_Restaurants.Models.RestaurantWorker>
+
+@{
+    ViewData["Title"] = "Worker Details";
+}
+
+<!-- Table Section -->
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <!-- Card -->
+    <div class="flex flex-col">
+        <div class="-m-1.5 overflow-x-auto">
+            <div class="p-1.5 min-w-full inline-block align-middle">
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-slate-900 dark:border-gray-700">
+                    <!-- Header -->
+                    <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                                Staff Details
+                            </h2>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    <!-- End Header -->
+
+                    <!-- Table -->
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-slate-800">
+                            <tr>
+
+                                <th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
+                                            @Html.DisplayNameFor(model => model.FirstName)
+                                        </span>
+                                    </div>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            @Html.DisplayNameFor(model => model.LastName)
+                                        </span>
+                                    </div>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            @Html.DisplayNameFor(model => model.PhoneNumber)
+
+                                        </span>
+                                    </div>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            @Html.DisplayNameFor(model => model.Username)
+                                        </span>
+                                    </div>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            @Html.DisplayNameFor(model => model.RestaurantId)
+                                        </span>
+                                    </div>
+                                </th>
+
+                                 <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            Edit
+                                        </span>
+                                    </div>
+                                </th>
+
+                                 <th scope="col" class="px-6 py-3 text-left">
+                                    <div class="flex items-center gap-x-2">
+                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                            Delete
+                                        </span>
+                                    </div>
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-right"></th>
+                            </tr>
+                        </thead>
+
+
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                          @foreach (var user in Model)
+                         { 
+                        <form method="post" asp-action="Edit">
+
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">@user.FirstName</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.LastName</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.PhoneNumber</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.Username</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.RestaurantId</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <a type="button" asp-action="Edit" asp-route-id ="@user.WorkerId" class="btn btn-outline-primary">Edit</a></td>
+                        <input type="hidden" name="workerID" value="@user.WorkerId" />         
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                        <a type="button" asp-action="Delete" asp-route-id="@user.WorkerId" class="btn btn-outline-primary">Delete</a>
+                                    </td>
+                        </tr>
+                        </form>
+
+                        }
+                    </tbody>
+                    </table>
