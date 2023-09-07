@@ -72,3 +72,7 @@ body {
         color: #F2F4F3;
         border-color: #A9927D;
     }
+
+#formInput {
+    border-color: #A9927D;
+}
