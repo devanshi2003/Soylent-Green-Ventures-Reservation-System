@@ -8,6 +8,28 @@
     body {
         background-color: #fcfcfc;
     }
+
+
+    .row {
+        display: flex;
+    }
+
+    .column {
+        padding: 20px;
+    }
+
+        .column:nth-child(odd) {
+            background-color: #f0f0f0;
+        }
+
+        /* Adjust the width of the left column */
+        .column:nth-child(1) {
+            flex: 1; /* Right column will take the remaining space */
+        }
+
+        .column:nth-child(2) {
+            flex: 2; /* Adjust the flex value to make it wider */
+        }
 </style>
 
 <body>
@@ -15,7 +37,7 @@
     <!-- Container for the page content -->
     <div class="relative">
         <!-- Your image is placed within this container -->
-        <img src="/img/BambooLeaf.png" alt="Image of Mexicana Restaurant Logo" class="h-9" />
+        <img src="/img/BambooLeaf.png" alt="Image of Bamboo Leaf Restaurant Logo" class="h-9" />
 
     </div>
 
@@ -23,10 +45,68 @@
         <h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
             Welcome to Bamboo Leaf!
         </h1>
+        <p class="mt-6 text-xl leading-8 text-gray-700"><i>Modern Asian Fusion in the heart of Adelaide.</i></p>
     </div>
     <!-- Rest of your page content goes here -->
-    <div>
-        <!-- Your page content -->
+    <div class="row">
+        <div class="column text-center">
+            <img src="/img/Bamboo Restaurant.jpg"/>
+            <h2 class="text-xl leading-8 text-gray-700"><b>FAQs</b></h2>
+            <p class="text-l leading-8 text-gray-700">
+                25 Gouger Street
+                Adelaide
+            </p>
+            <p class="text-l leading-8 text-gray-700"><b>Open:</b> Tuesdays to Sundays</p>
+            <br />
+            <p class="text-2xl leading-8 text-gray-700"><b>Special Banquets</b></p>
+            <br />
+            <p class="text-xl leading-8 text-gray-700">
+                <b>Share Banquet $55PP</b>
+            </p>
+
+            <p class="text-l leading-6 text-gray-700">
+                (min 4 people)
+                <br />
+                <br />
+                Satay Chicken
+                <br />
+                Steam prawn dumplings
+                <br />
+                S+P Squid
+                <br />
+                Roast Pork
+                <br />
+                Sticky pork
+                <br />
+                Asian green
+                <br />
+            </p>
+            <br />
+            <p class="text-xl leading-8 text-gray-700">
+                <b>Feast Banquet $70PP</b>
+            </p>
+            <p class="text-l leading-6 text-gray-700">
+                (min 4 people)
+                <br />
+                <br />
+                Crispy beef
+                <br />
+                Satay chicken
+                <br />
+                S+P Eggplant
+                <br />
+                Crying Tiger Salad
+                <br />
+                Steam prawn dumplings
+                <br />
+                Ribs
+                <br />
+                Barramundi curry
+            </p>
+        </div>
+        <div class="column text-center">
+            <h2 class="text-3xl leading-8 text-gray-700"><b>Make a reservation</b></h2>
+        </div>
     </div>
 
 </body>

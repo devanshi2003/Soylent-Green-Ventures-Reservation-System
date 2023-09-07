@@ -8,6 +8,28 @@
     body {
         background-color: #fff8dc;
     }
+
+
+    .row {
+        display: flex;
+    }
+
+    .column {
+        padding: 20px;
+    }
+
+        .column:nth-child(odd) {
+            background-color: #f5edcc;
+        }
+
+        /* Adjust the width of the left column */
+        .column:nth-child(1) {
+            flex: 1; /* Right column will take the remaining space */
+        }
+
+        .column:nth-child(2) {
+            flex: 2; /* Adjust the flex value to make it wider */
+        }
 </style>
 
 <body>
@@ -15,18 +37,43 @@
     <!-- Container for the page content -->
     <div class="relative">
         <!-- Your image is placed within this container -->
-        <img src="/img/LaOeste.png" alt="Image of Mexicana Restaurant Logo" class="h-14" />
+        <img src="/img/LaOeste.png" alt="Image of Mexicana Restaurant Logo" class="h-9" />
 
     </div>
 
     <div class="text-center">
         <h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
-            Welcome to La Oeste De La Mar!
+            Welcome to Bamboo Leaf!
         </h1>
+        <p class="mt-6 text-xl leading-8 text-gray-700"><i>Vibrant Brazilian in the heart of Adelaide.</i></p>
     </div>
     <!-- Rest of your page content goes here -->
-    <div>
-        <!-- Your page content -->
+    <div class="row">
+        <div class="column text-center">
+            <img src="/img/Brazilian Restaurant.jpg" />
+            <h2 class="text-xl leading-8 text-gray-700"><b>FAQs</b></h2>
+            <p class="text-l leading-8 text-gray-700">
+                40 120 North Terrace
+                Adelaide
+            </p>
+
+            <br />
+            <p class="text-l leading-8 text-gray-700">
+                <b>Sittings:</b>
+            </p>
+            <p class="text-l leading-6 text-gray-700">
+                Brunch 10AM-12PM <br />
+                Lunch 12-2PM <br />
+                First dinner 5-7PM <br />
+                Second dinner 7-9PM <br />
+            </p>
+            <br />
+            <p class="text-l leading-8 text-gray-700"><b>Open:</b> Wednesday to Sunday</p>
+            <br />
+        </div>
+        <div class="column text-center">
+            <h2 class="text-3xl leading-8 text-gray-700"><b>Make a reservation</b></h2>
+        </div>
     </div>
 
 </body>
