@@ -188,6 +188,8 @@ namespace SVG_Restaurants.Controllers
                 {
                     _context.Update(restaurantWorker);
                     await _context.SaveChangesAsync();
+                    TempData["EditDone"] = "Edit";
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -200,6 +202,7 @@ namespace SVG_Restaurants.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction("WorkerDetails", "RestaurantWorkers");
             }
             ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", restaurantWorker.RestaurantId);
