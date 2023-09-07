@@ -19,9 +19,9 @@ body {
 
 
 .btn-outline {
-    color: #E4BDBD;
-    background-color: #230C0C;
-    border-color: #2E1212;
+    color: #F2F4F3;
+    background-color: rgba(94,80,63, 1);
+    border-color: #5E503F;
     font-weight: bold;
     letter-spacing: 0.05em;
 }
@@ -30,7 +30,18 @@ body {
     .btn-outline:active,
     .btn-outline:focus,
     .btn-outline.active {
-        background: #E4BDBD;
-        color: #2E1212;
-        border-color: #E4BDBD;
+        background: #362417;
+        color: #F2F4F3;
+        border-color: #A9927D;
     }
+
+#restaurantCard:hover{
+    color:black;
+}
+
+#restaurantsLink, #upcomingBookingsLink {
+    color: #F2F4F3;
+    background-color: rgba(94,80,63, 1);
+    border-color: #362417;
+    letter-spacing: 0.05em;
+}
