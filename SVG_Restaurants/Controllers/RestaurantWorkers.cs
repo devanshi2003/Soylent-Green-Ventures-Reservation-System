@@ -148,7 +148,7 @@ namespace SVG_Restaurants.Controllers
             {
                 _context.Add(restaurantWorker);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("WorkerDetails", "RestaurantWorkers");
             }
             ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", restaurantWorker.RestaurantId);
             return View(restaurantWorker);
