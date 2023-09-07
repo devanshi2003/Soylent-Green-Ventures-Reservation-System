@@ -108,7 +108,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <a type="button" asp-action="Edit" asp-route-id ="@user.WorkerId" class="btn btn-outline-primary">Edit</a></td>
                         <input type="hidden" name="workerID" value="@user.WorkerId" />         
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                        <a type="button" asp-action="Delete" asp-route-workerID="@user.WorkerId" class="btn btn-outline-primary">Delete</a>
+                                        <a type="button" asp-action="Delete" asp-route-id="@user.WorkerId" class="btn btn-outline-primary">Delete</a>
                                     </td>
                         </tr>
                         </form>
