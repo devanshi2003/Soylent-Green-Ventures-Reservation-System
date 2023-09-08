@@ -35,6 +35,13 @@
     label {
         text-align: left;
         margin-bottom: 0;
+        padding-bottom: 0;
+        margin-top: 30px;
+    }
+    input{
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
     }
 </style>
 
@@ -109,7 +116,7 @@
                     @*First name Last name*@
                     <div class="-mx-3 flex flex-wrap">
                         <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
+                            <div class="">
                                 <label for="fName" class="mb-3 block text-base font-medium text-[#07074D]">
                                     First Name
                                 </label>
@@ -118,7 +125,7 @@
                             </div>
                         </div>
                         <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
+                            <div class="">
                                 <label for="lName" class="mb-3 block text-base font-medium text-[#07074D]">
                                     Last Name
                                 </label>
@@ -131,7 +138,7 @@
                     @*Guests number Special Banquets*@
                     <div class="-mx-3 flex flex-wrap">
                         <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
+                            <div class="">
                                 <label for="guest"
                                        class="mb-3 block text-base font-medium text-[#07074D]">
                                     Number of guests
@@ -141,7 +148,7 @@
                             </div>
                         </div>
                         <div class="w-full px-3 sm:w-1/2">
-                            <div class="mb-5">
+                            <div class="">
                                 <label for="specialBanquets" class="mb-3 block text-base font-medium text-[#07074D]">
                                     Special Banquets
                                 </label>
@@ -154,7 +161,7 @@
                     </div>
 
                     @*Special Requests*@
-                    <div class="mb-5">
+                    <div class="">
                         <label for="specialReq" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">
                             Special Requests?
                         </label>
@@ -163,9 +170,9 @@
                     </div>
 
                     <div class="form-check flex content-start">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="margin-top: 35px; margin-right: 5px">
                         <label class="form-check-label block text-base font-medium text-[#07074D]" for="flexCheckDefault">
-                            Would you like a high chair for your child?
+                              Would you like a high chair for your child?
                         </label>
                     </div>
 
@@ -189,7 +196,7 @@
                     </div>
 
                     <div>
-                        <button class="hover:shadow-form rounded-md bg-[#E1C16E] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                        <button class="hover:shadow-form rounded-md bg-[#E1C16E] py-3 px-8 text-center text-base font-semibold text-white outline-none" style="margin-top: 50px">
                             Reserve
                         </button>
                     </div>
