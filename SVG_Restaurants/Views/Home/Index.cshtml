@@ -17,10 +17,10 @@
 <body>
 <div class="row justify-content-end">
     @{
-        string customerID = Context.Request.Query["CustomerID"];
+        //string customerID = Context.Request.Query["CustomerID"];
 
         // Display Login buttons if customerID is not present
-        if (string.IsNullOrEmpty(customerID))
+        if (string.IsNullOrEmpty(ViewBag.customerID))
         {
             <div class="col-auto">
                 <a asp-controller="Customers" asp-action="Login" class="btn btn-outline">Login as Customer</a>
@@ -54,7 +54,7 @@
         </li>
     </ul>
     @{
-        if (string.IsNullOrEmpty(customerID))
+        if (string.IsNullOrEmpty(ViewBag.customerID))
         {
             <div class="text-center">
             <div id="upcomingBookings">

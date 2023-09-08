@@ -13,8 +13,9 @@ namespace SVG_Restaurants.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string customerID)
         {
+            ViewBag.customerID = customerID;
             return View();
         }
 
