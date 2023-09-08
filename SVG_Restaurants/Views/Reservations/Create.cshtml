@@ -6,7 +6,20 @@
 
 }
 
+@{
+    string cID = Context.Request.Query["CustomerID"];
+    string rID = Context.Request.Query["RestaurantID"];
 
+
+}
+
+@if (string.IsNullOrEmpty(cID))
+{
+
+    <p> As a Guest</p>
+    <p> @rID</p>
+
+}
 
 
 else
