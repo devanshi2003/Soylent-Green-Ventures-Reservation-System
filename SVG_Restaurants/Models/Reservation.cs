@@ -13,6 +13,8 @@ namespace SVG_Restaurants.Models
         public int? BanquetId { get; set; }
         public int? NumberOfPeople { get; set; }
         public int? GuestId { get; set; }
+        public int? HighChairs { get; set; }
+        public string? SpecialNotes { get; set; }
 
         public virtual DiningArea? Area { get; set; }
         public virtual Banquet? Banquet { get; set; }
