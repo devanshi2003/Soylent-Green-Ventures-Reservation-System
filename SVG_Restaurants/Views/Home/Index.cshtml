@@ -71,17 +71,19 @@
                     {
                             <h2 class="font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">No upcoming bookings :(</h2>
                         }
-                        else
+                    else
+                    {
+                        foreach (var reservation in Model.Reservations)
                         {
-                            <ul>
-                                @{
-                                    foreach (var reservation in Model.Reservations)
-                                    {
-                                        <li>@reservation.ReservationId</li>
-                                    }
-                                }
-                            </ul>
+                            <div>
+                                <p>Reservation ID is: @reservation.ReservationId</p>
+                                <p>Restaurant ID is: @reservation.RestaurantId</p>
+                                <p>The booking time is: @reservation.ReservationTiming</p>
+                                <p>The number of people for this booking is: @reservation.NumberOfPeople</p>
+                                <hr/>
+                            </div>
                         }
+                    }
                 }
             </div>
             </div>

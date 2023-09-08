@@ -23,6 +23,7 @@ namespace SVG_Restaurants.Controllers
                 CustomerID = customerID,
                 Reservations = _context.Reservations
                     .Where(r => r.CustomerId == customerID)
+                    .OrderByDescending(r => r.ReservationTiming)
                     .ToList(),
             };
 
