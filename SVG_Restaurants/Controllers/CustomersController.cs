@@ -137,7 +137,7 @@ namespace SVG_Restaurants.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Login", "Customers");
             }
             return View(customer);
         }
