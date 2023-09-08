@@ -3,58 +3,71 @@
 
 @{
     ViewData["Title"] = "Create";
+
 }
 
 
-<h4>Reservation</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @{
-                string customerID = Context.Request.Query["CustomerID"];
-                string restaurantID = Context.Request.Query["restaurantID"];
 
-                if (!string.IsNullOrEmpty(customerID))
-                {
-                    <input type="hidden" asp-for="@Model.TheReservation.CustomerId" value=@customerID />
 
+else
+{
+   
+    <h4>Reservation</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @{
+                    string customerID = Context.Request.Query["CustomerID"];
+                    string restaurantID = Context.Request.Query["restaurantID"];
+
+                   
+                        <input type="hidden" asp-for="@Model.TheReservation.CustomerId" value=@customerID />
+
+                   
+                    <div class="form-group">
+                        <input type="hidden" asp-for="@Model.TheReservation.RestaurantId" value=@restaurantID />
+                    </div>
                 }
+                <div class="form-group">
+                    <label asp-for="@Model.TheReservation.AreaId" class="control-label"></label>
+                    <select asp-for="@Model.TheReservation.AreaId" asp-items="ViewBag.AreaId" class="form-control">
+                        <option value="">Select an Area</option>
+                    </select>
+                </div>
+
 
                 <div class="form-group">
-                    <input type="hidden" asp-for="@Model.TheReservation.RestaurantId" value=@restaurantID />
+                    <label asp-for="@Model.TheReservation.ReservationTiming" class="control-label"></label>
+                    <input asp-for="@Model.TheReservation.ReservationTiming" class="form-control" />
+                    <span asp-validation-for="@Model.TheReservation.ReservationTiming" class="text-danger"></span>
                 </div>
-            }
 
-            <div class="form-group">
-                <label asp-for="@Model.TheReservation.AreaId" class="control-label"></label>
-                <input asp-for="@Model.TheReservation.AreaId" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.TheReservation.ReservationTiming" class="control-label"></label>
-                <input asp-for="@Model.TheReservation.ReservationTiming" class="form-control" />
-                <span asp-validation-for="@Model.TheReservation.ReservationTiming" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.TheReservation.BanquetId" class="control-label"></label>
-                <input asp-for="@Model.TheReservation.BanquetId" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.TheReservation.NumberOfPeople" class="control-label"></label>
-                <input asp-for="@Model.TheReservation.NumberOfPeople" class="form-control" />
-            </div>
+                <div class="form-group">
+                    <label asp-for="@Model.TheReservation.BanquetId" class="control-label"></label>
+                    <select asp-for="@Model.TheReservation.BanquetId" asp-items="ViewBag.Banquet" class="form-control">
+                        <option value="">Select an Area</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.TheReservation.NumberOfPeople" class="control-label"></label>
+                    <input asp-for="@Model.TheReservation.NumberOfPeople" class="form-control" />
+                </div>
            
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
