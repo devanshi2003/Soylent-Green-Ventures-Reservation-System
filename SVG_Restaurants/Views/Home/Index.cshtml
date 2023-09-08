@@ -66,7 +66,23 @@
         {
             <div class="text-center">
             <div id="upcomingBookings">
-                <h2 class="font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">No upcoming bookings :(</h2>
+                @{
+                    if(Model.Reservations.Count() == 0)
+                    {
+                            <h2 class="font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">No upcoming bookings :(</h2>
+                        }
+                        else
+                        {
+                            <ul>
+                                @{
+                                    foreach (var reservation in Model.Reservations)
+                                    {
+                                        <li>@reservation.ReservationId</li>
+                                    }
+                                }
+                            </ul>
+                        }
+                }
             </div>
             </div>
         }

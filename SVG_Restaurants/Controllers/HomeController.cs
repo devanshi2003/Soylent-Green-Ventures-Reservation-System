@@ -8,17 +8,22 @@ namespace SVG_Restaurants.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly SGVContext _context;   //Test this out
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, SGVContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index(int customerID)
         {
             var viewModel = new CustomerDetailsVM
             {
-                CustomerID = customerID
+                CustomerID = customerID,
+                Reservations = _context.Reservations
+                    .Where(r => r.CustomerId == customerID)
+                    .ToList(),
             };
 
             return View(viewModel);
