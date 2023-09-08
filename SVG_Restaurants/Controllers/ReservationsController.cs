@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SVG_Restaurants.Models;
+using SVG_Restaurants.ViewModels;
 
 namespace SVG_Restaurants.Controllers
 {
@@ -52,12 +53,51 @@ namespace SVG_Restaurants.Controllers
         // GET: Reservations/Create
         public IActionResult Create()
         {
-            ViewData["AreaId"] = new SelectList(_context.DiningAreas, "AreaId", "AreaId");
+            string rID = Request.Query["restaurantID"];
+            int parsedrID;
+
+            var diningAreas = _context.DiningAreas.ToList();
+
+
+            if (int.TryParse(rID, out parsedrID))
+            {
+                diningAreas = diningAreas
+                    .Where(da => da.RestaurantId == parsedrID)
+                    .ToList();
+            }
+
+            var banquet = _context.Banquets.Where(c=>c.RestaurantId == parsedrID).ToList();
+
+
+            // Create a SelectListItem list using AreaName as the display text
+            var areaSelectList = diningAreas
+                .Select(da => new SelectListItem
+                {
+                    Value = da.AreaId.ToString(), 
+                    Text = da.Area 
+                })
+                .ToList();
+
+            var banquetList = banquet
+               .Select(b => new SelectListItem
+               {
+                   Value = b.BanquetId.ToString(),
+                   Text = b.BanquetName
+               })
+               .ToList();
+
+            ViewBag.AreaId = new SelectList(areaSelectList, "Value", "Text");
+            ViewBag.Banquet = new SelectList(banquetList, "Value", "Text");
+
             ViewData["BanquetId"] = new SelectList(_context.Banquets, "BanquetId", "BanquetId");
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "Email");
             ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId");
+
             return View();
         }
+
+
+
 
         // POST: Reservations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
