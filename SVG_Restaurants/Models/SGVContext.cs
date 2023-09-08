@@ -133,6 +133,8 @@ namespace SVG_Restaurants.Models
 
                 entity.Property(e => e.RestaurantId).HasColumnName("RestaurantID");
 
+                entity.Property(e => e.SpecialNotes).HasMaxLength(800);
+
                 entity.HasOne(d => d.Area)
                     .WithMany(p => p.Reservations)
                     .HasForeignKey(d => d.AreaId)
