@@ -24,7 +24,7 @@
 
 else
 {
-   
+
     <h4>Reservation</h4>
     <hr />
     <div class="row">
@@ -35,14 +35,13 @@ else
                     string customerID = Context.Request.Query["CustomerID"];
                     string restaurantID = Context.Request.Query["restaurantID"];
 
-                   
-                        <input type="hidden" asp-for="@Model.TheReservation.CustomerId" value=@customerID />
+                    <input type="hidden" asp-for="@Model.TheReservation.CustomerId" value=@customerID />
 
-                   
                     <div class="form-group">
                         <input type="hidden" asp-for="@Model.TheReservation.RestaurantId" value=@restaurantID />
                     </div>
                 }
+
                 <div class="form-group">
                     <label asp-for="@Model.TheReservation.AreaId" class="control-label"></label>
                     <select asp-for="@Model.TheReservation.AreaId" asp-items="ViewBag.AreaId" class="form-control">
@@ -68,7 +67,7 @@ else
                     <label asp-for="@Model.TheReservation.NumberOfPeople" class="control-label"></label>
                     <input asp-for="@Model.TheReservation.NumberOfPeople" class="form-control" />
                 </div>
-           
+
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
@@ -84,4 +83,51 @@ else
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>//const disabledDates = [
+        //    new Date("2023-09-10"),
+        //    new Date("2023-09-15"),
+        //    new Date("2023-09-20"),
+        //    // Add more dates as needed
+        //];
+
+        function getSundaysInYear(year) {
+            const sundays = [];
+            const startDate = new Date(year, 0, 1); // January 1st of the given year
+            const endDate = new Date(year, 11, 31); // December 31st of the given year
+
+            for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+                if (currentDate.getDay() === 0) {
+                    const formattedDate = new Date(`${year}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`);
+                    sundays.push(formattedDate);
+                }
+            }
+
+            return sundays;
+        }
+        const year = 2023;
+        const disabledDates = getSundaysInYear(year);
+
+        console.log(disabledDates);</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+
+    <script>// Set the maximum time for all days to 5:00 PM
+        const maxTime = new Date();
+        maxTime.setHours(22, 0, 0, 0); // 10PM
+
+        const minTime = new Date();
+        minTime.setHours(17, 0, 0, 0); // 10PM
+
+        // Initialize Flatpickr with date and time options
+        flatpickr("#datetime", {
+            enableTime: true,
+            dateFormat: 'M j, Y h:i K',
+            minDate: 'today', // Set the minimum date to today
+            disable: disabledDates, // Specify the array of disabled dates
+            minTime: minTime, // Set the min time for all days
+            maxTime: maxTime // Set the maximum time for all days
+        });</script>
 }
