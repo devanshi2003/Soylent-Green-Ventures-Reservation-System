@@ -1,0 +1,54 @@
+﻿@model SVG_Restaurants.Models.Reservation
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Reservation</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ReservationTiming)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ReservationTiming)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberOfPeople)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumberOfPeople)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Area.AreaId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Banquet)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Banquet.BanquetId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Customer.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Restaurant)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Restaurant.RestaurantId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ReservationId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
