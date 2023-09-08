@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -67,9 +68,33 @@ namespace SVG_Restaurants.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(reservation);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == 1).FirstOrDefaultAsync();
+
+                var dateTimeToCompare = DateTime.ParseExact("2023-09-08 15:30:00", "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+                var sumOfNumberOfPeople = _context.Reservations
+                    .Where(r => r.ReservationTiming >= dateTimeToCompare)
+                    .Sum(r => r.NumberOfPeople);
+
+                sumOfNumberOfPeople += reservation.NumberOfPeople;
+
+                if (sumOfNumberOfPeople <= restaurant.SeatCapacity)
+                {
+                    // Decrement the number of available seats
+                    restaurant.SeatCapacity -= reservation.NumberOfPeople;
+
+                    // Add the reservation to the database
+                    _context.Add(reservation);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");
+                }
+
+
             }
             ViewData["AreaId"] = new SelectList(_context.DiningAreas, "AreaId", "AreaId", reservation.AreaId);
             ViewData["BanquetId"] = new SelectList(_context.Banquets, "BanquetId", "BanquetId", reservation.BanquetId);
@@ -77,6 +102,7 @@ namespace SVG_Restaurants.Controllers
             ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", reservation.RestaurantId);
             return View(reservation);
         }
+        
 
         // GET: Reservations/Edit/5
         public async Task<IActionResult> Edit(int? id)
