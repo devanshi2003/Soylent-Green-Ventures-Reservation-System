@@ -140,6 +140,8 @@
                                        class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                             </div>
                         </div>
+
+
                         <div class="w-full px-3 sm:w-1/2">
                             <div class="mb-5">
                                 <label for="specialBanquets" class="mb-3 block text-base font-medium text-[#07074D]">
@@ -198,6 +200,27 @@
         </div>
     </div>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the input element
+        var guestInput = document.getElementById('guest');
+
+        // Get the available seats value from the ViewBag or model property
+        var availableSeats = @ViewBag.AvailableSeats; // Use the correct syntax for your view engine
+
+        // Set the max attribute of the input element based on available seats
+        guestInput.max = availableSeats;
+
+        // Optional: Add an event listener to validate input further if needed
+        guestInput.addEventListener('input', function () {
+            var selectedGuests = parseInt(guestInput.value);
+            if (selectedGuests > availableSeats) {
+                guestInput.value = availableSeats; // Limit input to available seats
+            }
+        });
+    });
+</script>
 
 <script>//const disabledDates = [
     //    new Date("2023-09-10"),
