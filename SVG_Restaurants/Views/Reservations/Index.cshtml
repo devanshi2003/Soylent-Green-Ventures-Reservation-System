@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SVG_Restaurants.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservationTiming)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfPeople)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Banquet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurant)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservationTiming)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfPeople)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area.AreaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Banquet.BanquetId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Restaurant.RestaurantId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ReservationId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ReservationId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ReservationId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -38,6 +38,9 @@ namespace SVG_Restaurants.Controllers
         {
             var restaurant = await _context.Restaurants
                 .FirstOrDefaultAsync();
+            
+            ViewBag.AvailableSeats = 50;
+
             return View(restaurant);
         }
 
