@@ -4,11 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<form asp-action="Create">
+@*<form asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-@*Guests number Special Banquets*@
 <div class="-mx-3 flex flex-wrap">
        <div class="w-full px-3 sm:w-1/2">
         <div class="">
@@ -16,7 +14,7 @@
                    class="mb-3 block text-base font-medium text-[#07074D]">
                 Customer
             </label>
-                <input asp-for="CustomerId" type="number" name="guest" id="guest" placeholder="5" min="0"
+                <input asp-for="CustomerId" type="number" id="guest" placeholder="5" min="0"
                    class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
         </div>
     </div>
@@ -55,8 +53,9 @@
         </div>
     </div>
 </div>
-
+@*
 @*Special Requests*@
+@*
 <div class="">
     <label for="specialReq" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">
         Special Requests?
@@ -72,7 +71,7 @@
     </label>
 </div>
 
-@*Date Time*@
+
 <div class="flex justify-left">
     <div class="flatpickr">
         <label asp-for="ReservationTiming" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">Date and Time</label>
@@ -96,9 +95,9 @@
     </div>
 
 </form>
+*@
 
-<h1>Create</h1>
-@*
+
 <h4>Reservation</h4>
 <hr />
 <div class="row">
@@ -107,15 +106,15 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CustomerId" class="control-label"></label>
-                <select asp-for="CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
+                <input asp-for="CustomerId" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="RestaurantId" class="control-label"></label>
-                <select asp-for="RestaurantId" class ="form-control" asp-items="ViewBag.RestaurantId"></select>
+                <input asp-for="RestaurantId" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="AreaId" class="control-label"></label>
-                <select asp-for="AreaId" class ="form-control" asp-items="ViewBag.AreaId"></select>
+                <input asp-for="AreaId" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="ReservationTiming" class="control-label"></label>
@@ -124,12 +123,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="BanquetId" class="control-label"></label>
-                <select asp-for="BanquetId" class ="form-control" asp-items="ViewBag.BanquetId"></select>
+                <input asp-for="BanquetId" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="NumberOfPeople" class="control-label"></label>
                 <input asp-for="NumberOfPeople" class="form-control" />
-                <span asp-validation-for="NumberOfPeople" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -140,7 +138,7 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
-</div>*@
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
