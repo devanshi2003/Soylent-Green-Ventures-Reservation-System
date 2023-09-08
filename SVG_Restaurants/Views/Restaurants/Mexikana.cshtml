@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model SVG_Restaurants.ViewModels.RestaurantVM
 @{
     ViewData["Title"] = "Mexikana";
 }
@@ -38,7 +36,8 @@
         padding-bottom: 0;
         margin-top: 30px;
     }
-    input{
+
+    input {
         margin-top: 0;
         margin-bottom: 0;
         padding-bottom: 0;
@@ -111,13 +110,7 @@
 
             <!-- Sharobp=nn me -->
             <div class="mx-auto w-full max-w-[550px]">
-                <form asp-action="Create" asp-controller="Reservations">
-                    <div>
-                        <button class="hover:shadow-form rounded-md bg-[#E1C16E] py-3 px-8 text-center text-base font-semibold text-white outline-none" style="margin-top: 50px">
-                            Reserve
-                        </button>
-                    </div>
-                </form>
+                <a asp-controller="Reservations" asp-action="Create" asp-route-customerID="@Model.CustomerID" asp-route-restaurantID="3" class="btn btn-outline">Reserve</a>
             </div>
         </div>
     </div>
