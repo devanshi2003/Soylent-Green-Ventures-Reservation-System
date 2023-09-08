@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using SVG_Restaurants.Models;
 
 namespace SVG_Restaurants.Models
 {
@@ -20,6 +19,7 @@ namespace SVG_Restaurants.Models
         public virtual DbSet<Banquet> Banquets { get; set; } = null!;
         public virtual DbSet<Customer> Customers { get; set; } = null!;
         public virtual DbSet<DiningArea> DiningAreas { get; set; } = null!;
+        public virtual DbSet<Guest> Guests { get; set; } = null!;
         public virtual DbSet<Reservation> Reservations { get; set; } = null!;
         public virtual DbSet<Restaurant> Restaurants { get; set; } = null!;
         public virtual DbSet<RestaurantHour> RestaurantHours { get; set; } = null!;
@@ -29,7 +29,8 @@ namespace SVG_Restaurants.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=sgv.chjtb5ba2uqq.us-east-1.rds.amazonaws.com,1433;Initial Catalog=SGV;User ID=admin;Password=password");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Data Source=sgv.chjtb5ba2uqq.us-east-1.rds.amazonaws.com,1433;Initial Catalog=SGV;Persist Security Info=True;User ID=admin;Password=password");
             }
         }
 
@@ -97,6 +98,23 @@ namespace SVG_Restaurants.Models
                     .HasConstraintName("FK__DiningAre__Resta__3E52440B");
             });
 
+            modelBuilder.Entity<Guest>(entity =>
+            {
+                entity.Property(e => e.GuestId).HasColumnName("GuestID");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName).HasMaxLength(50);
+
+                entity.Property(e => e.LastName).HasMaxLength(50);
+
+                entity.Property(e => e.PhoneNumber)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Reservation>(entity =>
             {
                 entity.ToTable("Reservation");
@@ -108,6 +126,8 @@ namespace SVG_Restaurants.Models
                 entity.Property(e => e.BanquetId).HasColumnName("BanquetID");
 
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+
+                entity.Property(e => e.GuestId).HasColumnName("GuestID");
 
                 entity.Property(e => e.ReservationTiming).HasColumnType("datetime");
 
@@ -127,6 +147,11 @@ namespace SVG_Restaurants.Models
                     .WithMany(p => p.Reservations)
                     .HasForeignKey(d => d.CustomerId)
                     .HasConstraintName("FK__Reservati__Custo__440B1D61");
+
+                entity.HasOne(d => d.Guest)
+                    .WithMany(p => p.Reservations)
+                    .HasForeignKey(d => d.GuestId)
+                    .HasConstraintName("FK__Reservati__Guest__4BAC3F29");
 
                 entity.HasOne(d => d.Restaurant)
                     .WithMany(p => p.Reservations)
