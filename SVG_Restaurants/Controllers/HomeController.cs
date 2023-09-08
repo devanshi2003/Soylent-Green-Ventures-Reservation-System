@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SVG_Restaurants.Models;
+using SVG_Restaurants.ViewModels;
 using System.Diagnostics;
 
 namespace SVG_Restaurants.Controllers
@@ -13,10 +14,14 @@ namespace SVG_Restaurants.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(string customerID)
+        public IActionResult Index(int customerID)
         {
-            ViewBag.customerID = customerID;
-            return View();
+            var viewModel = new CustomerDetailsVM
+            {
+                CustomerID = customerID
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
