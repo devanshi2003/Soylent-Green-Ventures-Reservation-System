@@ -31,23 +31,38 @@
         .column:nth-child(2) {
             flex: 2; /* Adjust the flex value to make it wider */
         }
+
+    label {
+        text-align: left;
+        margin-bottom: 0;
+    }
 </style>
 
 <body>
 
-        <!-- Your image is placed within this container -->
-    <img src="/img/Mexikana.png" alt="Image of Mexicana Restaurant Logo" style="height: 9rem;" />
+    <div class="row" style="padding-bottom: 20px;">
+        <div class="col-4 justify-content-between" style="display: flex; flex-direction: column; align-items: center;">
+            <!-- Your image is placed within this container -->
+            <img src="/img/Mexikana.png" alt="Image of Mexicana Restaurant Logo" style="height: 9rem;" />
+        </div>
 
-    <div class="text-center">
-        <h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
-            Welcome to Mexikana!
-        </h1>
-        <p class="mt-6 text-xl leading-8 text-gray-700"><i>Korean Mexican fusion for the hipsters.</i></p>
+        <div class="col-8 justify-content-between" style="padding-top: 20px;">
+            <div class="text-center ">
+                <h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
+                    Welcome to Mexikana!
+                </h1>
+                <p class="mt-6 text-xl leading-8 text-gray-700"><i>Korean Mexican fusion for the hipsters.</i></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
     </div>
     <!-- Rest of your page content goes here -->
     <div class="row">
         <div class="column text-center">
-            <img src="/img/Mexican Restaurant.jpg" />
+            <img src="/img/Mexican Restaurant.jpg" style="width: 100%;" />
             <h2 class="text-xl leading-8 text-gray-700"><b>FAQs</b></h2>
             <p class="text-l leading-8 text-gray-700">
                 40 Fullarton Road
@@ -85,15 +100,106 @@
             </p>
         </div>
         <div class="column text-center">
-            <h2 class="text-3xl leading-8 text-gray-700"><b>Make a reservation</b></h2>
+            <h2 class="text-3xl leading-8" style="color: #E1C16E; margin-bottom:50px"><b>Make a reservation</b></h2>
+
+            <!-- Sharobp=nn me -->
+            <div class="mx-auto w-full max-w-[550px]">
+                <form action="https://formbold.com/s/FORM_ID" method="POST">
+
+                    @*First name Last name*@
+                    <div class="-mx-3 flex flex-wrap">
+                        <div class="w-full px-3 sm:w-1/2">
+                            <div class="mb-5">
+                                <label for="fName" class="mb-3 block text-base font-medium text-[#07074D]">
+                                    First Name
+                                </label>
+                                <input type="text" name="fName" id="fName" placeholder="First Name"
+                                       class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            </div>
+                        </div>
+                        <div class="w-full px-3 sm:w-1/2">
+                            <div class="mb-5">
+                                <label for="lName" class="mb-3 block text-base font-medium text-[#07074D]">
+                                    Last Name
+                                </label>
+                                <input type="text" name="lName" id="lName" placeholder="Last Name"
+                                       class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            </div>
+                        </div>
+                    </div>
+
+                    @*Guests number Special Banquets*@
+                    <div class="-mx-3 flex flex-wrap">
+                        <div class="w-full px-3 sm:w-1/2">
+                            <div class="mb-5">
+                                <label for="guest"
+                                       class="mb-3 block text-base font-medium text-[#07074D]">
+                                    Number of guests
+                                </label>
+                                <input type="number" name="guest" id="guest" placeholder="5" min="0"
+                                       class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            </div>
+                        </div>
+                        <div class="w-full px-3 sm:w-1/2">
+                            <div class="mb-5">
+                                <label for="specialBanquets" class="mb-3 block text-base font-medium text-[#07074D]">
+                                    Special Banquets
+                                </label>
+                                <select name="specialBanquets" id="specialBanquets" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
+                                    <option value="shareBanquet">Share Banquet</option>
+                                    <option value="feastBanquet">Feast Banquet</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*Date Time*@
+                    <div class="flex justify-left">
+                        <div class="flatpickr">
+                            <label for="datetime" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">Date and Time</label>
+                            <div class="flex align-middle align-content-center">
+                                <input type="text" id="datetime" data-input placeholder="Select..."
+                                       class="block w-30 px-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-l-md shadow-sm">
+                                <a class="h-11 w-10 input-button cursor-pointer rounded-r-md bg-transparent border-gray-300 border-t border-b border-r"
+                                   title="clear" data-clear>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mt-2 ml-1" viewBox="0 0 20 20" fill="#c53030">
+                                        <path fill-rule="evenodd"
+                                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                              clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*Special Requests*@
+                    <div class="mb-5">
+                        <label for="specialReq" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">
+                            Special Requests?
+                        </label>
+                        <input type="text" name="specialReq" id="specialReq" placeholder="I am allergic to nuts"
+                               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                    </div>
+
+                    <div class="form-check flex content-start">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label block text-base font-medium text-[#07074D]" for="flexCheckDefault">
+                            Would you like a high chair for your child?
+                        </label>
+                    </div>
+
+                    <div>
+                        <button class="hover:shadow-form rounded-md bg-[#E1C16E] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                            Reserve
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
 </body>
 
-
-<script>
-    //const disabledDates = [
+<script>//const disabledDates = [
     //    new Date("2023-09-10"),
     //    new Date("2023-09-15"),
     //    new Date("2023-09-20"),
@@ -117,36 +223,14 @@
     const year = 2023;
     const disabledDates = getSundaysInYear(year);
 
-    console.log(disabledDates);
+    console.log(disabledDates);</script>
 
-   
-
-</script>
-<div class="flatpickr container mx-auto col-span-6 sm:col-span-6 mt-5">
-    <label for="datetime" class="flex-grow block font-medium text-sm text-gray-700 mb-1">Date and Time</label>
-    <div class="flex align-middle align-content-center">
-        <input type="text"
-               id="datetime"
-               data-input
-               placeholder="Select.."
-               class="block w-full px-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-l-md shadow-sm">
-        <a class="h-11 w-10 input-button cursor-pointer rounded-r-md bg-transparent border-gray-300 border-t border-b border-r"
-           title="clear" data-clear>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mt-2 ml-1" viewBox="0 0 20 20" fill="#c53030">
-                <path fill-rule="evenodd"
-                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                      clip-rule="evenodd" />
-            </svg>
-        </a>
-    </div>
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 
-<script>
-    // Set the maximum time for all days to 5:00 PM
+<script>// Set the maximum time for all days to 5:00 PM
     const maxTime = new Date();
     maxTime.setHours(22, 0, 0, 0); // 10PM
 
@@ -161,6 +245,4 @@
         disable: disabledDates, // Specify the array of disabled dates
         minTime: minTime, // Set the min time for all days
         maxTime: maxTime // Set the maximum time for all days
-    });
-
-</script>
+    });</script>
