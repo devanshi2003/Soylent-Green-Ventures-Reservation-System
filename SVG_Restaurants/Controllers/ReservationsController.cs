@@ -21,8 +21,9 @@ namespace SVG_Restaurants.Controllers
         // GET: Reservations
         public async Task<IActionResult> Index()
         {
-            var sGVContext = _context.Reservations.Include(r => r.Area).Include(r => r.Banquet).Include(r => r.Customer).Include(r => r.Restaurant);
-            return View(await sGVContext.ToListAsync());
+
+            return View("Create");
+
         }
 
         // GET: Reservations/Details/5
