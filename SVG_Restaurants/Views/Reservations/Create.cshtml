@@ -153,7 +153,7 @@ else if (Convert.ToString(rID) == "3")
                 @*Area*@
                 <div class="w-full px-3 sm:w-1/2">
                     <div class="">
-                        <label asp-for="@Model.TheReservation.AreaId" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start"></label>
+                        <label asp-for="@Model.TheReservation.AreaId" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">Dining Area</label>
                         <select asp-for="@Model.TheReservation.AreaId" asp-items="ViewBag.AreaId" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
                             <option value="">Select an Area</option>
                         </select>
@@ -201,7 +201,7 @@ else if (Convert.ToString(rID) == "3")
                 </div>*@
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" style="margin-top: 30px" />
+                <input type="submit" value="Create" class="btn btn-outline" style="margin-top: 30px" />
             </div>
         </form>
     </div>
