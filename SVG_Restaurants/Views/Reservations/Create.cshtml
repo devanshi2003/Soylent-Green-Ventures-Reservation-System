@@ -52,7 +52,7 @@ else if (Convert.ToString(rID) == "3")
         <form asp-action="Create" method="post">
             @if (string.IsNullOrEmpty(cID))
             {
-                <p class="text-center mt-6 text-xl leading-8 text-gray-700"><i>As a Guest</i></p>
+                <p class="text-center mt-6 text-xl leading-8 text-gray-700"><i>As Guest</i></p>
                 string guestID = Context.Request.Query["GuestID"];
                 string restaurantID = Context.Request.Query["restaurantID"];
                 <input type="hidden" asp-for="@Model.TheReservation.GuestId" value=@guestID />
