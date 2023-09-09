@@ -13,6 +13,30 @@
 
 }
 
+@if (Convert.ToString(rID) == "1")
+{
+    <style type="text/css">
+        body {
+            background-color: #fcfcfc;
+        }
+    </style>
+}
+else if (Convert.ToString(rID) == "2")
+{
+<style type="text/css">
+    body {
+        background-color: #fff8dc;
+    }
+</style>
+}
+else if (Convert.ToString(rID) == "3")
+{
+<style type="text/css">
+    body {
+        background-color: #dae1e6;
+    }
+</style>
+}
 <div class="text-center">
     <h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
         Reservation
@@ -90,9 +114,9 @@
                 </div>
 
                 @*<div class="form-group">
-                <label asp-for="@Model.TheReservation.NumberOfPeople" class="control-label"></label>
-                <input asp-for="@Model.TheReservation.NumberOfPeople" class="form-control" />
-            </div>*@
+                        <label asp-for="@Model.TheReservation.NumberOfPeople" class="control-label"></label>
+                        <input asp-for="@Model.TheReservation.NumberOfPeople" class="form-control" />
+                    </div>*@
                 @*Special banquets*@
                 <div class="w-full px-3 sm:w-1/2">
                     <div class="">
@@ -107,11 +131,11 @@
             </div>
 
             @*<div class="form-group">
-            <label asp-for="@Model.TheReservation.BanquetId" class="control-label"></label>
-            <select asp-for="@Model.TheReservation.BanquetId" asp-items="ViewBag.Banquet" class="form-control">
-                <option value="">Select an Area</option>
-            </select>
-        </div>*@
+                    <label asp-for="@Model.TheReservation.BanquetId" class="control-label"></label>
+                    <select asp-for="@Model.TheReservation.BanquetId" asp-items="ViewBag.Banquet" class="form-control">
+                        <option value="">Select an Area</option>
+                    </select>
+                </div>*@
 
             @*Special Notes*@
             <div class="">
@@ -136,11 +160,11 @@
                     </div>
                 </div>
                 @*<div class="form-group">
-                <label asp-for="@Model.TheReservation.AreaId" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start"></label>
-                <select asp-for="@Model.TheReservation.AreaId" asp-items="ViewBag.AreaId" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
-                    <option value="">Select an Area</option>
-                </select>
-            </div>*@
+                        <label asp-for="@Model.TheReservation.AreaId" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start"></label>
+                        <select asp-for="@Model.TheReservation.AreaId" asp-items="ViewBag.AreaId" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
+                            <option value="">Select an Area</option>
+                        </select>
+                    </div>*@
 
                 @*Chair*@
                 <div class="w-full px-3 sm:w-1/2">
@@ -171,13 +195,13 @@
                 </div>
             </div>
             @*<div class="form-group">
-            <label asp-for="@Model.TheReservation.ReservationTiming" class="control-label"></label>
-            <input asp-for="@Model.TheReservation.ReservationTiming" class="form-control" />
-            <span asp-validation-for="@Model.TheReservation.ReservationTiming" class="text-danger"></span>
-        </div>*@
+                    <label asp-for="@Model.TheReservation.ReservationTiming" class="control-label"></label>
+                    <input asp-for="@Model.TheReservation.ReservationTiming" class="form-control" />
+                    <span asp-validation-for="@Model.TheReservation.ReservationTiming" class="text-danger"></span>
+                </div>*@
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" style="margin-top: 30px"/>
+                <input type="submit" value="Create" class="btn btn-primary" style="margin-top: 30px" />
             </div>
         </form>
     </div>
@@ -241,7 +265,7 @@
 }
 <style type="text/css">
     body {
-        background-color: #dae1e6;
+        background-color: white;
     }
 
 
