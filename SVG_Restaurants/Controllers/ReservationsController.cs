@@ -116,9 +116,9 @@ namespace SVG_Restaurants.Controllers
                     .Where(r => r.ReservationTiming >= dateTimeToCompare)
                     .Sum(r => r.NumberOfPeople);
 
-                sumOfNumberOfPeople += reservation.NumberOfPeople;
+                //sumOfNumberOfPeople += reservation.NumberOfPeople;
 
-                if (sumOfNumberOfPeople <= restaurant.SeatCapacity)
+                if (reservation.NumberOfPeople <= restaurant.SeatCapacity)
                 {
                     //Decrement the number of available seats
                     restaurant.SeatCapacity -= reservation.NumberOfPeople;
