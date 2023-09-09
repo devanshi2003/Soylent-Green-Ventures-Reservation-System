@@ -118,10 +118,10 @@ namespace SVG_Restaurants.Controllers
 
                 sumOfNumberOfPeople += reservation.TheReservation.NumberOfPeople;
 
-                if (reservation.TheReservation.NumberOfPeople <= restaurant.SeatCapacity)
+                if (sumOfNumberOfPeople <= restaurant.SeatCapacity)
                 {
-                    // Decrement the number of available seats
-                    restaurant.SeatCapacity -= reservation.TheReservation.NumberOfPeople;
+                    //Decrement the number of available seats
+                    restaurant.SeatCapacity -= reservation.NumberOfPeople;
 
                     // Add the reservation to the database
                     _context.Add(reservation.TheReservation); // Add the reservation entity, not the ViewModel
@@ -132,8 +132,15 @@ namespace SVG_Restaurants.Controllers
                 else
                 {
                     ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");
+
                 }
+
+
             }
+            ViewData["AreaId"] = new SelectList(_context.DiningAreas, "AreaId", "AreaId", reservation.AreaId);
+            ViewData["BanquetId"] = new SelectList(_context.Banquets, "BanquetId", "BanquetId", reservation.BanquetId);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "Email", reservation.CustomerId);
+            ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", reservation.RestaurantId);
 
             return View(reservation);
         }
