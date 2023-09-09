@@ -106,14 +106,6 @@
 
 
 <script>
-    //const disabledDates = [
-    //    new Date("2023-09-10"),
-    //    new Date("2023-09-15"),
-    //    new Date("2023-09-20"),
-    //    // Add more dates as needed
-    //];
-
-
 
     document.addEventListener("DOMContentLoaded", function () {
         const currentUrl = new URL(window.location.href);
@@ -141,7 +133,6 @@
             }
         });
     });
-
 
 
     function getSundaysInYear(year) {
@@ -210,7 +201,7 @@
 
     let maxTime = new Date();
     let minTime = new Date();
-    const disabledTimes=[]
+
     let disabledDates = getSundaysInYear(year);
 
 
@@ -223,7 +214,6 @@
 
     }
     else if (restaurantID === "2") {   //La Oesta - ID = 2
-        console.log("2")
         minTime.setHours(10, 0, 0, 0);
         maxTime.setHours(21, 0, 0, 0);
         disabledDates = [...getMondaysInYear(2023), ...getTuesdaysInYear(2023)];
@@ -232,23 +222,18 @@
     }
     else { // Bamboo ID = 1 
 
-        disabledTimes.push({ from: "15:00", to: "16:00" });
         minTime.setHours(12, 0, 0, 0); 
         maxTime.setHours(21, 0, 0, 0);
         disabledDates = getMondaysInYear(2023);
 
     }
-
-    const disabledDateTime = [...disabledDates, ...disabledTimes];
-
-    console.log(disabledDateTime)
-
+    
     // Initialize Flatpickr with date and time options
     flatpickr("#datetime", {
         enableTime: true,
         dateFormat: 'M j, Y h:i K',
         minDate: 'today', // Set the minimum date to today
-        disable: disabledDateTime, // Specify the array of disabled dates and times
+        disable: disabledDates,
         minTime: minTime, // Set the min time for all days
         maxTime: maxTime // Set the maximum time for all days
     });
