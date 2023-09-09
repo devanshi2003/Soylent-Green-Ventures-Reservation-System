@@ -104,7 +104,7 @@ namespace SVG_Restaurants.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservationId,CustomerId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople")] RestaurantReservationVM reservation)
+        public async Task<IActionResult> Create([Bind("ReservationId,CustomerId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +116,7 @@ namespace SVG_Restaurants.Controllers
                     .Where(r => r.ReservationTiming >= dateTimeToCompare)
                     .Sum(r => r.NumberOfPeople);
 
-                sumOfNumberOfPeople += reservation.TheReservation.NumberOfPeople;
+                sumOfNumberOfPeople += reservation.NumberOfPeople;
 
                 if (sumOfNumberOfPeople <= restaurant.SeatCapacity)
                 {
@@ -124,7 +124,7 @@ namespace SVG_Restaurants.Controllers
                     restaurant.SeatCapacity -= reservation.NumberOfPeople;
 
                     // Add the reservation to the database
-                    _context.Add(reservation.TheReservation); // Add the reservation entity, not the ViewModel
+                    _context.Add(reservation); // Add the reservation entity, not the ViewModel
                     await _context.SaveChangesAsync(); // Save changes to the database
 
                     return RedirectToAction(nameof(Index));
