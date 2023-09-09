@@ -174,7 +174,6 @@
     const year = 2023;
     const disabledDates = getSundaysInYear(year);
 
-    console.log(disabledDates);
 
 
 
@@ -198,15 +197,22 @@
     const disabledTimes=[]
 
     // Set the maximum time and minimum time based on the restaurantID
-    if (restaurantID === "3") {
-        maxTime.setHours(22, 0, 0, 0); // 10PM
-        minTime.setHours(17, 0, 0, 0); // 5PM
+
+   
+    if (restaurantID === "3") {   //Mexikana ID = 3 
+        minTime.setHours(17, 0, 0, 0);
+        maxTime.setHours(23, 0, 0, 0); 
     }
-    else {
+    else if (restaurantID === "2") {   //La Oesta - ID = 2
+        console.log("2")
+        minTime.setHours(10, 0, 0, 0);
+        maxTime.setHours(21, 0, 0, 0); 
+    }
+    else { // Bamboo ID = 1 
 
         disabledTimes.push({ from: "15:00", to: "16:00" });
-        minTime.setHours(13, 0, 0, 0); // 1PM
-        maxTime.setHours(18, 0, 0, 0); // 6PM
+        minTime.setHours(12, 0, 0, 0); 
+        maxTime.setHours(21, 0, 0, 0); 
     }
 
     const disabledDateTime = [...disabledDates, ...disabledTimes];
