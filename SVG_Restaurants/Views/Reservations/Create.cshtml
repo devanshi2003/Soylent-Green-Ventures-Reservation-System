@@ -23,19 +23,19 @@
 }
 else if (Convert.ToString(rID) == "2")
 {
-<style type="text/css">
-    body {
-        background-color: #fff8dc;
-    }
-</style>
+    <style type="text/css">
+        body {
+            background-color: #fff8dc;
+        }
+    </style>
 }
 else if (Convert.ToString(rID) == "3")
 {
-<style type="text/css">
-    body {
-        background-color: #dae1e6;
-    }
-</style>
+    <style type="text/css">
+        body {
+            background-color: #dae1e6;
+        }
+    </style>
 }
 <div class="text-center">
     <h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
@@ -215,6 +215,27 @@ else if (Convert.ToString(rID) == "3")
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get the input element
+        var guestInput = document.getElementById('guest');
+
+        // Get the available seats value from the ViewBag or model property
+        var availableSeats = @ViewBag.AvailableSeats; // Use the correct syntax for your view engine
+
+        // Set the max attribute of the input element based on available seats
+        guestInput.max = availableSeats;
+
+        // Optional: Add an event listener to validate input further if needed
+        guestInput.addEventListener('input', function () {
+            var selectedGuests = parseInt(guestInput.value);
+            if (selectedGuests > availableSeats) {
+                guestInput.value = availableSeats; // Limit input to available seats
+            }
+        });
+    });
+    </script>
 
     <script>//const disabledDates = [
         //    new Date("2023-09-10"),
