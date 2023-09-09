@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SVG_Restaurants.Models;
+using SVG_Restaurants.ViewModels;
 using System.Diagnostics;
 
 namespace SVG_Restaurants.Controllers
@@ -7,15 +8,26 @@ namespace SVG_Restaurants.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly SGVContext _context;   //Test this out
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, SGVContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int customerID)
         {
-            return View();
+            var viewModel = new CustomerDetailsVM
+            {
+                CustomerID = customerID,
+                Reservations = _context.Reservations
+                    .Where(r => r.CustomerId == customerID)
+                    .OrderByDescending(r => r.ReservationTiming)
+                    .ToList(),
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

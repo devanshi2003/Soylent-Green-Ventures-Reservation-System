@@ -3,46 +3,46 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-   <style type="text/css">
-        body {
-            background-color: #A9927D;
-        }
-    </style>
+<head>
+    <link rel="stylesheet" href="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/css/main.ad49aa9b.css" />
+</head>
+<style type="text/css">
+    body {
+        background-color: #A9927D;
+    }
+</style>
 <div class="text-center">
-<h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
-    Soylent Green Ventures
-</h1>
+    <h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
+        Soylent Green Ventures
+    </h1>
 </div>
 <body>
-<div class="row justify-content-end">
-    @{
-        string customerID = Context.Request.Query["CustomerID"];
-
-        // Display Login buttons if customerID is not present
-        if (string.IsNullOrEmpty(customerID))
-        {
-            <div class="col-auto">
-                <a asp-controller="Customers" asp-action="Login" class="btn btn-outline">Login as Customer</a>
-            </div>
-            <div class="col-auto">
-                <a asp-controller="RestaurantWorkers" asp-action="Login" class="btn btn-outline">Login as Staff</a>
-            </div>
+    <div class="row justify-content-end">
+        @{
+            // Display Login buttons if customerID is not present
+            if (@Model.CustomerID == 0)
+            {
+                <div class="col-auto">
+                    <a asp-controller="Customers" asp-action="Login" class="btn btn-outline">Login as Customer</a>
+                </div>
+                <div class="col-auto">
+                    <a asp-controller="RestaurantWorkers" asp-action="Login" class="btn btn-outline">Login as Staff</a>
+                </div>
+            }
+            else
+            {
+                <div class="col-auto">
+                    <a asp-controller="Customers" asp-action="Delete" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">Delete Account</a>
+                </div>
+                <div class="col-auto">
+                    <a asp-controller="Customers" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">Edit Profile</a>
+                </div>
+                <div class="col-auto">
+                    <a id="LogOut" asp-controller="Home" asp-action="Index" class="btn btn-outline">Log out</a>
+                </div>
+            }
         }
-        else
-        {
-            <div class="col-auto">
-                <a asp-controller="Customers" asp-action="Delete" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">Delete Account</a>
-            </div>
-            <div class="col-auto">
-                <a asp-controller="Customers" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">Edit Profile</a>
-            </div>
-            <div class="col-auto">
-                <a  id="LogOut" asp-controller="Home" asp-action="Index" class="btn btn-outline">Log out</a>
-            </div>
-        }
-    }
-</div>
+    </div>
 
 
     <ul class="nav nav-tabs">
@@ -54,22 +54,76 @@
         </li>
     </ul>
     @{
-        if (string.IsNullOrEmpty(customerID))
+        if (Model.CustomerID == 0)
         {
             <div class="text-center">
-            <div id="upcomingBookings">
+                <div id="upcomingBookings">
                     <h2 class="font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">
-                    Log in to see your upcoming bookings!
-                </h2>
-            </div>
+                        Log in to see your upcoming bookings!
+                    </h2>
+                </div>
             </div>
         }
         else
         {
-            <div class="text-center">
-            <div id="upcomingBookings">
-                <h2 class="font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">No upcoming bookings :(</h2>
-            </div>
+            <div class="">
+                <div id="upcomingBookings">
+                    @{
+                        if (Model.Reservations.Count() == 0)
+                        {
+                            <h2 class="font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-200">No upcoming bookings :(</h2>
+                        }
+                        else
+                        {
+                            foreach (var reservation in Model.Reservations)
+                            {
+                                @*<div>
+                                        <p>Reservation ID is: @reservation.ReservationId</p>
+                                        <p>Restaurant ID is: @reservation.RestaurantId</p>
+                                        <p>The booking time is: @reservation.ReservationTiming</p>
+                                        <p>The number of people for this booking is: @reservation.NumberOfPeople</p>
+                                        <hr />
+                                    </div>*@
+
+                                <div class="flex flex-col justify-center items-center h-[30vh]">
+                                    <div class="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:!shadow-none p-3">
+                                        <div class="mt-2 mb-8 w-full">
+                                            <h4 class="px-2 text-xl font-bold text-navy-700 dark:text-white">
+                                                Reservation ID: @reservation.ReservationId
+                                            </h4>
+                                            <p class="mt-2 px-2 text-base text-gray-600">
+                                                Restaurant ID: @reservation.RestaurantId
+
+                                            </p>
+                                            @if (reservation.Restaurant != null)
+                                            {
+                                                <p class="mt-2 px-2 text-base text-gray-600">Restaurant: @reservation.Restaurant.RestaurantName;</p>
+
+                                            }
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-4 px-2 w-full">
+                                            <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                                                <p class="text-sm text-gray-600">Number of People</p>
+                                                <p class="text-base font-medium text-navy-700 dark:text-white">
+                                                    @reservation.NumberOfPeople
+                                                </p>
+                                            </div>
+
+                                            <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                                                <p class="text-sm text-gray-600">Booking time</p>
+                                                <p class="text-base font-medium text-navy-700 dark:text-white">
+                                                    @reservation.ReservationTiming
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        }
+                    }
+                </div>
             </div>
         }
     }
@@ -156,28 +210,26 @@
         <!-- End Card -->
 
     </div>
-    <!-- End Grid -->
-</div>
-<!-- End Card Blog -->
+    <!-- End Card Blog -->
 
-<script>// Event listener for the "Upcoming Bookings" link
-    const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
-    const allCards = document.getElementById('allCards');
-    const upcomingBookings = document.getElementById('upcomingBookings');
+    <script>// Event listener for the "Upcoming Bookings" link
+        const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
+        const allCards = document.getElementById('allCards');
+        const upcomingBookings = document.getElementById('upcomingBookings');
 
-    upcomingBookingsLink.addEventListener('click', function (event) {
+        upcomingBookingsLink.addEventListener('click', function (event) {
 
-        allCards.style.display = 'none';
-        upcomingBookings.style.display = 'block';
+            allCards.style.display = 'none';
+            upcomingBookings.style.display = 'block';
 
-    });
+        });
 
-    // Event listener for the "Restaurants" link
-    const restaurantsLink = document.getElementById('restaurantsLink');
-    restaurantsLink.addEventListener('click', function (event) {
-        allCards.style.display = 'block';
-        upcomingBookings.style.display = 'none';
-    });
+        // Event listener for the "Restaurants" link
+        const restaurantsLink = document.getElementById('restaurantsLink');
+        restaurantsLink.addEventListener('click', function (event) {
+            allCards.style.display = 'block';
+            upcomingBookings.style.display = 'none';
+        });
 
         document.addEventListener('DOMContentLoaded', function () {
             var logOutButton = document.getElementById('LogOut');
@@ -188,6 +240,6 @@
             });
         });
 
-    allCards.style.display = 'block';
-    upcomingBookings.style.display = 'none';</script>
+        allCards.style.display = 'block';
+        upcomingBookings.style.display = 'none';</script>
 </body>
