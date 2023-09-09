@@ -57,7 +57,9 @@
                                        id="datetime"
                                        asp-for="@Model.ReservationTiming"
                                        data-input
+                                       pattern="^(?!(1[3-4]|17):[0-5][0-9]|18:00).*$"
                                        placeholder="Select.."
+
                                        class="block w-full px-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-l-md shadow-sm">
                                 <a class="h-11 w-10 input-button cursor-pointer rounded-r-md bg-transparent border-gray-300 border-t border-b border-r"
                                    title="clear" data-clear>
@@ -104,6 +106,7 @@
 
     }
 </div>
+<div id="error-container" class="text-danger"></div>
 
 
 <script>
@@ -113,6 +116,46 @@
     //    new Date("2023-09-20"),
     //    // Add more dates as needed
     //];
+
+
+    // JavaScript for client-side validation
+    // JavaScript for client-side validation
+    // JavaScript for client-side validation
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the current URL
+        const currentUrl = new URL(window.location.href);
+
+        // Get the restaurantID query parameter value
+        const restaurantID = currentUrl.searchParams.get("restaurantID");
+
+        const inputElement = document.getElementById("datetime");
+        const errorContainer = document.getElementById("error-container");
+
+        inputElement.addEventListener("input", function () {
+            const selectedDateTime = new Date(inputElement.value);
+
+            // Check if restaurantID is not 3 and time is outside allowed ranges
+            if (restaurantID !== "3" &&
+                (selectedDateTime.getHours() < 13 || (selectedDateTime.getHours() >= 17 && selectedDateTime.getHours() < 19))) {
+                // Clear the input value
+                inputElement.value = "";
+
+                // Create a new error message element
+                const errorMessage = document.createElement("div");
+                errorMessage.textContent = "Invalid reservation time for this restaurant.";
+                errorMessage.classList.add("error-message");
+
+                // Append the error message to the container
+                errorContainer.innerHTML = ""; // Clear any previous messages
+                errorContainer.appendChild(errorMessage);
+            } else {
+                // If valid, clear any previous error messages
+                errorContainer.innerHTML = "";
+            }
+        });
+    });
+
+
 
     function getSundaysInYear(year) {
         const sundays = [];
@@ -152,6 +195,7 @@
 
     let maxTime = new Date();
     let minTime = new Date();
+    const disabledTimes=[]
 
     // Set the maximum time and minimum time based on the restaurantID
     if (restaurantID === "3") {
@@ -159,17 +203,22 @@
         minTime.setHours(17, 0, 0, 0); // 5PM
     }
     else {
+
+        disabledTimes.push({ from: "15:00", to: "16:00" });
         minTime.setHours(13, 0, 0, 0); // 1PM
-        maxTime.setHours(17, 0, 0, 0); // 5PM
+        maxTime.setHours(18, 0, 0, 0); // 6PM
     }
 
+    const disabledDateTime = [...disabledDates, ...disabledTimes];
+
+    console.log(disabledDateTime)
 
     // Initialize Flatpickr with date and time options
     flatpickr("#datetime", {
         enableTime: true,
         dateFormat: 'M j, Y h:i K',
         minDate: 'today', // Set the minimum date to today
-        disable: disabledDates, // Specify the array of disabled dates
+        disable: disabledDateTime, // Specify the array of disabled dates and times
         minTime: minTime, // Set the min time for all days
         maxTime: maxTime // Set the maximum time for all days
     });
