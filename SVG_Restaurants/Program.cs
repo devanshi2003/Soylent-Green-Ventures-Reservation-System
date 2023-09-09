@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Add run time compilation to show changes to Razor views without having to restart the application.
-//builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); 
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); 
 
 // Add Entity Framework Core service registration for SGVRestaurantsContext
 builder.Services.AddDbContext<SGVContext>(options =>
