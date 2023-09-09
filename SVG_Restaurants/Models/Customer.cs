@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
 
 namespace SVG_Restaurants.Models
@@ -38,6 +39,10 @@ namespace SVG_Restaurants.Models
         [Display(Name = "Password")]
         [Required(ErrorMessage = "{0} is required.")]
         public string? Password { get; set; }
+
+        [NotMapped]
+        public string? NewPassword { get; set; }
+
         public int? LoyaltyPoints { get; set; }
 
         public virtual ICollection<Reservation> Reservations { get; set; }
