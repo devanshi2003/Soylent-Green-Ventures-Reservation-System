@@ -84,10 +84,6 @@
                         </div>
                     }
 
-                    
-
-
-
                     <div class="form-group">
                         <label asp-for="@Model.NumberOfPeople" class="control-label"></label>
                         <input asp-for="@Model.NumberOfPeople" class="form-control" />
@@ -118,9 +114,7 @@
     //];
 
 
-    // JavaScript for client-side validation
-    // JavaScript for client-side validation
-    // JavaScript for client-side validation
+
     document.addEventListener("DOMContentLoaded", function () {
         const currentUrl = new URL(window.location.href);
         const restaurantID = currentUrl.searchParams.get("restaurantID");
@@ -164,8 +158,40 @@
 
         return sundays;
     }
+
+
+    function getMondaysInYear(year) {
+        const mondays = [];
+        const startDate = new Date(year, 0, 1); // January 1st of the given year
+        const endDate = new Date(year, 11, 31); // December 31st of the given year
+
+        for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+            if (currentDate.getDay() === 1) {
+                const formattedDate = new Date(`${year}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`);
+                mondays.push(formattedDate);
+            }
+        }
+
+        return mondays;
+    }
+
+    function getTuesdaysInYear(year) {
+        const tuesdays = [];
+        const startDate = new Date(year, 0, 1); // January 1st of the given year
+        const endDate = new Date(year, 11, 31); // December 31st of the given year
+
+        for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+            if (currentDate.getDay() === 2) {
+                const formattedDate = new Date(`${year}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`);
+                tuesdays.push(formattedDate);
+            }
+        }
+
+        return tuesdays;
+    }
+
+
     const year = 2023;
-    const disabledDates = getSundaysInYear(year);
 
 </script>
 
@@ -185,24 +211,32 @@
     let maxTime = new Date();
     let minTime = new Date();
     const disabledTimes=[]
+    let disabledDates = getSundaysInYear(year);
+
 
     // Set the maximum time and minimum time based on the restaurantID
 
    
     if (restaurantID === "3") {   //Mexikana ID = 3 
         minTime.setHours(17, 0, 0, 0);
-        maxTime.setHours(23, 0, 0, 0); 
+        maxTime.setHours(23, 0, 0, 0);
+
     }
     else if (restaurantID === "2") {   //La Oesta - ID = 2
         console.log("2")
         minTime.setHours(10, 0, 0, 0);
-        maxTime.setHours(21, 0, 0, 0); 
+        maxTime.setHours(21, 0, 0, 0);
+        disabledDates = [...getMondaysInYear(2023), ...getTuesdaysInYear(2023)];
+
+
     }
     else { // Bamboo ID = 1 
 
         disabledTimes.push({ from: "15:00", to: "16:00" });
         minTime.setHours(12, 0, 0, 0); 
-        maxTime.setHours(21, 0, 0, 0); 
+        maxTime.setHours(21, 0, 0, 0);
+        disabledDates = getMondaysInYear(2023);
+
     }
 
     const disabledDateTime = [...disabledDates, ...disabledTimes];
