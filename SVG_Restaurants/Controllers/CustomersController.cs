@@ -119,6 +119,7 @@ namespace SVG_Restaurants.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("CustomerId,FirstName,LastName,Email,PhoneNumber,Username,Password,LoyaltyPoints")] Customer customer)
         {
+            ViewBag.submissionSuccess = false;
             if (ModelState.IsValid)
             {
                 try
@@ -140,6 +141,7 @@ namespace SVG_Restaurants.Controllers
 
                     _context.Update(existingCustomer);
                     await _context.SaveChangesAsync();
+                    ViewBag.submissionSuccess = true;
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -152,7 +154,7 @@ namespace SVG_Restaurants.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Login", "Customers");
+                return View(customer);
             }
             return View(customer);
         }
