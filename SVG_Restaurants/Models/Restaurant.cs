@@ -16,6 +16,7 @@ namespace SVG_Restaurants.Models
         public int RestaurantId { get; set; }
         public string? RestaurantAddress { get; set; }
         public string? RestaurantName { get; set; }
+        public int? SeatCapacity { get; set; }
 
         public virtual ICollection<Banquet> Banquets { get; set; }
         public virtual ICollection<DiningArea> DiningAreas { get; set; }

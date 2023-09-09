@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SVG_Restaurants.Models;
+using SVG_Restaurants.ViewModels;
 
 namespace SVG_Restaurants.Controllers
 {
@@ -19,26 +20,47 @@ namespace SVG_Restaurants.Controllers
         }
 
         // GET: BambooLeaf
-        public async Task<IActionResult> BambooLeaf()
+        public async Task<IActionResult> BambooLeaf(int? CustomerID, int RestaurantId, RestaurantVM vm)
         {
+            if(CustomerID.HasValue)
+            {
+                vm.CustomerID = CustomerID;
+            }
+            vm.RestaurantId = RestaurantId;
+
             var restaurant = await _context.Restaurants
                 .FirstOrDefaultAsync();
-            return View(restaurant);
+            return View(vm);
         }
         // GET: LaOeste
-        public async Task<IActionResult> LaOeste()
+        public async Task<IActionResult> LaOeste(int? CustomerID, int RestaurantId, RestaurantVM vm)
         {
+            if (CustomerID.HasValue)
+            {
+                vm.CustomerID = CustomerID;
+            }
+            vm.RestaurantId = RestaurantId;
+
             var restaurant = await _context.Restaurants
                 .FirstOrDefaultAsync();
-            return View(restaurant);
+            return View(vm);
         }
 
         // GET: Mexikana
-        public async Task<IActionResult> Mexikana()
+        public async Task<IActionResult> Mexikana(int? CustomerID, int RestaurantId, RestaurantVM vm)
         {
+            if (CustomerID.HasValue)
+            {
+                vm.CustomerID = CustomerID;
+            }
+            vm.RestaurantId = RestaurantId;
+
             var restaurant = await _context.Restaurants
                 .FirstOrDefaultAsync();
-            return View(restaurant);
+            
+            ViewBag.AvailableSeats = 50;
+
+            return View(vm);
         }
 
         // GET: Restaurants

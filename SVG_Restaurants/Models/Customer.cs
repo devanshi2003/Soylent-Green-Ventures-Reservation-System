@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace SVG_Restaurants.Models
 {
@@ -12,6 +13,7 @@ namespace SVG_Restaurants.Models
         }
 
         public int CustomerId { get; set; }
+
 
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "{0} is required.")]

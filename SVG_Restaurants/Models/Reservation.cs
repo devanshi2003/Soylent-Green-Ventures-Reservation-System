@@ -12,10 +12,14 @@ namespace SVG_Restaurants.Models
         public DateTime? ReservationTiming { get; set; }
         public int? BanquetId { get; set; }
         public int? NumberOfPeople { get; set; }
+        public int? GuestId { get; set; }
+        public int? HighChairs { get; set; }
+        public string? SpecialNotes { get; set; }
 
         public virtual DiningArea? Area { get; set; }
         public virtual Banquet? Banquet { get; set; }
         public virtual Customer? Customer { get; set; }
+        public virtual Guest? Guest { get; set; }
         public virtual Restaurant? Restaurant { get; set; }
     }
 }
