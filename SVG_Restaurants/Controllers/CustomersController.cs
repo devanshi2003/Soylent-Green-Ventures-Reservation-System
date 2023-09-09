@@ -123,7 +123,22 @@ namespace SVG_Restaurants.Controllers
             {
                 try
                 {
-                    _context.Update(customer);
+                    var existingCustomer = await _context.Customers.FindAsync(customer.CustomerId);
+
+                    if (existingCustomer.Password != customer.Password)
+                    {
+                        ModelState.AddModelError("Password", "Incorrect password.");
+                        return View(customer);
+                    }
+
+                    existingCustomer.FirstName = customer.FirstName;
+                    existingCustomer.LastName = customer.LastName;
+                    existingCustomer.Email = customer.Email;
+                    existingCustomer.PhoneNumber = customer.PhoneNumber;
+                    existingCustomer.Username = customer.Username;
+                    existingCustomer.LoyaltyPoints = customer.LoyaltyPoints;
+
+                    _context.Update(existingCustomer);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
