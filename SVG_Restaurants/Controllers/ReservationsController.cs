@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SVG_Restaurants.Models;
+using SVG_Restaurants.ViewModels;
 
 namespace SVG_Restaurants.Controllers
 {
@@ -78,24 +79,29 @@ namespace SVG_Restaurants.Controllers
 
                 sumOfNumberOfPeople += reservation.NumberOfPeople;
 
-                if (sumOfNumberOfPeople <= restaurant.SeatCapacity)
+                if (sumOfNumberOfPeople <= 50)
+                //if (sumOfNumberOfPeople <= restaurant.SeatCapacity)
                 {
-                    // Decrement the number of available seats
+                    //Decrement the number of available seats
                     restaurant.SeatCapacity -= reservation.NumberOfPeople;
+                    restaurant.SeatCapacity -= reservation.NumberOfPeople;
+
 
                     // Add the reservation to the database
                     _context.Add(reservation);
                     await _context.SaveChangesAsync();
 
                     return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");
-                }
-
 
             }
+            else
+            {
+                ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");
+
+            }
+
+
+        }
             ViewData["AreaId"] = new SelectList(_context.DiningAreas, "AreaId", "AreaId", reservation.AreaId);
             ViewData["BanquetId"] = new SelectList(_context.Banquets, "BanquetId", "BanquetId", reservation.BanquetId);
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "Email", reservation.CustomerId);
