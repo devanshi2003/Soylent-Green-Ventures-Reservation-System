@@ -122,35 +122,28 @@
     // JavaScript for client-side validation
     // JavaScript for client-side validation
     document.addEventListener("DOMContentLoaded", function () {
-        // Get the current URL
         const currentUrl = new URL(window.location.href);
-
-        // Get the restaurantID query parameter value
         const restaurantID = currentUrl.searchParams.get("restaurantID");
-
         const inputElement = document.getElementById("datetime");
         const errorContainer = document.getElementById("error-container");
+
+        function displayErrorMessage(message) {
+            const errorMessage = document.createElement("div");
+            errorMessage.textContent = message;
+            errorMessage.classList.add("error-message");
+            errorContainer.appendChild(errorMessage);
+        }
 
         inputElement.addEventListener("input", function () {
             const selectedDateTime = new Date(inputElement.value);
 
-            // Check if restaurantID is not 3 and time is outside allowed ranges
-            if (restaurantID !== "3" &&
-                (selectedDateTime.getHours() < 13 || (selectedDateTime.getHours() >= 17 && selectedDateTime.getHours() < 19))) {
-                // Clear the input value
-                inputElement.value = "";
+            errorContainer.innerHTML = "";
 
-                // Create a new error message element
-                const errorMessage = document.createElement("div");
-                errorMessage.textContent = "Invalid reservation time for this restaurant.";
-                errorMessage.classList.add("error-message");
-
-                // Append the error message to the container
-                errorContainer.innerHTML = ""; // Clear any previous messages
-                errorContainer.appendChild(errorMessage);
-            } else {
-                // If valid, clear any previous error messages
-                errorContainer.innerHTML = "";
+            if (restaurantID === "1" && (selectedDateTime.getHours() >= 14 && selectedDateTime.getHours() < 17)) {
+                displayErrorMessage("Invalid reservation time for Restaurant 1.");
+            }
+            if (restaurantID === "2" && (selectedDateTime.getHours() >= 14 && selectedDateTime.getHours() < 17)) {
+                displayErrorMessage("Invalid reservation time for Restaurant 2.");
             }
         });
     });
@@ -173,9 +166,6 @@
     }
     const year = 2023;
     const disabledDates = getSundaysInYear(year);
-
-
-
 
 </script>
 
