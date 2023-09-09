@@ -110,7 +110,7 @@
 
             <!-- Sharobp=nn me -->
             <div class="mx-auto w-full max-w-[550px]">
-                <a asp-controller="Reservations" asp-action="Create" asp-route-customerID="@Model.CustomerID" asp-route-restaurantID="@Model.RestaurantId" class="btn btn-outline">Reserve</a>
+                <a href="~/Reservations/Create?customerID=@Model.CustomerID&restaurantID=3" class="btn btn-outline">Reserve</a>
             </div>
         </div>
     </div>

@@ -53,19 +53,58 @@ namespace SVG_Restaurants.Controllers
         // GET: Reservations/Create
         public IActionResult Create()
         {
-            ViewData["AreaId"] = new SelectList(_context.DiningAreas, "AreaId", "AreaId");
+            string rID = Request.Query["restaurantID"];
+            int parsedrID;
+
+            var diningAreas = _context.DiningAreas.ToList();
+
+
+            if (int.TryParse(rID, out parsedrID))
+            {
+                diningAreas = diningAreas
+                    .Where(da => da.RestaurantId == parsedrID)
+                    .ToList();
+            }
+
+            var banquet = _context.Banquets.Where(c=>c.RestaurantId == parsedrID).ToList();
+
+
+            // Create a SelectListItem list using AreaName as the display text
+            var areaSelectList = diningAreas
+                .Select(da => new SelectListItem
+                {
+                    Value = da.AreaId.ToString(), 
+                    Text = da.Area 
+                })
+                .ToList();
+
+            var banquetList = banquet
+               .Select(b => new SelectListItem
+               {
+                   Value = b.BanquetId.ToString(),
+                   Text = b.BanquetName
+               })
+               .ToList();
+
+            ViewBag.AreaId = new SelectList(areaSelectList, "Value", "Text");
+            ViewBag.Banquet = new SelectList(banquetList, "Value", "Text");
+
             ViewData["BanquetId"] = new SelectList(_context.Banquets, "BanquetId", "BanquetId");
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "Email");
             ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId");
+
             return View();
         }
+
+
+
 
         // POST: Reservations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservationId,CustomerId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("ReservationId,CustomerId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople")] RestaurantReservationVM reservation)
         {
             if (ModelState.IsValid)
             {
@@ -77,38 +116,36 @@ namespace SVG_Restaurants.Controllers
                     .Where(r => r.ReservationTiming >= dateTimeToCompare)
                     .Sum(r => r.NumberOfPeople);
 
-                sumOfNumberOfPeople += reservation.NumberOfPeople;
+                sumOfNumberOfPeople += reservation.TheReservation.NumberOfPeople;
 
-                if (sumOfNumberOfPeople <= 50)
-                //if (sumOfNumberOfPeople <= restaurant.SeatCapacity)
+                if (sumOfNumberOfPeople <= restaurant.SeatCapacity)
                 {
                     //Decrement the number of available seats
                     restaurant.SeatCapacity -= reservation.NumberOfPeople;
-                    restaurant.SeatCapacity -= reservation.NumberOfPeople;
-
 
                     // Add the reservation to the database
-                    _context.Add(reservation);
-                    await _context.SaveChangesAsync();
+                    _context.Add(reservation.TheReservation); // Add the reservation entity, not the ViewModel
+                    await _context.SaveChangesAsync(); // Save changes to the database
 
                     return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");
+
+                }
+
 
             }
-            else
-            {
-                ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");
-
-            }
-
-
-        }
             ViewData["AreaId"] = new SelectList(_context.DiningAreas, "AreaId", "AreaId", reservation.AreaId);
             ViewData["BanquetId"] = new SelectList(_context.Banquets, "BanquetId", "BanquetId", reservation.BanquetId);
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "Email", reservation.CustomerId);
             ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "RestaurantId", reservation.RestaurantId);
+
             return View(reservation);
         }
-        
+
+
 
         // GET: Reservations/Edit/5
         public async Task<IActionResult> Edit(int? id)
