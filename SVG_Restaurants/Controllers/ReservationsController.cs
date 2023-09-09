@@ -108,7 +108,7 @@ namespace SVG_Restaurants.Controllers
         {
             if (ModelState.IsValid)
             {
-                var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == 1).FirstOrDefaultAsync();
+                var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
 
                 var dateTimeToCompare = DateTime.ParseExact("2023-09-08 15:30:00", "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
