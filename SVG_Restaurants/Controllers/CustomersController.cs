@@ -117,9 +117,12 @@ namespace SVG_Restaurants.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("CustomerId,FirstName,LastName,Email,PhoneNumber,Username,Password,LoyaltyPoints")] Customer customer)
+        //public async Task<IActionResult> Edit([Bind("CustomerId,FirstName,LastName,Email,PhoneNumber,Username,Password,LoyaltyPoints")] Customer customer)
+        public async Task<IActionResult> Edit([Bind("CustomerId,FirstName,LastName,Email,PhoneNumber,Username,Password,LoyaltyPoints")] Customer customer, string? NewPassword)
         {
             ViewBag.submissionSuccess = false;
+            bool isPasswordChanged = false;
+
             if (ModelState.IsValid)
             {
                 try
@@ -137,7 +140,13 @@ namespace SVG_Restaurants.Controllers
                     existingCustomer.Email = customer.Email;
                     existingCustomer.PhoneNumber = customer.PhoneNumber;
                     existingCustomer.Username = customer.Username;
-                    existingCustomer.LoyaltyPoints = customer.LoyaltyPoints;
+
+                    // Update the password if a new one is provided
+                    if (!string.IsNullOrEmpty(NewPassword))
+                    {
+                        existingCustomer.Password = NewPassword;
+                        isPasswordChanged = true;
+                    }
 
                     _context.Update(existingCustomer);
                     await _context.SaveChangesAsync();
@@ -154,8 +163,14 @@ namespace SVG_Restaurants.Controllers
                         throw;
                     }
                 }
-                return View(customer);
+
             }
+
+            if (isPasswordChanged)
+            {
+                return RedirectToAction("Login");
+            }
+
             return View(customer);
         }
 
