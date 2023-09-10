@@ -104,7 +104,7 @@ namespace SVG_Restaurants.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservationId,CustomerId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople,HighChairs,SpecialNotes,GuestID")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("ReservationId,CustomerId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople,HighChairs,SpecialNotes,GuestId")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
@@ -127,8 +127,16 @@ namespace SVG_Restaurants.Controllers
                     _context.Add(reservation); // Add the reservation entity, not the ViewModel
                     await _context.SaveChangesAsync(); // Save changes to the database
 
-                    return RedirectToAction(nameof(Index));
+                    if (reservation.CustomerId == null) {
+                        return RedirectToAction("Index", "Home");
+
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home", new { customerID = reservation.CustomerId});
+                    }
                 }
+                    
                 else
                 {
                     ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");

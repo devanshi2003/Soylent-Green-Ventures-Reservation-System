@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +48,8 @@ namespace SVG_Restaurants.Controllers
         // GET: Guests/Create
         public IActionResult Create()
         {
+            ViewBag.RestaurantID = Request.Query["RestaurantID"];
+
             return View();
         }
 
@@ -57,11 +60,14 @@ namespace SVG_Restaurants.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GuestId,FirstName,LastName,Email,PhoneNumber")] Guest guest)
         {
+
             if (ModelState.IsValid)
             {
+
+                string restaurantID = Request.Form["RestaurantID"];
                 _context.Add(guest);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "Reservations", new { GuestID = guest.GuestId, RestaurantID = restaurantID });
             }
             return View(guest);
         }

@@ -44,168 +44,320 @@ else
         }
     </style>
 }
-<div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-6">
-        <form asp-action="Create" method="post">
-            @if (string.IsNullOrEmpty(cID))
-            {
-                string guestID = Context.Request.Query["GuestID"];
-                string restaurantIDguest = Context.Request.Query["restaurantID"];
-                <input type="hidden" asp-for="@Model.GuestId" value=@guestID />
 
-                <div class="form-group">
-                    <input type="hidden" asp-for="@Model.RestaurantId" value=@restaurantIDguest />
+
+
+@if (string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
+
+{
+    <div class="overflow-hidden">
+        <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="relative mx-auto max-w-4xl grid space-y-5 sm:space-y-10">
+                <!-- Title -->
+                <div class="text-center">
+
+                    <h1 class="text-3xl text-gray-800 font-bold sm:text-5xl lg:text-6xl lg:leading-tight dark:text-gray-200">
+                        Hold up! You're not logged in!
+                    </h1>
                 </div>
-
-                <p class="text-center mt-6 text-xl leading-8 text-gray-700"><i>As a Guest</i></p>
-                @*First name Last name*@
-                @*<div class="-mx-3 flex flex-wrap">
-                        <div class="w-full px-3 sm:w-1/2">
-                            <div class="">
-                                <label for="fName" class="mb-3 block text-base font-medium text-[#07074D]">
-                                    First Name
-                                </label>
-                                <input type="text" name="fName" id="fName" placeholder="First Name"
-                                       class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                            </div>
+                <!-- End Title -->
+                <!-- Form -->
+                <form>
+                    <div class="mx-auto max-w-2xl sm:flex sm:space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-slate-900 dark:border-gray-700 dark:shadow-gray-900/[.2]">
+                        <div class="pb-2 sm:pb-0 sm:flex-[1_0_0%]">
+                            <a href="@Url.Action("Create", "Guests", new { RestaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4 dark:focus:ring-offset-gray-800">
+                                Continue as a Guest
+                            </a>
                         </div>
-                        <div class="w-full px-3 sm:w-1/2">
-                            <div class="">
-                                <label for="lName" class="mb-3 block text-base font-medium text-[#07074D]">
-                                    Last Name
-                                </label>
-                                <input type="text" name="lName" id="lName" placeholder="Last Name"
-                                       class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                            </div>
-                        </div>
-                    </div>*@
-            }
-            else
-            {
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                string customerID = Context.Request.Query["CustomerID"];
-                string restaurantID = Context.Request.Query["restaurantID"];
-
-                <input type="hidden" asp-for="@Model.CustomerId" value=@customerID />
-                <input type="hidden" asp-for="@Model.RestaurantId" value=@restaurantID />
-
-                <p class="text-center mt-6 text-xl leading-8 text-gray-700"><i>As a Registered Customer</i></p>
-            }
-
-            @*Guests number Special Banquets*@
-            @*Guests number*@
-            <div class="-mx-3 flex flex-wrap">
-                <div class="w-full px-3 sm:w-1/2">
-                    <div class="">
-                        <label asp-for="@Model.NumberOfPeople"
-                               class="mb-3 block text-base font-medium text-[#07074D]">
-                            Number of guests
-                        </label>
-                        <input type="number" asp-for="@Model.NumberOfPeople" placeholder="5" min="0"
-                               class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                        <span asp-validation-for="@Model.NumberOfPeople" class="text-danger"></span>
-                    </div>
-                </div>
-
-                @*<div class="form-group">
-                        <label asp-for="@Model.NumberOfPeople" class="control-label"></label>
-                        <input asp-for="@Model.NumberOfPeople" class="form-control" />
-                        <span asp-validation-for="@Model.NumberOfPeople" class="text-danger"></span>
-                    </div>*@
-
-                @*Special Banquets*@
-                @if (ViewBag.Banquet != null && ((IEnumerable<SelectListItem>)ViewBag.Banquet).Count() > 0)
-                {
-                    <div class="w-full px-3 sm:w-1/2">
-                        <div class="">
-                            <label asp-for="BanquetId" class="mb-3 block text-base font-medium text-[#07074D]">Special Banquets</label>
-                            <select asp-for="BanquetId" asp-items="ViewBag.Banquet" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
-                                <option value="">Select a banquet</option>-->
-                                <!-- Default option -->
-                            </select>
-                        </div>
-                    </div>
-
-                }
-            </div>
-
-            @*Area Chair Date Time*@
-            <div class="-mx-3 flex flex-wrap">
-                @*Area*@
-
-                <div class="w-full px-3 sm:w-1/2">
-                    <label asp-for="AreaId" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">Dining Area</label>
-                    <select asp-for="AreaId" asp-items="ViewBag.AreaId" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
-                        <option value="">Select an Area</option>-->
-                        <!-- Default option -->
-                    </select>
-                </div>
-
-                @*Chair*@
-                <div class="w-full px-3 sm:w-1/2">
-                    <div class="">
-                        <label asp-for="@Model.HighChairs"
-                               class="mb-3 block text-base font-medium text-[#07074D]">
-                            Baby Seats
-                        </label>
-                        <input type="number" asp-for="@Model.HighChairs" value="0" min="0"
-                               class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                    </div>
-                </div>
-            </div>
-
-            @*Special Notes*@
-            <div class="-mx-3 flex flex-wrap">
-                <div class="w-full px-3 sm:w-1/1">
-                    <label asp-for="@Model.SpecialNotes" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">
-                        Special Notes
-                    </label>
-                    <input type="text" asp-for="@Model.SpecialNotes" id="specialReq" placeholder="I am allergic to nuts"
-                           class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                </div>
-            </div>
-
-            @*Date Time*@
-            <div class="-mx-3 flex flex-wrap">
-                <div class="w-full px-3 sm:w-1/2">
-                    <label asp-for="@Model.ReservationTiming" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start"></label>
-                    <span asp-validation-for="@Model.ReservationTiming" class="text-danger"></span>
-
-                    <div id="error-container" class="text-danger"></div>
-
-                    <div class="flatpickr mx-auto col-span-6 sm:col-span-6">
-                        <div class="flex align-middle align-content-center">
-                            <input type="text"
-                                   id="datetime"
-                                   asp-for="@Model.ReservationTiming"
-                                   data-input
-                                   pattern="^(?!(1[3-4]|17):[0-5][0-9]|18:00).*$"
-                                   placeholder="Select Date and Time"
-                                   class="block w-full px-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-l-md shadow-sm">
-                            <a class="h-11 w-10 input-button cursor-pointer rounded-r-md bg-transparent border-gray-300 border-t border-b border-r"
-                               title="clear" data-clear>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mt-2 ml-1" viewBox="0 0 20 20" fill="#c53030">
-                                    <path fill-rule="evenodd"
-                                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                          clip-rule="evenodd" />
-                                </svg>
+                        <div class="pt-2 sm:pt-0 sm:pl-3 border-t border-gray-200 sm:border-t-0 sm:border-l sm:flex-[1_0_0%] dark:border-gray-700">
+                            <a asp-action="Login" asp-controller="Customers" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4 dark:focus:ring-offset-gray-800">
+                                Login or Sign up!
                             </a>
                         </div>
 
+                    </div>
+                </form>
+               
+            </div>
+        </div>
+    </div>
+    <!-- End Hero -->
+}
 
+
+
+//Guest
+
+else if (string.IsNullOrEmpty(cID) && !string.IsNullOrEmpty(gID))
+{
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <form asp-action="Create" method="post">
+                @{
+                    string guestID = Context.Request.Query["GuestID"];
+                    string restaurantIDguest = Context.Request.Query["restaurantID"];
+                }
+
+                
+                <p>@guestID</p>
+
+                @{int guestIdValue;
+                if (int.TryParse(guestID, out guestIdValue))
+                {
+                // Conversion successful, set the GuestId in the hidden field
+                <input type="hidden" asp-for="@Model.GuestId" value="@guestIdValue" />
+                }
+                }
+
+                <div class="form-group">
+                    <input type="hidden" asp-for="@Model.RestaurantId" value="@restaurantIDguest" />
+                </div>
+
+                <p class="text-center mt-6 text-xl leading-8 text-gray-700"><i>As a Guest</i></p>
+
+                @*Guests number Special Banquets*@
+                @*Guests number*@
+                <div class="-mx-3 flex flex-wrap">
+                    <div class="w-full px-3 sm:w-1/2">
+                        <div class="">
+                            <label asp-for="@Model.NumberOfPeople"
+                                   class="mb-3 block text-base font-medium text-[#07074D]">
+                                Number of guests
+                            </label>
+                            <input type="number" asp-for="@Model.NumberOfPeople" placeholder="5" min="0"
+                                   class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            <span asp-validation-for="@Model.NumberOfPeople" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                    @*Special Banquets*@
+                    @if (ViewBag.Banquet != null && ((IEnumerable<SelectListItem>)ViewBag.Banquet).Count() > 0)
+                    {
+                        <div class="w-full px-3 sm:w-1/2">
+                            <div class="">
+                                <label asp-for="BanquetId" class="mb-3 block text-base font-medium text-[#07074D]">Special Banquets</label>
+                                <select asp-for="BanquetId" asp-items="ViewBag.Banquet" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
+                                    <option value="">Select a banquet</option>-->
+                                    <!-- Default option -->
+                                </select>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+
+                @*Area Chair Date Time*@
+                <div class="-mx-3 flex flex-wrap">
+                    @*Area*@
+
+                    <div class="w-full px-3 sm:w-1/2">
+                        <label asp-for="AreaId" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">Dining Area</label>
+                        <select asp-for="AreaId" asp-items="ViewBag.AreaId" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
+                            <option value="">Select an Area</option>-->
+                            <!-- Default option -->
+                        </select>
+                    </div>
+
+                    @*Chair*@
+                    <div class="w-full px-3 sm:w-1/2">
+                        <div class="">
+                            <label asp-for="@Model.HighChairs"
+                                   class="mb-3 block text-base font-medium text-[#07074D]">
+                                Baby Seats
+                            </label>
+                            <input type="number" asp-for="@Model.HighChairs" value="0" min="0"
+                                   class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                        </div>
                     </div>
                 </div>
 
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn" id="formButton" style="margin-top: 30px;"/>
-            </div>
-        </form>
+                @*Special Notes*@
+                <div class="-mx-3 flex flex-wrap">
+                    <div class="w-full px-3 sm:w-1/1">
+                        <label asp-for="@Model.SpecialNotes" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">
+                            Special Notes
+                        </label>
+                        <input type="text" asp-for="@Model.SpecialNotes" id="specialReq" placeholder="I am allergic to nuts"
+                               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                    </div>
+                </div>
+
+                @*Date Time*@
+                <div class="-mx-3 flex flex-wrap">
+                    <div class="w-full px-3 sm:w-1/2">
+                        <label asp-for="@Model.ReservationTiming" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start"></label>
+                        <span asp-validation-for="@Model.ReservationTiming" class="text-danger"></span>
+
+                        <div id="error-container" class="text-danger"></div>
+
+                        <div class="flatpickr mx-auto col-span-6 sm:col-span-6">
+                            <div class="flex align-middle align-content-center">
+                                <input type="text"
+                                       id="datetime"
+                                       asp-for="@Model.ReservationTiming"
+                                       data-input
+                                       pattern="^(?!(1[3-4]|17):[0-5][0-9]|18:00).*$"
+                                       placeholder="Select Date and Time"
+                                       class="block w-full px-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-l-md shadow-sm">
+                                <a class="h-11 w-10 input-button cursor-pointer rounded-r-md bg-transparent border-gray-300 border-t border-b border-r"
+                                   title="clear" data-clear>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mt-2 ml-1" viewBox="0 0 20 20" fill="#c53030">
+                                        <path fill-rule="evenodd"
+                                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                              clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn" id="formButton" style="margin-top: 30px;" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+}
+
+
+//Not a Guest 
+else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
+{
+
+
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <form asp-action="Create" method="post">
+               
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    @{
+                    string customerID = Context.Request.Query["CustomerID"];
+                    string restaurantID = Context.Request.Query["restaurantID"];
+                    }
+
+                    <input type="hidden" asp-for="@Model.CustomerId" value=@customerID />
+                    <input type="hidden" asp-for="@Model.RestaurantId" value=@restaurantID />
+
+                    <p class="text-center mt-6 text-xl leading-8 text-gray-700"><i>As a Registered Customer</i></p>
+                
+
+                @*Guests number Special Banquets*@
+                @*Guests number*@
+                <div class="-mx-3 flex flex-wrap">
+                    <div class="w-full px-3 sm:w-1/2">
+                        <div class="">
+                            <label asp-for="@Model.NumberOfPeople"
+                                   class="mb-3 block text-base font-medium text-[#07074D]">
+                                Number of guests
+                            </label>
+                            <input type="number" asp-for="@Model.NumberOfPeople" placeholder="5" min="0"
+                                   class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            <span asp-validation-for="@Model.NumberOfPeople" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                    @*Special Banquets*@
+                    @if (ViewBag.Banquet != null && ((IEnumerable<SelectListItem>)ViewBag.Banquet).Count() > 0)
+                    {
+                        <div class="w-full px-3 sm:w-1/2">
+                            <div class="">
+                                <label asp-for="BanquetId" class="mb-3 block text-base font-medium text-[#07074D]">Special Banquets</label>
+                                <select asp-for="BanquetId" asp-items="ViewBag.Banquet" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
+                                    <option value="">Select a banquet</option>-->
+                                    <!-- Default option -->
+                                </select>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+
+                @*Area Chair Date Time*@
+                <div class="-mx-3 flex flex-wrap">
+                    @*Area*@
+
+                    <div class="w-full px-3 sm:w-1/2">
+                        <label asp-for="AreaId" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">Dining Area</label>
+                        <select asp-for="AreaId" asp-items="ViewBag.AreaId" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
+                            <option value="">Select an Area</option>-->
+                            <!-- Default option -->
+                        </select>
+                    </div>
+
+                    @*Chair*@
+                    <div class="w-full px-3 sm:w-1/2">
+                        <div class="">
+                            <label asp-for="@Model.HighChairs"
+                                   class="mb-3 block text-base font-medium text-[#07074D]">
+                                Baby Seats
+                            </label>
+                            <input type="number" asp-for="@Model.HighChairs" value="0" min="0"
+                                   class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                        </div>
+                    </div>
+                </div>
+
+                @*Special Notes*@
+                <div class="-mx-3 flex flex-wrap">
+                    <div class="w-full px-3 sm:w-1/1">
+                        <label asp-for="@Model.SpecialNotes" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start">
+                            Special Notes
+                        </label>
+                        <input type="text" asp-for="@Model.SpecialNotes" id="specialReq" placeholder="I am allergic to nuts"
+                               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                    </div>
+                </div>
+
+                @*Date Time*@
+                <div class="-mx-3 flex flex-wrap">
+                    <div class="w-full px-3 sm:w-1/2">
+                        <label asp-for="@Model.ReservationTiming" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start"></label>
+                        <span asp-validation-for="@Model.ReservationTiming" class="text-danger"></span>
+
+                        <div id="error-container" class="text-danger"></div>
+
+                        <div class="flatpickr mx-auto col-span-6 sm:col-span-6">
+                            <div class="flex align-middle align-content-center">
+                                <input type="text"
+                                       id="datetime"
+                                       asp-for="@Model.ReservationTiming"
+                                       data-input
+                                       pattern="^(?!(1[3-4]|17):[0-5][0-9]|18:00).*$"
+                                       placeholder="Select Date and Time"
+                                       class="block w-full px-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-l-md shadow-sm">
+                                <a class="h-11 w-10 input-button cursor-pointer rounded-r-md bg-transparent border-gray-300 border-t border-b border-r"
+                                   title="clear" data-clear>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mt-2 ml-1" viewBox="0 0 20 20" fill="#c53030">
+                                        <path fill-rule="evenodd"
+                                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                              clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn" id="formButton" style="margin-top: 30px;" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
 
 <div>
     <a asp-action="Index" class="btn" id="returnButton" style="margin-top: 10px;">Back to List</a>
