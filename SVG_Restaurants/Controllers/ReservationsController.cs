@@ -143,17 +143,15 @@ namespace SVG_Restaurants.Controllers
                            .Sum(r => r.NumberOfPeople);
                             Debug.WriteLine(sumOfNumberOfPeople);
 
-                        //var totalPeople = sumOfNumberOfPeople + reservation.NumberOfPeople;
+                        var totalPeople = sumOfNumberOfPeople + reservation.NumberOfPeople;
 
 
                         var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
 
-                        //sumOfNumberOfPeople += reservation.NumberOfPeople;
-
-                        if (reservation.NumberOfPeople <= restaurant.SeatCapacity)
+                        if (totalPeople <= restaurant.SeatCapacity)
                         {
                             //Decrement the number of available seats
-                            restaurant.SeatCapacity -= reservation.NumberOfPeople;
+                            //restaurant.SeatCapacity -= reservation.NumberOfPeople;
 
                             // Add the reservation to the database
                             _context.Add(reservation); // Add the reservation entity, not the ViewModel
