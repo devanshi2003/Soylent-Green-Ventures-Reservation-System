@@ -189,7 +189,7 @@ else if (string.IsNullOrEmpty(cID) && !string.IsNullOrEmpty(gID))
                                    class="mb-3 block text-base font-medium text-[#07074D]">
                                 Baby Seats
                             </label>
-                            <input type="number" asp-for="@Model.HighChairs" value="0" min="0"
+                            <input type="number" asp-for="@Model.HighChairs" value="0" min="0" max=""
                                    class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                         </div>
                     </div>
@@ -280,7 +280,7 @@ else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
                                    class="mb-3 block text-base font-medium text-[#07074D]">
                                 Number of guests
                             </label>
-                            <input type="number" asp-for="@Model.NumberOfPeople" placeholder="5" min="0"
+                            <input type="number" asp-for="@Model.NumberOfPeople" id="numberOfPeopleInput" placeholder="5" min="0"
                                    class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                             <span asp-validation-for="@Model.NumberOfPeople" class="text-danger"></span>
                         </div>
@@ -548,6 +548,10 @@ else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
                     seatCountElement.textContent = data.availableSeats;
                     seatCountElement.classList.add("seat-count"); // Add a CSS class for formatting
 
+                    // Update the minimum value for the number of people input
+                    const numberOfPeopleInput = document.getElementById("numberOfPeopleInput");
+                    numberOfPeopleInput.max = data.availableSeats; // Set the minimum based on available seats
+
                     // Clear the existing content and append the new content
                     availableSeatsMessage.innerHTML = ''; // Clear existing content
                     availableSeatsMessage.appendChild(textElement); // Add "Available seats:" text
@@ -556,6 +560,7 @@ else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
                 .catch(error => {
                     console.error("Error fetching available seats: ", error);
                 });
+
         });
     });
 
