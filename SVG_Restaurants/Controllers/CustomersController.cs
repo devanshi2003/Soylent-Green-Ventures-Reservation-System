@@ -89,6 +89,7 @@ namespace SVG_Restaurants.Controllers
         {
             if (ModelState.IsValid)
             {
+                customer.LoyaltyPoints = 0;
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Login", "Customers");
