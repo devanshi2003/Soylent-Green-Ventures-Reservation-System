@@ -61,7 +61,7 @@ namespace SVG_Restaurants.Controllers
             {
                 _context.Add(guest);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "Reservations", new { GuestID = guest.GuestId });
             }
             return View(guest);
         }
