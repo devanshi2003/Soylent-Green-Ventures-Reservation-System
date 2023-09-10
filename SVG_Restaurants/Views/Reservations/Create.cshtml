@@ -366,14 +366,18 @@ else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
                                 </a>
                             </div>
 
-
                         </div>
+                        <div id="availableSeatsMessage"><strong>Available seats:</strong> <span id="availableSeatsCount"></span></div>
+
                     </div>
 
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn" id="formButton" style="margin-top: 30px;" />
                 </div>
+
+
+
             </form>
         </div>
     </div>
@@ -384,135 +388,9 @@ else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
     <a asp-action="Index" class="btn" id="returnButton" style="margin-top: 10px;">Back to List</a>
 </div>
 
-<!--<!--@*<div class="form-group">
-                <label asp-for="AreaId" class="control-label"></label>
-                <select asp-for="AreaId" class="form-control" asp-items="ViewBag.AreaId">
-                    <option value="">Select an area</option>
-                </select>
-            </d
-            <!--@*<div class="form-group">
-                        <label asp-for="AreaId" class="control-label"></label>
-                        <select asp-for="AreaId" class="form-control" asp-items="ViewBag.AreaId">
-                            <option value="">Select an area</option>
-                        </select>
-                    </div>*@
-                    </form>
-                </div>
-            <
-    </div>
-</div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-<!--<!--@*<div class="form-group">
-    <label asp-for="AreaId" class="control-label"></label>
-    <select asp-for="AreaId" class="form-control" asp-items="ViewBag.AreaId">
-        <option value="">Select an area</option>
-    </select>
-</d
-<!--@*<div class="form-group">
-            <label asp-for="AreaId" class="control-label"></label>
-            <select asp-for="AreaId" class="form-control" asp-items="ViewBag.AreaId">
-                <option value="">Select an area</option>
-            </select>
-        </div>*@
-        </form>
-    </div>
-</div>
-
-<!--<div class="col-md-6">
-
-    if (string.IsNullOrEmpty(cID))
-    {
-
-
-        <p> As a Guest</p>
-        <p> @rID</p>
-    }
-
-    else
-    {
-        <hr />
-        <div class="row">
-            <div class="col-md-4">
-                <form asp-action="Create" method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                        string customerID = Context.Request.Query["CustomerID"];
-                        string restaurantID = Context.Request.Query["restaurantID"];
-
-                        <input type="hidden" asp-for="Model.CustomerId" value=customerID />
-                        <input type="hidden" asp-for="Model.RestaurantId" value=restaurantID />
-
-
-                    <div class="form-group">
-                        <label asp-for="AreaId" class="control-label"></label>
-                        <select asp-for="AreaId" class="form-control" asp-items="ViewBag.AreaId">
-                            <option value="">Select an area</option>-->
-<!-- Default option -->
-<!--</select>
-</div>
-<div class="form-group">
-    <label asp-for="Model.ReservationTiming" class="control-label"></label>
-    <span asp-validation-for="Model.ReservationTiming" class="text-danger"></span>
-
-    <div id="error-container" class="text-danger"></div>
-
-    <div class="flatpickr container mx-auto col-span-6 sm:col-span-6">
-        <div class="flex align-middle align-content-center">
-            <input type="text"
-                   id="datetime"
-                   asp-for="Model.ReservationTiming"
-                   data-input
-                   pattern="^(?!(1[3-4]|17):[0-5][0-9]|18:00).*$"
-                   placeholder="Select.."
-                   class="block w-full px-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-l-md shadow-sm">
-            <a class="h-11 w-10 input-button cursor-pointer rounded-r-md bg-transparent border-gray-300 border-t border-b border-r"
-               title="clear" data-clear>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mt-2 ml-1" viewBox="0 0 20 20" fill="#c53030">
-                    <path fill-rule="evenodd"
-                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                          clip-rule="evenodd" />
-                </svg>
-            </a>
-        </div>
-    </div>
-
-
-</div>
-
-
-if (ViewBag.Banquet != null && ((IEnumerable<SelectListItem>)ViewBag.Banquet).Count() > 0)
-{
-    <div class="form-group">
-        <label asp-for="BanquetId" class="control-label"></label>
-        <select asp-for="BanquetId" class="form-control" asp-items="ViewBag.Banquet">
-            <option value="">Banquets</option>-->
-<!-- Default option -->
-<!--</select>
-                        </div>
-                    }
-
-                    <div class="form-group">
-                        <label asp-for="Model.NumberOfPeople" class="control-label"></label>
-                        <input asp-for="Model.NumberOfPeople" class="form-control" />
-                        <span asp-validation-for="Model.NumberOfPeople" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" />
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div>
-            <a asp-action="Index">Back to List</a>
-        </div>
-
-    }
-</div>-->
 
 
 <script>document.addEventListener("DOMContentLoaded", function () {
@@ -641,6 +519,47 @@ if (ViewBag.Banquet != null && ((IEnumerable<SelectListItem>)ViewBag.Banquet).Co
         minTime: minTime, // Set the min time for all days
         maxTime: maxTime // Set the maximum time for all days
     });</script>
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const inputElement = document.getElementById("datetime");
+
+        const queryParams = new URLSearchParams(window.location.search);
+        const restaurantID = queryParams.get("restaurantID");
+        console.log(restaurantID)
+        console.log(inputElement)
+
+        inputElement.addEventListener("change", function () {
+            const selectedDateTime = inputElement.value;
+
+            // Make a request to fetch available seats
+            fetch(`/Reservation/GetAvailableSeats?selectedDateTime=${selectedDateTime}&RestaurantId=${restaurantID}`)
+                .then(response => response.json())
+                .then(data => {
+                    const availableSeatsMessage = document.getElementById("availableSeatsMessage");
+
+                    // Create a strong element for the "Available seats:" text
+                    const textElement = document.createElement("strong");
+                    textElement.textContent = "Available seats: ";
+
+                    // Create a span element for the seat count and format it with a class
+                    const seatCountElement = document.createElement("span");
+                    seatCountElement.textContent = data.availableSeats;
+                    seatCountElement.classList.add("seat-count"); // Add a CSS class for formatting
+
+                    // Clear the existing content and append the new content
+                    availableSeatsMessage.innerHTML = ''; // Clear existing content
+                    availableSeatsMessage.appendChild(textElement); // Add "Available seats:" text
+                    availableSeatsMessage.appendChild(seatCountElement); // Add seat count
+                })
+                .catch(error => {
+                    console.error("Error fetching available seats: ", error);
+                });
+        });
+    });
+
+    </script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

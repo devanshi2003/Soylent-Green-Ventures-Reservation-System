@@ -191,8 +191,8 @@ namespace SVG_Restaurants.Controllers
             return View(reservation);
         }
 
-
-        public int GetAvailableSeats(DateTime selectedDateTime, int RestaurantId)
+        [HttpGet("Reservation/GetAvailableSeats")]
+        public JsonResult GetAvailableSeats(DateTime selectedDateTime, int RestaurantId)
         {
             var timeFrames = new List<(int startHour, int endHour)>
                 {
@@ -229,17 +229,19 @@ namespace SVG_Restaurants.Controllers
                         .FirstOrDefault();
 
                     int availableSeats = (int)seatCapacity - (int)sumOfNumberOfPeople;
-                    return availableSeats;
 
+                    return Json(new { availableSeats = availableSeats });
                 }
 
             }
-            return -1;
+            return Json(new { availableSeats = -1 });
+
         }
 
 
-            // GET: Reservations/Edit/5
-            public async Task<IActionResult> Edit(int? id)
+
+        // GET: Reservations/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Reservations == null)
             {
