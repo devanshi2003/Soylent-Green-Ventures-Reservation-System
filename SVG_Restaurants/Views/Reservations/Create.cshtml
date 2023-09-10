@@ -47,6 +47,158 @@ else
 
 
 
+                <div class="-mx-3 flex flex-wrap">
+                    <a id="toggleButton" class="toggle-button">View Menu</a>
+                    <div id="textToToggle" class="hidden">
+
+                        @if (string.Equals(rID, "3", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <div class="column text-center">
+                                <img src="/img/Mexican Restaurant.jpg" style="width: 100%;" />
+                                <h2 class="text-xl leading-8 text-gray-700"><b>FAQs</b></h2>
+                                <p class="text-l leading-8 text-gray-700">
+                                    40 Fullarton Road
+                                    Norwood
+                                </p>
+
+                                <br />
+                                <p class="text-l leading-8 text-gray-700">
+                                    <b>Sittings:</b>
+                                </p>
+                                <p class="text-l leading-6 text-gray-700">
+                                    First dinner 5-7PM <br />
+                                    Second dinner 7-9PM <br />
+                                    Late night dinner 9-11PM <br />
+
+                                </p>
+                                <br />
+                                <p class="text-l leading-8 text-gray-700"><b>Open:</b> Monday to Saturday</p>
+                                <br />
+                                <p class="text-2xl leading-8 text-gray-700"><b>Special Banquets</b></p>
+                                <br />
+                                <p class="text-xl leading-8 text-gray-700">
+                                    <b>Share Banquet $35PP</b>
+                                </p>
+
+                                <p class="text-l leading-6 text-gray-700">
+                                    (min 4 people)
+                                    <br />
+                                    <br />
+                                    Papas Fritas <br />
+                                    Korean Fried Chicken Tacos <br />
+                                    Smokey chicken <br />
+                                    Taquitos dorados <br />
+                                    Nachos <br />
+                                </p>
+                            </div>
+                        }
+
+
+                        @if (string.Equals(rID, "1", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <div class="column text-center">
+                            <img src="/img/Bamboo Restaurant.jpg" />
+                            <h2 class="text-xl leading-8 text-gray-700"><b>FAQs</b></h2>
+                            <p class="text-l leading-8 text-gray-700">
+                                25 Gouger Street
+                                Adelaide
+                            </p>
+                            <p class="text-l leading-8 text-gray-700"><b>Open:</b> Tuesdays to Sundays</p>
+                            <br />
+                            <p class="text-2xl leading-8 text-gray-700"><b>Special Banquets</b></p>
+                            <br />
+                            <p class="text-xl leading-8 text-gray-700">
+                                <b>Share Banquet $55PP</b>
+                            </p>
+
+                            <p class="text-l leading-6 text-gray-700">
+                                (min 4 people)
+                                <br />
+                                <br />
+                                Satay Chicken
+                                <br />
+                                Steam prawn dumplings
+                                <br />
+                                S+P Squid
+                                <br />
+                                Roast Pork
+                                <br />
+                                Sticky pork
+                                <br />
+                                Asian green
+                                <br />
+                            </p>
+                            <br />
+                            <p class="text-xl leading-8 text-gray-700">
+                                <b>Feast Banquet $70PP</b>
+                            </p>
+                            <p class="text-l leading-6 text-gray-700">
+                                (min 4 people)
+                                <br />
+                                <br />
+                                Crispy beef
+                                <br />
+                                Satay chicken
+                                <br />
+                                S+P Eggplant
+                                <br />
+                                Crying Tiger Salad
+                                <br />
+                                Steam prawn dumplings
+                                <br />
+                                Ribs
+                                <br />
+                                Barramundi curry
+                            </p>
+                            </div>
+                        }
+
+
+                        @if (string.Equals(rID, "2", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <div class="column text-center">
+                                <img src="/img/Brazilian Restaurant.jpg" />
+                                <h2 class="text-xl leading-8 text-gray-700"><b>FAQs</b></h2>
+                                <p class="text-l leading-8 text-gray-700">
+                                    40 120 North Terrace
+                                    Adelaide
+                                </p>
+
+                                <br />
+                                <p class="text-l leading-8 text-gray-700">
+                                    <b>Sittings:</b>
+                                </p>
+                                <p class="text-l leading-6 text-gray-700">
+                                    Brunch 10AM-12PM <br />
+                                    Lunch 12-2PM <br />
+                                    First dinner 5-7PM <br />
+                                    Second dinner 7-9PM <br />
+                                </p>
+                                <br />
+                                <p class="text-l leading-8 text-gray-700"><b>Open:</b> Wednesday to Sunday</p>
+                                <br />
+                            </div>
+                        }
+                    </div>
+                    <script src="script.js"></script>
+                    <style>
+                        /* Add styles for the button */
+                        .toggle-button {
+                            padding: 10px 20px; /* Adjust padding as needed */
+                            background-color: #007BFF; /* Button background color */
+                            color: #fff; /* Button text color */
+                            border: none; /* Remove button border */
+                            cursor: pointer; /* Add pointer cursor on hover */
+                        }
+
+                        /* Add styles for the hidden text */
+                        .hidden {
+                            display: none; /* Initially hide the text */
+                        }
+
+                    </style>
+                </div>
+
 @if (string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
 
 {
@@ -377,73 +529,7 @@ else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn" id="formButton" style="margin-top: 30px;" />
-                </div>
-
-
-                <div class="-mx-3 flex flex-wrap">
-                    <a id="toggleButton" class="toggle-button">View Menu</a>
-                    <div id="textToToggle" class="hidden">
-                        <div class="column text-center">
-                            <img src="/img/Mexican Restaurant.jpg" style="width: 100%;" />
-                            <h2 class="text-xl leading-8 text-gray-700"><b>FAQs</b></h2>
-                            <p class="text-l leading-8 text-gray-700">
-                                40 Fullarton Road
-                                Norwood
-                            </p>
-
-                            <br />
-                            <p class="text-l leading-8 text-gray-700">
-                                <b>Sittings:</b>
-                            </p>
-                            <p class="text-l leading-6 text-gray-700">
-                                First dinner 5-7PM <br />
-                                Second dinner 7-9PM <br />
-                                Late night dinner 9-11PM <br />
-
-                            </p>
-                            <br />
-                            <p class="text-l leading-8 text-gray-700"><b>Open:</b> Monday to Saturday</p>
-                            <br />
-                            <p class="text-2xl leading-8 text-gray-700"><b>Special Banquets</b></p>
-                            <br />
-                            <p class="text-xl leading-8 text-gray-700">
-                                <b>Share Banquet $35PP</b>
-                            </p>
-
-                            <p class="text-l leading-6 text-gray-700">
-                                (min 4 people)
-                                <br />
-                                <br />
-                                Papas Fritas <br />
-                                Korean Fried Chicken Tacos <br />
-                                Smokey chicken <br />
-                                Taquitos dorados <br />
-                                Nachos <br />
-                            </p>
-                        </div>
-                        
-                    </div>
-                    <script src="script.js"></script>
-                    <style>
-                        /* Add styles for the button */
-                        .toggle-button {
-                            padding: 10px 20px; /* Adjust padding as needed */
-                            background-color: #007BFF; /* Button background color */
-                            color: #fff; /* Button text color */
-                            border: none; /* Remove button border */
-                            cursor: pointer; /* Add pointer cursor on hover */
-                        }
-
-                        /* Add styles for the hidden text */
-                        .hidden {
-                            display: none; /* Initially hide the text */
-                        }
-
-                    </style>
-                </div>
-                
-
-
+                </div>        
 
             </form>
         </div>
@@ -452,6 +538,7 @@ else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
         Go back
     </a>
 }
+
 <script>
     const toggleButton = document.getElementById("toggleButton");
     const textToToggle = document.getElementById("textToToggle");
