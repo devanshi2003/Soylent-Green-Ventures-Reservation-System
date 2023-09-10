@@ -220,13 +220,14 @@
 
     </div>
     <!-- End Card Blog -->
+</div>
 
     <script>// Event listener for the "Upcoming Bookings" link
         const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
         const allCards = document.getElementById('allCards');
         const upcomingBookings = document.getElementById('upcomingBookings');
-        const loyaltyPointsButton = document.getElementById('loyaltyPointsLink');
         const loyaltyPoints = document.getElementById('loyaltyPoints');
+        const restaurantsLink = document.getElementById('restaurantsLink');
 
         upcomingBookingsLink.addEventListener('click', function (event) {
 
@@ -236,20 +237,21 @@
 
         });
 
-        loyaltyPointsButton.addEventListener('click', function (event) {
-
-            allCards.style.display = 'none';
-            upcomingBookings.style.display = 'none';
-            loyaltyPoints.style.display = 'block';
-
-        });
-
         // Event listener for the "Restaurants" link
-        const restaurantsLink = document.getElementById('restaurantsLink');
         restaurantsLink.addEventListener('click', function (event) {
             allCards.style.display = 'block';
             upcomingBookings.style.display = 'none';
             loyaltyPoints.style.display = 'none';
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var loyaltyPointsButton = document.getElementById('loyaltyPointsLink');
+
+            loyaltyPointsButton.addEventListener('click', function () {
+                allCards.style.display = 'none';
+                upcomingBookings.style.display = 'none';
+                loyaltyPoints.style.display = 'block';
+            });
         });
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -263,5 +265,6 @@
 
         allCards.style.display = 'block';
         upcomingBookings.style.display = 'none';
-        loyaltyPoints.style.display = 'none';</script>
+        loyaltyPoints.style.display = 'none';
+        </script>
 </body>
