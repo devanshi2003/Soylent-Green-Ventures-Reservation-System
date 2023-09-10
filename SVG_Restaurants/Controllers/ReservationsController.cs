@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -110,11 +111,14 @@ namespace SVG_Restaurants.Controllers
             {
                 var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
 
-                var dateTimeToCompare = DateTime.ParseExact("2023-09-08 15:30:00", "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                //var dateTimeToCompare = DateTime.ParseExact("2023-09-08 15:30:00", "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
                 var sumOfNumberOfPeople = _context.Reservations
-                    .Where(r => r.ReservationTiming >= dateTimeToCompare)
-                    .Sum(r => r.NumberOfPeople);
+                .Where(r => r.ReservationTiming.HasValue && r.ReservationTiming.Value.Hour > 18)
+                .Sum(r => r.NumberOfPeople);
+
+                Debug.WriteLine(sumOfNumberOfPeople);
+
 
                 //sumOfNumberOfPeople += reservation.NumberOfPeople;
 
