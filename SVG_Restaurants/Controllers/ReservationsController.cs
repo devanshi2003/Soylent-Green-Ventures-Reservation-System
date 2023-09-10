@@ -191,6 +191,53 @@ namespace SVG_Restaurants.Controllers
             return View(reservation);
         }
 
+        [HttpGet("Reservation/GetAvailableSeats")]
+        public JsonResult GetAvailableSeats(DateTime selectedDateTime, int RestaurantId)
+        {
+            var timeFrames = new List<(int startHour, int endHour)>
+                {
+                    (12, 14),
+                    (17, 19),
+                    (19, 21),
+                    (10, 12),
+                    (12, 14),
+                    (21, 23),
+                };
+
+            foreach (var timeFrame in timeFrames)
+            {
+                int startHour = timeFrame.startHour;
+                int endHour = timeFrame.endHour;
+
+                if (selectedDateTime.Hour >= startHour && selectedDateTime.Hour < endHour)
+                {
+
+                    var sumOfNumberOfPeople = _context.Reservations
+                       .Where(r => r.RestaurantId == RestaurantId &&
+                                r.ReservationTiming.HasValue &&
+                                r.ReservationTiming.Value.Date == selectedDateTime.Date &&
+                                r.ReservationTiming.Value.Hour >= startHour &&
+                                r.ReservationTiming.Value.Hour <= endHour)
+                       .Sum(r => r.NumberOfPeople);
+
+
+                    Debug.WriteLine(sumOfNumberOfPeople);
+
+                    var seatCapacity = _context.Restaurants
+                        .Where(c => c.RestaurantId == RestaurantId)
+                        .Select(c => c.SeatCapacity)
+                        .FirstOrDefault();
+
+                    int availableSeats = (int)seatCapacity - (int)sumOfNumberOfPeople;
+
+                    return Json(new { availableSeats = availableSeats });
+                }
+
+            }
+            return Json(new { availableSeats = -1 });
+
+        }
+
 
 
         // GET: Reservations/Edit/5
