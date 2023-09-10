@@ -60,13 +60,14 @@ namespace SVG_Restaurants.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GuestId,FirstName,LastName,Email,PhoneNumber")] Guest guest)
         {
+
             if (ModelState.IsValid)
             {
-                Debug.WriteLine($"vm.guest.FirstName: {ViewBag.RestaurantID}");
 
+                string restaurantID = Request.Form["restaurantID"];
                 _context.Add(guest);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Create", "Reservations", new { GuestID = guest.GuestId, RestaurantID = ViewBag.RestaurantID });
+                return RedirectToAction("Create", "Reservations", new { GuestID = guest.GuestId, RestaurantID = restaurantID });
             }
             return View(guest);
         }
