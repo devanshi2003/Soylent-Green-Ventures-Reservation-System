@@ -127,8 +127,16 @@ namespace SVG_Restaurants.Controllers
                     _context.Add(reservation); // Add the reservation entity, not the ViewModel
                     await _context.SaveChangesAsync(); // Save changes to the database
 
-                    return RedirectToAction(nameof(Index));
+                    if (reservation.CustomerId == null) {
+                        return RedirectToAction("Index", "Home");
+
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home", new { customerID = reservation.CustomerId});
+                    }
                 }
+                    
                 else
                 {
                     ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");
