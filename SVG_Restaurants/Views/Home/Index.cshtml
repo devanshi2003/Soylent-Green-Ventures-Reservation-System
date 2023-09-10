@@ -91,13 +91,13 @@
                                             <h4 class="px-2 text-xl font-bold text-navy-700 dark:text-white">
                                                 Reservation ID: @reservation.ReservationId
                                             </h4>
-                                            <p class="mt-2 px-2 text-base text-gray-600">
+                                            @*<p class="mt-2 px-2 text-base text-gray-600">
                                                 Restaurant ID: @reservation.RestaurantId
 
-                                            </p>
+                                            </p>*@
                                             @if (reservation.Restaurant != null)
                                             {
-                                                <p class="mt-2 px-2 text-base text-gray-600">Restaurant: @reservation.Restaurant.RestaurantName;</p>
+                                                <p class="mt-2 px-2 text-base text-gray-600">Restaurant: @reservation.Restaurant.RestaurantName</p>
 
                                             }
                                         </div>
