@@ -121,6 +121,7 @@ namespace SVG_Restaurants.Controllers
                     (21, 23),
                 };
 
+
                 foreach (var timeFrame in timeFrames)
                 {
                     int startHour = timeFrame.startHour;
@@ -134,50 +135,53 @@ namespace SVG_Restaurants.Controllers
                         Debug.WriteLine(endHour);
 
                         var sumOfNumberOfPeople = _context.Reservations
-                           .Where(r => r.ReservationTiming.HasValue && r.ReservationTiming.Value.Hour >= startHour && r.ReservationTiming.Value.Hour <= endHour )
+                           .Where(r => r.RestaurantId == reservation.RestaurantId && 
+                                    r.ReservationTiming.HasValue &&
+                                    r.ReservationTiming.Value.Date == reservation.ReservationTiming.Value.Date &&
+                                    r.ReservationTiming.Value.Hour >= startHour && 
+                                    r.ReservationTiming.Value.Hour <= endHour )
                            .Sum(r => r.NumberOfPeople);
                             Debug.WriteLine(sumOfNumberOfPeople);
 
+                        var totalPeople = sumOfNumberOfPeople + reservation.NumberOfPeople;
 
-                        break; // Exit the loop once a match is found
 
+                        var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
+
+                        //sumOfNumberOfPeople += reservation.NumberOfPeople;
+
+                        if (totalPeople <= restaurant.SeatCapacity)
+                        {
+                            //Decrement the number of available seats
+                            restaurant.SeatCapacity -= reservation.NumberOfPeople;
+
+                            // Add the reservation to the database
+                            _context.Add(reservation); // Add the reservation entity, not the ViewModel
+                            await _context.SaveChangesAsync(); // Save changes to the database
+
+                            if (reservation.CustomerId == null)
+                            {
+                                return RedirectToAction("Index", "Home");
+
+                            }
+                            else
+                            {
+                                return RedirectToAction("Index", "Home");
+                            }
+                        }
+
+                        else
+                        {
+                            ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");
+
+                        }
+
+                        break; 
 
                     }
                 }
 
 
-
-                var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
-
-
-
-
-                //sumOfNumberOfPeople += reservation.NumberOfPeople;
-
-                if (reservation.NumberOfPeople <= restaurant.SeatCapacity)
-                {
-                    //Decrement the number of available seats
-                    restaurant.SeatCapacity -= reservation.NumberOfPeople;
-
-                    // Add the reservation to the database
-                    _context.Add(reservation); // Add the reservation entity, not the ViewModel
-                    await _context.SaveChangesAsync(); // Save changes to the database
-
-                    if (reservation.CustomerId == null) {
-                        return RedirectToAction("Index", "Home");
-
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-                    
-                else
-                {
-                    ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");
-
-                }
 
 
             }
