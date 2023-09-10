@@ -3,51 +3,80 @@
 @{
     ViewData["Title"] = "Create";
 }
+<style type="text/css">
+    body {
+        background-color: #A9927D;
+    }
+</style>
+@*<h1>Create</h1>
 
-@{
-    ViewBag.RestaurantID = Context.Request.Query["restaurantID"];
-}
-<p>@ViewBag.RestaurantID</p>
 
-<h1>Create</h1>
+    <h4>Guest</h4>*@
+<div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">
+                Create a Guest Profile
+            </h2>
+        </div>
 
-<h4>Guest</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
         <form asp-action="Create">
-            <input type="hidden" name="RestaurantID" value="@ViewBag.RestaurantID" />
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+            <!-- Grid -->
+            <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!-- First Name -->
+                <div class="sm:col-span-3">
+                    <label asp-for="FirstName" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">First Name</label>
+                </div>
+                <div class="sm:col-span-9">
+                    <input asp-for="FirstName" class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Enter first name" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <!-- Last Name -->
+                <div class="sm:col-span-3">
+                    <label asp-for="LastName" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">Last Name</label>
+                </div>
+                <div class="sm:col-span-9">
+                    <input asp-for="LastName" class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Enter last name" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <!-- Email -->
+                <div class="sm:col-span-3">
+                    <label asp-for="Email" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200"></label>
+                </div>
+                <div class="sm:col-span-9">
+                    <input asp-for="Email" class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Enter email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="sm:col-span-3">
+                    <label asp-for="PhoneNumber" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">Phone Number</label>
+                </div>
+                <div class="sm:col-span-9">
+                    <input asp-for="PhoneNumber" class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Enter phone number" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="mt-5 flex justify-end gap-x-2">
+                <a asp-action="Index" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">Back to List</a>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" />
+                </div>
             </div>
         </form>
     </div>
 </div>
 
+<hr />
+
 <div>
-    <a asp-action="Index">Back to List</a>
+
 </div>
 
 @section Scripts {
