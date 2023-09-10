@@ -60,7 +60,7 @@
     </ul>
     @if (Model.CustomerID != 0)
     {
-        <p id="loyaltyPoints">Here lies loyalty points :)</p>
+        <p id="loyaltyPoints">@ViewBag.LoyaltyPoints</p>
     }
     @{
         if (Model.CustomerID == 0)
