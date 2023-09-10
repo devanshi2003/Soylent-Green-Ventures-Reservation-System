@@ -50,34 +50,55 @@ else
 @if (string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
 
 {
+    <style type="text/css">
+        body {
+            background-color: #A9927D;
+        }
+    </style>
     <div class="overflow-hidden">
         <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="relative mx-auto max-w-4xl grid space-y-5 sm:space-y-10">
                 <!-- Title -->
                 <div class="text-center">
-
-                    <h1 class="text-3xl text-gray-800 font-bold sm:text-5xl lg:text-6xl lg:leading-tight dark:text-gray-200">
+                    <h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white" style="color: white">
                         Hold up! You're not logged in!
                     </h1>
                 </div>
                 <!-- End Title -->
                 <!-- Form -->
-                <form>
-                    <div class="mx-auto max-w-2xl sm:flex sm:space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-slate-900 dark:border-gray-700 dark:shadow-gray-900/[.2]">
-                        <div class="pb-2 sm:pb-0 sm:flex-[1_0_0%]">
-                            <a href="@Url.Action("Create", "Guests", new { RestaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4 dark:focus:ring-offset-gray-800">
-                                Continue as a Guest
-                            </a>
-                        </div>
-                        <div class="pt-2 sm:pt-0 sm:pl-3 border-t border-gray-200 sm:border-t-0 sm:border-l sm:flex-[1_0_0%] dark:border-gray-700">
-                            <a asp-action="Login" asp-controller="Customers" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4 dark:focus:ring-offset-gray-800">
-                                Login or Sign up!
-                            </a>
-                        </div>
+                <div class="w-full max-w-md mx-auto p-6">
+                    <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                        <div class="p-4 sm:p-7">
+                            <div class="text-center">
+                                <div class="">
+                                    <form>
+                                        <div class="grid gap-y-4">
+                                            <a asp-action="Login" asp-controller="Customers" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="formButton">
+                                                Login or Sign up!
+                                            </a>
+                                            <a href="@Url.Action("Create", "Guests", new { RestaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-black hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="returnButton">
+                                                Continue as a Guest
+                                            </a>
+                                        </div>
+                                        @*<div class="mx-auto max-w-2xl sm:flex sm:space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-slate-900 dark:border-gray-700 dark:shadow-gray-900/[.2]">
+                                                <div class="pb-2 sm:pb-0 sm:flex-[1_0_0%]">
+                                                    <a href="@Url.Action("Create", "Guests", new { RestaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4 dark:focus:ring-offset-gray-800">
+                                                        Continue as a Guest
+                                                    </a>
+                                                </div>
+                                                <div class="pt-2 sm:pt-0 sm:pl-3 border-t border-gray-200 sm:border-t-0 sm:border-l sm:flex-[1_0_0%] dark:border-gray-700">
+                                                    <a asp-action="Login" asp-controller="Customers" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4 dark:focus:ring-offset-gray-800">
+                                                        Login or Sign up!
+                                                    </a>
+                                                </div>
 
+                                            </div>*@
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </form>
-               
+                </div>
             </div>
         </div>
     </div>
@@ -100,15 +121,15 @@ else if (string.IsNullOrEmpty(cID) && !string.IsNullOrEmpty(gID))
                     string restaurantIDguest = Context.Request.Query["restaurantID"];
                 }
 
-                
+
                 <p>@guestID</p>
 
                 @{int guestIdValue;
-                if (int.TryParse(guestID, out guestIdValue))
-                {
-                // Conversion successful, set the GuestId in the hidden field
-                <input type="hidden" asp-for="@Model.GuestId" value="@guestIdValue" />
-                }
+                    if (int.TryParse(guestID, out guestIdValue))
+                    {
+                        // Conversion successful, set the GuestId in the hidden field
+                        <input type="hidden" asp-for="@Model.GuestId" value="@guestIdValue" />
+                    }
                 }
 
                 <div class="form-group">
@@ -226,7 +247,7 @@ else if (string.IsNullOrEmpty(cID) && !string.IsNullOrEmpty(gID))
 }
 
 
-//Not a Guest 
+//Not a Guest
 else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
 {
 
@@ -236,19 +257,19 @@ else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
         </div>
         <div class="col-md-6">
             <form asp-action="Create" method="post">
-               
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    @{
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                @{
                     string customerID = Context.Request.Query["CustomerID"];
                     string restaurantID = Context.Request.Query["restaurantID"];
-                    }
+                }
 
-                    <input type="hidden" asp-for="@Model.CustomerId" value=@customerID />
-                    <input type="hidden" asp-for="@Model.RestaurantId" value=@restaurantID />
+                <input type="hidden" asp-for="@Model.CustomerId" value=@customerID />
+                <input type="hidden" asp-for="@Model.RestaurantId" value=@restaurantID />
 
-                    <p class="text-center mt-6 text-xl leading-8 text-gray-700"><i>As a Registered Customer</i></p>
-                
+                <p class="text-center mt-6 text-xl leading-8 text-gray-700"><i>As a Registered Customer</i></p>
+
 
                 @*Guests number Special Banquets*@
                 @*Guests number*@
@@ -362,6 +383,7 @@ else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
 <div>
     <a asp-action="Index" class="btn" id="returnButton" style="margin-top: 10px;">Back to List</a>
 </div>
+
 <!--<!--@*<div class="form-group">
                 <label asp-for="AreaId" class="control-label"></label>
                 <select asp-for="AreaId" class="form-control" asp-items="ViewBag.AreaId">
