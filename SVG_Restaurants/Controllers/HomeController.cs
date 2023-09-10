@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SVG_Restaurants.Models;
 using SVG_Restaurants.ViewModels;
 using System.Diagnostics;
@@ -22,6 +23,7 @@ namespace SVG_Restaurants.Controllers
             {
                 CustomerID = customerID,
                 Reservations = _context.Reservations
+                    .Include(r => r.Restaurant)
                     .Where(r => r.CustomerId == customerID)
                     .OrderByDescending(r => r.ReservationTiming)
                     .ToList(),
