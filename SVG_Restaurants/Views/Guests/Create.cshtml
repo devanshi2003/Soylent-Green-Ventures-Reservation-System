@@ -2,7 +2,11 @@
 
 @{
     ViewData["Title"] = "Create";
+    ViewBag.RestaurantID = Context.Request.Query["RestaurantID"];
+
 }
+<p>@ViewBag.RestaurantID</p>
+
 <style type="text/css">
     body {
         background-color: #A9927D;
@@ -23,6 +27,7 @@
 
         <form asp-action="Create">
 
+            <input type="hidden" name="RestaurantID" value="@ViewBag.RestaurantID" />
             <!-- Grid -->
             <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
