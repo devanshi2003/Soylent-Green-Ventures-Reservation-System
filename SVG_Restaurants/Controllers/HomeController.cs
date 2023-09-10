@@ -29,6 +29,11 @@ namespace SVG_Restaurants.Controllers
                     .ToList(),
             };
 
+            ViewBag.LoyaltyPoints = _context.Customers
+                .Where(c => c.CustomerId == customerID)
+                .Select(c => c.LoyaltyPoints ?? 0)
+                .FirstOrDefault();
+
             return View(viewModel);
         }
 

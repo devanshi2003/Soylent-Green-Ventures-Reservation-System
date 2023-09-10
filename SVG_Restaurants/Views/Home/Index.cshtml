@@ -52,7 +52,21 @@
         <li class="nav-item">
             <a id="upcomingBookingsLink" class="nav-link active btn-outline" aria-current="page" href="#">Upcoming Bookings</a>
         </li>
+        @if (Model.CustomerID != 0) {
+        <li class="nav-item">
+            <a id="loyaltyPointsLink" class="nav-link active btn-outline" aria-current="page" href="#">LoyaltyPoints</a>
+        </li>
+        }
     </ul>
+    @if (Model.CustomerID != 0)
+    {
+        <div id="loyaltyPoints" class="flex flex-col items-center justify-center h-screen">
+            <h1 class="text-2xl font-bold mb-4">Loyalty Points:</h1>
+            <div class="flex max-w-md h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 items-center">
+                <div class="flex flex-col justify-center overflow-hidden bg-orange-500 text-xs text-black text-center" role="progressbar" style="width: @(ViewBag.LoyaltyPoints)%" aria-valuenow="@(ViewBag.LoyaltyPoints)" aria-valuemin="0" aria-valuemax="100">@ViewBag.LoyaltyPoints%</div>
+            </div>
+        </div>
+    }
     @{
         if (Model.CustomerID == 0)
         {
@@ -211,24 +225,38 @@
 
     </div>
     <!-- End Card Blog -->
+</div>
 
     <script>// Event listener for the "Upcoming Bookings" link
         const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
         const allCards = document.getElementById('allCards');
         const upcomingBookings = document.getElementById('upcomingBookings');
+        const loyaltyPoints = document.getElementById('loyaltyPoints');
+        const restaurantsLink = document.getElementById('restaurantsLink');
 
         upcomingBookingsLink.addEventListener('click', function (event) {
 
             allCards.style.display = 'none';
             upcomingBookings.style.display = 'block';
+            loyaltyPoints.style.display = 'none';
 
         });
 
         // Event listener for the "Restaurants" link
-        const restaurantsLink = document.getElementById('restaurantsLink');
         restaurantsLink.addEventListener('click', function (event) {
             allCards.style.display = 'block';
             upcomingBookings.style.display = 'none';
+            loyaltyPoints.style.display = 'none';
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var loyaltyPointsButton = document.getElementById('loyaltyPointsLink');
+
+            loyaltyPointsButton.addEventListener('click', function () {
+                allCards.style.display = 'none';
+                upcomingBookings.style.display = 'none';
+                loyaltyPoints.style.display = 'block';
+            });
         });
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -241,5 +269,7 @@
         });
 
         allCards.style.display = 'block';
-        upcomingBookings.style.display = 'none';</script>
+        upcomingBookings.style.display = 'none';
+        loyaltyPoints.style.display = 'none';
+        </script>
 </body>
