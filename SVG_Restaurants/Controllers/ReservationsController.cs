@@ -143,14 +143,14 @@ namespace SVG_Restaurants.Controllers
                            .Sum(r => r.NumberOfPeople);
                             Debug.WriteLine(sumOfNumberOfPeople);
 
-                        var totalPeople = sumOfNumberOfPeople + reservation.NumberOfPeople;
+                        //var totalPeople = sumOfNumberOfPeople + reservation.NumberOfPeople;
 
 
                         var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
 
                         //sumOfNumberOfPeople += reservation.NumberOfPeople;
 
-                        if (totalPeople <= restaurant.SeatCapacity)
+                        if (reservation.NumberOfPeople <= restaurant.SeatCapacity)
                         {
                             //Decrement the number of available seats
                             restaurant.SeatCapacity -= reservation.NumberOfPeople;
