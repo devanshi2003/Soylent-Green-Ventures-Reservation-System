@@ -54,10 +54,14 @@
         </li>
         @if (Model.CustomerID != 0) {
         <li class="nav-item">
-            <a id="loyaltyPoints" class="nav-link active btn-outline" aria-current="page" href="#">LoyaltyPoints</a>
+            <a id="loyaltyPointsLink" class="nav-link active btn-outline" aria-current="page" href="#">LoyaltyPoints</a>
         </li>
         }
     </ul>
+    @if (Model.CustomerID != 0)
+    {
+        <p id="loyaltyPoints">Here lies loyalty points :)</p>
+    }
     @{
         if (Model.CustomerID == 0)
         {
@@ -221,11 +225,22 @@
         const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
         const allCards = document.getElementById('allCards');
         const upcomingBookings = document.getElementById('upcomingBookings');
+        const loyaltyPointsButton = document.getElementById('loyaltyPointsLink');
+        const loyaltyPoints = document.getElementById('loyaltyPoints');
 
         upcomingBookingsLink.addEventListener('click', function (event) {
 
             allCards.style.display = 'none';
             upcomingBookings.style.display = 'block';
+            loyaltyPoints.style.display = 'none';
+
+        });
+
+        loyaltyPointsButton.addEventListener('click', function (event) {
+
+            allCards.style.display = 'none';
+            upcomingBookings.style.display = 'none';
+            loyaltyPoints.style.display = 'block';
 
         });
 
@@ -234,6 +249,7 @@
         restaurantsLink.addEventListener('click', function (event) {
             allCards.style.display = 'block';
             upcomingBookings.style.display = 'none';
+            loyaltyPoints.style.display = 'none';
         });
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -246,5 +262,6 @@
         });
 
         allCards.style.display = 'block';
-        upcomingBookings.style.display = 'none';</script>
+        upcomingBookings.style.display = 'none';
+        loyaltyPoints.style.display = 'none';</script>
 </body>
