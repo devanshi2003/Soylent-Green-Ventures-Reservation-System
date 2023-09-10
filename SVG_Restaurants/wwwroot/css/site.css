@@ -39,7 +39,7 @@ body {
     color:black;
 }
 
-#restaurantsLink, #upcomingBookingsLink, #loyaltyPoints {
+#restaurantsLink, #upcomingBookingsLink, #loyaltyPointsLink {
     color: #F2F4F3;
     background-color: rgba(94,80,63, 1);
     border-color: #362417;
