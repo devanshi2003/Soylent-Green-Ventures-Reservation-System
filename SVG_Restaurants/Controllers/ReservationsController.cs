@@ -109,15 +109,47 @@ namespace SVG_Restaurants.Controllers
         {
             if (ModelState.IsValid)
             {
+
+
+                var timeFrames = new List<(int startHour, int endHour)>
+                {
+                    (12, 14),
+                    (17, 19),
+                    (19, 21),
+                    (10, 12),
+                    (12, 14),
+                    (21, 23),
+                };
+
+                foreach (var timeFrame in timeFrames)
+                {
+                    int startHour = timeFrame.startHour;
+                    int endHour = timeFrame.endHour;
+                
+                    if (reservation.ReservationTiming.Value.Hour >= startHour && reservation.ReservationTiming.Value.Hour < endHour)
+                    {
+
+                        Debug.WriteLine(startHour);
+
+                        Debug.WriteLine(endHour);
+
+                        var sumOfNumberOfPeople = _context.Reservations
+                           .Where(r => r.ReservationTiming.HasValue && r.ReservationTiming.Value.Hour >= startHour && r.ReservationTiming.Value.Hour <= endHour )
+                           .Sum(r => r.NumberOfPeople);
+                            Debug.WriteLine(sumOfNumberOfPeople);
+
+
+                        break; // Exit the loop once a match is found
+
+
+                    }
+                }
+
+
+
                 var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
 
-                //var dateTimeToCompare = DateTime.ParseExact("2023-09-08 15:30:00", "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
-                var sumOfNumberOfPeople = _context.Reservations
-                .Where(r => r.ReservationTiming.HasValue && r.ReservationTiming.Value.Hour > 18)
-                .Sum(r => r.NumberOfPeople);
-
-                Debug.WriteLine(sumOfNumberOfPeople);
 
 
                 //sumOfNumberOfPeople += reservation.NumberOfPeople;
@@ -137,7 +169,7 @@ namespace SVG_Restaurants.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home", new { customerID = reservation.CustomerId});
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                     
