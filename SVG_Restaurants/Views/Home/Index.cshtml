@@ -60,7 +60,12 @@
     </ul>
     @if (Model.CustomerID != 0)
     {
-        <p id="loyaltyPoints">@ViewBag.LoyaltyPoints</p>
+        <div id="loyaltyPoints" class="flex flex-col items-center justify-center h-screen">
+            <h1 class="text-2xl font-bold mb-4">Loyalty Points:</h1>
+            <div class="flex max-w-md h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 items-center">
+                <div class="flex flex-col justify-center overflow-hidden bg-blue-500 text-xs text-white text-center" role="progressbar" style="width: @(ViewBag.LoyaltyPoints)%" aria-valuenow="@(ViewBag.LoyaltyPoints)" aria-valuemin="0" aria-valuemax="100">@ViewBag.LoyaltyPoints%</div>
+            </div>
+        </div>
     }
     @{
         if (Model.CustomerID == 0)
