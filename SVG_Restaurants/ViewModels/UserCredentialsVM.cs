@@ -5,5 +5,6 @@
         public string username { get; set; }
         public string password { get; set; }
         public string errorMessage { get; set; }
+        public string? restaurantID { get; set; }
     }
 }
