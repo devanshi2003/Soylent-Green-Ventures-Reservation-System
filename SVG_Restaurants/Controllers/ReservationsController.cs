@@ -253,6 +253,41 @@ namespace SVG_Restaurants.Controllers
             {
                 return NotFound();
             }
+
+            string rID = Request.Query["restaurantID"];
+            int parsedrID;
+
+            var diningAreas = _context.DiningAreas.ToList();
+
+            if (int.TryParse(rID, out parsedrID))
+            {
+                diningAreas = diningAreas
+                    .Where(da => da.RestaurantId == parsedrID)
+                    .ToList();
+            }
+
+            var banquet = _context.Banquets.Where(c => c.RestaurantId == parsedrID).ToList();
+
+            // Create a SelectListItem list using AreaName as the display text
+            var areaSelectList = diningAreas
+                .Select(da => new SelectListItem
+                {
+                    Value = da.AreaId.ToString(),
+                    Text = da.Area
+                })
+                .ToList();
+
+            var banquetList = banquet
+               .Select(b => new SelectListItem
+               {
+                   Value = b.BanquetId.ToString(),
+                   Text = b.BanquetName
+               })
+               .ToList();
+
+            ViewBag.DiningAreas = new SelectList(areaSelectList, "Value", "Text");
+            ViewBag.Banquet = new SelectList(banquetList, "Value", "Text");
+
             ViewData["AreaId"] = new SelectList(_context.DiningAreas, "AreaId", "AreaId", reservation.AreaId);
             ViewData["BanquetId"] = new SelectList(_context.Banquets, "BanquetId", "BanquetId", reservation.BanquetId);
             ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "Email", reservation.CustomerId);
@@ -265,8 +300,10 @@ namespace SVG_Restaurants.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReservationId,CustomerId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople")] Reservation reservation)
+        public async Task<IActionResult> Edit(int id, [Bind("ReservationId,CustomerId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople,HighChairs,SpecialNotes")] Reservation reservation)
         {
+            ViewBag.updateSuccess = false;
+
             if (id != reservation.ReservationId)
             {
                 return NotFound();
@@ -278,6 +315,7 @@ namespace SVG_Restaurants.Controllers
                 {
                     _context.Update(reservation);
                     await _context.SaveChangesAsync();
+                    ViewBag.updateSuccess = true;
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -290,7 +328,7 @@ namespace SVG_Restaurants.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
             ViewData["AreaId"] = new SelectList(_context.DiningAreas, "AreaId", "AreaId", reservation.AreaId);
             ViewData["BanquetId"] = new SelectList(_context.Banquets, "BanquetId", "BanquetId", reservation.BanquetId);
