@@ -60,11 +60,41 @@
     </ul>
     @if (Model.CustomerID != 0)
     {
-        <div id="loyaltyPoints" class="flex flex-col items-center justify-center h-screen">
-            <h1 class="text-2xl font-bold mb-4">Loyalty Points:</h1>
-            <div class="flex max-w-md h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 items-center">
-                <div class="flex flex-col justify-center overflow-hidden bg-orange-500 text-xs text-black text-center" role="progressbar" style="width: @(ViewBag.LoyaltyPoints)%" aria-valuenow="@(ViewBag.LoyaltyPoints)" aria-valuemin="0" aria-valuemax="100">@ViewBag.LoyaltyPoints%</div>
+        <div id="loyaltyPoints" style="padding-top: 20px;">
+            <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+            <div class="md:flex flex-col">
+                <div class="p-8">
+                    <div class="flex justify-between">
+                            <div class="flex items-center">
+                    <p class="mt-2 text-slate-500" style="padding-bottom: 10px;">Points balance</p>
+                    </div>
+                            <div class="flex items-center">
+                            <p class="mt-2 text-slate-500" style="padding-bottom: 10px;"><b class="text-4xl font-extrabold text-black">@ViewBag.LoyaltyPoints</b> / 500</p>
+                            </div>
+                    </div>
+                        <div class="flex w-full h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700">
+                            <div class="flex flex-col justify-center overflow-hidden bg-orange-500" role="progressbar" style="width: @(ViewBag.LoyaltyPoints)%" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="mt-2 text-slate-500" style="padding-bottom: 10px;">
+                            @{
+                                var sum = 500 - ViewBag.LoyaltyPoints;
+                            }
+                            @if (sum > 0)
+                            {
+                                <span>
+                                    <b class="text-orange-500">@sum</b> more points to be a VIP member
+                                </span>
+                            }
+                            else
+                            {
+                                <span>
+                                Congratulations! You are a VIP member!
+                                </span>
+                                    }
+                        </p>
+                    </div>
             </div>
+        </div>
         </div>
     }
     @{
