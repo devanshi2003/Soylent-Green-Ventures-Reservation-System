@@ -108,79 +108,9 @@
         <div class="column text-center">
             <h2 class="text-3xl leading-8" style="color: #E1C16E; margin-bottom:50px"><b>Make a reservation</b></h2>
 
-            <!-- Sharobp=nn me -->
             <div class="mx-auto w-full max-w-[550px]">
                 <a href="~/Reservations/Create?customerID=@Model.CustomerID&restaurantID=3" class="btn btn-outline">Reserve</a>
             </div>
         </div>
     </div>
 </body>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Get the input element
-        var guestInput = document.getElementById('guest');
-
-        // Get the available seats value from the ViewBag or model property
-        var availableSeats = @ViewBag.AvailableSeats; // Use the correct syntax for your view engine
-
-        // Set the max attribute of the input element based on available seats
-        guestInput.max = availableSeats;
-
-        // Optional: Add an event listener to validate input further if needed
-        guestInput.addEventListener('input', function () {
-            var selectedGuests = parseInt(guestInput.value);
-            if (selectedGuests > availableSeats) {
-                guestInput.value = availableSeats; // Limit input to available seats
-            }
-        });
-    });
-</script>
-
-<script>//const disabledDates = [
-    //    new Date("2023-09-10"),
-    //    new Date("2023-09-15"),
-    //    new Date("2023-09-20"),
-    //    // Add more dates as needed
-    //];
-
-    function getSundaysInYear(year) {
-        const sundays = [];
-        const startDate = new Date(year, 0, 1); // January 1st of the given year
-        const endDate = new Date(year, 11, 31); // December 31st of the given year
-
-        for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
-            if (currentDate.getDay() === 0) {
-                const formattedDate = new Date(`${year}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`);
-                sundays.push(formattedDate);
-            }
-        }
-
-        return sundays;
-    }
-    const year = 2023;
-    const disabledDates = getSundaysInYear(year);
-
-    console.log(disabledDates);</script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-
-<script>// Set the maximum time for all days to 5:00 PM
-    const maxTime = new Date();
-    maxTime.setHours(22, 0, 0, 0); // 10PM
-
-    const minTime = new Date();
-    minTime.setHours(17, 0, 0, 0); // 10PM
-
-    // Initialize Flatpickr with date and time options
-    flatpickr("#datetime", {
-        enableTime: true,
-        dateFormat: 'M j, Y h:i K',
-        minDate: 'today', // Set the minimum date to today
-        disable: disabledDates, // Specify the array of disabled dates
-        minTime: minTime, // Set the min time for all days
-        maxTime: maxTime // Set the maximum time for all days
-    });</script>

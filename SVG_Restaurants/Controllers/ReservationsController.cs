@@ -130,10 +130,6 @@ namespace SVG_Restaurants.Controllers
                     if (reservation.ReservationTiming.Value.Hour >= startHour && reservation.ReservationTiming.Value.Hour < endHour)
                     {
 
-                        Debug.WriteLine(startHour);
-
-                        Debug.WriteLine(endHour);
-
                         var sumOfNumberOfPeople = _context.Reservations
                            .Where(r => r.RestaurantId == reservation.RestaurantId &&
                                     r.ReservationTiming.HasValue &&
@@ -141,38 +137,33 @@ namespace SVG_Restaurants.Controllers
                                     r.ReservationTiming.Value.Hour >= startHour &&
                                     r.ReservationTiming.Value.Hour <= endHour)
                            .Sum(r => r.NumberOfPeople);
-                        Debug.WriteLine(sumOfNumberOfPeople);
 
                         var totalPeople = sumOfNumberOfPeople + reservation.NumberOfPeople;
-
-
                         var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
 
                         if (totalPeople <= restaurant.SeatCapacity)
-                        {
-                            //Decrement the number of available seats
-                            //restaurant.SeatCapacity -= reservation.NumberOfPeople;
+                        {                          
 
                             // Add the reservation to the database
                             _context.Add(reservation); // Add the reservation entity, not the ViewModel
                             await _context.SaveChangesAsync(); // Save changes to the database
 
                             if (reservation.CustomerId == null)
-                            {
-                                return RedirectToAction("Create", "Reservations", new { reservation.GuestId, reservation.RestaurantId, reservation.ReservationId });
+                                {
+                                    return RedirectToAction("Create", "Reservations", new { reservation.GuestId, reservation.RestaurantId, reservation.ReservationId });
 
-                            }
+                                }
                             else
-                            {
-                                return RedirectToAction("Create", "Reservations", new { customerID = reservation.CustomerId, restaurantID = reservation.RestaurantId, reservationID = reservation.ReservationId });
+                                {
+                                    return RedirectToAction("Create", "Reservations", new { customerID = reservation.CustomerId, restaurantID = reservation.RestaurantId, reservationID = reservation.ReservationId });
+                                }
                             }
-                        }
 
                         else
-                        {
-                            ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");
+                            {
+                                ModelState.AddModelError("NumberOfPeople", "Not enough available seats for this reservation.");
 
-                        }
+                            }
 
                         break;
 
