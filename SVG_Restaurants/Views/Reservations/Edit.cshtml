@@ -4,56 +4,317 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<style type="text/css">
+    body {
+        background-color: #A9927D;
+    }
+</style>
 
-<h4>Reservation</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ReservationId" />
-            <div class="form-group">
-                <label asp-for="CustomerId" class="control-label"></label>
-                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
-                <span asp-validation-for="CustomerId" class="text-danger"></span>
+@if (ViewBag.updateSuccess == true)
+    {
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">Your reservation details has been updated successfully!</span>
+            <a asp-controller="Home" asp-action="Index" asp-route-customerID="@Model.CustomerId"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
+        </div>
+    }
+
+<!-- Card Section -->
+<div class="max-w-2xl px-4 py-10 sm:px-6 lg:px-4 lg:py-14 mx-auto">
+    <!-- Card -->
+    <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">
+                Reservation
+            </h2>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+                Update your reservation details.
+            </p>
+        </div>
+
+        <form method="post" asp-action="Edit">
+            <!-- Grid -->
+            <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!--Hidden ID-->
+                <input type="hidden" asp-for="ReservationId" value="@Model.ReservationId" />
+                <input type="hidden" asp-for="CustomerId" value="@Model.CustomerId" />
+                <input type="hidden" asp-for="RestaurantId" value="@Model.RestaurantId" />
+
+
+                <!-- Number of People -->
+                <div class="sm:col-span-3">
+                    <label asp-for="NumberOfPeople" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                        Number of Guests
+                    </label>
+                </div>
+                <div class="sm:col-span-9">
+                    <input asp-for="NumberOfPeople" min="1" id="numberOfPeopleInput" class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-1 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
+                    <span asp-validation-for="NumberOfPeople" class="text-danger"></span>
+                </div>
+
+                <!-- Special Banquets -->
+                @if (Model.RestaurantId != 2)
+                {
+                    <div class="sm:col-span-3">
+                        <label asp-for="BanquetId" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                            Special Banquets
+                        </label>
+                    </div>
+                    <div class="sm:col-span-9">
+                        <select asp-for="BanquetId" asp-items="ViewBag.Banquet" class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-1 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
+                            <option value="">Select a Banquet</option>
+                        </select>
+                        <span asp-validation-for="BanquetId" class="text-danger"></span>
+                    </div>
+                }
+
+                <!-- Dining Area -->
+                <div class="sm:col-span-3">
+                    <label asp-for="AreaId" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                        Dining Area
+                    </label>
+                </div>
+                <div class="sm:col-span-9">
+                    <select asp-for="AreaId" asp-items="ViewBag.DiningAreas" class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-1 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
+                        <option value="">Select an Area</option>
+                    </select>
+                    <span asp-validation-for="AreaId" class="text-danger"></span>
+                </div>
+
+                <!-- Reservation Timing -->
+                <div class="sm:col-span-3">
+                    <label asp-for="AreaId" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                        Reservation Time
+                    </label>
+                </div>
+                <div class="sm:col-span-9">
+                    <span asp-validation-for="ReservationTiming" class="text-danger"></span>
+                    <div id="error-container" class="text-danger"></div>
+
+                    <div class="flatpickr mx-auto col-span-6 sm:col-span-6">
+                        <div class="flex align-middle align-content-center">
+                            <input type="text"
+                                   id="datetime"
+                                   asp-for="ReservationTiming"
+                                   data-input
+                                   pattern="^(?!(1[3-4]|17):[0-5][0-9]|18:00).*$"
+                                   placeholder="Select Date and Time"
+                                   class="block w-full h-11 px-4 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-l-md shadow-sm text-base font-medium text-[#6B7280]">
+                        </div>
+                    </div>
+                    <div id="availableSeatsMessage" class="h-11 px-4 mt-2"><strong>Available seats:</strong> <span id="availableSeatsCount"></span></div>
+                </div>
+
+                <!-- High Chairs -->
+                <div class="sm:col-span-3">
+                    <label asp-for="HighChairs" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                        Baby Seats
+                    </label>
+                </div>
+                <div class="sm:col-span-9">
+                    <input asp-for="HighChairs" min="0" class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-1 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
+                    <span asp-validation-for="HighChairs" class="text-danger"></span>
+                </div>
+
+                <!-- Special Notes -->
+                <div class="sm:col-span-3">
+                    <label asp-for="SpecialNotes" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                        Special Notes
+                    </label>
+                </div>
+                <div class="sm:col-span-9">
+                    <textarea asp-for="SpecialNotes" class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-1 px-4 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]"></textarea>
+                    <span asp-validation-for="SpecialNotes" class="text-danger"></span>
+                </div>
+
             </div>
-            <div class="form-group">
-                <label asp-for="RestaurantId" class="control-label"></label>
-                <select asp-for="RestaurantId" class="form-control" asp-items="ViewBag.RestaurantId"></select>
-                <span asp-validation-for="RestaurantId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AreaId" class="control-label"></label>
-                <select asp-for="AreaId" class="form-control" asp-items="ViewBag.AreaId"></select>
-                <span asp-validation-for="AreaId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ReservationTiming" class="control-label"></label>
-                <input asp-for="ReservationTiming" class="form-control" />
-                <span asp-validation-for="ReservationTiming" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BanquetId" class="control-label"></label>
-                <select asp-for="BanquetId" class="form-control" asp-items="ViewBag.BanquetId"></select>
-                <span asp-validation-for="BanquetId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumberOfPeople" class="control-label"></label>
-                <input asp-for="NumberOfPeople" class="form-control" />
-                <span asp-validation-for="NumberOfPeople" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+            <!-- End Grid -->
+
+            <div class="mt-5 flex justify-end gap-x-2">
+                    <a asp-controller="Home" asp-action="Index" asp-route-customerID="@Model.CustomerId" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                        Go back
+                    </a>
+                    <button type="submit" value="Save" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                        Save changes
+                    </button>
+                </div>
         </form>
     </div>
+    <!-- End Card -->
 </div>
+<!-- End Card Section -->
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>document.addEventListener("DOMContentLoaded", function () {
+        const currentUrl = new URL(window.location.href);
+        const restaurantID = currentUrl.searchParams.get("restaurantID");
+        const inputElement = document.getElementById("datetime");
+        const errorContainer = document.getElementById("error-container");
+
+        function displayErrorMessage(message) {
+            const errorMessage = document.createElement("div");
+            errorMessage.textContent = message;
+            errorMessage.classList.add("error-message");
+            errorContainer.appendChild(errorMessage);
+        }
+
+        inputElement.addEventListener("input", function () {
+            const selectedDateTime = new Date(inputElement.value);
+
+            errorContainer.innerHTML = "";
+
+            if (restaurantID === "1" && (selectedDateTime.getHours() >= 14 && selectedDateTime.getHours() < 17)) {
+                displayErrorMessage("Restaurant closed during this time.");
+            }
+            if (restaurantID === "2" && (selectedDateTime.getHours() >= 14 && selectedDateTime.getHours() < 17)) {
+                displayErrorMessage("Restaurant closed during this time.");
+            }
+        });
+    });
+
+
+    function getSundaysInYear(year) {
+        const sundays = [];
+        const startDate = new Date(year, 0, 1); // January 1st of the given year
+        const endDate = new Date(year, 11, 31); // December 31st of the given year
+
+        for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+            if (currentDate.getDay() === 0) {
+                const formattedDate = new Date(`${year}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`);
+                sundays.push(formattedDate);
+            }
+        }
+
+        return sundays;
+    }
+
+
+    function getMondaysInYear(year) {
+        const mondays = [];
+        const startDate = new Date(year, 0, 1); // January 1st of the given year
+        const endDate = new Date(year, 11, 31); // December 31st of the given year
+
+        for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+            if (currentDate.getDay() === 1) {
+                const formattedDate = new Date(`${year}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`);
+                mondays.push(formattedDate);
+            }
+        }
+
+        return mondays;
+    }
+
+    function getTuesdaysInYear(year) {
+        const tuesdays = [];
+        const startDate = new Date(year, 0, 1); // January 1st of the given year
+        const endDate = new Date(year, 11, 31); // December 31st of the given year
+
+        for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+            if (currentDate.getDay() === 2) {
+                const formattedDate = new Date(`${year}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`);
+                tuesdays.push(formattedDate);
+            }
+        }
+
+        return tuesdays;
+    }
+
+
+    const year = 2023;</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+
+<script>// Get the current URL
+    const currentUrl = new URL(window.location.href);
+
+    // Get the restaurantID query parameter value
+    const restaurantID = currentUrl.searchParams.get("restaurantID");
+
+    let maxTime = new Date();
+    let minTime = new Date();
+
+    let disabledDates = getSundaysInYear(year);
+
+
+    // Set the maximum time and minimum time based on the restaurantID
+
+
+    if (restaurantID === "3") {   //Mexikana ID = 3
+        minTime.setHours(17, 0, 0, 0);
+        maxTime.setHours(23, 0, 0, 0);
+
+    }
+    else if (restaurantID === "2") {   //La Oesta - ID = 2
+        minTime.setHours(10, 0, 0, 0);
+        maxTime.setHours(21, 0, 0, 0);
+        disabledDates = [...getMondaysInYear(2023), ...getTuesdaysInYear(2023)];
+
+
+    }
+    else { // Bamboo ID = 1
+
+        minTime.setHours(12, 0, 0, 0);
+        maxTime.setHours(21, 0, 0, 0);
+        disabledDates = getMondaysInYear(2023);
+
+    }
+
+    // Initialize Flatpickr with date and time options
+    flatpickr("#datetime", {
+        enableTime: true,
+        dateFormat: 'M j, Y h:i K',
+        minDate: 'today', // Set the minimum date to today
+        disable: disabledDates,
+        minTime: minTime, // Set the min time for all days
+        maxTime: maxTime // Set the maximum time for all days
+    });</script>
+
+
+<script>document.addEventListener("DOMContentLoaded", function () {
+        const inputElement = document.getElementById("datetime");
+
+        const queryParams = new URLSearchParams(window.location.search);
+        const restaurantID = queryParams.get("restaurantID");
+        console.log(restaurantID)
+        console.log(inputElement)
+
+        inputElement.addEventListener("change", function () {
+            const selectedDateTime = inputElement.value;
+
+            // Make a request to fetch available seats
+            fetch(`/Reservation/GetAvailableSeats?selectedDateTime=${selectedDateTime}&RestaurantId=${restaurantID}`)
+                .then(response => response.json())
+                .then(data => {
+                    const availableSeatsMessage = document.getElementById("availableSeatsMessage");
+
+                    // Create a strong element for the "Available seats:" text
+                    const textElement = document.createElement("strong");
+                    textElement.textContent = "Available seats: ";
+
+                    // Create a span element for the seat count and format it with a class
+                    const seatCountElement = document.createElement("span");
+                    seatCountElement.textContent = data.availableSeats;
+                    seatCountElement.classList.add("seat-count"); // Add a CSS class for formatting
+
+                    // Update the minimum value for the number of people input
+                    const numberOfPeopleInput = document.getElementById("numberOfPeopleInput");
+                    numberOfPeopleInput.max = data.availableSeats; // Set the minimum based on available seats
+
+                    // Clear the existing content and append the new content
+                    availableSeatsMessage.innerHTML = ''; // Clear existing content
+                    availableSeatsMessage.appendChild(textElement); // Add "Available seats:" text
+                    availableSeatsMessage.appendChild(seatCountElement); // Add seat count
+                })
+                .catch(error => {
+                    console.error("Error fetching available seats: ", error);
+                });
+
+        });
+    });</script>
