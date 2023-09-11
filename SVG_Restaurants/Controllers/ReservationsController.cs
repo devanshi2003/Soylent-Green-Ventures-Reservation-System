@@ -67,15 +67,15 @@ namespace SVG_Restaurants.Controllers
                     .ToList();
             }
 
-            var banquet = _context.Banquets.Where(c=>c.RestaurantId == parsedrID).ToList();
+            var banquet = _context.Banquets.Where(c => c.RestaurantId == parsedrID).ToList();
 
 
             // Create a SelectListItem list using AreaName as the display text
             var areaSelectList = diningAreas
                 .Select(da => new SelectListItem
                 {
-                    Value = da.AreaId.ToString(), 
-                    Text = da.Area 
+                    Value = da.AreaId.ToString(),
+                    Text = da.Area
                 })
                 .ToList();
 
@@ -126,7 +126,7 @@ namespace SVG_Restaurants.Controllers
                 {
                     int startHour = timeFrame.startHour;
                     int endHour = timeFrame.endHour;
-                
+
                     if (reservation.ReservationTiming.Value.Hour >= startHour && reservation.ReservationTiming.Value.Hour < endHour)
                     {
 
@@ -135,13 +135,13 @@ namespace SVG_Restaurants.Controllers
                         Debug.WriteLine(endHour);
 
                         var sumOfNumberOfPeople = _context.Reservations
-                           .Where(r => r.RestaurantId == reservation.RestaurantId && 
+                           .Where(r => r.RestaurantId == reservation.RestaurantId &&
                                     r.ReservationTiming.HasValue &&
                                     r.ReservationTiming.Value.Date == reservation.ReservationTiming.Value.Date &&
-                                    r.ReservationTiming.Value.Hour >= startHour && 
-                                    r.ReservationTiming.Value.Hour <= endHour )
+                                    r.ReservationTiming.Value.Hour >= startHour &&
+                                    r.ReservationTiming.Value.Hour <= endHour)
                            .Sum(r => r.NumberOfPeople);
-                            Debug.WriteLine(sumOfNumberOfPeople);
+                        Debug.WriteLine(sumOfNumberOfPeople);
 
                         var totalPeople = sumOfNumberOfPeople + reservation.NumberOfPeople;
 
@@ -159,7 +159,7 @@ namespace SVG_Restaurants.Controllers
 
                             if (reservation.CustomerId == null)
                             {
-                                return RedirectToAction("Index", "Home");
+                                return RedirectToAction("Create", "Reservations", new { reservation.GuestId, reservation.RestaurantId, reservation.ReservationId });
 
                             }
                             else
@@ -174,7 +174,7 @@ namespace SVG_Restaurants.Controllers
 
                         }
 
-                        break; 
+                        break;
 
                     }
                 }
@@ -227,6 +227,7 @@ namespace SVG_Restaurants.Controllers
                         .Where(c => c.RestaurantId == RestaurantId)
                         .Select(c => c.SeatCapacity)
                         .FirstOrDefault();
+
 
                     int availableSeats = (int)seatCapacity - (int)sumOfNumberOfPeople;
 
@@ -374,16 +375,16 @@ namespace SVG_Restaurants.Controllers
             {
                 _context.Reservations.Remove(reservation);
             }
-            
+
             await _context.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));
-            return RedirectToAction("Index", "Home", new {customerId = customerId});
+            return RedirectToAction("Index", "Home", new { customerId = customerId });
             //return Redirect($"/Home/Index/?customerId={customerId}");
         }
 
         private bool ReservationExists(int id)
         {
-          return (_context.Reservations?.Any(e => e.ReservationId == id)).GetValueOrDefault();
+            return (_context.Reservations?.Any(e => e.ReservationId == id)).GetValueOrDefault();
         }
     }
 }
