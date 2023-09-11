@@ -17,7 +17,6 @@
         Soylent Green Ventures
     </h1>
 </div>
-<h2>Welcome @ViewBag.CustomerName</h2>
 <body>
     <div class="row justify-content-end">
         @{
@@ -44,6 +43,21 @@
                 </div>
             }
         }
+    </div>
+    <div class="row">
+        <div class="text-right" style="display: flex; align-items: center;">
+            <div style="padding-right: 15px">
+            <h2 class="flex items-center text-xl font-extrabold text-black">Welcome @ViewBag.CustomerName</h2>
+            </div>
+            <svg width="50" height="50" viewBox="0 0 140 140">
+                <path fill="gold">
+                    <animate attributeName="d"
+                             dur="1440ms"
+                             repeatCount="indefinite"
+                             values="M 10,110 L 10,10 L 40,50 L 70,10 L 100,50 L 130,10 L 130,110 z;M 30,110 L 0,0 L 50,50 L 70,0 L 90,50 L 140,0 L 110,110 z;M 10,110 L 10,10 L 40,50 L 70,10 L 100,50 L 130,10 L 130,110 z;" />
+                </path>
+            </svg>
+        </div>
     </div>
 
 
