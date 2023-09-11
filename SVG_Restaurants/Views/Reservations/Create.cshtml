@@ -6,8 +6,8 @@
 }
 
 @{
-    string cID = Context.Request.Query["CustomerID"];
-    string rID = Context.Request.Query["RestaurantID"];
+    string cID = Context.Request.Query["customerID"];
+    string rID = Context.Request.Query["restaurantID"];
     string gID = Context.Request.Query["GuestID"];
     string rvID = Context.Request.Query["ReservationID"];
 
@@ -262,18 +262,18 @@ else
                                                     </a>
                                                 </div>
                                                 @*<div class="mx-auto max-w-2xl sm:flex sm:space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-slate-900 dark:border-gray-700 dark:shadow-gray-900/[.2]">
-                                                        <div class="pb-2 sm:pb-0 sm:flex-[1_0_0%]">
-                                                            <a href="@Url.Action("Create", "Guests", new { RestaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4 dark:focus:ring-offset-gray-800">
-                                                                Continue as a Guest
-                                                            </a>
-                                                        </div>
-                                                        <div class="pt-2 sm:pt-0 sm:pl-3 border-t border-gray-200 sm:border-t-0 sm:border-l sm:flex-[1_0_0%] dark:border-gray-700">
-                                                            <a asp-action="Login" asp-controller="Customers" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4 dark:focus:ring-offset-gray-800">
-                                                                Login or Sign up!
-                                                            </a>
-                                                        </div>
+                                            <div class="pb-2 sm:pb-0 sm:flex-[1_0_0%]">
+                                            <a href="@Url.Action("Create", "Guests", new { RestaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4 dark:focus:ring-offset-gray-800">
+                                            Continue as a Guest
+                                            </a>
+                                            </div>
+                                            <div class="pt-2 sm:pt-0 sm:pl-3 border-t border-gray-200 sm:border-t-0 sm:border-l sm:flex-[1_0_0%] dark:border-gray-700">
+                                            <a asp-action="Login" asp-controller="Customers" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm sm:p-4 dark:focus:ring-offset-gray-800">
+                                            Login or Sign up!
+                                            </a>
+                                            </div>
 
-                                                    </div>*@
+                                            </div>*@
                                             </form>
                                         </div>
                                     </div>
@@ -303,7 +303,8 @@ else
 
                         <p>@guestID</p>
 
-                        @{int guestIdValue;
+                        @{
+                            int guestIdValue;
                             if (int.TryParse(guestID, out guestIdValue))
                             {
                                 // Conversion successful, set the GuestId in the hidden field
@@ -326,7 +327,7 @@ else
                                            class="mb-3 block text-base font-medium text-[#07074D]">
                                         Number of guests
                                     </label>
-                                    <input type="number" asp-for="@Model.NumberOfPeople" placeholder="5" min="0"
+                                    <input type="number" asp-for="@Model.NumberOfPeople" id="numberOfPeopleInput" placeholder="5" min="0"
                                            class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                     <span asp-validation-for="@Model.NumberOfPeople" class="text-danger"></span>
                                 </div>
@@ -412,6 +413,7 @@ else
                                         </a>
                                     </div>
 
+                                    <div id="availableSeatsMessage"><strong>Available seats:</strong> <span id="availableSeatsCount"></span></div>
 
                                 </div>
                             </div>
@@ -568,7 +570,8 @@ else
     </div>
 </div>
 
-<script>const toggleButton = document.getElementById("toggleButton");
+<script>
+    const toggleButton = document.getElementById("toggleButton");
     const textToToggle = document.getElementById("textToToggle");
 
     toggleButton.addEventListener("click", function () {
@@ -578,7 +581,8 @@ else
             textToToggle.style.display = "none";
         }
     });</script>
-<script>function toggleViewMenu() {
+<script>
+    function toggleViewMenu() {
         var element = document.getElementById("viewMenu");
         if (element.classList.contains("column") && element.classList.contains("text-center")) {
             element.classList.remove("column", "text-center");
@@ -597,7 +601,8 @@ else
 </div>
 
 
-<script>document.addEventListener("DOMContentLoaded", function () {
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
         const currentUrl = new URL(window.location.href);
         const restaurantID = currentUrl.searchParams.get("restaurantID");
         const inputElement = document.getElementById("datetime");
@@ -679,7 +684,8 @@ else
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 
-<script>// Get the current URL
+<script>
+    // Get the current URL
     const currentUrl = new URL(window.location.href);
 
     // Get the restaurantID query parameter value
@@ -725,7 +731,8 @@ else
     });</script>
 
 
-<script>document.addEventListener("DOMContentLoaded", function () {
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
         const inputElement = document.getElementById("datetime");
 
         const queryParams = new URLSearchParams(window.location.search);
@@ -768,7 +775,9 @@ else
     });</script>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
 <style type="text/css">
     .row {
@@ -780,8 +789,8 @@ else
     }
 
         /*        .column:nth-child(odd) {
-            background-color: #c4ccd2;
-        }*/
+                background-color: #c4ccd2;
+            }*/
 
         /* Adjust the width of the left column */
         .column:nth-child(1) {
