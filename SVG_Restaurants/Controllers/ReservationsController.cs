@@ -331,13 +331,15 @@ namespace SVG_Restaurants.Controllers
                 return Problem("Entity set 'SGVContext.Reservations'  is null.");
             }
             var reservation = await _context.Reservations.FindAsync(id);
+            int customerId = (int)reservation.CustomerId;
             if (reservation != null)
             {
                 _context.Reservations.Remove(reservation);
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+            return Redirect($"/Home/Index/customerId={customerId}");
         }
 
         private bool ReservationExists(int id)
