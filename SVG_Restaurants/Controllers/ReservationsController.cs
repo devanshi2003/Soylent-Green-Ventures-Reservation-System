@@ -339,7 +339,8 @@ namespace SVG_Restaurants.Controllers
             
             await _context.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));
-            return Redirect($"/Home/Index/customerId={customerId}");
+            return RedirectToAction("Index", "Home", new {customerId = customerId});
+            //return Redirect($"/Home/Index/?customerId={customerId}");
         }
 
         private bool ReservationExists(int id)
