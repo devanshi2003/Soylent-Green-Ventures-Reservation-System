@@ -5,9 +5,43 @@
 
 <style type="text/css">
     body {
-        background-color: #dae1e6;
+        position: relative;
+        background-image: url('/img/Mexican Restaurant.jpg'); 
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        margin: 0; 
+        padding: 0; 
     }
 
+
+
+    
+    .background-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/img/Mexican Restaurant.jpg'); 
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        filter: blur(5px); 
+        z-index: -1; 
+    }
+
+
+
+
+    
+    .content-container {
+        border: none;
+        padding: 20px; 
+        margin: 20px auto; 
+        max-width: 700px; 
+        max-height: 400px
+    }
 
     .row {
         display: flex;
@@ -18,16 +52,16 @@
     }
 
         .column:nth-child(odd) {
-            background-color: #c4ccd2;
+            background-color: rgba(196, 204, 210, 0.4);
         }
 
-        /* Adjust the width of the left column */
+        
         .column:nth-child(1) {
-            flex: 1; /* Right column will take the remaining space */
+            flex: 1; 
         }
 
         .column:nth-child(2) {
-            flex: 2; /* Adjust the flex value to make it wider */
+            flex: 1; 
         }
 
     label {
@@ -46,19 +80,17 @@
 
 <body>
 
-    <div class="row" style="padding-bottom: 20px;">
-        <div class="col-4 justify-content-between" style="display: flex; flex-direction: column; align-items: center;">
-            <!-- Your image is placed within this container -->
-            <img src="/img/Mexikana.png" alt="Image of Mexicana Restaurant Logo" style="height: 9rem;" />
-        </div>
+    <div class="background-container"></div>
 
-        <div class="col-8 justify-content-between" style="padding-top: 20px;">
-            <div class="text-center ">
-                <h1 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
-                    Welcome to Mexikana!
-                </h1>
-                <p class="mt-6 text-xl leading-8 text-gray-700"><i>Korean Mexican fusion for the hipsters.</i></p>
+    <div class="row" style="padding-bottom: 20px;">
+        <div class="text-center">
+
+            <div class="flex justify-center">
+                <!-- Your image is placed within this container -->
+                <img src="/img/Mexikana.png" alt="Image of Mexicana Restaurant Logo" class="h-9" />
+
             </div>
+            <p class="text-xl text-sm mb-2 dark:text-black" style="font-family: Baskerville">Korean Mexican fusion for the hipsters.</p>
         </div>
     </div>
 
@@ -66,51 +98,169 @@
 
     </div>
     <!-- Rest of your page content goes here -->
+
+
+
+
     <div class="row">
-        <div class="column text-center">
-            <img src="/img/Mexican Restaurant.jpg" style="width: 100%;" />
-            <h2 class="text-xl leading-8 text-gray-700"><b>FAQs</b></h2>
-            <p class="text-l leading-8 text-gray-700">
-                40 Fullarton Road
-                Norwood
-            </p>
+        <div class="column text-center" style="flex: 1;">
 
-            <br />
-            <p class="text-l leading-8 text-gray-700">
-                <b>Sittings:</b>
-            </p>
-            <p class="text-l leading-6 text-gray-700">
-                First dinner 5-7PM <br />
-                Second dinner 7-9PM <br />
-                Late night dinner 9-11PM <br />
 
-            </p>
-            <br />
-            <p class="text-l leading-8 text-gray-700"><b>Open:</b> Monday to Saturday</p>
-            <br />
-            <p class="text-2xl leading-8 text-gray-700"><b>Special Banquets</b></p>
-            <br />
-            <p class="text-xl leading-8 text-gray-700">
-                <b>Share Banquet $35PP</b>
-            </p>
+            <div class="row content-container">
 
-            <p class="text-l leading-6 text-gray-700">
-                (min 4 people)
+
+                <h2 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif"><b>You can find us at:</b></h2>
+                <p class="text-l font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif">
+                    40 Fullarton Road
+                    Norwood
+                </p>
+
                 <br />
+                <p class="text-l font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif">
+                    <b>Sittings:</b>
+                </p>
+                <p class="text-l font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif">
+                    First dinner 5-7PM <br />
+                    Second dinner 7-9PM <br />
+                    Late night dinner 9-11PM <br />
+
+                </p>
                 <br />
-                Papas Fritas <br />
-                Korean Fried Chicken Tacos <br />
-                Smokey chicken <br />
-                Taquitos dorados <br />
-                Nachos <br />
-            </p>
+                <p class="text-l font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif"><b>Open:</b> Monday to Saturday</p>
+                <br />
+                <p class="text-2xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif"><b>Special Banquets</b></p>
+                <br />
+                <p class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif">
+                    <b>Share Banquet $35PP</b>
+                </p>
+
+                <p class="text-l font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif">
+                    (min 4 people)
+                    <br />
+                    <br />
+                    Papas Fritas <br />
+                    Korean Fried Chicken Tacos <br />
+                    Smokey chicken <br />
+                    Taquitos dorados <br />
+                    Nachos <br />
+                </p>
+
+            </div>
+
         </div>
-        <div class="column text-center">
-            <h2 class="text-3xl leading-8" style="color: #E1C16E; margin-bottom:50px"><b>Make a reservation</b></h2>
 
+        <div class="column text-center" style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1;">
+          
             <div class="mx-auto w-full max-w-[550px]">
-                <a href="~/Reservations/Create?customerID=@Model.CustomerID&restaurantID=3" class="btn btn-outline">Reserve</a>
+                <a href="~/Reservations/Create?customerID=@Model.CustomerID&restaurantID=3" class="btn btn-outline" style="margin-top: 1px;">Make a reservation</a>
+                
             </div>
         </div>
+
+
     </div>
+
+
+
+
+    <!-- Testimonials -->
+    
+            <!-- Title -->
+ 
+    <!-- End Title -->
+    <!-- Grid -->
+    <p class="text-l font-semibold text-sm mb-2" style="font-family: Sans-serif; color:#F5F5DC">Restaurant Reviews</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" style="margin-top: 50px; margin-bottom: 50px;">
+        <!-- Card -->
+        <div class="flex h-auto">
+            <div class="flex flex-col bg-white rounded-xl dark:bg-slate-900" style="opacity: 0.7;">
+                <div class="flex-auto p-4 md:p-6">
+                    <p class="text-base italic md:text-lg text-gray-800 dark:text-gray-200">
+                        " With Preline, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience. "
+                    </p>
+                </div>
+
+                <div class="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-slate-700">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-8 w-8 rounded-full sm:h-[2.875rem] sm:w-[2.875rem]" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Image Description">
+                        </div>
+
+                        <div class="grow ml-3">
+                            <p class="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-200">
+                                Josh Tyson
+                            </p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">
+                                Product Manager | Capsule
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Card -->
+        <!-- Card -->
+        <div class="flex h-auto">
+            <div class="flex flex-col bg-white rounded-xl dark:bg-slate-900" style="opacity: 0.7;">
+                <div class="flex-auto p-4 md:p-6">
+                    <p class="text-base italic md:text-lg text-gray-800 dark:text-gray-200">
+                        " In September, I will be using this theme for 2 years. I went through multiple updates and changes and I'm very glad to see the consistency and effort made by the team. "
+                    </p>
+                </div>
+
+                <div class="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-slate-700">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-8 w-8 rounded-full sm:h-[2.875rem] sm:w-[2.875rem]" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Image Description">
+                        </div>
+
+                        <div class="grow ml-3">
+                            <p class="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-200">
+                                Luisa
+                            </p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">
+                                Senior Director of Operations | Fitbit
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Card -->
+        <!-- Card -->
+        <div class="flex h-auto">
+            <div class="flex flex-col bg-white rounded-xl dark:bg-slate-900" style="opacity: 0.7;">
+                <div class="flex-auto p-4 md:p-6">
+                    <p class="text-base italic md:text-lg text-gray-800 dark:text-gray-200">
+                        " Refreshing and Thought provoking design and it changes my view about how I design the websites. Great typography, modern clean white design, nice tones of the color. "
+                    </p>
+                </div>
+
+                <div class="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-slate-700">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-8 w-8 rounded-full sm:h-[2.875rem] sm:w-[2.875rem]" src="https://images.unsplash.com/photo-1579017331263-ef82f0bbc748?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=900&h=900&q=80" alt="Image Description">
+                        </div>
+
+                        <div class="grow ml-3">
+                            <p class="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-200">
+                                Alisa Williams
+                            </p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">
+                                Entrepreneur | Happy customer
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Card -->
+    </div>
+    <!-- End Grid -->
+    <!-- Grid -->
+   
+
+
+
+
 </body>
