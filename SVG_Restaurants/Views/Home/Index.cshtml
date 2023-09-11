@@ -62,14 +62,13 @@
     {
         <div id="loyaltyPoints" style="padding-top: 20px;">
         <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-            <div class="md:flex">
+            <div class="md:flex flex-col">
                 <div class="p-8">
                     <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Company retreats</div>
-                    <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Incredible accommodation for your team</a>
                     <p class="mt-2 text-slate-500" style="padding-bottom: 10px;">Points balance</p>
-                        <div class="flex max-w-md h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 items-center">
-                            <div class="flex flex-col justify-center overflow-hidden bg-orange-500 text-xs text-black text-center" role="progressbar" style="width: @(ViewBag.LoyaltyPoints)%" aria-valuenow="@(ViewBag.LoyaltyPoints)" aria-valuemin="0" aria-valuemax="500">@ViewBag.LoyaltyPoints%</div>
-                        </div>
+                    <div class="flex w-full h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700">
+                        <div class="flex flex-col justify-center overflow-hidden bg-blue-500" role="progressbar" style="width: 50%" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
             </div>
         </div>
