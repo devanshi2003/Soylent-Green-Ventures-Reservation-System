@@ -317,18 +317,6 @@ else
 
                         <p class="text-center mt-6 text-xl leading-8 text-gray-700"><i>As a Guest</i></p>
 
-
-else if (string.IsNullOrEmpty(cID) && !string.IsNullOrEmpty(gID))
-{
-    <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-6">
-            <form asp-action="Create" method="post">
-                @{
-                    string guestID = Context.Request.Query["GuestID"];
-                    string restaurantIDguest = Context.Request.Query["RestaurantID"];
-                }
                         @*Guests number Special Banquets*@
                         @*Guests number*@
                         <div class="-mx-3 flex flex-wrap">
@@ -358,20 +346,6 @@ else if (string.IsNullOrEmpty(cID) && !string.IsNullOrEmpty(gID))
                                     </div>
                                 </div>
 
-                <p class="text-center mt-6 text-xl leading-8 text-gray-700"><i>As a Guest</i></p>
-
-                @*Guests number Special Banquets*@
-                @*Guests number*@
-                <div class="-mx-3 flex flex-wrap">
-                    <div class="w-full px-3 sm:w-1/2">
-                        <div class="">
-                            <label asp-for="@Model.NumberOfPeople"
-                                   class="mb-3 block text-base font-medium text-[#07074D]">
-                                Number of guests
-                            </label>
-                            <input type="number" id="numberOfPeopleInput" asp-for="@Model.NumberOfPeople" placeholder="5" min="0" max=""
-                                   class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                            <span asp-validation-for="@Model.NumberOfPeople" class="text-danger"></span>
                             }
                         </div>
 
@@ -454,33 +428,6 @@ else if (string.IsNullOrEmpty(cID) && !string.IsNullOrEmpty(gID))
                 </div>
             </div>
 
-                @*Date Time*@
-                <div class="-mx-3 flex flex-wrap">
-                    <div class="w-full px-3 sm:w-1/2">
-                        <label asp-for="@Model.ReservationTiming" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start"></label>
-                        <span asp-validation-for="@Model.ReservationTiming" class="text-danger"></span>
-
-                        <div id="error-container" class="text-danger"></div>
-
-                        <div class="flatpickr mx-auto col-span-6 sm:col-span-6">
-                            <div class="flex align-middle align-content-center">
-                                <input type="text"
-                                       id="datetime"
-                                       asp-for="@Model.ReservationTiming"
-                                       data-input
-                                       pattern="^(?!(1[3-4]|17):[0-5][0-9]|18:00).*$"
-                                       placeholder="Select Date and Time"
-                                       class="block w-full px-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-l-md shadow-sm">
-                                <a class="h-11 w-10 input-button cursor-pointer rounded-r-md bg-transparent border-gray-300 border-t border-b border-r"
-                                   title="clear" data-clear>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mt-2 ml-1" viewBox="0 0 20 20" fill="#c53030">
-                                        <path fill-rule="evenodd"
-                                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                              clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </div>
-                            <div id="availableSeatsMessage"><strong>Available seats:</strong> <span id="availableSeatsCount"></span></div>
         }
 
         //Not a Guest

@@ -228,8 +228,6 @@ namespace SVG_Restaurants.Controllers
                         .Select(c => c.SeatCapacity)
                         .FirstOrDefault();
 
-                    Debug.WriteLine(seatCapacity);
-
 
                     int availableSeats = (int)seatCapacity - (int)sumOfNumberOfPeople;
 
