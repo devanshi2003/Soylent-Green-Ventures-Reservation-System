@@ -34,6 +34,11 @@ namespace SVG_Restaurants.Controllers
                 .Select(c => c.LoyaltyPoints ?? 0)
                 .FirstOrDefault();
 
+            ViewBag.CustomerName = _context.Customers
+                .Where(c => c.CustomerId == customerID)
+                .Select(c => c.FirstName)
+                .FirstOrDefault();
+
             return View(viewModel);
         }
 
