@@ -5,12 +5,11 @@
 }
 @{
     int customerId = Model.Customer.CustomerId;
-    int rID = (int)Model.RestaurantId;
 }
 <head>
     <link rel="stylesheet" href="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/css/main.ad49aa9b.css" />
 </head>
-@if (rID == 1)
+@if (Model.RestaurantId == 1)
 {
     <style type="text/css">
         body {
@@ -18,7 +17,7 @@
         }
     </style>
 }
-else if (rID == 2)
+else if (Model.RestaurantId == 2)
 {
     <style type="text/css">
         body {
@@ -26,7 +25,7 @@ else if (rID == 2)
         }
     </style>
 }
-else if (rID == 3)
+else if (Model.RestaurantId == 3)
 {
     <style type="text/css">
         body {
