@@ -173,13 +173,6 @@
                         {
                             foreach (var reservation in Model.Reservations)
                             {
-                                @*<div>
-                                        <p>Reservation ID is: @reservation.ReservationId</p>
-                                        <p>Restaurant ID is: @reservation.RestaurantId</p>
-                                        <p>The booking time is: @reservation.ReservationTiming</p>
-                                        <p>The number of people for this booking is: @reservation.NumberOfPeople</p>
-                                        <hr />
-                                    </div>*@
 
                                 <div class="flex flex-col justify-center items-center h-[30vh]">
                                     <div class="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:!shadow-none p-3">
@@ -197,10 +190,7 @@
                                             <h4 class="px-2 text-xl font-bold text-navy-700 dark:text-white">
                                                 Reservation ID: @reservation.ReservationId
                                             </h4>
-                                            @*<p class="mt-2 px-2 text-base text-gray-600">
-                                                Restaurant ID: @reservation.RestaurantId
 
-                                            </p>*@
                                             @if (reservation.Restaurant != null)
                                             {
                                                 <p class="mt-2 px-2 text-base text-gray-600">Restaurant: @reservation.Restaurant.RestaurantName</p>
