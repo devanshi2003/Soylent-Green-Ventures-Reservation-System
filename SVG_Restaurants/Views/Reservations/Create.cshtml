@@ -50,7 +50,7 @@ else
 {
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
         <span class="font-medium">Your reservation has been created!</span>
-        <a asp-controller="Home" asp-action="Index" asp-route-customerID="@cID"><span class="link-text">Click here</span></a><span> to see your upcoming bookings</span>
+        <a asp-controller="Home" asp-action="Index" asp-route-customerID="@cID"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
     </div>
 }
 
@@ -233,7 +233,7 @@ else
                                 <div class="">
                                     <form>
                                         <div class="grid gap-y-4">
-                                            <a asp-action="Login" asp-controller="Customers" asp-route-RestaurantID="@rID" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="formButton">
+                                            <a asp-action="Login" asp-controller="Customers" asp-route-restaurantID="@rID" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="formButton">
                                                 Login or Sign up!
                                             </a>
                                             <a href="@Url.Action("Create", "Guests", new { RestaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-black hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="returnButton">
@@ -776,12 +776,6 @@ else if (!string.IsNullOrEmpty(cID) && string.IsNullOrEmpty(gID))
         margin-top: 0;
         margin-bottom: 0;
         padding-bottom: 0;
-    }
-
-    .link-text {
-        color: blue; 
-        text-decoration: underline; 
-        cursor: pointer; 
     }
 
 </style>

@@ -47,9 +47,9 @@ namespace SVG_Restaurants.Controllers
                 if (!string.IsNullOrEmpty(vm.restaurantID))
                 {
 
-                    return RedirectToAction("Create", "Reservations", new { CustomerID = user.CustomerId, RestaurantID = vm.restaurantID });
+                    return RedirectToAction("Create", "Reservations", new { customerID = user.CustomerId, vm.restaurantID });
                 }
-                return RedirectToAction("Index", "Home", new { CustomerID = user.CustomerId });
+                return RedirectToAction("Index", "Home", new { customerID = user.CustomerId });
             }
             else
             {

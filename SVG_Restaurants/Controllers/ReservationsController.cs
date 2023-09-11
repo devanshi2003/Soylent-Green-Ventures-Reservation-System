@@ -164,7 +164,7 @@ namespace SVG_Restaurants.Controllers
                             }
                             else
                             {
-                                return RedirectToAction("Create", "Reservations", new { CustomerID = reservation.CustomerId, RestaurantID = reservation.RestaurantId, ReservationID = reservation.ReservationId });
+                                return RedirectToAction("Create", "Reservations", new { customerID = reservation.CustomerId, restaurantID = reservation.RestaurantId, reservationID = reservation.ReservationId });
                             }
                         }
 
