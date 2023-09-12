@@ -316,7 +316,7 @@ else
                             @*Special Banquets*@
                             @if (ViewBag.Banquet != null && ((IEnumerable<SelectListItem>)ViewBag.Banquet).Count() > 0)
                             {
-                                <div class="w-full px-3 sm:w-1/2">
+                                <div id="Banquet" class="w-full px-3 sm:w-1/2">
                                     <div class="">
                                         <label asp-for="BanquetId" class="mb-3 block text-base font-medium text-[#07074D]">Special Banquets</label>
                                         <select asp-for="BanquetId" asp-items="ViewBag.Banquet" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
@@ -451,14 +451,14 @@ else
                             @*Special Banquets*@
                             @if (ViewBag.Banquet != null && ((IEnumerable<SelectListItem>)ViewBag.Banquet).Count() > 0)
                                 {
-                                    <div class="w-full px-3 sm:w-1/2">
+                                    <div id="Banquet" class="w-full px-3 sm:w-1/2">
                                         <div class="">
                                             <label asp-for="BanquetId" class="mb-3 block text-base font-medium text-[#07074D]">Special Banquets</label>
                                             <select asp-for="BanquetId" asp-items="ViewBag.Banquet" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
                                                 <option value="">Select a banquet</option>-->
                                                 <!-- Default option -->
                                             </select>
-                                        </div>
+                                        </div>  
                                     </div>
 
                                 }
@@ -571,6 +571,7 @@ else
 </script>
 
 <script>
+    
     document.addEventListener("DOMContentLoaded", function () {
         const currentUrl = new URL(window.location.href);
         const restaurantID = currentUrl.searchParams.get("restaurantID");
