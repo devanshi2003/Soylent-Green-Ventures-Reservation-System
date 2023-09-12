@@ -3,44 +3,77 @@
     ViewData["Title"] = "Mexikana";
 }
 
+
 <style type="text/css">
     body {
         position: relative;
-        background-image: url('/img/Mexican Restaurant.jpg'); 
-        background-size: cover; 
-        background-position: center; 
-        background-repeat: no-repeat; 
-        margin: 0; 
-        padding: 0; 
+        background-image: url('/img/Mexican Restaurant.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
     }
 
-
-
-    
     .background-container {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('/img/Mexican Restaurant.jpg'); 
-        background-size: cover; 
-        background-position: center; 
-        background-repeat: no-repeat; 
-        filter: blur(5px); 
-        z-index: -1; 
+        background-image: url('/img/Mexican Restaurant.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: blur(5px);
+        z-index: -1;
+    }
+
+    #fusion-container {
+        background-color: #dae1e6;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 20px;
+        border-radius: 10px;
     }
 
 
+    .btn-custom {
+        width: 300px;
+        height: 50px;
+        font-size: 18px;
+        background-color: #dae1e6;
+        font-family: sans-serif;
+        font-weight: bold;
+        color: #000000;
+        border: 2px solid #dae1e6;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s; /* Transition for hover effect */
+    }
 
 
-    
+        .btn-custom:hover {
+            background-color: #c4cacf;
+            color: #000000;
+            border: 2px solid #c4cacf;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition back to normal */
+        }
+
+
+
     .content-container {
         border: none;
-        padding: 20px; 
-        margin: 20px auto; 
-        max-width: 700px; 
-        max-height: 400px
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 300px;
+        max-height: 600px;
+        border-radius: 20px;
+        background-color: rgba(196, 204, 210, 0.9);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
 
     .row {
@@ -51,17 +84,15 @@
         padding: 20px;
     }
 
-        .column:nth-child(odd) {
-            background-color: rgba(196, 204, 210, 0.4);
-        }
 
-        
+
+
         .column:nth-child(1) {
-            flex: 1; 
+            flex: 1;
         }
 
         .column:nth-child(2) {
-            flex: 1; 
+            flex: 1;
         }
 
     label {
@@ -76,23 +107,36 @@
         margin-bottom: 0;
         padding-bottom: 0;
     }
+
+    .checked {
+        color: orange;
+    }
+
+    .row span {
+        display: inline-block;
+    }
 </style>
+
+
+
 
 <body>
 
     <div class="background-container"></div>
 
     <div class="row" style="padding-bottom: 20px;">
-        <div class="text-center">
+        <div class="text-center" id="fusion-container">
 
             <div class="flex justify-center">
                 <!-- Your image is placed within this container -->
                 <img src="/img/Mexikana.png" alt="Image of Mexicana Restaurant Logo" class="h-9" />
-
             </div>
             <p class="text-xl text-sm mb-2 dark:text-black" style="font-family: Baskerville">Korean Mexican fusion for the hipsters.</p>
         </div>
     </div>
+
+
+
 
     <div class="row">
 
@@ -103,58 +147,68 @@
 
 
     <div class="row">
-        <div class="column text-center" style="flex: 1;">
+        <div class="column text-center" style="flex: 1; ">
 
 
             <div class="row content-container">
 
 
-                <h2 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif"><b>You can find us at:</b></h2>
-                <p class="text-l font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif">
+                <h2 class="text-xl font-semibold text-sm mb-2" style="font-family: Cambria; color: #000000; "><b>You can find us at:</b></h2>
+                <p class="text-l font-semibold text-sm mb-2 " style="font-family: Cambria; color: #000000 ">
                     40 Fullarton Road
                     Norwood
                 </p>
 
                 <br />
-                <p class="text-l font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif">
-                    <b>Sittings:</b>
-                </p>
-                <p class="text-l font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif">
+                <p class="text-l font-semibold text-sm mb-2 " style="font-family: Cambria; color: #000000 ">
+                    Sittings:<br />
                     First dinner 5-7PM <br />
                     Second dinner 7-9PM <br />
                     Late night dinner 9-11PM <br />
+                </p>
 
+                <br />
+                <p class="text-l font-semibold text-sm mb-2" style="font-family: Cambria; color: #000000 ">
+                    Open:<br />
+                    Monday to Saturday<br />
                 </p>
                 <br />
-                <p class="text-l font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif"><b>Open:</b> Monday to Saturday</p>
+
+                <div style="margin-top: 20px; margin-bottom: 20px; border-bottom: 1px solid #000;"></div>
+
                 <br />
-                <p class="text-2xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif"><b>Special Banquets</b></p>
+
+                <p class="text-4xl font-semibold text-sm mb-2 " style="font-family: Cambria; color: #000000 "><b>-Special Banquets-</b></p>
                 <br />
-                <p class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif">
+
+                <h2 class="text-xl font-semibold text-sm mb-1 " style="font-family: Cambria; color: #000000; ">
                     <b>Share Banquet $35PP</b>
-                </p>
+                </h2>
 
-                <p class="text-l font-semibold text-sm mb-2 dark:text-black" style="font-family: Sans-serif">
-                    (min 4 people)
+                <p class="text-2xl font-semibold text-sm mb-1 " style="font-family: Cambria; color: #000000 ">
+                    <b>(min 4 people)</b>
                     <br />
                     <br />
-                    Papas Fritas <br />
-                    Korean Fried Chicken Tacos <br />
-                    Smokey chicken <br />
-                    Taquitos dorados <br />
-                    Nachos <br />
+                    <span style="font-size: 1.5em;">Papas Fritas</span> <br />
+                    <span style="font-size: 1.5em;">Korean Fried Chicken Tacos</span> <br />
+                    <span style="font-size: 1.5em;">Smokey chicken</span> <br />
+                    <span style="font-size: 1.5em;">Taquitos dorados</span> <br />
+                    <span style="font-size: 1.5em;">Nachos</span> <br />
                 </p>
-
             </div>
 
         </div>
+    </div>
+
+    <div class="row">
 
         <div class="column text-center" style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1;">
-          
+
             <div class="mx-auto w-full max-w-[550px]">
-                <a href="~/Reservations/Create?customerID=@Model.CustomerID&restaurantID=3" class="btn btn-outline" style="margin-top: 1px;">Make a reservation</a>
-                
+                <a href="~/Reservations/Create?customerID=@Model.CustomerID&restaurantID=3" class="btn btn-custom" style="margin-top: 1px; font-family: Cambria">Make a Reservation</a>
             </div>
+
+
         </div>
 
 
@@ -163,35 +217,51 @@
 
 
 
-    <!-- Testimonials -->
-    
-            <!-- Title -->
- 
-    <!-- End Title -->
-    <!-- Grid -->
-    <p class="text-l font-semibold text-sm mb-2" style="font-family: Sans-serif; color:#F5F5DC">Restaurant Reviews</p>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" style="margin-top: 50px; margin-bottom: 50px;">
+    <!-- Reviewsss -->
+
+
+    <div style="margin-top: 100px; margin-bottom: 20px; text-align: center; position: relative;">
+        <p class="text-l font-semibold italic text-sm" style="font-family: Sans-serif; color:#F5F5DC; display: inline-block; padding: 0 10px; position: relative; z-index: 1;">Restaurant Reviews</p>
+        <p style="position: absolute; width: 50%; top: 50%; transform: translateY(-50%); left: 0; right: 0; margin: 0 auto; border-bottom: 1px solid #000;"></p>
+    </div>
+
+
+
+
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" style="margin-top: 30px; margin-bottom: 50px;">
         <!-- Card -->
         <div class="flex h-auto">
             <div class="flex flex-col bg-white rounded-xl dark:bg-slate-900" style="opacity: 0.7;">
                 <div class="flex-auto p-4 md:p-6">
                     <p class="text-base italic md:text-lg text-gray-800 dark:text-gray-200">
-                        " With Preline, we're able to easily track our performance in full detail. It's become an essential tool for us to grow and engage with our audience. "
+                        " Mexikana is a culinary masterpiece! It's like a flavor explosion in your mouth. The fusion of Korean and Mexican cuisine is genius, I had the Bulgogi Burrito... too good "
                     </p>
                 </div>
+                
+                <div style="padding-left: 30px;">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                </div>
+                <br />
 
                 <div class="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-slate-700">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
-                            <img class="h-8 w-8 rounded-full sm:h-[2.875rem] sm:w-[2.875rem]" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Image Description">
+                            <img class="h-8 w-8 rounded-full sm:h-[2.875rem] sm:w-[2.875rem]" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FJennie_%2528singer%2529&psig=AOvVaw0OcB_ornJ47_GGvYhVAGfu&ust=1694617590674000&source=images&cd=vfe&opi=89978449&ved=0CA8QjRxqFwoTCOjMps6spYEDFQAAAAAdAAAAABAJ" alt="Jen">
                         </div>
 
                         <div class="grow ml-3">
                             <p class="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-200">
-                                Josh Tyson
+                                Jennie Ruby Jane
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">
-                                Product Manager | Capsule
+                                Regular | Gold Customer 
                             </p>
                         </div>
                     </div>
@@ -204,9 +274,19 @@
             <div class="flex flex-col bg-white rounded-xl dark:bg-slate-900" style="opacity: 0.7;">
                 <div class="flex-auto p-4 md:p-6">
                     <p class="text-base italic md:text-lg text-gray-800 dark:text-gray-200">
-                        " In September, I will be using this theme for 2 years. I went through multiple updates and changes and I'm very glad to see the consistency and effort made by the team. "
+                        " As a self-proclaimed foodie and hipster enthusiast, I can confidently say that Mexikana has won my heart. The Kimchi Quesadilla, tbh I thought it would be weird, but it's a game-changer"
                     </p>
                 </div>
+                <div style="padding-left: 30px;">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+                <br />
 
                 <div class="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-slate-700">
                     <div class="flex items-center">
@@ -216,10 +296,10 @@
 
                         <div class="grow ml-3">
                             <p class="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-200">
-                                Luisa
+                                Taeyong
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">
-                                Senior Director of Operations | Fitbit
+                                Baggy Jean
                             </p>
                         </div>
                     </div>
@@ -232,9 +312,19 @@
             <div class="flex flex-col bg-white rounded-xl dark:bg-slate-900" style="opacity: 0.7;">
                 <div class="flex-auto p-4 md:p-6">
                     <p class="text-base italic md:text-lg text-gray-800 dark:text-gray-200">
-                        " Refreshing and Thought provoking design and it changes my view about how I design the websites. Great typography, modern clean white design, nice tones of the color. "
+                        " I stumbled upon Mexikana while exploring the hidden gems of the city, and it instantly became my go-to spot. The ambiance is effortlessly cool, the kpop live band was a extra bonus!"
                     </p>
                 </div>
+                <div style="padding-left: 30px;">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+                <br />
 
                 <div class="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-slate-700">
                     <div class="flex items-center">
@@ -244,10 +334,10 @@
 
                         <div class="grow ml-3">
                             <p class="text-sm sm:text-base font-semibold text-gray-800 dark:text-gray-200">
-                                Alisa Williams
+                                Shakira
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">
-                                Entrepreneur | Happy customer
+                                hot sauce lover | Happy customer
                             </p>
                         </div>
                     </div>
@@ -258,7 +348,7 @@
     </div>
     <!-- End Grid -->
     <!-- Grid -->
-   
+
 
 
 
