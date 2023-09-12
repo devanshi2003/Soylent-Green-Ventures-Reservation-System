@@ -25,6 +25,7 @@ namespace SVG_Restaurants.Models
 
         [Display(Name = "Number of People")]
         [Required(ErrorMessage = "{0} is required.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Booking must have at least 1 person")]
         public int? NumberOfPeople { get; set; }
         public int? GuestId { get; set; }
 
