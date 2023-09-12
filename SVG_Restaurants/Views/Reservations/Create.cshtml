@@ -571,7 +571,21 @@ else
 </script>
 
 <script>
-    
+    const numberOfPeopleInput = document.getElementById("numberOfPeopleInput");
+    const banquetDiv = document.getElementById("Banquet");
+    banquetDiv.style.display = "none";
+
+    numberOfPeopleInput.addEventListener("input", function () {
+        const inputValue = parseInt(this.value);
+
+        // Check if the input value is greater than 4
+        if (inputValue >= 4) {
+            banquetDiv.style.display = "block";
+        } else {
+            banquetDiv.style.display = "none";
+        }
+    });
+
     document.addEventListener("DOMContentLoaded", function () {
         const currentUrl = new URL(window.location.href);
         const restaurantID = currentUrl.searchParams.get("restaurantID");
