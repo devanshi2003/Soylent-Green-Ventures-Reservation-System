@@ -255,6 +255,11 @@ else
                                                         Login or Sign up!
                                                         <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                                                     </a>
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
                                                     <script>
                                                         document.getElementById('formButton').addEventListener('click', function (e) {
 
@@ -268,7 +273,11 @@ else
 
                                                     </script>
 
+<<<<<<< Updated upstream
                                                     <a href="@Url.Action("Create", "Guests", new { RestaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-black hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="returnButton">
+=======
+                                                    <a href="@Url.Action("Create", "Guests", new { restaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-black hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="returnButton">
+>>>>>>> Stashed changes
                                                         Continue as a Guest
                                                         <span id="guest" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                                                     </a>
@@ -279,7 +288,7 @@ else
 
                                                             document.getElementById('guest').style.display = 'inline-block';
 
-                                                            window.location.href = '/Guests/Create?RestaurantID=@rID';
+                                                            window.location.href = '/Guests/Create?restaurantID=@rID';
 
                                                         });
 
@@ -430,6 +439,7 @@ else
                                 Go back
                                 <span id="loadingReturn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                             </a>
+                                <input type="submit" value="Create" class="btn" id="formButton" style="margin-top: 30px;" />
                             <script>
                                 document.getElementById('returnButton').addEventListener('click', function (e) {
 
@@ -439,24 +449,6 @@ else
 
                                     window.location.href = '/Home/Index?guestID=@gID';
 
-                                });
-
-                            </script>
-                            <div>
-                                <input type="submit" value="Create" class="btn" id="formButton" style="margin-top: 30px;" />
-                                <span id="create" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
-
-                            </div>
-                            <script>
-                                document.getElementById('formButton').addEventListener('click', function (e) {
-
-                                    this.disabled = true;
-
-                                    document.getElementById('create').style.display = 'inline-block';
-
-                                    setTimeout(function () {
-                                        document.querySelector('form2').submit();
-                                    }, 300);
                                 });
 
                             </script>
@@ -595,7 +587,21 @@ else
                         <div class="form-group">
                             <a asp-controller="Home" asp-action="Index" asp-route-customerID="@cID" id="returnButton" class="btn" style="margin-top: 30px; margin-right: 20px">
                                 Go back
+                                <span id="return" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                             </a>
+                            <script>
+                                document.getElementById('returnButton').addEventListener('click', function (e) {
+
+                                    this.disabled = true;
+
+                                    document.getElementById('return').style.display = 'inline-block';
+
+                                    window.location.href = '/Home/Index?customerID=@cID';
+
+                                });
+
+                            </script>
+
                             <input type="submit" value="Create" class="btn" id="formButton" style="margin-top: 30px; " />
                         </div>
                     </form>
