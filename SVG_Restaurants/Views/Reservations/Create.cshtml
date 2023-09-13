@@ -48,16 +48,29 @@ else
 
 @if (!string.IsNullOrEmpty(rvID))
 {
+    if (string.IsNullOrEmpty(gID))
+    {
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">Your reservation has been created!</span>
+            <a asp-controller="Home" asp-action="Index" asp-route-customerID="@cID"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
+        </div>
+    }
+
+    else 
+    {
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
         <span class="font-medium">Your reservation has been created!</span>
-        <a asp-controller="Home" asp-action="Index" asp-route-customerID="@cID"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
+        <a asp-controller="Home" asp-action="Index"><span class="link-primary">Click here to return to home page</span></a><span></span>
     </div>
+    }
 }
 
 
 
+
+
 <div class="-mx-3 flex flex-wrap">
-    <a id="toggleButton" class="toggle-button" onclick="toggleViewMenu()">View Menu</a>
+    <a id="toggleButton" class="toggle-button" onclick="toggleViewMenu()">View Restaurant Info</a>
 </div>
 <div class="row">
     <div id="viewMenu" class="">
@@ -270,6 +283,7 @@ else
                                                     </script>
 
                                                     <a href="@Url.Action("Create", "Guests", new { restaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-black hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="returnButton">
+
                                                         Continue as a Guest
                                                         <span id="guest" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                                                     </a>
@@ -345,7 +359,7 @@ else
                             @*Special Banquets*@
                             @if (ViewBag.Banquet != null && ((IEnumerable<SelectListItem>)ViewBag.Banquet).Count() > 0)
                             {
-                                <div class="w-full px-3 sm:w-1/2">
+                                <div id="Banquet" class="w-full px-3 sm:w-1/2">
                                     <div class="">
                                         <label asp-for="BanquetId" class="mb-3 block text-base font-medium text-[#07074D]">Special Banquets</label>
                                         <select asp-for="BanquetId" asp-items="ViewBag.Banquet" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
@@ -412,11 +426,6 @@ else
                                                class="block w-full px-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-l-md shadow-sm">
                                         <a class="h-11 w-10 input-button cursor-pointer rounded-r-md bg-transparent border-gray-300 border-t border-b border-r"
                                            title="clear" data-clear>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mt-2 ml-1" viewBox="0 0 20 20" fill="#c53030">
-                                                <path fill-rule="evenodd"
-                                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                      clip-rule="evenodd" />
-                                            </svg>
                                         </a>
                                     </div>
 
@@ -493,14 +502,14 @@ else
                             @*Special Banquets*@
                             @if (ViewBag.Banquet != null && ((IEnumerable<SelectListItem>)ViewBag.Banquet).Count() > 0)
                                 {
-                                    <div class="w-full px-3 sm:w-1/2">
+                                    <div id="Banquet" class="w-full px-3 sm:w-1/2">
                                         <div class="">
                                             <label asp-for="BanquetId" class="mb-3 block text-base font-medium text-[#07074D]">Special Banquets</label>
                                             <select asp-for="BanquetId" asp-items="ViewBag.Banquet" class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-8 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1]">
                                                 <option value="">Select a banquet</option>-->
                                                 <!-- Default option -->
                                             </select>
-                                        </div>
+                                        </div>  
                                     </div>
 
                                 }
@@ -562,11 +571,7 @@ else
                                                class="block w-full px-2 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-l-md shadow-sm">
                                         <a class="h-11 w-10 input-button cursor-pointer rounded-r-md bg-transparent border-gray-300 border-t border-b border-r"
                                            title="clear" data-clear>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mt-2 ml-1" viewBox="0 0 20 20" fill="#c53030">
-                                                <path fill-rule="evenodd"
-                                                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                      clip-rule="evenodd" />
-                                            </svg>
+                                            
                                         </a>
                                     </div>
 
@@ -627,6 +632,21 @@ else
 </script>
 
 <script>
+    const numberOfPeopleInput = document.getElementById("numberOfPeopleInput");
+    const banquetDiv = document.getElementById("Banquet");
+    banquetDiv.style.display = "none";
+
+    numberOfPeopleInput.addEventListener("input", function () {
+        const inputValue = parseInt(this.value);
+
+        // Check if the input value is greater than 4
+        if (inputValue >= 4) {
+            banquetDiv.style.display = "block";
+        } else {
+            banquetDiv.style.display = "none";
+        }
+    });
+
     document.addEventListener("DOMContentLoaded", function () {
         const currentUrl = new URL(window.location.href);
         const restaurantID = currentUrl.searchParams.get("restaurantID");
@@ -702,7 +722,8 @@ else
     }
 
 
-    const year = 2023;</script>
+    const year = 2023;
+</script>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
@@ -719,7 +740,7 @@ else
     let maxTime = new Date();
     let minTime = new Date();
 
-    let disabledDates = getSundaysInYear(year);
+    let disabledDates = getSundaysInYear(2023);
 
 
     // Set the maximum time and minimum time based on the restaurantID

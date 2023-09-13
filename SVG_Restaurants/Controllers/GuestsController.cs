@@ -48,7 +48,7 @@ namespace SVG_Restaurants.Controllers
         // GET: Guests/Create
         public IActionResult Create()
         {
-            ViewBag.RestaurantID = Request.Query["RestaurantID"];
+            ViewBag.RestaurantID = Request.Query["restaurantID"];
 
             return View();
         }
@@ -67,7 +67,7 @@ namespace SVG_Restaurants.Controllers
                 string restaurantID = Request.Form["RestaurantID"];
                 _context.Add(guest);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Create", "Reservations", new { GuestID = guest.GuestId, RestaurantID = restaurantID });
+                return RedirectToAction("Create", "Reservations", new { GuestID = guest.GuestId, restaurantID = restaurantID });
             }
             return View(guest);
         }
