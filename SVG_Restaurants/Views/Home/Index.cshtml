@@ -104,18 +104,29 @@
 
                         <p class="mt-2 text-slate-500" style="padding-bottom: 10px;">
                             @{
-                                var sum = 500 - ViewBag.LoyaltyPoints;
+                                var sum = 1500 - ViewBag.LoyaltyPoints;
                             }
-                            @if (sum > 0)
+                            @if (ViewBag.LoyaltyPoints != 1500)
                             {
+                                @if(ViewBag.LoyaltyPoints >= 500) {
                                 <span>
-                                    <b class="text-orange-500">@sum</b> more points to be a VIP member
+                                    Congratulations! You are a Silver Tier member!
                                 </span>
+                                <span>
+                                        You have <b class="text-orange-500">@sum</b> more points to be Gold Tier.
+                                </span>
+                                }
+                                else
+                                {
+                                    <span>
+                                        <b class="text-orange-500">@sum</b> more points to be Silver Tier.
+                                    </span>
+                                }
                             }
                             else
                             {
                                 <span>
-                                Congratulations! You are a VIP member!
+                                Congratulations! You are a Gold Tier member!
                                 </span>
                                     }
                         </p>
