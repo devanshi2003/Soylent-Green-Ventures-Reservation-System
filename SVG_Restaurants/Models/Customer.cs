@@ -45,6 +45,8 @@ namespace SVG_Restaurants.Models
 
         public int? LoyaltyPoints { get; set; }
 
+        public string? Status { get; set; }
+
         public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

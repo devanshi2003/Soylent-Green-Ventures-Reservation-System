@@ -74,6 +74,10 @@ namespace SVG_Restaurants.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Status)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Username).HasMaxLength(20);
             });
 
