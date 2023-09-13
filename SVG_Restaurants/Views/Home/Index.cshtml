@@ -90,12 +90,18 @@
                     <p class="mt-2 text-slate-500" style="padding-bottom: 10px;">Points balance</p>
                     </div>
                             <div class="flex items-center">
-                            <p class="mt-2 text-slate-500" style="padding-bottom: 10px;"><b class="text-4xl font-extrabold text-black">@ViewBag.LoyaltyPoints</b> / 500</p>
+                            <p class="mt-2 text-slate-500" style="padding-bottom: 10px;"><b class="text-4xl font-extrabold text-black">@ViewBag.LoyaltyPoints</b> / 1500</p>
                             </div>
                     </div>
                         <div class="flex w-full h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700">
-                            <div class="flex flex-col justify-center overflow-hidden bg-orange-500" role="progressbar" style="width: @(ViewBag.LoyaltyPoints)%" aria-valuemin="0" aria-valuemax="100"></div>
+                            @{
+                                double loyaltyPoints = Convert.ToDouble(ViewBag.LoyaltyPoints);
+                                double maxPoints = 1500;
+                                double percentage = (loyaltyPoints / maxPoints) * 100;
+                            }
+                            <div class="flex flex-col justify-center overflow-hidden bg-orange-500" role="progressbar" style="width: @percentage%" aria-valuemin="0" aria-valuemax="1500"></div>
                         </div>
+
                         <p class="mt-2 text-slate-500" style="padding-bottom: 10px;">
                             @{
                                 var sum = 500 - ViewBag.LoyaltyPoints;
