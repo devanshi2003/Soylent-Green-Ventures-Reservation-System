@@ -266,10 +266,38 @@ else
                                                 <div class="grid gap-y-4">
                                                     <a asp-action="Login" asp-controller="Customers" asp-route-restaurantID="@rID" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="formButton">
                                                         Login or Sign up!
+                                                        <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                                                     </a>
+                                                    <script>
+                                                        document.getElementById('formButton').addEventListener('click', function (e) {
+
+                                                            this.disabled = true;
+
+                                                            document.getElementById('loading').style.display = 'inline-block';
+
+                                                            window.location.href = '/Customers/Login?restaurantID=@rID';
+
+                                                        });
+
+                                                    </script>
+
                                                     <a href="@Url.Action("Create", "Guests", new { RestaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-black hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="returnButton">
                                                         Continue as a Guest
+                                                        <span id="guest" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                                                     </a>
+                                                    <script>
+                                                        document.getElementById('returnButton').addEventListener('click', function (e) {
+
+                                                            this.disabled = true;
+
+                                                            document.getElementById('guest').style.display = 'inline-block';
+
+                                                            window.location.href = '/Guests/Create?RestaurantID=@rID';
+
+                                                        });
+
+                                                    </script>
+
                                                 </div>
                                             </form>
                                         </div>
@@ -290,7 +318,7 @@ else
                 <div class="col-md-3">
                 </div>
                 <div class="col-md-6">
-                    <form asp-action="Create" method="post">
+                    <form asp-action="Create" method="post" id="form2">
                         @{
                             string guestID = Context.Request.Query["GuestID"];
                             string restaurantIDguest = Context.Request.Query["restaurantID"];
@@ -408,8 +436,38 @@ else
                         <div class="form-group">
                             <a asp-controller="Home" asp-action="Index" asp-route-guestID="@gID" id="returnButton" class="btn" style="margin-top: 30px; margin-right: 30px;">
                                 Go back
+                                <span id="loadingReturn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                             </a>
-                            <input type="submit" value="Create" class="btn" id="formButton" style="margin-top: 30px;" />
+                            <script>
+                                document.getElementById('returnButton').addEventListener('click', function (e) {
+
+                                    this.disabled = true;
+
+                                    document.getElementById('loadingReturn').style.display = 'inline-block';
+
+                                    window.location.href = '/Home/Index?guestID=@gID';
+
+                                });
+
+                            </script>
+                            <div>
+                                <input type="submit" value="Create" class="btn" id="formButton" style="margin-top: 30px;" />
+                                <span id="create" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+
+                            </div>
+                            <script>
+                                document.getElementById('formButton').addEventListener('click', function (e) {
+
+                                    this.disabled = true;
+
+                                    document.getElementById('create').style.display = 'inline-block';
+
+                                    setTimeout(function () {
+                                        document.querySelector('form2').submit();
+                                    }, 300);
+                                });
+
+                            </script>
                         </div>
                     </form>
 
