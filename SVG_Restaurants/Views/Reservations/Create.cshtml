@@ -48,11 +48,24 @@ else
 
 @if (!string.IsNullOrEmpty(rvID))
 {
+    if (string.IsNullOrEmpty(gID))
+    {
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">Your reservation has been created!</span>
+            <a asp-controller="Home" asp-action="Index" asp-route-customerID="@cID"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
+        </div>
+    }
+
+    else 
+    {
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
         <span class="font-medium">Your reservation has been created!</span>
-        <a asp-controller="Home" asp-action="Index" asp-route-customerID="@cID"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
+        <a asp-controller="Home" asp-action="Index"><span class="link-primary">Click here to return to home page</span></a><span></span>
     </div>
+    }
 }
+
+
 
 
 
