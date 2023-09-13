@@ -48,7 +48,7 @@ namespace SVG_Restaurants.Controllers
         // GET: Guests/Create
         public IActionResult Create()
         {
-            ViewBag.RestaurantID = Request.Query["RestaurantID"];
+            ViewBag.RestaurantID = Request.Query["restaurantID"];
 
             return View();
         }
