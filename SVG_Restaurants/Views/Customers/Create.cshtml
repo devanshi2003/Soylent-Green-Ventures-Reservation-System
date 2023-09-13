@@ -84,7 +84,7 @@
                     </label>
                 </div>
                 <div class="sm:col-span-9">
-                    <input asp-for="PhoneNumber" class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Enter phone number">
+                    <input asp-for="PhoneNumber" id="PhoneNumberInput" class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Enter phone number">
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
             </div>
@@ -95,8 +95,7 @@
                     Cancel
                     <span id="cancelbtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
                 </a>
-                <script>
-                    document.getElementById('cancel').addEventListener('click', function (e) {
+                <script>document.getElementById('cancel').addEventListener('click', function (e) {
 
                         this.disabled = true;
 
@@ -104,16 +103,13 @@
 
                         window.location.href = '/Home/Index';
 
-                    });
-
-                </script>
-                <button type="submit" id ="save" value="Save" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                    });</script>
+                <button type="submit" id="save" value="Save" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                     Create
                     <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
 
                 </button>
-                <script>
-                    document.getElementById('save').addEventListener('click', function (e) {
+                <script>document.getElementById('save').addEventListener('click', function (e) {
 
                         this.disabled = true;
 
@@ -122,9 +118,7 @@
                         setTimeout(function () {
                             document.querySelector('form').submit();
                         }, 300);
-                    });
-
-                </script>
+                    });</script>
 
 
 
@@ -141,4 +135,9 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>$(document).ready(function () {
+            $('#PhoneNumberInput').mask('(61) 000-000-000');
+        });</script>
 }
