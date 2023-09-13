@@ -47,12 +47,24 @@
 
     @if (Model.CustomerID != 0)
     {
-    <div class="row">
+        @if (ViewBag.LoyaltyPoints >= 500)
+        {
+            <div style="background-color: rgba(255, 255, 255, 0.75); display: inline-block; border-radius: 10px; padding: 5px;">
+                <div class="uppercase tracking-wide text-2xl text-gray-500 font-semibold font-bold" style="padding: 5px;">Silver Tier</div>
+            </div>
+        }
+        else if (ViewBag.LoyaltyPoints == 1500)
+        {
+            <div style="background-color: rgba(255, 255, 255, 0.75); display: inline-block; border-radius: 10px; padding: 5px;">
+                <div class="uppercase tracking-wide text-2xl text-yellow-500 font-semibold font-bold" style="padding: 5px;">Gold Tier</div>
+            </div>
+        }
+        <div class="row">
         <div class="text-right" style="display: flex; align-items: center;">
             <div style="padding-right: 15px">
             <h2 class="flex items-center text-2xl font-extrabold text-black">Welcome, @ViewBag.CustomerName</h2>
             </div>
-            @if (ViewBag.LoyaltyPoints == 500) {
+            @if (ViewBag.LoyaltyPoints == 1500) {
             <svg width="50" height="50" viewBox="0 0 140 140">
                 <path fill="gold">
                     <animate attributeName="d"
