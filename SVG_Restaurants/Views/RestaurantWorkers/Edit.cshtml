@@ -29,7 +29,7 @@
             </p>
         </div>
 
-        <form method="post" asp-action="Edit">
+        <form method="post" asp-action="Edit" id="form">
             <!-- Grid -->
             <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -117,13 +117,41 @@
             <!-- End Grid -->
 
             <div class="mt-5 flex justify-end gap-x-2">
-                <a asp-controller="RestaurantWorkers" asp-action="WorkerDetails" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                <a asp-controller="RestaurantWorkers" asp-action="WorkerDetails" id="return" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
                     Discard Changes
-                </a>
-                <button type="submit" value="Save" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                    Save Changes
-                </button>
+                    <span id="back" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
 
+                </a>
+                <script>
+                    document.getElementById('return').addEventListener('click', function (e) {
+
+                        this.disabled = true;
+
+                        document.getElementById('back').style.display = 'inline-block';
+
+                        window.location.href = '/RestaurantWorkers/Admin';
+
+                    });
+
+                </script>
+                <button type="submit" value="Save" id="save" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                    Save Changes
+                    <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
+
+                </button>
+                <script>
+                    document.getElementById('save').addEventListener('click', function (e) {
+
+                        this.disabled = true;
+
+                        document.getElementById('loading').style.display = 'inline-block';
+
+                        setTimeout(function () {
+                            document.querySelector('form').submit();
+                        }, 300);
+                    });
+
+                </script>
 
             </div>
         </form>

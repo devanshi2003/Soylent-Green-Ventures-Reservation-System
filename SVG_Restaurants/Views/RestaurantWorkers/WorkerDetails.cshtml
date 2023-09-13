@@ -49,9 +49,21 @@
                             </h2>
                         </div>
 
-                        <a asp-controller="RestaurantWorkers" asp-action="Admin" asp-route-restaurantID=1 type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                        <a asp-controller="RestaurantWorkers" id="admin" asp-action="Admin" asp-route-restaurantID=1 type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                             Go Back
+                            <span id="adminbtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-green rounded-full" style="display: none;" aria-label="Loading"></span>
                         </a>
+                        <script>
+                            document.getElementById('admin').addEventListener('click', function (e) {
+
+                                this.disabled = true;
+
+                                document.getElementById('adminbtn').style.display = 'inline-block';
+                                window.location.href = '/RestaurantWorkers/Admin';
+
+                            });
+
+                        </script>
                     </div>
 
                 </div>
@@ -139,11 +151,39 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.PhoneNumber</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.Username</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@user.RestaurantId</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"> <a type="button" asp-action="Edit" asp-route-id ="@user.WorkerId" class="btn btn-outline-primary">Edit</a></td>
-                        <input type="hidden" name="workerID" value="@user.WorkerId" />         
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                        <a type="button" asp-action="Delete" asp-route-id="@user.WorkerId" class="btn btn-outline-primary">Delete</a>
+                                    <a type="button" id="edit-@user.WorkerId" asp-action="Edit" asp-route-id="@user.WorkerId" class="btn btn-outline-primary">
+                                            Edit
+                                        <span id="editbtn-@user.WorkerId" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-green rounded-full" style="display: none;" aria-label="Loading"></span>
+                                            </a>
+                                        <script>
+                                                document.getElementById('edit-@user.WorkerId').addEventListener('click', function (e) {
+                                                this.disabled = true;
+                                                document.getElementById('editbtn-@user.WorkerId').style.display = 'inline-block';
+                                                window.location.href = '/RestaurantWorkers/Edit?id=@user.WorkerId';
+
+                                            });
+
+                                        </script>
+
                                     </td>
+
+                                    <input type="hidden" name="workerID" value="@user.WorkerId" />         
+                                    
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                        <a type="button" id="delete-@user.WorkerId" asp-action="Delete" asp-route-id="@user.WorkerId" class="btn btn-outline-primary">
+                                            Delete
+                                            <span id="deletebtn-@user.WorkerId" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-green rounded-full" style="display: none;" aria-label="Loading"></span>
+                                        </a>
+                                    </td>
+                                    <script>
+                                            document.getElementById('delete-@user.WorkerId').addEventListener('click', function (e) {
+                                            this.disabled = true;
+                                            document.getElementById('deletebtn-@user.WorkerId').style.display = 'inline-block';
+                                            window.location.href = '/RestaurantWorkers/Delete?id=@user.WorkerId';
+
+                                        });
+                                    </script>
                         </tr>
                         </form>
 

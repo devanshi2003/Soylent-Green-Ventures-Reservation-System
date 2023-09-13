@@ -72,15 +72,44 @@
     </tbody>
 </table>
 
-<form asp-action="Delete">
+<form asp-action="Delete" id="form">
     <input type="hidden" asp-for="WorkerId" />
-    <button type="submit" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-white hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+    <button type="submit" id="delete" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-white hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
         Delete
+        <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-green rounded-full" style="display: none;" aria-label="Loading"></span>
+
     </button>
+    <script>
+        document.getElementById('delete').addEventListener('click', function (e) {
+
+            this.disabled = true;
+
+            document.getElementById('loading').style.display = 'inline-block';
+
+            setTimeout(function () {
+                document.querySelector('form').submit();
+            }, 300);
+        });
+
+    </script>
 
 
-    <a asp-controller="RestaurantWorkers" asp-action="WorkerDetails" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-blue-100 border border-transparent font-semibold text-blue-500 hover:text-white hover:bg-blue-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+    <a asp-controller="RestaurantWorkers" asp-action="WorkerDetails" id="back" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-blue-100 border border-transparent font-semibold text-blue-500 hover:text-white hover:bg-blue-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
         No, I don't want to delete
+        <span id="backbtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-green rounded-full" style="display: none;" aria-label="Loading"></span>
+        <script>
+            document.getElementById('back').addEventListener('click', function (e) {
+
+                this.disabled = true;
+
+                document.getElementById('backbtn').style.display = 'inline-block';
+                window.location.href = '/RestaurantWorkers/WorkerDetails';
+
+            });
+
+        </script>
+
+
     </a>
 </form>
 
