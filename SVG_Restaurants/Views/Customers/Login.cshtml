@@ -11,7 +11,7 @@
                     <div class="text-center">
                         <div class="mt-5">
                             <!--FORM-->
-                            <form method="post" asp-controller="Customers" asp-action="Index">
+                            <form method="post" asp-controller="Customers" asp-action="Index" id="done">
                                 <div class="grid gap-y-4">
                                     <div class="row justify-content-center">
                                         <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Customers Login</h1>
@@ -21,6 +21,9 @@
                                         <a class="text-blue-600 decoration-2 hover:underline font-medium" asp-action="Create">
                                             Sign up here
                                         </a>
+                                    <div id="loading-container" style="display: none;">
+                                        <span>Loading...</span>
+                                    </div>
                                     </p>
                                     <div class="relative">
                                         <input type="text" asp-for="username" id="inputUsername" class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400" placeholder="Username" id="formInput" required autofocus />
@@ -32,10 +35,41 @@
                                         <input type="hidden" asp-for="restaurantID" value="@Context.Request.Query["RestaurantID"]"/>
                                     </div>
 
-                                    <button asp-controller="Customers" asp-action="Index" type="submit" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="formButton">Sign in</button>
+                                <button asp-controller="Customers" asp-action="Index" type="submit"class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="signIn">
+                                    Sign in
+                                    <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+                                </button>
+                                <script>
+                                    document.getElementById('signIn').addEventListener('click', function (e) {
+
+                                        this.disabled = true;
+
+                                        document.getElementById('loading').style.display = 'inline-block';
+
+                                        setTimeout(function () {
+                                            document.querySelector('form').submit();
+                                        }, 300);
+                                    });
+
+                                </script>
+
                                     <a type="button" asp-controller="Home" asp-action="Index" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-black hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="returnButton">
                                         Return to home page
+                                    <span id="loadingReturn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+
                                     </a>
+                                <script>
+                                    document.getElementById('returnButton').addEventListener('click', function (e) {
+
+                                        this.disabled = true;
+
+                                        document.getElementById('loadingReturn').style.display = 'inline-block';
+
+                                        window.location.href = '/Home/Index';
+
+                                    });
+
+                                </script>
                                 </div>
                             </form>
                         </div>
