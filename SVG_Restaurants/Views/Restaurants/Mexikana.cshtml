@@ -206,8 +206,42 @@
         <div class="column text-center" style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1;">
             <div class="flex flex-col justify-center items-center h-[10vh]">
                 <div style="margin-top: 0px;">
-                    <a href="~/Home/Index?customerID=@Model.CustomerID" class="btn btn-custom" style="margin-top: 1px; font-family: Cambria; width: 200px; margin-right: 20px;">Go Back</a>
-                    <a href="~/Reservations/Create?customerID=@Model.CustomerID&restaurantID=3" class="btn btn-custom" style="margin-top: 1px; font-family: Cambria; width: 200px;">Make a Reservation</a>
+                    <a href="~/Home/Index?customerID=@Model.CustomerID" id="back" class="btn btn-custom" style="margin-top: 1px; font-family: Cambria; width: 200px; margin-right: 20px;">
+                        Go Back
+                        <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
+
+                        </a>
+                    <script>
+                        document.getElementById('back').addEventListener('click', function (e) {
+                            e.preventDefault();
+
+                            this.disabled = true;
+
+                            document.getElementById('loading').style.display = 'inline-block';
+
+                            window.location.href = '/Home/Index?customerID=@Model.CustomerID';
+
+                        });
+
+                    </script>
+
+                    <a href="~/Reservations/Create?customerID=@Model.CustomerID&restaurantID=3" id="book" class="btn btn-custom" style="margin-top: 1px; font-family: Cambria; width: 250px;">
+                        Make a Reservation
+                        <span id="reservation" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
+                        </a>
+                    <script>
+                        document.getElementById('book').addEventListener('click', function (e) {
+                            e.preventDefault();
+
+                            this.disabled = true;
+
+                            document.getElementById('reservation').style.display = 'inline-block';
+
+                            window.location.href = '/Reservations/Create?customerID=@Model.CustomerID&restaurantID=3';
+
+                        });
+
+                    </script>
                 </div>
             </div>
         </div>

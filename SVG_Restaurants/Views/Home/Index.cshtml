@@ -24,23 +24,108 @@
             if (@Model.CustomerID == 0)
             {
                 <div class="col-auto">
-                    <a asp-controller="Customers" asp-action="Login" class="btn btn-outline">Login as Customer</a>
+                    <a asp-controller="Customers" id="customerLogin" asp-action="Login" class="btn btn-outline">
+                    Login as Customer
+                        <span id="login" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+
+                    </a>
                 </div>
+                <script>
+                    document.getElementById('customerLogin').addEventListener('click', function (e) {
+
+                        this.disabled = true;
+
+                        document.getElementById('login').style.display = 'inline-block';
+
+                        window.location.href = '/Customers/Login';
+
+                    });
+
+                </script>
+
                 <div class="col-auto">
-                    <a asp-controller="RestaurantWorkers" asp-action="Login" class="btn btn-outline">Login as Staff</a>
-                </div>
+                    <a asp-controller="RestaurantWorkers" id="sLogin" asp-action="Login" class="btn btn-outline">
+                    Login as Staff
+                    <span id="staffLogin" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+
+                    </a>
+                 </div>
+                <script>
+                    document.getElementById('sLogin').addEventListener('click', function (e) {
+
+                        this.disabled = true;
+
+                        document.getElementById('staffLogin').style.display = 'inline-block';
+
+                        window.location.href = '/RestaurantWorkers/Login';
+
+                    });
+
+                </script>
             }
             else
             {
                 <div class="col-auto">
-                    <a asp-controller="Customers" asp-action="Delete" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">Delete Account</a>
+                    <a asp-controller="Customers" id="delete" asp-action="Delete" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">
+                    Delete Account
+                    <span id="deletebtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+
+                    </a>
+
                 </div>
+                <script>
+                    document.getElementById('delete').addEventListener('click', function (e) {
+
+                        this.disabled = true;
+
+                        document.getElementById('deletebtn').style.display = 'inline-block';
+
+                        window.location.href = '/Customers/Delete?customerID="@Context.Request.Query["CustomerID"]';
+
+                    });
+
+                </script>
+
                 <div class="col-auto">
-                    <a asp-controller="Customers" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">Edit Profile</a>
+                    <a asp-controller="Customers" id="edit" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">
+                    Edit Profile
+                    <span id="editbtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+
+                    </a>
+
                 </div>
+                <script>
+                    document.getElementById('edit').addEventListener('click', function (e) {
+
+                        this.disabled = true;
+
+                        document.getElementById('editbtn').style.display = 'inline-block';
+
+                        window.location.href = '/Customers/Edit?customerID="@Context.Request.Query["CustomerID"]';
+
+                    });
+
+                </script>
+
                 <div class="col-auto">
-                    <a id="LogOut" asp-controller="Home" asp-action="Index" class="btn btn-outline">Log out</a>
+                    <a id="LogOut" asp-controller="Home" id="logOut" asp-action="Index" class="btn btn-outline">
+                    Log out
+                    <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+                    </a>
+
                 </div>
+                <script>
+                    document.getElementById('logOut').addEventListener('click', function (e) {
+
+                        this.disabled = true;
+
+                        document.getElementById('loading').style.display = 'inline-block';
+
+                        window.location.href = '/Home/Index';
+
+                    });
+
+                </script>
             }
         }
     </div>
