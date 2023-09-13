@@ -25,13 +25,12 @@
             {
                 <div class="col-auto">
                     <a asp-controller="Customers" id="customerLogin" asp-action="Login" class="btn btn-outline">
-                    Login as Customer
+                        Login as Customer
                         <span id="login" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
 
                     </a>
                 </div>
-                <script>
-                    document.getElementById('customerLogin').addEventListener('click', function (e) {
+                <script>document.getElementById('customerLogin').addEventListener('click', function (e) {
 
                         this.disabled = true;
 
@@ -39,19 +38,16 @@
 
                         window.location.href = '/Customers/Login';
 
-                    });
-
-                </script>
+                    });</script>
 
                 <div class="col-auto">
                     <a asp-controller="RestaurantWorkers" id="sLogin" asp-action="Login" class="btn btn-outline">
-                    Login as Staff
-                    <span id="staffLogin" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+                        Login as Staff
+                        <span id="staffLogin" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
 
                     </a>
-                 </div>
-                <script>
-                    document.getElementById('sLogin').addEventListener('click', function (e) {
+                </div>
+                <script>document.getElementById('sLogin').addEventListener('click', function (e) {
 
                         this.disabled = true;
 
@@ -59,16 +55,14 @@
 
                         window.location.href = '/RestaurantWorkers/Login';
 
-                    });
-
-                </script>
+                    });</script>
             }
             else
             {
                 <div class="col-auto">
                     <a asp-controller="Customers" id="delete" asp-action="Delete" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">
-                    Delete Account
-                    <span id="deletebtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+                        Delete Account
+                        <span id="deletebtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
 
                     </a>
 
@@ -88,8 +82,8 @@
 
                 <div class="col-auto">
                     <a asp-controller="Customers" id="edit" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">
-                    Edit Profile
-                    <span id="editbtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+                        Edit Profile
+                        <span id="editbtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
 
                     </a>
 
@@ -109,13 +103,12 @@
 
                 <div class="col-auto">
                     <a id="LogOut" asp-controller="Home" id="logOut" asp-action="Index" class="btn btn-outline">
-                    Log out
-                    <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+                        Log out
+                        <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                     </a>
 
                 </div>
-                <script>
-                    document.getElementById('logOut').addEventListener('click', function (e) {
+                <script>document.getElementById('logOut').addEventListener('click', function (e) {
 
                         this.disabled = true;
 
@@ -123,44 +116,43 @@
 
                         window.location.href = '/Home/Index';
 
-                    });
-
-                </script>
+                    });</script>
             }
         }
     </div>
 
     @if (Model.CustomerID != 0)
     {
-        @if (ViewBag.LoyaltyPoints >= 500)
-        {
-            <div style="background-color: rgba(255, 255, 255, 0.75); display: inline-block; border-radius: 10px; padding: 5px;">
-                <div class="uppercase tracking-wide text-2xl text-gray-500 font-semibold font-bold" style="padding: 5px;">Silver Tier</div>
-            </div>
-        }
-        else if (ViewBag.LoyaltyPoints == 1500)
+        if (ViewBag.LoyaltyPoints == 1500)
         {
             <div style="background-color: rgba(255, 255, 255, 0.75); display: inline-block; border-radius: 10px; padding: 5px;">
                 <div class="uppercase tracking-wide text-2xl text-yellow-500 font-semibold font-bold" style="padding: 5px;">Gold Tier</div>
             </div>
         }
-        <div class="row">
-        <div class="text-right" style="display: flex; align-items: center;">
-            <div style="padding-right: 15px">
-            <h2 class="flex items-center text-2xl font-extrabold text-black">Welcome, @ViewBag.CustomerName</h2>
+        else if (ViewBag.LoyaltyPoints >= 500)
+        {
+            <div style="background-color: rgba(255, 255, 255, 0.75); display: inline-block; border-radius: 10px; padding: 5px;">
+                <div class="uppercase tracking-wide text-2xl text-gray-500 font-semibold font-bold" style="padding: 5px;">Silver Tier</div>
             </div>
-            @if (ViewBag.LoyaltyPoints == 1500) {
-            <svg width="50" height="50" viewBox="0 0 140 140">
-                <path fill="gold">
-                    <animate attributeName="d"
-                             dur="1440ms"
-                             repeatCount="indefinite"
-                             values="M 10,110 L 10,10 L 40,50 L 70,10 L 100,50 L 130,10 L 130,110 z;M 30,110 L 0,0 L 50,50 L 70,0 L 90,50 L 140,0 L 110,110 z;M 10,110 L 10,10 L 40,50 L 70,10 L 100,50 L 130,10 L 130,110 z;" />
-                </path>
-            </svg>
+        }
+        <div class="row">
+            <div class="text-right" style="display: flex; align-items: center;">
+                <div style="padding-right: 15px">
+                    <h2 class="flex items-center text-2xl font-extrabold text-black">Welcome, @ViewBag.CustomerName</h2>
+                </div>
+                @if (ViewBag.LoyaltyPoints == 1500)
+                {
+                    <svg width="50" height="50" viewBox="0 0 140 140">
+                        <path fill="gold">
+                            <animate attributeName="d"
+                                     dur="1440ms"
+                                     repeatCount="indefinite"
+                                     values="M 10,110 L 10,10 L 40,50 L 70,10 L 100,50 L 130,10 L 130,110 z;M 30,110 L 0,0 L 50,50 L 70,0 L 90,50 L 140,0 L 110,110 z;M 10,110 L 10,10 L 40,50 L 70,10 L 100,50 L 130,10 L 130,110 z;" />
+                        </path>
+                    </svg>
                 }
+            </div>
         </div>
-    </div>
     }
 
     <ul class="nav nav-tabs">
@@ -170,26 +162,27 @@
         <li class="nav-item">
             <a id="upcomingBookingsLink" class="nav-link active btn-outline" aria-current="page" href="#">Upcoming Bookings</a>
         </li>
-        @if (Model.CustomerID != 0) {
-        <li class="nav-item">
-            <a id="loyaltyPointsLink" class="nav-link active btn-outline" aria-current="page" href="#">LoyaltyPoints</a>
-        </li>
+        @if (Model.CustomerID != 0)
+        {
+            <li class="nav-item">
+                <a id="loyaltyPointsLink" class="nav-link active btn-outline" aria-current="page" href="#">LoyaltyPoints</a>
+            </li>
         }
     </ul>
     @if (Model.CustomerID != 0)
     {
         <div id="loyaltyPoints" style="padding-top: 20px;">
             <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-            <div class="md:flex flex-col">
-                <div class="p-8">
-                    <div class="flex justify-between">
+                <div class="md:flex flex-col">
+                    <div class="p-8">
+                        <div class="flex justify-between">
                             <div class="flex items-center">
-                    <p class="mt-2 text-slate-500" style="padding-bottom: 10px;">Points balance</p>
-                    </div>
-                            <div class="flex items-center">
-                            <p class="mt-2 text-slate-500" style="padding-bottom: 10px;"><b class="text-4xl font-extrabold text-black">@ViewBag.LoyaltyPoints</b> / 1500</p>
+                                <p class="mt-2 text-slate-500" style="padding-bottom: 10px;">Points balance</p>
                             </div>
-                    </div>
+                            <div class="flex items-center">
+                                <p class="mt-2 text-slate-500" style="padding-bottom: 10px;"><b class="text-4xl font-extrabold text-black">@ViewBag.LoyaltyPoints</b> / 1500</p>
+                            </div>
+                        </div>
                         <div class="flex w-full h-4 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700">
                             @{
                                 double loyaltyPoints = Convert.ToDouble(ViewBag.LoyaltyPoints);
@@ -205,13 +198,14 @@
                             }
                             @if (ViewBag.LoyaltyPoints != 1500)
                             {
-                                @if(ViewBag.LoyaltyPoints >= 500) {
-                                <span>
-                                    Congratulations! You are a Silver Tier member!
-                                </span>
-                                <span>
+                                @if (ViewBag.LoyaltyPoints >= 500)
+                                {
+                                    <span>
+                                        Congratulations! You are a Silver Tier member!
+                                    </span>
+                                    <span>
                                         You have <b class="text-orange-500">@sum</b> more points to be Gold Tier.
-                                </span>
+                                    </span>
                                 }
                                 else
                                 {
@@ -223,9 +217,9 @@
                             else
                             {
                                 <span>
-                                Congratulations! You are a Gold Tier member!
+                                    Congratulations! You are a Gold Tier member!
                                 </span>
-                                    }
+                            }
                         </p>
 
                         <button class="bg-orange-500 text-white font-bold py-2 px-4 rounded-full" disabled style="display: inline-flex; align-items: center;">
@@ -233,7 +227,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
                             </svg>
                             <div style="padding-left: 10px;">
-                            Redeem points
+                                Redeem points
                             </div>
                         </button>
 
@@ -290,81 +284,81 @@
                         </div>
 
                         <div class="flex">
-                        <!-- Card -->
-                        <div class="flex-1 flex flex-col border border-gray-200 text-center rounded-xl p-8 dark:border-gray-700 mr-4">
-                            <span class="mt-7 font-bold text-4xl text-gray-800 dark:text-gray-200">Silver Tier</span>
-                            <p class="mt-2 text-sm text-gray-500">Worth: 500 points</p>
+                            <!-- Card -->
+                            <div class="flex-1 flex flex-col border border-gray-200 text-center rounded-xl p-8 dark:border-gray-700 mr-4">
+                                <span class="mt-7 font-bold text-4xl text-gray-800 dark:text-gray-200">Silver Tier</span>
+                                <p class="mt-2 text-sm text-gray-500">Worth: 500 points</p>
 
-                            <ul class="mt-7 space-y-2.5 text-sm">
-                                <li class="flex space-x-2">
-                                    <svg class="flex-shrink-0 h-5 w-5 text-blue-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor" />
-                                    </svg>
-                                    <span class="text-gray-800 dark:text-gray-400">
-                                        Enjoy exclusive perks such as a higher priority with reservations.
-                                    </span>
-                                </li>
-
-                                <li class="flex space-x-2">
-                                    <svg class="flex-shrink-0 h-5 w-5 text-blue-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor" />
-                                    </svg>
-                                    <span class="text-gray-800 dark:text-gray-400">
-                                        Receive a $10 gift card, valid for use with our partners (Company A, Company B, Company C).
-                                    </span>
-                                </li>
-
-                                <li class="flex space-x-2">
-                                    <svg class="flex-shrink-0 h-5 w-5 text-gray-500" width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                                        <path d='M18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C13.9706 18 18 13.9706 18 9Z' fill='currentColor' fill-opacity='0.1' />
-                                        <path d='M5.64639 5.64654C5.74016 5.55281 5.86731 5.50015 5.99989 5.50015C6.13248 5.50015 6.25963 5.55281 6.35339 5.64654L8.99989 8.29304L11.6464 5.64654C11.6925 5.59879 11.7477 5.56069 11.8087 5.53449C11.8697 5.50829 11.9353 5.49449 12.0017 5.49392C12.0681 5.49334 12.1339 5.50599 12.1954 5.53113C12.2568 5.55627 12.3126 5.5934 12.3596 5.64034C12.4065 5.68729 12.4437 5.74312 12.4688 5.80456C12.4939 5.86601 12.5066 5.93185 12.506 5.99824C12.5054 6.06463 12.4916 6.13024 12.4654 6.19124C12.4392 6.25224 12.4011 6.30742 12.3534 6.35354L9.70689 9.00004L12.3534 11.6465C12.4445 11.7408 12.4949 11.8671 12.4937 11.9982C12.4926 12.1293 12.44 12.2547 12.3473 12.3474C12.2546 12.4402 12.1292 12.4927 11.9981 12.4939C11.867 12.495 11.7407 12.4446 11.6464 12.3535L8.99989 9.70704L6.35339 12.3535C6.25909 12.4446 6.13279 12.495 6.00169 12.4939C5.87059 12.4927 5.74519 12.4402 5.65248 12.3474C5.55978 12.2547 5.5072 12.1293 5.50606 11.9982C5.50492 11.8671 5.55531 11.7408 5.64639 11.6465L8.29289 9.00004L5.64639 6.35354C5.55266 6.25978 5.5 6.13262 5.5 6.00004C5.5 5.86746 5.55266 5.7403 5.64639 5.64654V5.64654Z' fill='currentColor' />
-                                    </svg>
-                                    <span class="text-gray-800 dark:text-gray-400">
-                                        After you redeem your points for rewards, your Silver tier status will reset, and you will need to accumulate 500 points again to regain this tier.
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- End Card -->
-                        <div class="flex-1 flex flex-col border border-gray-200 text-center rounded-xl p-8 dark:border-gray-700 ml-4">
-                            <span class="mt-7 font-bold text-4xl text-gray-800 dark:text-gray-200">Gold Tier</span>
-                            <p class="mt-2 text-sm text-gray-500">Worth: 1500 points</p>
-
-                            <ul class="mt-7 space-y-2.5 text-sm">
-                                <li class="flex space-x-2">
-                                    <svg class="flex-shrink-0 h-5 w-5 text-blue-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor" />
-                                    </svg>
-                                    <span class="text-gray-800 dark:text-gray-400">
-                                            Enjoy exclusive perks such as a higher priority with reservations.
-                                    </span>
-                                </li>
-
-                                <li class="flex space-x-2">
-                                    <svg class="flex-shrink-0 h-5 w-5 text-blue-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor" />
-                                    </svg>
-                                    <span class="text-gray-800 dark:text-gray-400">
-                                        Receive a $35 gift card, valid for use with our partners (Company A, Company B, Company C).
-                                    </span>
-                                </li>
-
-                                <li class="flex space-x-2">
+                                <ul class="mt-7 space-y-2.5 text-sm">
+                                    <li class="flex space-x-2">
                                         <svg class="flex-shrink-0 h-5 w-5 text-blue-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor" />
                                         </svg>
-                                    <span class="text-gray-800 dark:text-gray-400">
-                                       Upon reaching Gold tier, your status remains permanent.
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- End Card -->
+                                        <span class="text-gray-800 dark:text-gray-400">
+                                            Enjoy exclusive perks such as a higher priority with reservations.
+                                        </span>
+                                    </li>
+
+                                    <li class="flex space-x-2">
+                                        <svg class="flex-shrink-0 h-5 w-5 text-blue-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor" />
+                                        </svg>
+                                        <span class="text-gray-800 dark:text-gray-400">
+                                            Receive a $10 gift card, valid for use with our partners (Company A, Company B, Company C).
+                                        </span>
+                                    </li>
+
+                                    <li class="flex space-x-2">
+                                        <svg class="flex-shrink-0 h-5 w-5 text-gray-500" width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                                            <path d='M18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C13.9706 18 18 13.9706 18 9Z' fill='currentColor' fill-opacity='0.1' />
+                                            <path d='M5.64639 5.64654C5.74016 5.55281 5.86731 5.50015 5.99989 5.50015C6.13248 5.50015 6.25963 5.55281 6.35339 5.64654L8.99989 8.29304L11.6464 5.64654C11.6925 5.59879 11.7477 5.56069 11.8087 5.53449C11.8697 5.50829 11.9353 5.49449 12.0017 5.49392C12.0681 5.49334 12.1339 5.50599 12.1954 5.53113C12.2568 5.55627 12.3126 5.5934 12.3596 5.64034C12.4065 5.68729 12.4437 5.74312 12.4688 5.80456C12.4939 5.86601 12.5066 5.93185 12.506 5.99824C12.5054 6.06463 12.4916 6.13024 12.4654 6.19124C12.4392 6.25224 12.4011 6.30742 12.3534 6.35354L9.70689 9.00004L12.3534 11.6465C12.4445 11.7408 12.4949 11.8671 12.4937 11.9982C12.4926 12.1293 12.44 12.2547 12.3473 12.3474C12.2546 12.4402 12.1292 12.4927 11.9981 12.4939C11.867 12.495 11.7407 12.4446 11.6464 12.3535L8.99989 9.70704L6.35339 12.3535C6.25909 12.4446 6.13279 12.495 6.00169 12.4939C5.87059 12.4927 5.74519 12.4402 5.65248 12.3474C5.55978 12.2547 5.5072 12.1293 5.50606 11.9982C5.50492 11.8671 5.55531 11.7408 5.64639 11.6465L8.29289 9.00004L5.64639 6.35354C5.55266 6.25978 5.5 6.13262 5.5 6.00004C5.5 5.86746 5.55266 5.7403 5.64639 5.64654V5.64654Z' fill='currentColor' />
+                                        </svg>
+                                        <span class="text-gray-800 dark:text-gray-400">
+                                            After you redeem your points for rewards, your Silver tier status will reset, and you will need to accumulate 500 points again to regain this tier.
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End Card -->
+                            <div class="flex-1 flex flex-col border border-gray-200 text-center rounded-xl p-8 dark:border-gray-700 ml-4">
+                                <span class="mt-7 font-bold text-4xl text-gray-800 dark:text-gray-200">Gold Tier</span>
+                                <p class="mt-2 text-sm text-gray-500">Worth: 1500 points</p>
+
+                                <ul class="mt-7 space-y-2.5 text-sm">
+                                    <li class="flex space-x-2">
+                                        <svg class="flex-shrink-0 h-5 w-5 text-blue-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor" />
+                                        </svg>
+                                        <span class="text-gray-800 dark:text-gray-400">
+                                            Enjoy exclusive perks such as a higher priority with reservations.
+                                        </span>
+                                    </li>
+
+                                    <li class="flex space-x-2">
+                                        <svg class="flex-shrink-0 h-5 w-5 text-blue-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor" />
+                                        </svg>
+                                        <span class="text-gray-800 dark:text-gray-400">
+                                            Receive a $35 gift card, valid for use with our partners (Company A, Company B, Company C).
+                                        </span>
+                                    </li>
+
+                                    <li class="flex space-x-2">
+                                        <svg class="flex-shrink-0 h-5 w-5 text-blue-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor" />
+                                        </svg>
+                                        <span class="text-gray-800 dark:text-gray-400">
+                                            Upon reaching Gold tier, your status remains permanent.
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End Card -->
                         </div>
 
                     </div>
+                </div>
             </div>
-        </div>
         </div>
     }
     @{
@@ -442,90 +436,90 @@
         }
     }
 
-<!-- Card Blog -->
-<div id="allCards" class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-    <!-- Grid -->
-    <div class="row">
-        <!-- Card -->
-        <a asp-controller="Restaurants" asp-action="BambooLeaf" asp-route-customerID="@Context.Request.Query["CustomerID"]" asp-route-restaurantID="1" class="col-4 group rounded-xl overflow-hidden" id="restaurantCard">
-            <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
-                <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:text-black group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Bamboo Restaurant.jpg" alt="Image Description">
-                <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
-                    Special Banquet Available!
-                </span>
-            </div>
+    <!-- Card Blog -->
+    <div id="allCards" class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <!-- Grid -->
+        <div class="row">
+            <!-- Card -->
+            <a asp-controller="Restaurants" asp-action="BambooLeaf" asp-route-customerID="@Context.Request.Query["CustomerID"]" asp-route-restaurantID="1" class="col-4 group rounded-xl overflow-hidden" id="restaurantCard">
+                <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
+                    <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:text-black group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Bamboo Restaurant.jpg" alt="Image Description">
+                    <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
+                        Special Banquet Available!
+                    </span>
+                </div>
 
-            <div class="mt-7">
-                <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville">
-                    Bamboo Leaf
-                </h3>
-                <p class="mt-3 mb-2 hover:text-black dark:text-black">
-                    Discover a modern twist on Asian fusion cuisine, drawing inspiration from the simplicity and originality of bamboo leaves. Join us at 25 Gouger Street, Adelaide!
-                </p>
-                <p></p>
+                <div class="mt-7">
+                    <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville">
+                        Bamboo Leaf
+                    </h3>
+                    <p class="mt-3 mb-2 hover:text-black dark:text-black">
+                        Discover a modern twist on Asian fusion cuisine, drawing inspiration from the simplicity and originality of bamboo leaves. Join us at 25 Gouger Street, Adelaide!
+                    </p>
+                    <p></p>
 
-                <p class="mt-5 inline-flex items-center gap-x-1.5 decoration-2 group-hover:underline font-medium" style="color: #362417">
-                    Make a reservation
-                    <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                </p>
+                    <p class="mt-5 inline-flex items-center gap-x-1.5 decoration-2 group-hover:underline font-medium" style="color: #362417">
+                        Make a reservation
+                        <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </p>
 
-            </div>
-        </a>
-        <!-- End Card -->
-        <!-- Card -->
-        <a asp-controller="Restaurants" asp-action="LaOeste" asp-route-customerID="@Context.Request.Query["CustomerID"]" asp-route-restaurantID="2" class="col-4 group rounded-xl overflow-hidden" id="restaurantCard">
-            <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
-                <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Brazilian Restaurant.jpg" alt="Image Description">
-            </div>
+                </div>
+            </a>
+            <!-- End Card -->
+            <!-- Card -->
+            <a asp-controller="Restaurants" asp-action="LaOeste" asp-route-customerID="@Context.Request.Query["CustomerID"]" asp-route-restaurantID="2" class="col-4 group rounded-xl overflow-hidden" id="restaurantCard">
+                <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
+                    <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Brazilian Restaurant.jpg" alt="Image Description">
+                </div>
 
-            <div class="mt-7">
-                <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville">
-                    La Oeste De La Mar
-                </h3>
-                <p class="mt-3 mb-2 dark:text-black">
-                    La Oeste De La Mar: Sizzling Brazilian flavors in the heart of Adelaide. Discover our stunning restaurant at 40 120 North Terrace. Join us for an unforgettable taste of Brazil!
-                </p>
-                <p></p>
-                <p class="mt-5 inline-flex items-center gap-x-1.5 decoration-2 group-hover:underline font-medium" style="color: #362417">
-                    Make a reservation
-                    <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                </p>
-            </div>
-        </a>
-        <!-- End Card -->
-        <!-- Card -->
-        <a asp-controller="Restaurants" asp-action="Mexikana" asp-route-customerID="@Context.Request.Query["CustomerID"]" asp-route-restaurantID="3" class="col-4 group rounded-xl overflow-hidden" id="restaurantCard">
-            <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
-                <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Mexican Restaurant.jpg" alt="Image Description">
-                <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
-                    Special Banquet Available!
-                </span>
-            </div>
+                <div class="mt-7">
+                    <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville">
+                        La Oeste De La Mar
+                    </h3>
+                    <p class="mt-3 mb-2 dark:text-black">
+                        La Oeste De La Mar: Sizzling Brazilian flavors in the heart of Adelaide. Discover our stunning restaurant at 40 120 North Terrace. Join us for an unforgettable taste of Brazil!
+                    </p>
+                    <p></p>
+                    <p class="mt-5 inline-flex items-center gap-x-1.5 decoration-2 group-hover:underline font-medium" style="color: #362417">
+                        Make a reservation
+                        <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </p>
+                </div>
+            </a>
+            <!-- End Card -->
+            <!-- Card -->
+            <a asp-controller="Restaurants" asp-action="Mexikana" asp-route-customerID="@Context.Request.Query["CustomerID"]" asp-route-restaurantID="3" class="col-4 group rounded-xl overflow-hidden" id="restaurantCard">
+                <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
+                    <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Mexican Restaurant.jpg" alt="Image Description">
+                    <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
+                        Special Banquet Available!
+                    </span>
+                </div>
 
-            <div class="mt-7">
-                <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville">
-                    Mexikana
-                </h3>
-                <p class="mt-3 mb-2 dark:text-black">
-                    Indulge in a fusion of Korean and Mexican flavors designed with hipsters in mind! Join us at 40 Fullarton Road in Norwood, where culinary creativity meets vibes.
-                </p>
-                <p class="mt-5 inline-flex items-center gap-x-1.5 decoration-2 group-hover:underline font-medium" style="color: #362417">
-                    Make a reservation
-                    <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                </p>
-            </div>
-        </a>
-        <!-- End Card -->
+                <div class="mt-7">
+                    <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville">
+                        Mexikana
+                    </h3>
+                    <p class="mt-3 mb-2 dark:text-black">
+                        Indulge in a fusion of Korean and Mexican flavors designed with hipsters in mind! Join us at 40 Fullarton Road in Norwood, where culinary creativity meets vibes.
+                    </p>
+                    <p class="mt-5 inline-flex items-center gap-x-1.5 decoration-2 group-hover:underline font-medium" style="color: #362417">
+                        Make a reservation
+                        <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </p>
+                </div>
+            </a>
+            <!-- End Card -->
 
+        </div>
+        <!-- End Card Blog -->
     </div>
-    <!-- End Card Blog -->
-</div>
 
     <script>// Event listener for the "Upcoming Bookings" link
         const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
@@ -570,6 +564,5 @@
 
         allCards.style.display = 'block';
         upcomingBookings.style.display = 'none';
-        loyaltyPoints.style.display = 'none';
-        </script>
+        loyaltyPoints.style.display = 'none';</script>
 </body>
