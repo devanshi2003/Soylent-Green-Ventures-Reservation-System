@@ -178,10 +178,10 @@
 
                 <br />
 
-                <p class="text-4xl font-semibold text-sm mb-2 " style="font-family: Cambria; color: #000000 "><b>-Special Banquets-</b></p>
+                <p class="text-xl font-semibold text-sm mb-2 " style="font-family: Cambria; color: #000000"><b>-Special Banquets-</b></p>
                 <br />
 
-                <h2 class="text-xl font-semibold text-sm mb-1 " style="font-family: Cambria; color: #000000; ">
+                <h2 class="font-semibold text-sm mb-1 " style="font-family: Cambria; color: #000000; font-size: 1.5em;">
                     <b>Share Banquet $35PP</b>
                 </h2>
 
@@ -189,11 +189,13 @@
                     <b>(min 4 people)</b>
                     <br />
                     <br />
-                    <span style="font-size: 1.5em;">Papas Fritas</span> <br />
-                    <span style="font-size: 1.5em;">Korean Fried Chicken Tacos</span> <br />
-                    <span style="font-size: 1.5em;">Smokey chicken</span> <br />
-                    <span style="font-size: 1.5em;">Taquitos dorados</span> <br />
-                    <span style="font-size: 1.5em;">Nachos</span> <br />
+                    <div class="text-xl font-semibold text-sm mb-1" style="font-family: Cambria;">
+                        <span>Papas Fritas</span> <br />
+                        <span>Korean Fried Chicken Tacos</span> <br />
+                        <span>Smokey chicken</span> <br />
+                        <span>Taquitos dorados</span> <br />
+                        <span>Nachos</span> <br />
+                    </div>
                 </p>
             </div>
 
@@ -201,23 +203,15 @@
     </div>
 
     <div class="row">
-
         <div class="column text-center" style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1;">
-
-            <div class="mx-auto w-full max-w-[550px]">
-                <a href="~/Reservations/Create?customerID=@Model.CustomerID&restaurantID=3" class="btn btn-custom" style="margin-top: 1px; font-family: Cambria">Make a Reservation</a>
+            <div class="flex flex-col justify-center items-center h-[10vh]">
+                <div style="margin-top: 0px;">
+                    <a href="~/Home/Index?customerID=@Model.CustomerID" class="btn btn-custom" style="margin-top: 1px; font-family: Cambria; width: 200px; margin-right: 20px;">Go Back</a>
+                    <a href="~/Reservations/Create?customerID=@Model.CustomerID&restaurantID=3" class="btn btn-custom" style="margin-top: 1px; font-family: Cambria; width: 200px;">Make a Reservation</a>
+                </div>
             </div>
-            <div class="mx-auto w-full max-w-[550px]">
-                <a href="~/Home/Index?customerID=@Model.CustomerID" class="btn btn-custom" style="margin-top: 1px; font-family: Cambria">Go Back</a>
-            </div>
-
-
-
         </div>
-
-
     </div>
-
 
 
 
@@ -242,7 +236,7 @@
                         " Mexikana is a culinary masterpiece! It's like a flavor explosion in your mouth. The fusion of Korean and Mexican cuisine is genius, I had the Bulgogi Burrito... too good "
                     </p>
                 </div>
-                
+
                 <div style="padding-left: 30px;">
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -257,7 +251,7 @@
                 <div class="p-4 bg-gray-100 rounded-b-xl md:px-7 dark:bg-slate-700">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
-                            <img class="h-8 w-8 rounded-full sm:h-[2.875rem] sm:w-[2.875rem]" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FJennie_%2528singer%2529&psig=AOvVaw0OcB_ornJ47_GGvYhVAGfu&ust=1694617590674000&source=images&cd=vfe&opi=89978449&ved=0CA8QjRxqFwoTCOjMps6spYEDFQAAAAAdAAAAABAJ" alt="Jen">
+                            <img class="h-8 w-8 rounded-full sm:h-[2.875rem] sm:w-[2.875rem]" src="https://mymodernmet.com/wp/wp-content/uploads/2019/09/100k-ai-faces-5.jpg" alt="Jen">
                         </div>
 
                         <div class="grow ml-3">
@@ -265,7 +259,7 @@
                                 Jennie Ruby Jane
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">
-                                Regular | Gold Customer 
+                                Regular | Gold Customer
                             </p>
                         </div>
                     </div>
