@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<head>
+    <link rel="stylesheet" href="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/css/main.ad49aa9b.css" />
+</head>
 <style type="text/css">
     body {
         background-color: #A9927D;
@@ -24,73 +27,86 @@
 </div>
 
 
-<h2 class="text-l font-bold md:text-3xl dark:text-white">Account Details </h2>
+@*<h2 class="text-l font-bold md:text-3xl dark:text-white">Account Details </h2>*@
 
+<div class="flex flex-col justify-center items-center h-[70vh]">
+    <div class="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:!shadow-none p-3">
+        <div class="mt-2 mb-8 w-full">
+            <h4 class="px-2 text-xl font-bold text-navy-700 dark:text-white">
+                Account Details
+            </h4>
+            @*<p class="mt-2 px-2 text-base text-gray-600">
+                    Are you sure you want to cancel this booking?
+                </p>*@
+        </div>
+        <div class="grid grid-cols-2 gap-4 px-2 w-full">
+            <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                <p class="text-sm text-gray-600">@Html.DisplayNameFor(model => model.FirstName)</p>
+                <p class="text-base font-medium text-navy-700 dark:text-white">
+                    @Html.DisplayFor(model => model.FirstName)
+                </p>
+            </div>
 
+            <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                <p class="text-sm text-gray-600">@Html.DisplayNameFor(model => model.LastName)</p>
+                <p class="text-base font-medium text-navy-700 dark:text-white">
+                    @Html.DisplayFor(model => model.LastName)
+                </p>
+            </div>
 
+            <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                <p class="text-sm text-gray-600">@Html.DisplayNameFor(model => model.Email)</p>
+                <p class="text-base font-medium text-navy-700 dark:text-white">
+                    @Html.DisplayFor(model => model.Email)
+                </p>
+            </div>
 
-<table>
-    <tbody>
-        <tr>
-            <td class="px-6 py-4 pr-0  whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">@Html.DisplayNameFor(model => model.FirstName)</td>
-            <td class="px-6 py-4 pl-0 col-sm-2 text-sm text-gray-800 dark:text-gray-200"> @Html.DisplayFor(model => model.FirstName)</td>
+            <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                <p class="text-sm text-gray-600">@Html.DisplayNameFor(model => model.PhoneNumber)</p>
+                <p class="text-base font-medium text-navy-700 dark:text-white">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </p>
+            </div>
 
-        </tr>
+            <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                <p class="text-sm text-gray-600">@Html.DisplayNameFor(model => model.Username)</p>
+                <p class="text-base font-medium text-navy-700 dark:text-white">
+                    @Html.DisplayFor(model => model.Username)
+                </p>
+            </div>
 
-        <tr>
-            <td class="px-6 py-4 pr-0 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">@Html.DisplayNameFor(model => model.LastName)</td>
-            <td class="px-6 py-4 pl-0 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@Html.DisplayFor(model => model.LastName)</td>
+            <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+                <p class="text-sm text-gray-600">@Html.DisplayNameFor(model => model.LoyaltyPoints)</p>
+                <p class="text-base font-medium text-navy-700 dark:text-white">
+                    @Html.DisplayFor(model => model.LoyaltyPoints)
+                </p>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 50px;">
+        <form asp-action="Delete">
+            <input type="hidden" id="form" asp-for="CustomerId" />
+            <button type="submit" id="del" class="btn btn-danger py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-400 border border-transparent font-semibold text-white-500 hover:text-white hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                Delete
+                <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+            </button>
+            <script>document.getElementById('del').addEventListener('click', function (e) {
 
-        </tr>
+                    this.disabled = true;
 
-        <tr>
-            <td class="px-6 py-4 pr-0 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">@Html.DisplayNameFor(model => model.Email)</td>
-            <td class="px-6 py-4 pl-0 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@Html.DisplayFor(model => model.Email)</td>
-        </tr>
+                    document.getElementById('loading').style.display = 'inline-block';
 
-        <tr>
-            <td class="px-6 py-4 pr-0 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">@Html.DisplayNameFor(model => model.PhoneNumber)</td>
-            <td class="px-6 py-4 pl-0 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@Html.DisplayFor(model => model.PhoneNumber)</td>
-        </tr>
+                    setTimeout(function () {
+                        document.querySelector('form').submit();
+                    }, 300);
+                });</script>
 
-        <tr>
-            <td class="px-6 py-4 pr-0 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">@Html.DisplayNameFor(model => model.Username)</td>
-            <td class="px-6 py-4 pl-0 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@Html.DisplayFor(model => model.Username)</td>
-        </tr>
+            <a asp-controller="Home" asp-action="Index" asp-route-customerID="@Model.CustomerId" id="back" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-blue-100 border border-transparent font-semibold text-blue-500 hover:text-white hover:bg-blue-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                No, I don't want to delete !
+                <span id="goBack" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
 
-        <tr>
-            <td class="px-6 py-4 pr-0 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">@Html.DisplayNameFor(model => model.LoyaltyPoints)</td>
-            <td class="px-6 py-4 pl-0 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">@Html.DisplayFor(model => model.LoyaltyPoints)</td>
-        </tr>
-
-    </tbody>
-</table>
-
-<form asp-action="Delete">
-    <input type="hidden" id="form" asp-for="CustomerId" />
-    <button type="submit" id="del" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-white hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-        Delete
-        <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
-    </button>
-    <script>
-        document.getElementById('del').addEventListener('click', function (e) {
-
-            this.disabled = true;
-
-            document.getElementById('loading').style.display = 'inline-block';
-
-            setTimeout(function () {
-                document.querySelector('form').submit();
-            }, 300);
-        });
-    </script>
-
-    <a asp-controller="Home" asp-action="Index" asp-route-customerID="@Model.CustomerId" id="back" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-blue-100 border border-transparent font-semibold text-blue-500 hover:text-white hover:bg-blue-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-        No, I don't want to delete !
-        <span id="goBack" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
-
-    </a>
-    <script>
+            </a>
+            <script>
         document.getElementById('back').addEventListener('click', function (e) {
 
             this.disabled = true;
@@ -101,8 +117,10 @@
 
         });
 
-    </script>
-</form>
+            </script>
+        </form>
+    </div>
+</div>
 
 <script>document.addEventListener('DOMContentLoaded', function () {
         var logOutButton = document.getElementById('del');
