@@ -117,9 +117,41 @@ else
     </div>
     <div style="margin-top: 50px;">
         <form asp-action="Delete">
-            <input type="hidden" asp-for="ReservationId" />
-            <input id="formButton" type="submit" value="Cancel Booking" class="btn btn-danger" />
-            <a asp-controller="Home" asp-action="Index" asp-route-customerID="@customerId" class="btn" id="returnButton">Go back</a>
+            <input type="hidden" asp-for="ReservationId" id="form" />
+            <div>
+                <input id="formButton" type="submit" value="Cancel Booking" class="btn btn-danger" />
+                <span id="cancel" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+            </div>
+            <script>
+                document.getElementById('formButton').addEventListener('click', function (e) {
+
+                    this.disabled = true;
+
+                    document.getElementById('cancel').style.display = 'inline-block';
+
+                    setTimeout(function () {
+                        document.querySelector('form').submit();
+                    }, 300);
+                });
+            </script>
+
+            <div>
+                <a asp-controller="Home" asp-action="Index" asp-route-customerID="@customerId" class="btn" id="returnButton">Go back</a>
+                <span id="home" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+            </div>
+            <script>
+                document.getElementById('returnButton').addEventListener('click', function (e) {
+
+                    this.disabled = true;
+
+                    document.getElementById('loadingReturn').style.display = 'inline-block';
+
+                    window.location.href = '/Home/Index?customerID=@customerId';
+
+                });
+
+            </script>
+
         </form>
 
     </div>
