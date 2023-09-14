@@ -84,22 +84,24 @@
         </div>
     </div>
     <div style="margin-top: 50px;">
-        <form asp-action="Delete">
+        <form asp-action="Delete" id="form">
             <input type="hidden" id="form" asp-for="CustomerId" />
             <button type="submit" id="del" class="btn btn-danger py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-500 border border-transparent font-semibold text-white-500 hover:text-white hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                 Delete
                 <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
             </button>
-            <script>document.getElementById('del').addEventListener('click', function (e) {
+            <script>
+                document.getElementById('del').addEventListener('click', function (e) {
+                    e.preventDefault(); // Prevent the default form submission
 
                     this.disabled = true;
-
                     document.getElementById('loading').style.display = 'inline-block';
 
                     setTimeout(function () {
                         document.querySelector('form').submit();
                     }, 300);
-                });</script>
+                });
+            </script>
 
             <a asp-controller="Home" asp-action="Index" asp-route-customerID="@Model.CustomerId" id="back" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-blue-100 border border-transparent font-semibold text-blue-500 hover:text-white hover:bg-blue-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                 No, I don't want to delete !
