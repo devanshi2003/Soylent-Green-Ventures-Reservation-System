@@ -35,19 +35,29 @@ namespace SVG_Restaurants.Controllers
 
         }
 
-        public async Task<IActionResult> Home(int restaurantID)
+        //public async Task<IActionResult> Home(int restaurantID)
+        public async Task<IActionResult> Home(RestaurantReservationVM vm, int restaurantID)
         {
 
             var restaurant = await _context.Restaurants
             .Where(c => c.RestaurantId == restaurantID)
             .FirstOrDefaultAsync();
 
-
-
             if (restaurant != null)
             {
                 // Restaurant with the specified ID was found, you can use it
-                return View(restaurant);
+                vm.restaurantID = restaurantID;
+                vm.theRestaurant = restaurant;
+                vm.reservations = _context.Reservations
+                    .Include(c => c.Customer)
+                    .Include(g => g.Guest)
+                    .Include(r => r.Restaurant)
+                    .Include(d => d.Area)
+                    .Include(b => b.Banquet)
+                    .Where(r => r.RestaurantId == restaurantID)
+                    .ToList();
+
+                return View(vm);
             }
             else
             {
