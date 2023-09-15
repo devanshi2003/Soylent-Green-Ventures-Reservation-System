@@ -85,6 +85,19 @@ else
                         </div>
                     </div>
                     <!-- End Header -->
+
+                    <!-- Search form -->
+                    <form method="post" asp-controller="RestaurantWorkers" asp-action="Home" asp-route-restaurantID="@Model.restaurantID" class="row mt-4 mb-4 px-6">
+                        <div class="col-2 ">
+                            <input asp-for="@Model.nameSearch" placeholder="Enter customer name..." class="form-control"
+                                   title="Search for customer by name" />
+                        </div>
+
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-outline-secondary">Search</button>
+                        </div>
+                    </form>
+
                     <!-- Table -->
                     <!--<table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
 
