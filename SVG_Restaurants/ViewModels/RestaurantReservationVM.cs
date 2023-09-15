@@ -9,8 +9,9 @@ namespace SVG_Restaurants.ViewModels
 		{
 		}
 
-		public Reservation TheReservation { get; set; }
-		public RestaurantVM restaurantVM { get; set; }
+		public List<Reservation> reservations { get; set; }
+		public Restaurant theRestaurant { get; set; }
+		public int restaurantID { get; set; }
 	}
 }
 
