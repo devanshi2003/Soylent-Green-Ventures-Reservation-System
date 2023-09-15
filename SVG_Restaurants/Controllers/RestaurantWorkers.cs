@@ -57,6 +57,24 @@ namespace SVG_Restaurants.Controllers
                     .Where(r => r.RestaurantId == restaurantID)
                     .ToList();
 
+                // Return reservations that match search by name
+                if(!string.IsNullOrEmpty(vm.nameSearch))
+                {
+                    var reservationQuery = vm.reservations
+                        .Where(c =>
+                            (
+                                (c.Customer?.FirstName != null && c.Customer?.LastName != null &&
+                                (c.Customer.FirstName + " " + c.Customer.LastName)
+                                    .IndexOf(vm.nameSearch, StringComparison.OrdinalIgnoreCase) >= 0)
+                                ||
+                                (c.Guest?.FirstName != null && c.Guest?.LastName != null &&
+                                (c.Guest.FirstName + " " + c.Guest.LastName)
+                                    .IndexOf(vm.nameSearch, StringComparison.OrdinalIgnoreCase) >= 0)
+                            )
+                        );
+
+                    vm.reservations = reservationQuery.ToList();
+                }
                 return View(vm);
             }
             else

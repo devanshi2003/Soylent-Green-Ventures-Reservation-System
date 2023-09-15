@@ -12,6 +12,8 @@ namespace SVG_Restaurants.ViewModels
 		public List<Reservation> reservations { get; set; }
 		public Restaurant theRestaurant { get; set; }
 		public int restaurantID { get; set; }
-	}
+        public string? nameSearch { get; set; }
+
+    }
 }
 
