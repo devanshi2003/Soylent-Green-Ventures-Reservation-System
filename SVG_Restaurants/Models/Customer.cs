@@ -43,6 +43,16 @@ namespace SVG_Restaurants.Models
         [NotMapped]
         public string? NewPassword { get; set; }
 
+        [Display(Name = "Customer Name")]
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+
         public int? LoyaltyPoints { get; set; }
 
         public string? Status { get; set; }
