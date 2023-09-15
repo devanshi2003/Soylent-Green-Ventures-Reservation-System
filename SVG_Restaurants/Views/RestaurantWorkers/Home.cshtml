@@ -4,13 +4,52 @@
     ViewData["Title"] = "Home";
 }
 
-<style>
-    body {
-        background-color: #D0CFCF;
-    }
-</style>
+@*<style>
+        body {
+            background-color: #D0CFCF;
+        }
+    </style>*@
 
+@{
+    string cID = Context.Request.Query["customerID"];
+    string rID = Context.Request.Query["restaurantID"];
+    string gID = Context.Request.Query["GuestID"];
+    string rvID = Context.Request.Query["ReservationID"];
 
+}
+
+@if (rID == "1")
+{
+    <style type="text/css">
+        body {
+            background-color: #fcfcfc;
+        }
+    </style>
+}
+else if (rID == "2")
+{
+    <style type="text/css">
+        body {
+            background-color: #fff8dc;
+        }
+    </style>
+}
+else if (rID == "3")
+{
+    <style type="text/css">
+        body {
+            background-color: #dae1e6;
+        }
+    </style>
+}
+else
+{
+    <style type="text/css">
+        body {
+            background-color: white;
+        }
+    </style>
+}
 <!-- Table Section -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <!-- Card -->
@@ -47,7 +86,7 @@
                     </div>
                     <!-- End Header -->
                     <!-- Table -->
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <!--<table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
 
                         <thead class="bg-gray-50 dark:bg-slate-800">
                             <tr>
@@ -57,66 +96,163 @@
                                             Reservation ID
                                         </span>
                                     </div>
-                                </th>
+                                </th>-->
+                    @*<th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
+                            <div class="flex items-center gap-x-2">
+                                <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
+                                    Customer ID
+                                </span>
+                            </div>
+                        </th>
 
-                                <th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
-                                            Customer Name
-                                        </span>
-                                    </div>
-                                </th>
+                        <th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
+                            <div class="flex items-center gap-x-2">
+                                <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
+                                    Guest ID
+                                </span>
+                            </div>
+                        </th>*@
 
-                                <th scope="col" class="px-6 py-3 text-left">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                            Number of People
-                                        </span>
-                                    </div>
-                                </th>
+                    <!--<th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
+                                <div class="flex items-center gap-x-2">
+                                    <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
+                                        Customer Name
+                                    </span>
+                                </div>
+                            </th>
 
-                                <th scope="col" class="px-6 py-3 text-left">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                            Reservation Time
-                                        </span>
-                                    </div>
-                                </th>
+                            <th scope="col" class="px-2 py-3 text-left">
+                                <div class="flex items-center gap-x-2">
+                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                        Number of People
+                                    </span>
+                                </div>
+                            </th>
 
-                                <th scope="col" class="px-6 py-3 text-left">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                            Phone Number
-                                        </span>
-                                    </div>
-                                </th>
+                            <th scope="col" class="px-6 py-3 text-left">
+                                <div class="flex items-center gap-x-2">
+                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                        Reservation Time
+                                    </span>
+                                </div>
+                            </th>
 
-                                <th scope="col" class="px-6 py-3 text-left">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                            Dining Area
-                                        </span>
-                                    </div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var reservation in Model.reservations)
-                            {
-                                <tr>
-                                    <th scope="row">@reservation.ReservationId</th>
-                                    <td>@(reservation.Customer?.FullName ?? reservation.Guest?.FullName)</td>
-                                    <td>@Html.DisplayFor(item => reservation.NumberOfPeople)</td>
-                                    <td>@Html.DisplayFor(item => reservation.ReservationTiming)</td>
-                                    <td>@(reservation.Customer?.PhoneNumber ?? reservation.Guest?.PhoneNumber)</td>
-                                    <td>@Html.DisplayFor(item => reservation.Area.Area)</td>
-                                </tr>
-                            }
-                        </tbody>
+                            <th scope="col" class="px-6 py-3 text-left">
+                                <div class="flex items-center gap-x-2">
+                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                        Banquet
+                                    </span>
+                                </div>
+                            </th>
 
-                    </table>
+                            <th scope="col" class="px-6 py-3 text-left">
+                                <div class="flex items-center gap-x-2">
+                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                        Phone Number
+                                    </span>
+                                </div>
+                            </th>
+
+                            <th scope="col" class="px-6 py-3 text-left">
+                                <div class="flex items-center gap-x-2">
+                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                        Dining Area
+                                    </span>
+                                </div>
+                            </th>
+
+                            <th scope="col" class="px-4 py-3 text-left">
+                                <div class="flex items-center gap-x-2">
+                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                        High Chairs
+                                    </span>
+                                </div>
+                            </th>
+
+                            <th scope="col" class="px-6 py-3 text-left">
+                                <div class="flex items-center gap-x-2">
+                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
+                                        Special Notes
+                                    </span>
+                                </div>
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        foreach (var reservation in Model.reservations)
+                        {-->
+                    @*<tr>
+                            <th scope="row">@reservation.ReservationId</th>
+
+                            <td>@(reservation.Customer?.FullName ?? reservation.Guest?.FullName)</td>
+                            <td>@Html.DisplayFor(item => reservation.NumberOfPeople)</td>
+                            <td>@Html.DisplayFor(item => reservation.ReservationTiming)</td>
+                            <td>@Html.DisplayFor(item => reservation.Banquet.BanquetName)</td>
+                            <td>@(reservation.Customer?.PhoneNumber ?? reservation.Guest?.PhoneNumber)</td>
+                            <td>@Html.DisplayFor(item => reservation.Area.Area)</td>
+                            <td>@Html.DisplayFor(item => reservation.HighChairs)</td>
+                            <td>@Html.DisplayFor(item => reservation.SpecialNotes)</td>
+                        </tr>*@
+                    <!--}
+                            </tbody>
+
+                        </table>-->
                 </div>
             </div>
         </div>
     </div>
 </div>
+<table class="table" style="background-color: white; margin-top: 0;">
+    <thead>
+        <tr>
+            <th>
+                Reservation ID
+            </th>
+            <th>
+                Full Name
+            </th>
+            <th>
+                Number of People
+            </th>
+            <th>
+                Reservation Time
+            </th>
+            <th>
+                Banquet
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th>
+                Dining Area
+            </th>
+            <th>
+                High Chairs
+            </th>
+            <th>
+                Special Notes
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model.reservations)
+        {
+            <tr>
+                <th scope="row">@reservation.ReservationId</th>
+                @*<td>@(reservation.Customer?.CustomerId ?? -1)</td>
+                    <td>@(reservation.Guest?.GuestId ?? -1)</td>*@
+                <td>@(reservation.Customer?.FullName ?? reservation.Guest?.FullName)</td>
+                <td>@Html.DisplayFor(item => reservation.NumberOfPeople)</td>
+                <td>@Html.DisplayFor(item => reservation.ReservationTiming)</td>
+                <td>@Html.DisplayFor(item => reservation.Banquet.BanquetName)</td>
+                <td>@(reservation.Customer?.PhoneNumber ?? reservation.Guest?.PhoneNumber)</td>
+                <td>@Html.DisplayFor(item => reservation.Area.Area)</td>
+                <td>@Html.DisplayFor(item => reservation.HighChairs)</td>
+                <td>@Html.DisplayFor(item => reservation.SpecialNotes)</td>
+                <td><a></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
