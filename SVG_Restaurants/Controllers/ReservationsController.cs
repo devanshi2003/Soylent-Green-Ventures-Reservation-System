@@ -143,6 +143,7 @@ namespace SVG_Restaurants.Controllers
 
                         var totalPeople = sumOfNumberOfPeople + reservation.NumberOfPeople;
                         var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
+                        var workerID = form["workerID"];
 
                         if (totalPeople <= restaurant.SeatCapacity)
                         {                          
@@ -151,7 +152,7 @@ namespace SVG_Restaurants.Controllers
                             _context.Add(reservation); // Add the reservation entity, not the ViewModel
                             await _context.SaveChangesAsync(); // Save changes to the database
 
-                            if (string.IsNullOrEmpty(ViewBag.wID))
+                            if (!string.IsNullOrEmpty(workerID))
                             {
                                 return RedirectToAction("Home", "RestaurantWorkers", new {reservation.RestaurantId, workerID = ViewBag.workerID});
                             }
