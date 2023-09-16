@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
 
 namespace SVG_Restaurants.Models
@@ -40,5 +41,27 @@ namespace SVG_Restaurants.Models
         public virtual Customer? Customer { get; set; }
         public virtual Guest? Guest { get; set; }
         public virtual Restaurant? Restaurant { get; set; }
+
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                // Calculate FullName based on Customer or Guest properties
+                if (Customer != null)
+                {
+                    return $"{Customer.FirstName} {Customer.LastName}";
+                }
+                else if (Guest != null)
+                {
+                    return $"{Guest.FirstName} {Guest.LastName}";
+                }
+                else
+                {
+                    // Handle cases where both Customer and Guest are null
+                    return "Unknown";
+                }
+            }
+        }
     }
 }

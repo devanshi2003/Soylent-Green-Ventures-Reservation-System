@@ -24,16 +24,6 @@ namespace SVG_Restaurants.Models
         [Phone(ErrorMessage = "Invalid Phone Number")]
         public string? PhoneNumber { get; set; }
 
-        [Display(Name = "Customer Name")]
-        [NotMapped]
-        public string FullName
-        {
-            get
-            {
-                return FirstName + " " + LastName;
-            }
-        }
-
         public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }
