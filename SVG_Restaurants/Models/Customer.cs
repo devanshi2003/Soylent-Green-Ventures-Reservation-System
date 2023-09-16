@@ -26,10 +26,12 @@ namespace SVG_Restaurants.Models
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "{0} is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
         public string? Email { get; set; }
 
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = "{0} is required.")]
+        [Phone(ErrorMessage = "Invalid phone number")]
         public string? PhoneNumber { get; set; }
 
         [Display(Name = "Username")]
@@ -42,16 +44,6 @@ namespace SVG_Restaurants.Models
 
         [NotMapped]
         public string? NewPassword { get; set; }
-
-        [Display(Name = "Customer Name")]
-        [NotMapped]
-        public string FullName
-        {
-            get
-            {
-                return FirstName + " " + LastName;
-            }
-        }
 
         public int? LoyaltyPoints { get; set; }
 

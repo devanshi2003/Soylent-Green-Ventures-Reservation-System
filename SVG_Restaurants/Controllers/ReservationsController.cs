@@ -301,10 +301,9 @@ namespace SVG_Restaurants.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReservationId,CustomerId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople,HighChairs,SpecialNotes")] Reservation reservation)
+        public async Task<IActionResult> Edit(int id, [Bind("ReservationId,CustomerId,GuestId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople,HighChairs,SpecialNotes")] Reservation reservation, int? workerID)
         {
             ViewBag.updateSuccess = false;
-
             if (id != reservation.ReservationId)
             {
                 return NotFound();
@@ -317,6 +316,10 @@ namespace SVG_Restaurants.Controllers
                     _context.Update(reservation);
                     await _context.SaveChangesAsync();
                     ViewBag.updateSuccess = true;
+                    if(workerID.HasValue)
+                    {
+                        ViewBag.workerID = workerID;
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
