@@ -12,11 +12,24 @@
 
 @if (ViewBag.updateSuccess == true)
     {
+        // Restaurant Worker edit reservation
+    @if (ViewBag.workerID != null)
+    {
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">Reservation details has been updated successfully!</span>
+            <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-restaurantID="@Model.RestaurantId" asp-route-workerID="@ViewBag.workerID"><span class="link-primary">Click here</span></a><span> to go back to RestaurantWorkers Home Page</span>
+        </div>
+
+        }
+        else // Customer edit reservation 
+        {
         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
             <span class="font-medium">Your reservation details has been updated successfully!</span>
             <a asp-controller="Home" asp-action="Index" asp-route-customerID="@Model.CustomerId"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
         </div>
     }
+
+}
 
 <!-- Card Section -->
 <div class="max-w-2xl px-4 py-10 sm:px-6 lg:px-4 lg:py-14 mx-auto">
@@ -39,7 +52,8 @@
                 <input type="hidden" asp-for="ReservationId" value="@Model.ReservationId" />
                 <input type="hidden" asp-for="CustomerId" value="@Model.CustomerId" />
                 <input type="hidden" asp-for="RestaurantId" value="@Model.RestaurantId" />
-
+                <input type="hidden" asp-for="GuestId" value="@Model.GuestId" />
+                <input type="hidden" name="workerID" value="@Context.Request.Query["workerID"]" />
 
                 <!-- Number of People -->
                 <div class="sm:col-span-3">
@@ -131,11 +145,22 @@
             <!-- End Grid -->
 
             <div class="mt-5 flex justify-end gap-x-2">
+                @if (!string.IsNullOrEmpty(Context.Request.Query["workerID"])) // Direct worker to RestaurantWorkers Home Page
+                    {
+                    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-restaurantID="@Model.RestaurantId" asp-route-workerID="@Context.Request.Query["workerID"]" id="backbtn" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                        Go back
+                        <span id="back" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
+                    </a>
+
+                    }
+                    else if(!string.IsNullOrEmpty(Context.Request.Query["customerID"])) // Direct customer to Main Home page 
+                    {
                     <a asp-controller="Home" asp-action="Index" asp-route-customerID="@Model.CustomerId" id="backbtn" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
                         Go back
-                    <span id="back" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
-
+                        <span id="back" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
                     </a>
+                }
+
                 <script>
                     document.getElementById('backbtn').addEventListener('click', function (e) {
 
@@ -149,13 +174,12 @@
 
                 </script>
 
-                    <button type="submit" value="Save" id="save" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                        Save changes
+                <button type="submit" value="Save" id="save" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                    Save changes
                     <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
 
-                    </button>
-                <script>
-                    document.getElementById('save').addEventListener('click', function (e) {
+                </button>
+                <script>document.getElementById('save').addEventListener('click', function (e) {
 
                         this.disabled = true;
 
@@ -164,10 +188,8 @@
                         setTimeout(function () {
                             document.querySelector('form').submit();
                         }, 300);
-                    });
-
-                </script>
-                </div>
+                    });</script>
+            </div>
         </form>
     </div>
     <!-- End Card -->
