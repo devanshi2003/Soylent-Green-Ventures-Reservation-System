@@ -113,9 +113,10 @@ namespace SVG_Restaurants.Controllers
 
             if (user != null)
             {
-                if (user.Username == admin.Username)
+
+                if (vm.username == admin.Username)
                 {
-                    if (admin.Password != vm.password)
+                    if (admin.Password != vm.password && vm.username != admin.Username)
                     {
                         // Handle the case where the credentials do not match
                         TempData["ErrorMessage"] = "Invalid username or password.";
@@ -127,9 +128,11 @@ namespace SVG_Restaurants.Controllers
                     }
                 }
 
-                // Redirect to a specific page upon successful login
-                //return RedirectToAction("Index", "Home");
-                return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = user.RestaurantId});
+                else {
+                    return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = user.RestaurantId });
+
+                }
+
             }
             else
             {
