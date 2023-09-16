@@ -127,12 +127,9 @@ namespace SVG_Restaurants.Controllers
                         return RedirectToAction("Admin", "RestaurantWorkers");
                     }
                 }
-
                 else {
-                    return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = user.RestaurantId });
-
+                    return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = user.RestaurantId, workerID = user.WorkerId });
                 }
-
             }
             else
             {
