@@ -26,10 +26,12 @@ namespace SVG_Restaurants.Models
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "{0} is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
         public string? Email { get; set; }
 
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = "{0} is required.")]
+        [Phone(ErrorMessage = "Invalid phone number")]
         public string? PhoneNumber { get; set; }
 
         [Display(Name = "Username")]
