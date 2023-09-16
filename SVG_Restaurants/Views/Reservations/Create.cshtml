@@ -10,6 +10,8 @@
     string rID = Context.Request.Query["restaurantID"];
     string gID = Context.Request.Query["GuestID"];
     string rvID = Context.Request.Query["ReservationID"];
+    string wID = Context.Request.Query["workerID"];
+    ViewBag.WorkerID = wID;
 
 }
 
@@ -323,7 +325,9 @@ else
                     <form asp-action="Create" method="post" id="form2">
                         @{
                             string guestID = Context.Request.Query["GuestID"];
+                            string workerID = Context.Request.Query["workerID"];
                             string restaurantIDguest = Context.Request.Query["restaurantID"];
+                        
                         }
 
                         @{
@@ -336,6 +340,9 @@ else
 
                         <div class="form-group">
                             <input type="hidden" asp-for="@Model.RestaurantId" value="@restaurantIDguest" />
+                            <input type="hidden" name="workerID" value="@ViewBag.WorkerID" />
+
+
                         </div>
 
                         <p class="text-center mt-6 text-xl leading-8 text-gray-700"><i>As a Guest</i></p>

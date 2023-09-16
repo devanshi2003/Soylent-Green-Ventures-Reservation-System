@@ -55,6 +55,9 @@ namespace SVG_Restaurants.Controllers
         public IActionResult Create()
         {
             string rID = Request.Query["restaurantID"];
+            string wID = Request.Query["workerID"];
+            ViewBag.wID = wID;
+
             int parsedrID;
 
             var diningAreas = _context.DiningAreas.ToList();
@@ -105,7 +108,7 @@ namespace SVG_Restaurants.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservationId,CustomerId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople,HighChairs,SpecialNotes,GuestId")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("ReservationId,CustomerId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople,HighChairs,SpecialNotes,GuestId")] Reservation reservation, IFormCollection form)
         {
             if (ModelState.IsValid)
             {
@@ -140,6 +143,7 @@ namespace SVG_Restaurants.Controllers
 
                         var totalPeople = sumOfNumberOfPeople + reservation.NumberOfPeople;
                         var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
+                        var workerID = form["workerID"];
 
                         if (totalPeople <= restaurant.SeatCapacity)
                         {                          
@@ -148,15 +152,20 @@ namespace SVG_Restaurants.Controllers
                             _context.Add(reservation); // Add the reservation entity, not the ViewModel
                             await _context.SaveChangesAsync(); // Save changes to the database
 
-                            if (reservation.CustomerId == null)
-                                {
-                                    return RedirectToAction("Create", "Reservations", new { reservation.GuestId, reservation.RestaurantId, reservation.ReservationId });
+                            if (!string.IsNullOrEmpty(workerID))
+                            {
+                                return RedirectToAction("Home", "RestaurantWorkers", new {reservation.RestaurantId, workerID = ViewBag.workerID});
+                            }
 
-                                }
+                            else if (reservation.CustomerId == null)
+                            {
+                                return RedirectToAction("Create", "Reservations", new { reservation.GuestId, reservation.RestaurantId, reservation.ReservationId });
+
+                            }                     
                             else
-                                {
-                                    return RedirectToAction("Create", "Reservations", new { customerID = reservation.CustomerId, restaurantID = reservation.RestaurantId, reservationID = reservation.ReservationId });
-                                }
+                            {
+                                return RedirectToAction("Create", "Reservations", new { customerID = reservation.CustomerId, restaurantID = reservation.RestaurantId, reservationID = reservation.ReservationId });
+                            }
                             }
 
                         else

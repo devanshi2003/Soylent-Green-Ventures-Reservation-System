@@ -109,10 +109,11 @@ namespace SVG_Restaurants.Controllers
             var admin = await _context.RestaurantWorkers
                          .FirstOrDefaultAsync(c => c.Username == "admin1");
 
-
+            
 
             if (user != null)
             {
+                ViewBag.WorkerID = user.WorkerId;
 
                 if (vm.username == admin.Username)
                 {
@@ -129,6 +130,7 @@ namespace SVG_Restaurants.Controllers
                 }
                 else {
                     return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = user.RestaurantId, workerID = user.WorkerId });
+
                 }
             }
             else

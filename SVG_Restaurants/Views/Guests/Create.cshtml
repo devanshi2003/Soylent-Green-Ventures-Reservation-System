@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Create";
     ViewBag.RestaurantID = Context.Request.Query["restaurantID"];
+    ViewBag.WorkerID = Context.Request.Query["workerID"];
+
 
 }
 
@@ -27,6 +29,8 @@
         <form asp-action="Create" id="form">
 
             <input type="hidden" name="restaurantID" value="@ViewBag.restaurantID" />
+            <input type="hidden" name="workerID" value="@ViewBag.WorkerID" />
+
             <!-- Grid -->
             <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
