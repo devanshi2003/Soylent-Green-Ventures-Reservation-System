@@ -6,66 +6,63 @@
 
 }
 
+<style type="text/css">
+    body {
+        background-color: #A9927D;
+    }
+</style>
+
+
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success">
         @TempData["SuccessMessage"]
     </div>
+
+    <p>Gift card will be shown here </p>
+    // SHOW THE GIFT CARD HERE
+
 }
 
-<!-- Card Section -->
-<div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-    <form asp-action="RedeemPoints" method="post">
-        <!-- Card -->
-        <input type="hidden" asp-for="CustomerId" value="@cID" />
+else
+{
 
-        <div class="bg-white rounded-xl shadow dark:bg-slate-900">
-            <div class="relative h-40 rounded-t-xl bg-[url('../svg/component/abstract-bg-1.svg')] bg-no-repeat bg-cover bg-center">
-                <div class="absolute top-0 right-0 p-4">
+
+    <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <form asp-action="RedeemPoints" method="post">
+            <input type="hidden" asp-for="CustomerId" value="@cID" />
+
+            <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+                <div class="md:flex flex-col">
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-300 dark:group-hover:text-white">
+                            Redeem Points for Gift Card
+                        </h3>
+                        <div class="pt-0 p-4 sm:pt-0 sm:p-7">
+                            <div class="space-y-4 sm:space-y-6">
+                                <label for="af-submit-app-project-name" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
+                                    Points Available: @Model.customer.LoyaltyPoints
+                                </label>
+                                <div class="space-y-2">
+                                    <p class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200"> Redeem points for dollars: </p>
+                                    <input type="range" id="pointSlider" asp-for="dollarsToRedeem" class="custom-slider" min="10" max="@(Model.customer.LoyaltyPoints / 50)" step="10">
+                                    <input type="text" id="selectedPoints" readonly>
+                                </div>
+                            </div>
+                            <div class="mt-5 flex justify-center gap-x-2">
+                                <button type="submit" class="bg-orange-500 text-white font-bold py-2 px-4 rounded-full"  style="display: inline-flex; align-items: center;">
+                                    Redeem Points
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </form>
+    </div>
 
 
-            <div class="pt-0 p-4 sm:pt-0 sm:p-7">
-                <!-- Grid -->
-                <div class="space-y-4 sm:space-y-6">
-                    <label for="af-submit-app-project-name" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
-                        Points Available: @Model.customer.LoyaltyPoints
-                    </label>
-                    <div class="space-y-2">
-
-                        <p class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200"> Redeem Points</p>
-
-
-                        <!-- HTML -->
-                        <input type="range" id="pointSlider" asp-for="dollarsToRedeem" class="custom-slider" min="10" max="@(Model.customer.LoyaltyPoints / 50)" step="10">
-                        <input type="text" id="selectedPoints" readonly>
-
-
-                       
-@*                   <input asp-for="dollarsToRedeem" id="af-submit-app-project-name" type="number" class="py-2 px-3 pr-11 block border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Enter amount in dollars" min="10" max="@((int)(Model.customer.LoyaltyPoints / 50))" step="10">
-*@                    </div>
-
-@*
-                    <div class="space-y-2">
-                        <label for="af-submit-app-description" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
-                            Description
-                        </label>
-
-                        <textarea id="af-submit-app-description" class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" rows="6" placeholder="A detailed summary will better explain your products to the audiences. Our users will see this in your dedicated product page."></textarea>
-                    </div>*@
-                </div>
-                <!-- End Grid -->
-
-                <div class="mt-5 flex justify-center gap-x-2">
-                    <button type="submit" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                        Redeem
-                    </button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+}
 
 <script>
     const slider = document.getElementById("pointSlider");
@@ -74,6 +71,5 @@
     slider.addEventListener("input", () => {
         const value = slider.value;
         selectedPoints.value = value;
-        // You can also use this value for form submission if needed.
     });
 </script>
