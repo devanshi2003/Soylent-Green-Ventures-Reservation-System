@@ -6,12 +6,18 @@
 
 }
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
 
 <!-- Card Section -->
 <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <form asp-action="RedeemPoints" method="post">
         <!-- Card -->
-        <input type="hidden" asp-for="CustomerId" value="@Model.customer.CustomerId" />
+        <input type="hidden" asp-for="CustomerId" value="@cID" />
 
         <div class="bg-white rounded-xl shadow dark:bg-slate-900">
             <div class="relative h-40 rounded-t-xl bg-[url('../svg/component/abstract-bg-1.svg')] bg-no-repeat bg-cover bg-center">
@@ -27,12 +33,18 @@
                         Points Available: @Model.customer.LoyaltyPoints
                     </label>
                     <div class="space-y-2">
-                      
 
                         <p class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200"> Redeem Points</p>
 
-                        <input asp-for=PointsToRedeem id="af-submit-app-project-name" type="number" class="py-2 px-3 pr-11 block  border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Enter number of points" min="500" max="@Model.customer.LoyaltyPoints">
-                    </div>
+
+                        <!-- HTML -->
+                        <input type="range" id="pointSlider" asp-for="dollarsToRedeem" class="custom-slider" min="10" max="@(Model.customer.LoyaltyPoints / 50)" step="10">
+                        <input type="text" id="selectedPoints" readonly>
+
+
+                       
+@*                   <input asp-for="dollarsToRedeem" id="af-submit-app-project-name" type="number" class="py-2 px-3 pr-11 block border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Enter amount in dollars" min="10" max="@((int)(Model.customer.LoyaltyPoints / 50))" step="10">
+*@                    </div>
 
 @*
                     <div class="space-y-2">
@@ -52,11 +64,16 @@
                 </div>
             </div>
         </div>
-        <!-- End Card -->
     </form>
 </div>
-<!-- End Card Section -->
 
+<script>
+    const slider = document.getElementById("pointSlider");
+    const selectedPoints = document.getElementById("selectedPoints");
 
-
-
+    slider.addEventListener("input", () => {
+        const value = slider.value;
+        selectedPoints.value = value;
+        // You can also use this value for form submission if needed.
+    });
+</script>

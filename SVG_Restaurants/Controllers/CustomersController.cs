@@ -107,28 +107,28 @@ namespace SVG_Restaurants.Controllers
 
             if (customer != null)
             {
-                //if (customer.LoyaltyPoints >= pointsToRedeem)
-                //{
-                    // Calculate the updated loyalty points
-                    customer.LoyaltyPoints -= vm.PointsToRedeem;
+                if (customer.LoyaltyPoints >= vm.dollarsToRedeem)
+                {
 
-                    // Save the changes to the database
+                   
+                    customer.LoyaltyPoints -= vm.dollarsToRedeem*50;
+
+                    TempData["SuccessMessage"] = "Points redeemed successfully.";
+
                     _context.SaveChanges();
 
-                    // Redirect or return a success message
-                    return RedirectToAction("Index", "Home"); // Redirect to a success page or another appropriate page
-                //}
-                //else
-                //{
-                //    // Return an error message indicating insufficient points
-                //    ModelState.AddModelError("pointsToRedeem", "Insufficient points for redemption.");
-                //    return View("YourViewName", customer); // Return to the view with an error message
-                //}
+                  
+                    return RedirectToAction("Redeem", "Customers", new { customerID = vm.CustomerId }); // Redirect to a success page or another appropriate page
+                }
+                else
+                {
+                    ModelState.AddModelError("pointsToRedeem", "Insufficient points for redemption.");
+                    return View("Redeem", "Customers"); 
+                }
             }
             else
             {
-                // Handle the case where the customer is not found
-                return NotFound(); // You may want to return a 404 status code
+                return NotFound();
             }
         }
 
