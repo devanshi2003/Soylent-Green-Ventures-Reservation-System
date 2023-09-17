@@ -84,6 +84,55 @@ namespace SVG_Restaurants.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Redeem(RedeemViewModel vm)
+        {
+
+            string cID = Request.Query["customerID"];
+            int customerId;
+            
+
+            if (int.TryParse(cID, out customerId))
+            {
+                vm.customer = _context.Customers.Where(c => c.CustomerId == customerId).FirstOrDefault();
+                return View(vm);
+
+            }
+            return View();
+        }
+
+        public IActionResult RedeemPoints(RedeemViewModel vm)
+        {
+            // Assuming you have a Customer model with LoyaltyPoints property
+             var customer = _context.Customers.Where(c => c.CustomerId == vm.CustomerId).FirstOrDefault(); 
+
+            if (customer != null)
+            {
+                if (customer.LoyaltyPoints >= vm.dollarsToRedeem)
+                {
+
+                   
+                    customer.LoyaltyPoints -= vm.dollarsToRedeem*50;
+
+                    TempData["SuccessMessage"] = "Points redeemed successfully.";
+
+                    _context.SaveChanges();
+
+                  
+                    return RedirectToAction("Redeem", "Customers", new { customerID = vm.CustomerId }); // Redirect to a success page or another appropriate page
+                }
+                else
+                {
+                    ModelState.AddModelError("pointsToRedeem", "Insufficient points for redemption.");
+                    return View("Redeem", "Customers"); 
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+
         // POST: Customers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

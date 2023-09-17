@@ -1,0 +1,79 @@
+﻿@model SVG_Restaurants.ViewModels.RedeemViewModel
+
+@{
+    ViewData["Title"] = "Redeem";
+    string cID = Context.Request.Query["customerID"];
+
+}
+
+<style type="text/css">
+    body {
+        background-color: #A9927D;
+    }
+</style>
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+
+    <p>Gift card will be shown here </p>
+    // SHOW THE GIFT CARD HERE
+
+}
+
+else
+{
+
+
+    <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <form asp-action="RedeemPoints" method="post">
+            <input type="hidden" asp-for="CustomerId" value="@cID" />
+
+            <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+                <div class="md:flex flex-col">
+                    <div class="p-8">
+                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-300 dark:group-hover:text-white">
+                            Redeem Points for Gift Card
+                        </h3>
+                        <div class="pt-0 p-4 sm:pt-0 sm:p-7">
+                            <div class="space-y-4 sm:space-y-6">
+                                <label for="af-submit-app-project-name" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
+                                    Points Available: @Model.customer.LoyaltyPoints
+                                </label>
+                                <div class="space-y-2">
+                                    <p class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200"> Redeem points for dollars: </p>
+                                    <input type="range" id="pointSlider" asp-for="dollarsToRedeem" class="custom-slider" min="10" max="@(Model.customer.LoyaltyPoints / 50)" step="10" value="10">
+                                    <input type="text" id="selectedPoints" readonly>
+                                </div>
+                            </div>
+                            <div class="mt-5 flex justify-center gap-x-2">
+                                <button type="submit" class="bg-orange-500 text-white font-bold py-2 px-4 rounded-full"  style="display: inline-flex; align-items: center;">
+                                    Redeem Points
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+}
+
+
+<script>
+    const slider = document.getElementById("pointSlider");
+    const selectedPoints = document.getElementById("selectedPoints");
+
+    // Set the initial value of the input field
+    selectedPoints.value = slider.value;
+
+    slider.addEventListener("input", () => {
+        const value = slider.value;
+        selectedPoints.value = value;
+    });
+</script>
