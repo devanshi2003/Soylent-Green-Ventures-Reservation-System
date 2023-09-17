@@ -84,12 +84,53 @@ namespace SVG_Restaurants.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Redeem()
+        public async Task<IActionResult> Redeem(RedeemViewModel vm)
         {
+
+            string cID = Request.Query["customerID"];
+            int customerId;
             
+
+            if (int.TryParse(cID, out customerId))
+            {
+                vm.customer = _context.Customers.Where(c => c.CustomerId == customerId).FirstOrDefault();
+                return View(vm);
+
+            }
             return View();
         }
 
+        public IActionResult RedeemPoints(RedeemViewModel vm)
+        {
+            // Assuming you have a Customer model with LoyaltyPoints property
+             var customer = _context.Customers.Where(c => c.CustomerId == vm.CustomerId).FirstOrDefault(); 
+
+            if (customer != null)
+            {
+                //if (customer.LoyaltyPoints >= pointsToRedeem)
+                //{
+                    // Calculate the updated loyalty points
+                    customer.LoyaltyPoints -= vm.PointsToRedeem;
+
+                    // Save the changes to the database
+                    _context.SaveChanges();
+
+                    // Redirect or return a success message
+                    return RedirectToAction("Index", "Home"); // Redirect to a success page or another appropriate page
+                //}
+                //else
+                //{
+                //    // Return an error message indicating insufficient points
+                //    ModelState.AddModelError("pointsToRedeem", "Insufficient points for redemption.");
+                //    return View("YourViewName", customer); // Return to the view with an error message
+                //}
+            }
+            else
+            {
+                // Handle the case where the customer is not found
+                return NotFound(); // You may want to return a 404 status code
+            }
+        }
 
 
         // POST: Customers/Create
