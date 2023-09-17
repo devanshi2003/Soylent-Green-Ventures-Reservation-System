@@ -84,6 +84,14 @@ namespace SVG_Restaurants.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Redeem()
+        {
+            
+            return View();
+        }
+
+
+
         // POST: Customers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
