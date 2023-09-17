@@ -45,7 +45,7 @@ else
                                 </label>
                                 <div class="space-y-2">
                                     <p class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200"> Redeem points for dollars: </p>
-                                    <input type="range" id="pointSlider" asp-for="dollarsToRedeem" class="custom-slider" min="10" max="@(Model.customer.LoyaltyPoints / 50)" step="10">
+                                    <input type="range" id="pointSlider" asp-for="dollarsToRedeem" class="custom-slider" min="10" max="@(Model.customer.LoyaltyPoints / 50)" step="10" value="10">
                                     <input type="text" id="selectedPoints" readonly>
                                 </div>
                             </div>
@@ -64,9 +64,13 @@ else
 
 }
 
+
 <script>
     const slider = document.getElementById("pointSlider");
     const selectedPoints = document.getElementById("selectedPoints");
+
+    // Set the initial value of the input field
+    selectedPoints.value = slider.value;
 
     slider.addEventListener("input", () => {
         const value = slider.value;
