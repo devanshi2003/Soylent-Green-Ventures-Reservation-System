@@ -33,8 +33,30 @@ namespace SVG_Restaurants.Controllers
             //return View("Login");
         }
 
-        // GET: Customers
-        public async Task<IActionResult> Index(UserCredentialsVM vm)
+        public async Task<IActionResult> AllCustomers(string nameSearch)
+        {
+            var users = await _context.Customers.ToListAsync();
+
+            if (!string.IsNullOrEmpty(nameSearch))
+            {
+                users = users.Where(c =>
+                    (
+                        c.FirstName != null && c.LastName != null &&
+                        (c.FirstName + " " + c.LastName).IndexOf(nameSearch, StringComparison.OrdinalIgnoreCase) >= 0
+                    ) ||
+                    (
+                        c.FirstName != null && c.FirstName.Contains(nameSearch, StringComparison.OrdinalIgnoreCase)
+                    ) ||
+                    (
+                        c.LastName != null && c.LastName.Contains(nameSearch, StringComparison.OrdinalIgnoreCase)
+                    )
+                ).ToList();
+            }
+
+            return View(users);
+        }
+            // GET: Customers
+            public async Task<IActionResult> Index(UserCredentialsVM vm)
         {
 
             // Check if a user with the provided username and password exists
@@ -142,6 +164,14 @@ namespace SVG_Restaurants.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var existingCustomer = await _context.Customers.FirstOrDefaultAsync(c => c.Username == customer.Username);
+                if (existingCustomer != null)
+                {
+                    ModelState.AddModelError("Username", "The username is already taken.");
+                    return View(customer);
+                }
+
                 customer.LoyaltyPoints = 0;
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
