@@ -353,6 +353,7 @@ namespace SVG_Restaurants.Controllers
                 .Include(r => r.Banquet)
                 .Include(r => r.Customer)
                 .Include(r => r.Restaurant)
+                .Include(r => r.Guest)
                 .FirstOrDefaultAsync(m => m.ReservationId == id);
             if (reservation == null)
             {
@@ -395,9 +396,12 @@ namespace SVG_Restaurants.Controllers
                 return NotFound();
             }
 
+            var workerID = HttpContext.Request.Query["workerID"];
+            var restaurantID = HttpContext.Request.Query["restaurantID"];
+
             _context.Reservations.Remove(item);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index"); // Redirect to the item list page
+            return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = restaurantID, workerID = workerID });
         }
 
         // POST: Reservations/Delete/5

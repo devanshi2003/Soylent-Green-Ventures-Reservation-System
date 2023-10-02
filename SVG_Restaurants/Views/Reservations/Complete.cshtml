@@ -11,7 +11,15 @@
 <h3>Are you sure you want to complete this item?</h3>
 <div>
     <p>@Context.Request.Query["workerID"]</p>
-    <form asp-action="Complete">
+    @if (Model.Customer == null)
+    {
+        <p>Guest: @Model.Guest.FirstName</p>
+    }
+    else
+    {
+        <p>Customer: @Model.Customer.FirstName</p>
+    }
+    <form asp-action="Complete" asp-route-restaurantID="@Context.Request.Query["restaurantID"]" asp-route-workerID="@Context.Request.Query["workerID"]">
         <p>@Model.ReservationId</p>
         <input type="submit" value="Complete" class="btn btn-danger" />
         <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-restaurantID="@Context.Request.Query["restaurantID"]" asp-route-workerID="@Context.Request.Query["workerID"]">Back to List</a>
