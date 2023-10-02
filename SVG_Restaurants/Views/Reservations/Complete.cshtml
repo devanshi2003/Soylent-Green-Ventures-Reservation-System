@@ -19,9 +19,33 @@
     {
         <p>Customer: @Model.Customer.FirstName</p>
     }
+    <p>@Model.ReservationId</p>
     <form asp-action="Complete" asp-route-restaurantID="@Context.Request.Query["restaurantID"]" asp-route-workerID="@Context.Request.Query["workerID"]">
-        <p>@Model.ReservationId</p>
-        <input type="submit" value="Complete" class="btn btn-danger" />
         <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-restaurantID="@Context.Request.Query["restaurantID"]" asp-route-workerID="@Context.Request.Query["workerID"]">Back to List</a>
+        <input id="formButton" type="submit" value="Complete" class="btn btn-danger" />
+        <span id="cancel" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
     </form>
 </div>
+
+<script>
+    document.getElementById('formButton').addEventListener('click', function (e) {
+
+        this.disabled = true;
+
+        document.getElementById('cancel').style.display = 'inline-block';
+
+        setTimeout(function () {
+            document.querySelector('form').submit();
+        }, 300);
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var logOutButton = document.getElementById('formButton');
+
+        logOutButton.addEventListener('click', function () {
+            // Show an alert when the button is clicked
+            alert('You have successfully cancelled your booking.');
+        });
+    });
+
+</script>
