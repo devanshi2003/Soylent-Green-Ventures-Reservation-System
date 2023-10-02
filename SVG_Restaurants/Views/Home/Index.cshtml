@@ -537,31 +537,67 @@
         </div>
         <!-- End Card Blog -->
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="800px" width="800px" version="1.1" id="Capa_1" viewBox="0 0 15.273 15.273" xml:space="preserve">
+<g>
+    <path style="fill:#030104;" d="M0,1.803h0.897V13.47H0V1.803z M1.446,13.47h0.505V1.803H1.446V13.47z M2.315,13.47h0.504V1.803   H2.315V13.47z M3.482,13.47h1.104V1.803H3.482V13.47z M5.47,13.47h0.552V1.803H5.47V13.47z M6.878,13.47h2.288V1.803H6.878V13.47z    M12.84,13.47h0.752V1.803H12.84V13.47z M14.248,1.803V13.47h1.025V1.803H14.248z M10.084,13.47h0.492V1.803h-0.492V13.47z    M11.281,13.47h0.492V1.803h-0.492V13.47z" />
+</g>
+</svg>
 
 <input type="text" id="input">
 
-<button onclick="generatePDF()">Generate PDF</button>
-    <div id="barcode"></div>
-
-    <script>// Event listener for the "Upcoming Bookings" link
-
+    <button onclick="generatePDF()">Download SVG</button>
+    <div id="svgContainer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+            <path d="M10 10 h 80 v 80 h-80 z" />
+        </svg>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <script>
+        // Event listener for the "Upcoming Bookings" link
         function generatePDF() {
             var input = document.getElementById("input").value;
 
             var doc = new jsPDF();
-            // Generate PNG image from canvas
-            var canvas = document.createElement('canvas');
-            var ctx = canvas.getContext('2d');
-            ctx.fillStyle = 'blue';
-            ctx.fillRect(0, 0, 100, 100);
-            var img = canvas.toDataURL();
+
+            var img = generateBarcode(input);
 
             doc.addImage(img, 20, 20);
 
-            // Add text
             doc.text(20, 120, input);
 
-            doc.save('file.pdf');
+            doc.save('generated.pdf');
+        }
+
+        function generateBarcode(userName) {
+            var barcodeCanvas = document.createElement('canvas');
+            barcodeCanvas.width = 300;
+            barcodeCanvas.height = 150;
+
+            var barCtx = barcodeCanvas.getContext('2d');
+
+            // Draw title
+            barCtx.font = '20px Arial';
+            barCtx.fillStyle = 'black';
+            barCtx.fillText('Hi, ' + userName + '. Here is your barcode:', 20, 30);
+
+            // Define barcode parameters
+            var barWidths = [10, 15, 20, 10, 30, 5]; // Different rectangle widths
+            var barHeight = 100;
+            var spacing = 10; // Spacing between rectangles
+
+            // Draw barcode pattern with different-sized rectangles
+            var isBlack = true;
+            var xPosition = 20;
+            for (var i = 0; i < barWidths.length; i++) {
+                var barWidth = barWidths[i];
+                barCtx.fillStyle = 'black';
+                barCtx.fillRect(xPosition, 50, barWidth, barHeight);
+                xPosition += barWidth + spacing;
+                isBlack = !isBlack;
+            }
+
+            return barcodeCanvas.toDataURL();
+
         }
         const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
         const allCards = document.getElementById('allCards');
@@ -607,6 +643,4 @@
         upcomingBookings.style.display = 'none';
         loyaltyPoints.style.display = 'none';
 </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.3/JsBarcode.all.min.js"></script>
 </body>
