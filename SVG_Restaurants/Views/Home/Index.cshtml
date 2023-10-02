@@ -195,8 +195,9 @@
                         <p class="mt-2 text-slate-500" style="padding-bottom: 10px;">
                             @{
                                 var sum = 1500 - ViewBag.LoyaltyPoints;
+                                var silverSum = 500 - ViewBag.LoyaltyPoints;
                             }
-                            @if (ViewBag.LoyaltyPoints != 1500)
+                            @if (ViewBag.LoyaltyPoints < 1500)
                             {
                                 @if (ViewBag.LoyaltyPoints >= 500)
                                 {
@@ -210,7 +211,7 @@
                                 else
                                 {
                                     <span>
-                                        <b class="text-orange-500">@sum</b> more points to be Silver Tier.
+                                        <b class="text-orange-500">@silverSum</b> more points to be Silver Tier.
                                     </span>
                                 }
                             }
@@ -238,7 +239,39 @@
                                 if (@loyaltyPoints <500) {
                                     alert("You don't have enough points to redeem.");
                                 }
-                                else{
+                                else if (@loyaltyPoints >= 1500) {
+                                    const imageUrl = "/img/GoldTierVoucher.png";
+
+                                    const link = document.createElement("a");
+                                    link.href = imageUrl;
+
+                                    const randomNumber = Math.floor(Math.random() * 1000).toString();
+
+                                    link.download = "Voucher_" + randomNumber + ".jpg";
+
+                                    document.body.appendChild(link);
+
+                                    link.click();
+
+                                    document.body.removeChild(link);
+                                    window.location.href = `/Customers/Redeem?customerID=@Model.CustomerID`;
+                                }
+                                else {
+                                    const imageUrl = "/img/SilverTierVoucher.png";
+
+                                    const link = document.createElement("a");
+                                    link.href = imageUrl;
+
+                                    const randomNumber = Math.floor(Math.random() * 1000).toString();
+
+                                    link.download = "Voucher_" + randomNumber + ".jpg";
+
+                                    document.body.appendChild(link);
+
+                                    link.click();
+
+                                    document.body.removeChild(link);
+
                                     window.location.href = `/Customers/Redeem?customerID=@Model.CustomerID`;
                                 }
                             });
@@ -537,7 +570,8 @@
         <!-- End Card Blog -->
     </div>
 
-    <script>// Event listener for the "Upcoming Bookings" link
+    <script>
+
         const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
         const allCards = document.getElementById('allCards');
         const upcomingBookings = document.getElementById('upcomingBookings');
@@ -580,5 +614,6 @@
 
         allCards.style.display = 'block';
         upcomingBookings.style.display = 'none';
-        loyaltyPoints.style.display = 'none';</script>
+        loyaltyPoints.style.display = 'none';
+</script>
 </body>
