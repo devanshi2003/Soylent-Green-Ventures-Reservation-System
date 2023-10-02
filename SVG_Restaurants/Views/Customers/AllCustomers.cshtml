@@ -12,8 +12,6 @@
     string wID = Context.Request.Query["workerID"];
 
 }
-
-<h1>Index</h1>
 <!-- Table Section -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <!-- Card -->
@@ -40,8 +38,8 @@
                     <!-- End Header -->
                     <!-- Search form -->
                     <form method="post" asp-controller="Customers" asp-action="AllCustomers" asp-route-restaurantID="@rID" asp-route-workerID="@Context.Request.Query["workerID"]" class="row mt-4 mb-4 px-6">
-                        <div class="col-2 ">
-                            <input placeholder="Enter customer name..." class="form-control"
+                        <div class="col-2 ">    
+                            <input name="nameSearch" placeholder="Enter customer name..." class="form-control"
                                    title="Search for customer by name" />
                         </div>
 
@@ -107,9 +105,7 @@
                 @Html.DisplayFor(modelItem => item.LoyaltyPoints)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
+                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.CustomerId">Make Reservation</a>
             </td>
         </tr>
 }

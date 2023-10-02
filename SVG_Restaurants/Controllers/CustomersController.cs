@@ -33,10 +33,26 @@ namespace SVG_Restaurants.Controllers
             //return View("Login");
         }
 
-        public async Task<IActionResult> AllCustomers()
+        public async Task<IActionResult> AllCustomers(string nameSearch)
         {
-            var users = await _context.Customers
-                .ToListAsync();
+            var users = await _context.Customers.ToListAsync();
+
+            if (!string.IsNullOrEmpty(nameSearch))
+            {
+                users = users.Where(c =>
+                    (
+                        c.FirstName != null && c.LastName != null &&
+                        (c.FirstName + " " + c.LastName).IndexOf(nameSearch, StringComparison.OrdinalIgnoreCase) >= 0
+                    ) ||
+                    (
+                        c.FirstName != null && c.FirstName.Contains(nameSearch, StringComparison.OrdinalIgnoreCase)
+                    ) ||
+                    (
+                        c.LastName != null && c.LastName.Contains(nameSearch, StringComparison.OrdinalIgnoreCase)
+                    )
+                ).ToList();
+            }
+
             return View(users);
         }
             // GET: Customers
