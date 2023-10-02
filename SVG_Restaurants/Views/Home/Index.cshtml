@@ -239,7 +239,35 @@
                                 if (@loyaltyPoints <500) {
                                     alert("You don't have enough points to redeem.");
                                 }
-                                else{
+                                else if (@loyaltyPoints >= 1500) {
+                                    const imageUrl = "/img/GoldTierVoucher.png";
+
+                                    const link = document.createElement("a");
+                                    link.href = imageUrl;
+
+                                    link.download = "Voucher.jpg";
+
+                                    document.body.appendChild(link);
+
+                                    link.click();
+
+                                    document.body.removeChild(link);
+                                    window.location.href = `/Customers/Redeem?customerID=@Model.CustomerID`;
+                                }
+                                else {
+                                    const imageUrl = "/img/SilverTierVoucher.png";
+
+                                    const link = document.createElement("a");
+                                    link.href = imageUrl;
+
+                                    link.download = "Voucher.jpg";
+
+                                    document.body.appendChild(link);
+
+                                    link.click();
+
+                                    document.body.removeChild(link);
+
                                     window.location.href = `/Customers/Redeem?customerID=@Model.CustomerID`;
                                 }
                             });
@@ -537,25 +565,8 @@
         </div>
         <!-- End Card Blog -->
     </div>
-<input type="text" id="input">
 
-    <button onclick="generatePDF()">Download SVG</button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
     <script>
-        function generatePDF() {
-            const imageUrl = "/img/SilverTierVoucher.png";
-
-            const link = document.createElement("a");
-            link.href = imageUrl;
-
-            link.download = "Voucher.jpg";
-
-            document.body.appendChild(link);
-
-            link.click();
-
-            document.body.removeChild(link);
-        }
 
         const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
         const allCards = document.getElementById('allCards');
