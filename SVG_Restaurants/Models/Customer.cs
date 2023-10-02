@@ -41,6 +41,7 @@ namespace SVG_Restaurants.Models
         public string? Username { get; set; }
 
         [Display(Name = "Password")]
+        [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters long.")]
         [Required(ErrorMessage = "{0} is required.")]
         public string? Password { get; set; }
 
