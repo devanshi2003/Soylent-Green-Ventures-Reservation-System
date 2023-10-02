@@ -35,6 +35,8 @@ namespace SVG_Restaurants.Models
         public string? PhoneNumber { get; set; }
 
         [Display(Name = "Username")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Username must be between 3 and 50 characters.")]
+        [RegularExpression(@"^[a-zA-Z0-9_-]*$", ErrorMessage = "Username can only contain letters, numbers, underscores, and hyphens.")]
         [Required(ErrorMessage = "{0} is required.")]
         public string? Username { get; set; }
 
