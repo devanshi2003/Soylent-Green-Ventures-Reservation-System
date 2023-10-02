@@ -341,13 +341,36 @@ namespace SVG_Restaurants.Controllers
             return View(reservation);
         }
 
-        // GET: Reservations/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Complete(int? id)
         {
             if (id == null || _context.Reservations == null)
             {
                 return NotFound();
             }
+
+            var reservation = await _context.Reservations
+                .Include(r => r.Area)
+                .Include(r => r.Banquet)
+                .Include(r => r.Customer)
+                .Include(r => r.Restaurant)
+                .Include(r => r.Guest)
+                .FirstOrDefaultAsync(m => m.ReservationId == id);
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+            return View(reservation);
+        }
+
+
+        // GET: Reservations/Delete/5
+        public async Task<IActionResult> Delete(int? id, int workerID)
+        {
+            if (id == null || _context.Reservations == null)
+            {
+                return NotFound();
+            }
+            ViewBag.WorkerID = workerID;
 
             var reservation = await _context.Reservations
                 .Include(r => r.Area)
@@ -361,6 +384,38 @@ namespace SVG_Restaurants.Controllers
             }
 
             return View(reservation);
+        }
+
+        [HttpPost, ActionName("Complete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CompleteConfirmed(int id)
+        {
+            var item = await _context.Reservations
+                .FindAsync(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            if (item.CustomerId != null)
+            {
+                var customer = await _context.Customers
+                    .Where(c => c.CustomerId == item.CustomerId)
+                    .FirstOrDefaultAsync();
+
+                if (customer != null)
+                {
+                    customer.LoyaltyPoints += 50 * item.NumberOfPeople;
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+            var workerID = HttpContext.Request.Query["workerID"];
+            var restaurantID = HttpContext.Request.Query["restaurantID"];
+
+            _context.Reservations.Remove(item);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = restaurantID, workerID = workerID });
         }
 
         // POST: Reservations/Delete/5
