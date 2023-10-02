@@ -195,8 +195,9 @@
                         <p class="mt-2 text-slate-500" style="padding-bottom: 10px;">
                             @{
                                 var sum = 1500 - ViewBag.LoyaltyPoints;
+                                var silverSum = 500 - ViewBag.LoyaltyPoints;
                             }
-                            @if (ViewBag.LoyaltyPoints != 1500)
+                            @if (ViewBag.LoyaltyPoints < 1500)
                             {
                                 @if (ViewBag.LoyaltyPoints >= 500)
                                 {
@@ -210,7 +211,7 @@
                                 else
                                 {
                                     <span>
-                                        <b class="text-orange-500">@sum</b> more points to be Silver Tier.
+                                        <b class="text-orange-500">@silverSum</b> more points to be Silver Tier.
                                     </span>
                                 }
                             }
@@ -537,7 +538,31 @@
         <!-- End Card Blog -->
     </div>
 
+<input type="text" id="input">
+
+<button onclick="generatePDF()">Generate PDF</button>
+    <div id="barcode"></div>
+
     <script>// Event listener for the "Upcoming Bookings" link
+
+        function generatePDF() {
+            var input = document.getElementById("input").value;
+
+            var doc = new jsPDF();
+            // Generate PNG image from canvas
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(0, 0, 100, 100);
+            var img = canvas.toDataURL();
+
+            doc.addImage(img, 20, 20);
+
+            // Add text
+            doc.text(20, 120, input);
+
+            doc.save('file.pdf');
+        }
         const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
         const allCards = document.getElementById('allCards');
         const upcomingBookings = document.getElementById('upcomingBookings');
@@ -580,5 +605,8 @@
 
         allCards.style.display = 'block';
         upcomingBookings.style.display = 'none';
-        loyaltyPoints.style.display = 'none';</script>
+        loyaltyPoints.style.display = 'none';
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.3/JsBarcode.all.min.js"></script>
 </body>
