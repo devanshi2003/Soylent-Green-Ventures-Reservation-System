@@ -13,6 +13,11 @@
     {
         customerId = Model.Customer.CustomerId;
     }
+    string cID = Context.Request.Query["customerID"];
+    string rID = Context.Request.Query["restaurantID"];
+    string gID = Context.Request.Query["GuestID"];
+    string rvID = Context.Request.Query["ReservationID"];
+    string wID = Context.Request.Query["workerID"];
 }
 <head>
     <link rel="stylesheet" href="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/css/main.ad49aa9b.css" />
@@ -137,7 +142,13 @@ else
         <form asp-action="Delete">
             <input type="hidden" asp-for="ReservationId" id="form" />
             <div>
-                <a asp-controller="Home" asp-action="Index" asp-route-customerID="@customerId" class="btn" id="returnButton" style="margin-right: 30px;">Go back</a>
+                @if (wID == null) {
+                    <a asp-controller="Home" asp-action="Index" asp-route-customerID="@customerId" class="btn" id="returnButton" style="margin-right: 30px;">Go back</a>
+                }
+                else
+                {
+                    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-restaurantID="@Context.Request.Query["restaurantID"]" asp-route-workerID="@Context.Request.Query["workerID"]" class="py-3 px-4 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">Back to List</a>
+                }
                 <span id="home" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                 <input id="formButton" type="submit" value="Cancel Booking" class="btn btn-danger" />
                 <span id="cancel" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
