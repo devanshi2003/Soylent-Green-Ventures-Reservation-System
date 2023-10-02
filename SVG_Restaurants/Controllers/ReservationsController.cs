@@ -376,6 +376,7 @@ namespace SVG_Restaurants.Controllers
                 .Include(r => r.Area)
                 .Include(r => r.Banquet)
                 .Include(r => r.Customer)
+                .Include(r => r.Guest)
                 .Include(r => r.Restaurant)
                 .FirstOrDefaultAsync(m => m.ReservationId == id);
             if (reservation == null)

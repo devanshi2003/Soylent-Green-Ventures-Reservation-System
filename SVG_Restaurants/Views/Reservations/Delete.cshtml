@@ -4,7 +4,15 @@
     ViewData["Title"] = "Delete";
 }
 @{
-    int customerId = Model.Customer.CustomerId;
+    int customerId;
+    if (Model.Customer == null)
+    {
+        customerId = Model.Guest.GuestId;
+    }
+    else
+    {
+        customerId = Model.Customer.CustomerId;
+    }
 }
 <head>
     <link rel="stylesheet" href="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/css/main.ad49aa9b.css" />
