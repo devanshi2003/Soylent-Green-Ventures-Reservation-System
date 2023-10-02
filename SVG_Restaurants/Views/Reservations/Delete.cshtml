@@ -109,10 +109,20 @@ else
             </div>
 
             <div class="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-                <p class="text-sm text-gray-600">@Html.DisplayNameFor(model => model.Customer)</p>
-                <p class="text-base font-medium text-navy-700 dark:text-white">
-                    @Html.DisplayFor(model => model.Customer.FirstName) @Html.DisplayFor(model => model.Customer.LastName)
-                </p>
+                @if (Model.Customer != null)
+                {
+                    <p class="text-sm text-gray-600">@Html.DisplayNameFor(model => model.Customer)</p>
+                    <p class="text-base font-medium text-navy-700 dark:text-white">
+                        @Html.DisplayFor(model => model.Customer.FirstName) @Html.DisplayFor(model => model.Customer.LastName)
+                    </p>
+                }
+                else
+                {
+                    <p class="text-sm text-gray-600">@Html.DisplayNameFor(model => model.Guest)</p>
+                    <p class="text-base font-medium text-navy-700 dark:text-white">
+                        @Html.DisplayFor(model => model.Guest.FirstName) @Html.DisplayFor(model => model.Guest.LastName)
+                    </p>
+                }
             </div>
 
             <div class="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
