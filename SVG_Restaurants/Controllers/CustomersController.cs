@@ -142,6 +142,14 @@ namespace SVG_Restaurants.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var existingCustomer = await _context.Customers.FirstOrDefaultAsync(c => c.Username == customer.Username);
+                if (existingCustomer != null)
+                {
+                    ModelState.AddModelError("Username", "The username is already taken.");
+                    return View(customer);
+                }
+
                 customer.LoyaltyPoints = 0;
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
