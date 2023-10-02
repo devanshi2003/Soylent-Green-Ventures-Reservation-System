@@ -33,8 +33,14 @@ namespace SVG_Restaurants.Controllers
             //return View("Login");
         }
 
-        // GET: Customers
-        public async Task<IActionResult> Index(UserCredentialsVM vm)
+        public async Task<IActionResult> AllCustomers()
+        {
+            var users = await _context.Customers
+                .ToListAsync();
+            return View(users);
+        }
+            // GET: Customers
+            public async Task<IActionResult> Index(UserCredentialsVM vm)
         {
 
             // Check if a user with the provided username and password exists
