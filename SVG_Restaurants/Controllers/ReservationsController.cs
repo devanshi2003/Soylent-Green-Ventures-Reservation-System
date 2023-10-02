@@ -341,6 +341,27 @@ namespace SVG_Restaurants.Controllers
             return View(reservation);
         }
 
+        public async Task<IActionResult> Complete(int? id)
+        {
+            if (id == null || _context.Reservations == null)
+            {
+                return NotFound();
+            }
+
+            var reservation = await _context.Reservations
+                .Include(r => r.Area)
+                .Include(r => r.Banquet)
+                .Include(r => r.Customer)
+                .Include(r => r.Restaurant)
+                .FirstOrDefaultAsync(m => m.ReservationId == id);
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+            return View(reservation);
+        }
+
+
         // GET: Reservations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -361,6 +382,21 @@ namespace SVG_Restaurants.Controllers
             }
 
             return View(reservation);
+        }
+
+        [HttpPost, ActionName("Complete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CompleteConfirmed(int id)
+        {
+            var item = await _context.Reservations.FindAsync(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            _context.Reservations.Remove(item);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index"); // Redirect to the item list page
         }
 
         // POST: Reservations/Delete/5
