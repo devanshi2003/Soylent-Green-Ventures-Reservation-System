@@ -390,10 +390,24 @@ namespace SVG_Restaurants.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CompleteConfirmed(int id)
         {
-            var item = await _context.Reservations.FindAsync(id);
+            var item = await _context.Reservations
+                .FindAsync(id);
             if (item == null)
             {
                 return NotFound();
+            }
+
+            if (item.CustomerId != null)
+            {
+                var customer = await _context.Customers
+                    .Where(c => c.CustomerId == item.CustomerId)
+                    .FirstOrDefaultAsync();
+
+                if (customer != null)
+                {
+                    customer.LoyaltyPoints += 50 * item.NumberOfPeople;
+                    await _context.SaveChangesAsync();
+                }
             }
 
             var workerID = HttpContext.Request.Query["workerID"];
