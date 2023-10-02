@@ -363,12 +363,13 @@ namespace SVG_Restaurants.Controllers
 
 
         // GET: Reservations/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, int workerID)
         {
             if (id == null || _context.Reservations == null)
             {
                 return NotFound();
             }
+            ViewBag.WorkerID = workerID;
 
             var reservation = await _context.Reservations
                 .Include(r => r.Area)
