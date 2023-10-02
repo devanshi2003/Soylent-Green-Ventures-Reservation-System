@@ -376,6 +376,7 @@ namespace SVG_Restaurants.Controllers
                 .Include(r => r.Area)
                 .Include(r => r.Banquet)
                 .Include(r => r.Customer)
+                .Include(r => r.Guest)
                 .Include(r => r.Restaurant)
                 .FirstOrDefaultAsync(m => m.ReservationId == id);
             if (reservation == null)
@@ -428,13 +429,22 @@ namespace SVG_Restaurants.Controllers
                 return Problem("Entity set 'SGVContext.Reservations'  is null.");
             }
             var reservation = await _context.Reservations.FindAsync(id);
-            int customerId = (int)reservation.CustomerId;
-            if (reservation != null)
+            int customerId = 0;
+            if (reservation.CustomerId != null)
             {
-                _context.Reservations.Remove(reservation);
+                customerId = (int)reservation.CustomerId;
+            }
+            var workerID = HttpContext.Request.Query["workerID"];
+            var restaurantID = HttpContext.Request.Query["restaurantID"];
+
+            _context.Reservations.Remove(reservation);
+            await _context.SaveChangesAsync();
+
+            if (!string.IsNullOrEmpty(workerID))
+            {
+                return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = restaurantID, workerID = workerID });
             }
 
-            await _context.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));
             return RedirectToAction("Index", "Home", new { customerId = customerId });
             //return Redirect($"/Home/Index/?customerId={customerId}");
