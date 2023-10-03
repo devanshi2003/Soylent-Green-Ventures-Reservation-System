@@ -39,9 +39,18 @@
             <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">
                 Reservation
             </h2>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-                Update your reservation details.
-            </p>
+            @if (!string.IsNullOrWhiteSpace(Context.Request.Query["WorkerId"]))
+            {
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Update this customer's reservation details
+                </p>
+            }
+            else
+            {
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Update your reservation details.
+                </p>
+            }
         </div>
 
         <form method="post" asp-action="Edit" id="form">
