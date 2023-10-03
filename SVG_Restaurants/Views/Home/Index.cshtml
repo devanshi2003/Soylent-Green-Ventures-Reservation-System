@@ -222,17 +222,28 @@
                                 }
                                 else
                                 {
-                                    <span>
-                                        <b class="text-orange-500">@silverSum</b> more points to be Silver Tier.
-                                    </span>
+                                    if (ViewBag.Status == "Gold")
+                                    {
+                                        <span>
+                                            Congratulations! You are a Gold Tier member!
+                                        </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            <b class="text-orange-500">@silverSum</b> more points to be Silver Tier.
+                                        </span>
+                                    }
+
                                 }
                             }
                             else
                             {
 
-                                    <span>
-                                        Congratulations! You are a Gold Tier member!
-                                    </span>
+                                <span>
+                                    Congratulations! You are a Gold Tier member!
+                                </span>
                               
 
                             }
