@@ -129,11 +129,10 @@ namespace SVG_Restaurants.Controllers
 
             if (customer != null)
             {
-                if (customer.LoyaltyPoints >= vm.dollarsToRedeem)
+                if (customer.LoyaltyPoints >= vm.pointsToRedeem)
                 {
-
                    
-                    customer.LoyaltyPoints -= vm.dollarsToRedeem*50;
+                    customer.LoyaltyPoints -= vm.pointsToRedeem;           
 
                     TempData["SuccessMessage"] = "Points redeemed successfully.";
 
