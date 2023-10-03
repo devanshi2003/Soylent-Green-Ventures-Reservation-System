@@ -44,7 +44,18 @@ else
                                     Points Available: @Model.customer.LoyaltyPoints
                                 </label>
 
-                                <input type="number" asp-for="pointsToRedeem" class="custom-slider" min="10" >
+                                <div class="flex">
+                                    <input type="checkbox" class="checkbox" id="hs-default-checkbox" value="500">
+                                    <label for="hs-default-checkbox" class="text-sm text-gray-500 ml-3 dark:text-gray-400"> $10 Gift Card</label>
+                                </div>
+
+                                <div class="flex">
+                                    <input type="checkbox" class="checkbox" id="hs-checked-checkbox" value="1500">
+                                    <label for="hs-checked-checkbox" class="text-sm text-gray-500 ml-3 dark:text-gray-400"> $35 Gift Card</label>
+                                </div>
+
+                                <input type="hidden" id="points" name="pointsToRedeem" asp-for="pointsToRedeem" readonly>
+
 
                             </div>
                             <div class="mt-5 flex justify-center gap-x-2">
@@ -61,5 +72,24 @@ else
 
 
 }
-@*
 
+
+<script>
+    const checkboxes = document.querySelectorAll('.checkbox');
+    const pointsToRedeemInput = document.getElementById('points');
+
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', function () {
+            // Uncheck all other checkboxes
+            checkboxes.forEach((otherCheckbox) => {
+                if (otherCheckbox !== this) {
+                    otherCheckbox.checked = false;
+                }
+            });
+
+            // Update the hidden input with the selected checkbox value
+            pointsToRedeemInput.value = this.value;
+        });
+    });
+
+</script>
