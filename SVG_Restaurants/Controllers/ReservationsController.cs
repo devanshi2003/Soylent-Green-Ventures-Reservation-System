@@ -146,6 +146,7 @@ namespace SVG_Restaurants.Controllers
                         var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
                         var WorkerId = form["WorkerId"];
 
+
                         if (totalPeople <= restaurant.SeatCapacity)
                         {
                             reservation.Completed = false;
@@ -155,6 +156,8 @@ namespace SVG_Restaurants.Controllers
 
                             if (!string.IsNullOrEmpty(WorkerId))
                             {
+                                TempData["SuccessMessage"] = "Reservation successfully created!";
+
                                 return RedirectToAction("Home", "RestaurantWorkers", new {RestaurantId = reservation.RestaurantId, WorkerId = WorkerId});
                             }
 
