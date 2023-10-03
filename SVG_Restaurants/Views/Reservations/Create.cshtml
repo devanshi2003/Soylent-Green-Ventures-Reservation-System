@@ -494,7 +494,6 @@ else
                             string customerID = Context.Request.Query["CustomerId"];
                             string restaurantID = Context.Request.Query["restaurantId"];
                         }
-
                         <input type="hidden" asp-for="@Model.CustomerId" value=@customerID />
                         <input type="hidden" asp-for="@Model.RestaurantId" value=@restaurantID />
 

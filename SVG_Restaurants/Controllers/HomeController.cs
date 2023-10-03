@@ -25,7 +25,7 @@ namespace SVG_Restaurants.Controllers
                 CustomerId = customerID,
                 Reservations = _context.Reservations
                     .Include(r => r.Restaurant)
-                    .Where(r => r.CustomerId == customerID)
+                    .Where(r => r.CustomerId == customerID && r.Completed == false)
                     .OrderBy(r => r.ReservationTiming)
                     .ToList(),
             };
