@@ -54,7 +54,7 @@ namespace SVG_Restaurants.Controllers
                     .Include(r => r.Restaurant)
                     .Include(d => d.Area)
                     .Include(b => b.Banquet)
-                    .Where(r => r.RestaurantId == restaurantID)
+                    .Where(r => r.RestaurantId == restaurantID && r.Completed == false)
                     .ToList();
 
                 // Return reservations that match search by name
