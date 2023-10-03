@@ -43,11 +43,9 @@ else
                                 <label for="af-submit-app-project-name" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
                                     Points Available: @Model.customer.LoyaltyPoints
                                 </label>
-                                <div class="space-y-2">
-                                    <p class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200"> Redeem points for dollars: </p>
-                                    <input type="range" id="pointSlider" asp-for="dollarsToRedeem" class="custom-slider" min="10" max="@(Model.customer.LoyaltyPoints / 50)" step="10" value="10">
-                                    <input type="text" id="selectedPoints" readonly>
-                                </div>
+
+                                <input type="number" asp-for="pointsToRedeem" class="custom-slider" min="10" >
+
                             </div>
                             <div class="mt-5 flex justify-center gap-x-2">
                                 <button type="submit" class="bg-orange-500 text-white font-bold py-2 px-4 rounded-full"  style="display: inline-flex; align-items: center;">
@@ -63,17 +61,5 @@ else
 
 
 }
+@*
 
-
-<script>
-    const slider = document.getElementById("pointSlider");
-    const selectedPoints = document.getElementById("selectedPoints");
-
-    // Set the initial value of the input field
-    selectedPoints.value = slider.value;
-
-    slider.addEventListener("input", () => {
-        const value = slider.value;
-        selectedPoints.value = value;
-    });
-</script>
