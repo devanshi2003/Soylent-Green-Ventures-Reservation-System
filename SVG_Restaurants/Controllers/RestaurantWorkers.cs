@@ -122,7 +122,7 @@ namespace SVG_Restaurants.Controllers
                             )
                         );
 
-                    vm.reservations = reservationQuery.ToList();
+                    vm.reservations = reservationQuery.Where(c=> c.Completed == true).ToList();
                 }
                 return View(vm);
             }

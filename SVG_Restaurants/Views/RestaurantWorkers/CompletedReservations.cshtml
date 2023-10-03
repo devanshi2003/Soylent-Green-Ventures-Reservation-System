@@ -97,7 +97,7 @@ else
                     </div>
                     <!-- End Header -->
                     <!-- Search form -->
-                    <form method="post" asp-controller="RestaurantWorkers" asp-action="Home" asp-route-RestaurantId="@Model.RestaurantId" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" class="row mt-4 mb-4 px-6">
+                    <form method="post" asp-controller="RestaurantWorkers" asp-action="CompletedReservations" asp-route-RestaurantId="@Model.RestaurantId" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" class="row mt-4 mb-4 px-6">
                         <div class="col-2 ">
                             <input asp-for="@Model.nameSearch" placeholder="Enter customer name..." class="form-control"
                                    title="Search for customer by name" />
