@@ -7,7 +7,7 @@ namespace SVG_Restaurants.ViewModels
 		{
 		}
 
-		public int? CustomerID { get; set; }
+		public int? CustomerId { get; set; }
 		public int RestaurantId { get; set; }
 	}
 }

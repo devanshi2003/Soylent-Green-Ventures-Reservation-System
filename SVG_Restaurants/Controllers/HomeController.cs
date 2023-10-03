@@ -22,7 +22,7 @@ namespace SVG_Restaurants.Controllers
         {
             var viewModel = new CustomerDetailsVM
             {
-                CustomerID = customerID,
+                CustomerId = customerID,
                 Reservations = _context.Reservations
                     .Include(r => r.Restaurant)
                     .Where(r => r.CustomerId == customerID)

@@ -103,7 +103,7 @@
                 });
             </script>
 
-            <a asp-controller="Home" asp-action="Index" asp-route-customerID="@Model.CustomerId" id="back" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-blue-100 border border-transparent font-semibold text-blue-500 hover:text-white hover:bg-blue-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+            <a asp-controller="Home" asp-action="Index" asp-route-CustomerId="@Model.CustomerId" id="back" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-blue-100 border border-transparent font-semibold text-blue-500 hover:text-white hover:bg-blue-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                 No, I don't want to delete !
                 <span id="goBack" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
 
@@ -115,7 +115,7 @@
 
             document.getElementById('goBack').style.display = 'inline-block';
 
-            window.location.href = '/Home/Index?customerID=@Model.CustomerId';
+            window.location.href = '/Home/Index?CustomerId=@Model.CustomerId';
 
         });
 

@@ -49,7 +49,7 @@
                             </h2>
                         </div>
 
-                        <a asp-controller="RestaurantWorkers" id="admin" asp-action="Admin" asp-route-restaurantID=1 type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                        <a asp-controller="RestaurantWorkers" id="admin" asp-action="Admin" asp-route-RestaurantId=1 type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                             Go Back
                             <span id="adminbtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-green rounded-full" style="display: none;" aria-label="Loading"></span>
                         </a>
@@ -168,7 +168,7 @@
 
                                     </td>
 
-                                    <input type="hidden" name="workerID" value="@user.WorkerId" />         
+                                    <input type="hidden" name="WorkerId" value="@user.WorkerId" />         
                                     
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                         <a type="button" id="delete-@user.WorkerId" asp-action="Delete" asp-route-id="@user.WorkerId" class="btn btn-outline-primary">
