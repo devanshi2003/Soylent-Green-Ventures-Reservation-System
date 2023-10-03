@@ -17,10 +17,33 @@
 {
     <div class="alert alert-success">
         @TempData["SuccessMessage"]
+
     </div>
 
     <p>Gift card will be shown here </p>
-    // SHOW THE GIFT CARD HERE
+
+    // $35 Card 
+    <div>
+        <img id="voucherImage" src="/img/GoldTierVoucher.png" alt="Voucher Image">
+        <a id="downloadLink" style="display: none;" download="voucher.jpg">Download Voucher</a>
+    </div>
+
+    <script>
+        const imageUrl = "/img/GoldTierVoucher.png";
+        const imageElement = document.getElementById("voucherImage");
+        const downloadLink = document.getElementById("downloadLink");
+
+        const randomNumber = Math.floor(Math.random() * 1000).toString();
+
+        downloadLink.href = imageUrl;
+        downloadLink.download = "Voucher_" + randomNumber + ".jpg";
+
+        imageElement.addEventListener("click", function () {
+            // Show the download link when the image is clicked
+            downloadLink.style.display = "block";
+        });
+    </script>
+
 
 }
 
