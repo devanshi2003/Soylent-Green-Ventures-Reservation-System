@@ -746,31 +746,30 @@ else
 
     let maxTime = new Date();
     let minTime = new Date();
+    const currentTime = new Date();
 
     let disabledDates = getSundaysInYear(2023);
 
 
     // Set the maximum time and minimum time based on the restaurantID
-
-
     if (restaurantID === "3") {   //Mexikana ID = 3
         minTime.setHours(17, 0, 0, 0);
         maxTime.setHours(23, 0, 0, 0);
-
     }
     else if (restaurantID === "2") {   //La Oesta - ID = 2
         minTime.setHours(10, 0, 0, 0);
         maxTime.setHours(21, 0, 0, 0);
         disabledDates = [...getMondaysInYear(2023), ...getTuesdaysInYear(2023)];
-
-
     }
     else { // Bamboo ID = 1
-
         minTime.setHours(12, 0, 0, 0);
         maxTime.setHours(21, 0, 0, 0);
         disabledDates = getMondaysInYear(2023);
+    }
 
+    // Check if the current time has passed the minimum time
+    if (currentTime > minTime) {
+        minTime = currentTime;
     }
 
     // Initialize Flatpickr with date and time options
