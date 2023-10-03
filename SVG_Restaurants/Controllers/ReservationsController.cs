@@ -147,8 +147,8 @@ namespace SVG_Restaurants.Controllers
                         var WorkerId = form["WorkerId"];
 
                         if (totalPeople <= restaurant.SeatCapacity)
-                        {                          
-
+                        {
+                            reservation.Completed = false;
                             // Add the reservation to the database
                             _context.Add(reservation); // Add the reservation entity, not the ViewModel
                             await _context.SaveChangesAsync(); // Save changes to the database
