@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Redeem";
-    string cID = Context.Request.Query["customerID"];
+    string cID = Context.Request.Query["CustomerId"];
 
 }
 
@@ -18,7 +18,7 @@
     <div class="alert alert-success">
         @TempData["SuccessMessage"]
         Remaining Points: @Model.customer.LoyaltyPoints
-        <a asp-action="Index" asp-controller="Home" asp-route-customerID="@Model.customer.CustomerId">Back to Home</a>
+        <a asp-action="Index" asp-controller="Home" asp-route-CustomerId="@Model.customer.CustomerId">Back to Home</a>
     </div>
 
 // $35 Card 

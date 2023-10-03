@@ -48,8 +48,8 @@ namespace SVG_Restaurants.Controllers
         // GET: Guests/Create
         public IActionResult Create()
         {
-            ViewBag.RestaurantID = Request.Query["restaurantID"];
-            ViewBag.WorkerID = Request.Query["workerID"];
+            ViewBag.RestaurantId = Request.Query["RestaurantId"];
+            ViewBag.WorkerId = Request.Query["WorkerId"];
 
 
             return View();
@@ -66,11 +66,11 @@ namespace SVG_Restaurants.Controllers
             if (ModelState.IsValid)
             {
 
-                string restaurantID = Request.Form["RestaurantID"];
-                string workerID = Request.Form["workerID"];
+                string RestaurantId = Request.Form["RestaurantId"];
+                string WorkerId = Request.Form["WorkerId"];
                 _context.Add(guest);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Create", "Reservations", new { GuestID = guest.GuestId, restaurantID = restaurantID, workerID = workerID });
+                return RedirectToAction("Create", "Reservations", new { guest.GuestId, RestaurantId, WorkerId });
             }
             return View(guest);
         }

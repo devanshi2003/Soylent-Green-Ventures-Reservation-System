@@ -6,12 +6,12 @@
 }
 
 @{
-    string cID = Context.Request.Query["customerID"];
-    string rID = Context.Request.Query["restaurantID"];
-    string gID = Context.Request.Query["GuestID"];
-    string rvID = Context.Request.Query["ReservationID"];
-    string wID = Context.Request.Query["workerID"];
-    ViewBag.WorkerID = wID;
+    string cID = Context.Request.Query["CustomerId"];
+    string rID = Context.Request.Query["RestaurantId"];
+    string gID = Context.Request.Query["GuestId"];
+    string rvID = Context.Request.Query["ReservationId"];
+    string wID = Context.Request.Query["WorkerId"];
+    ViewBag.WorkerId = wID;
 
 }
 
@@ -54,7 +54,7 @@ else
     {
         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
             <span class="font-medium">Your reservation has been created!</span>
-            <a asp-controller="Home" asp-action="Index" asp-route-customerID="@cID"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
+            <a asp-controller="Home" asp-action="Index" asp-route-CustomerId="@cID"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
         </div>
     }
 
@@ -266,7 +266,7 @@ else
                                         <div class="">
                                             <form>
                                                 <div class="grid gap-y-4">
-                                                    <a asp-action="Login" asp-controller="Customers" asp-route-restaurantID="@rID" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="formButton">
+                                                    <a asp-action="Login" asp-controller="Customers" asp-route-RestaurantId="@rID" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="formButton">
                                                         Login or Sign up!
                                                         <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                                                     </a>
@@ -278,13 +278,13 @@ else
 
                                                             document.getElementById('loading').style.display = 'inline-block';
 
-                                                            window.location.href = '/Customers/Login?restaurantID=@rID';
+                                                            window.location.href = '/Customers/Login?RestaurantId=@rID';
 
                                                         });
 
                                                     </script>
 
-                                                    <a href="@Url.Action("Create", "Guests", new { restaurantID = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-black hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="returnButton">
+                                                    <a href="@Url.Action("Create", "Guests", new { RestaurantId = rID })" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-red-100 border border-transparent font-semibold text-red-500 hover:text-black hover:bg-red-100 focus:outline-none focus:ring-2 ring-offset-white focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" id="returnButton">
 
                                                         Continue as a Guest
                                                         <span id="guest" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
@@ -296,7 +296,7 @@ else
 
                                                             document.getElementById('guest').style.display = 'inline-block';
 
-                                                            window.location.href = '/Guests/Create?restaurantID=@rID';
+                                                            window.location.href = '/Guests/Create?RestaurantId=@rID';
 
                                                         });
 
@@ -324,9 +324,9 @@ else
                 <div class="col-md-6">
                     <form asp-action="Create" method="post" id="form2">
                         @{
-                            string guestID = Context.Request.Query["GuestID"];
-                            string workerID = Context.Request.Query["workerID"];
-                            string restaurantIDguest = Context.Request.Query["restaurantID"];
+                            string guestID = Context.Request.Query["GuestId"];
+                            string workerID = Context.Request.Query["WorkerId"];
+                            string restaurantIDguest = Context.Request.Query["RestaurantId"];
                         
                         }
 
@@ -340,7 +340,7 @@ else
 
                         <div class="form-group">
                             <input type="hidden" asp-for="@Model.RestaurantId" value="@restaurantIDguest" />
-                            <input type="hidden" name="workerID" value="@ViewBag.WorkerID" />
+                            <input type="hidden" name="WorkerId" value="@ViewBag.WorkerId" />
 
 
                         </div>
@@ -443,7 +443,7 @@ else
                         </div>
 
                         <div class="form-group">
-                            <a asp-controller="Home" asp-action="Index" asp-route-guestID="@gID" id="returnButton" class="btn" style="margin-top: 30px; margin-right: 30px;">
+                            <a asp-controller="Home" asp-action="Index" asp-route-GuestId="@gID" id="returnButton" class="btn" style="margin-top: 30px; margin-right: 30px;">
                                 Go back
                                 <span id="loadingReturn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                             </a>
@@ -455,7 +455,7 @@ else
 
                                     document.getElementById('loadingReturn').style.display = 'inline-block';
 
-                                    window.location.href = '/Home/Index?guestID=@gID';
+                                    window.location.href = '/Home/Index?GuestId=@gID';
 
                                 });
 
@@ -481,8 +481,8 @@ else
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         @{
-                            string customerID = Context.Request.Query["CustomerID"];
-                            string restaurantID = Context.Request.Query["restaurantID"];
+                            string customerID = Context.Request.Query["CustomerId"];
+                            string restaurantID = Context.Request.Query["restaurantId"];
                         }
 
                         <input type="hidden" asp-for="@Model.CustomerId" value=@customerID />
@@ -589,7 +589,7 @@ else
 
                         </div>
                         <div class="form-group">
-                            <a asp-controller="Home" asp-action="Index" asp-route-customerID="@cID" id="returnButton" class="btn" style="margin-top: 30px; margin-right: 20px">
+                            <a asp-controller="Home" asp-action="Index" asp-route-CustomerId="@cID" id="returnButton" class="btn" style="margin-top: 30px; margin-right: 20px">
                                 Go back
                                 <span id="return" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                             </a>
@@ -600,7 +600,7 @@ else
 
                                     document.getElementById('return').style.display = 'inline-block';
 
-                                    window.location.href = '/Home/Index?customerID=@cID';
+                                    window.location.href = '/Home/Index?CustomerId=@cID';
 
                                 });
 
@@ -656,7 +656,7 @@ else
 
     document.addEventListener("DOMContentLoaded", function () {
         const currentUrl = new URL(window.location.href);
-        const restaurantID = currentUrl.searchParams.get("restaurantID");
+        const restaurantID = currentUrl.searchParams.get("RestaurantId");
         const inputElement = document.getElementById("datetime");
         const errorContainer = document.getElementById("error-container");
 
@@ -742,7 +742,7 @@ else
     const currentUrl = new URL(window.location.href);
 
     // Get the restaurantID query parameter value
-    const restaurantID = currentUrl.searchParams.get("restaurantID");
+    const restaurantID = currentUrl.searchParams.get("RestaurantId");
 
     let maxTime = new Date();
     let minTime = new Date();
@@ -788,7 +788,7 @@ else
         const inputElement = document.getElementById("datetime");
 
         const queryParams = new URLSearchParams(window.location.search);
-        const restaurantID = queryParams.get("restaurantID");
+        const restaurantID = queryParams.get("RestaurantId");
         console.log(restaurantID)
         console.log(inputElement)
 

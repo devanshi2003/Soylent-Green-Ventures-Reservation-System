@@ -15,7 +15,7 @@
 </h1>
 
 <div class="mt-16 max-w-xs flex flex-col rounded-md shadow-sm">
-    <a asp-controller="RestaurantWorkers" asp-action="Create" asp-route-restaurantID=1 id="createAcc" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+    <a asp-controller="RestaurantWorkers" asp-action="Create" asp-route-RestaurantId=1 id="createAcc" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
         Create Account
         <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
     </a>
@@ -26,7 +26,7 @@
 
             document.getElementById('loading').style.display = 'inline-block';
 
-            window.location.href = '/RestaurantWorkers/Create?restaurantID=1';
+            window.location.href = '/RestaurantWorkers/Create?RestaurantId=1';
 
         });
 
@@ -49,17 +49,17 @@
 
     </script>
 
-    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-workerID="25" asp-route-restaurantID="3" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-WorkerId="25" asp-route-RestaurantId="3" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
         Mexicana
         <span id="log" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
     </a>
 
-    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-workerID="25" asp-route-restaurantID="2" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-WorkerId="25" asp-route-RestaurantId="2" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
         La Oeste
         <span id="log" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
     </a>
 
-    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-workerID="25" asp-route-restaurantID="1" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-WorkerId="25" asp-route-RestaurantId="1" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
         Bamboo Leaf
         <span id="log" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
     </a>

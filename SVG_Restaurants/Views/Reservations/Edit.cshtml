@@ -13,11 +13,11 @@
 @if (ViewBag.updateSuccess == true)
     {
         // Restaurant Worker edit reservation
-    @if (ViewBag.workerID != null)
+    @if (ViewBag.WorkerId != null)
     {
         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
             <span class="font-medium">Reservation details has been updated successfully!</span>
-            <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-restaurantID="@Model.RestaurantId" asp-route-workerID="@ViewBag.workerID"><span class="link-primary">Click here</span></a><span> to go back to RestaurantWorkers Home Page</span>
+            <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-RestaurantId="@Model.RestaurantId" asp-route-WorkerId="@ViewBag.WorkerId"><span class="link-primary">Click here</span></a><span> to go back to RestaurantWorkers Home Page</span>
         </div>
 
         }
@@ -25,7 +25,7 @@
         {
         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
             <span class="font-medium">Your reservation details has been updated successfully!</span>
-            <a asp-controller="Home" asp-action="Index" asp-route-customerID="@Model.CustomerId"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
+            <a asp-controller="Home" asp-action="Index" asp-route-CustomerId="@Model.CustomerId"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
         </div>
     }
 
@@ -53,7 +53,7 @@
                 <input type="hidden" asp-for="CustomerId" value="@Model.CustomerId" />
                 <input type="hidden" asp-for="RestaurantId" value="@Model.RestaurantId" />
                 <input type="hidden" asp-for="GuestId" value="@Model.GuestId" />
-                <input type="hidden" name="workerID" value="@Context.Request.Query["workerID"]" />
+                <input type="hidden" name="WorkerId" value="@Context.Request.Query["WorkerId"]" />
 
                 <!-- Number of People -->
                 <div class="sm:col-span-3">
@@ -145,17 +145,17 @@
             <!-- End Grid -->
 
             <div class="mt-5 flex justify-end gap-x-2">
-                @if (!string.IsNullOrEmpty(Context.Request.Query["workerID"])) // Direct worker to RestaurantWorkers Home Page
+                @if (!string.IsNullOrEmpty(Context.Request.Query["WorkerId"])) // Direct worker to RestaurantWorkers Home Page
                     {
-                    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-restaurantID="@Model.RestaurantId" asp-route-workerID="@Context.Request.Query["workerID"]" id="backbtn" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-RestaurantId="@Model.RestaurantId" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" id="backbtn" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
                         Go back
                         <span id="back" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
                     </a>
 
                     }
-                    else if(!string.IsNullOrEmpty(Context.Request.Query["customerID"])) // Direct customer to Main Home page 
+                    else if(!string.IsNullOrEmpty(Context.Request.Query["CustomerId"])) // Direct customer to Main Home page 
                     {
-                    <a asp-controller="Home" asp-action="Index" asp-route-customerID="@Model.CustomerId" id="backbtn" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                    <a asp-controller="Home" asp-action="Index" asp-route-CustomerId="@Model.CustomerId" id="backbtn" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
                         Go back
                         <span id="back" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
                     </a>
@@ -168,7 +168,7 @@
 
                         document.getElementById('back').style.display = 'inline-block';
 
-                        window.location.href = '/Home/Index?customerID=@Model.CustomerId';
+                        window.location.href = '/Home/Index?CustomerId=@Model.CustomerId';
 
                     });
 
@@ -203,7 +203,7 @@
 
 <script>document.addEventListener("DOMContentLoaded", function () {
         const currentUrl = new URL(window.location.href);
-        const restaurantID = currentUrl.searchParams.get("restaurantID");
+        const restaurantID = currentUrl.searchParams.get("RestaurantId");
         const inputElement = document.getElementById("datetime");
         const errorContainer = document.getElementById("error-container");
 
@@ -287,7 +287,7 @@
     const currentUrl = new URL(window.location.href);
 
     // Get the restaurantID query parameter value
-    const restaurantID = currentUrl.searchParams.get("restaurantID");
+    const restaurantID = currentUrl.searchParams.get("RestaurantId");
 
     let maxTime = new Date();
     let minTime = new Date();
@@ -333,7 +333,7 @@
         const inputElement = document.getElementById("datetime");
 
         const queryParams = new URLSearchParams(window.location.search);
-        const restaurantID = queryParams.get("restaurantID");
+    const restaurantID = queryParams.get("RestaurantId");
         console.log(restaurantID)
         console.log(inputElement)
 
