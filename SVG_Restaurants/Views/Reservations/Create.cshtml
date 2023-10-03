@@ -764,7 +764,6 @@ else
 
     let maxTime = new Date();
     let minTime = new Date();
-    const currentTime = new Date();
 
     let disabledDates = getSundaysInYear(2023);
 
@@ -783,11 +782,6 @@ else
         minTime.setHours(12, 0, 0, 0);
         maxTime.setHours(21, 0, 0, 0);
         disabledDates = getMondaysInYear(2023);
-    }
-
-    // Check if the current time has passed the minimum time
-    if (currentTime > minTime) {
-        minTime = currentTime;
     }
 
     // Initialize Flatpickr with date and time options
