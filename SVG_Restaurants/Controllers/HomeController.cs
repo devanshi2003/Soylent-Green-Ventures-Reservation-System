@@ -35,7 +35,7 @@ namespace SVG_Restaurants.Controllers
                 .Select(c => c.LoyaltyPoints ?? 0)
                 .FirstOrDefault();
 
-            ViewBag.Cust=
+            ViewBag.Status=
                 _context.Customers
                 .Where(c => c.CustomerId == customerID)
                 .Select(c => c.Status ?? "0")

@@ -8,7 +8,7 @@
 </head>
 <style type="text/css">
     body {
-        background-color: #A9927D;
+    background-color: #A9927D;
     }
 </style>
 
@@ -32,11 +32,11 @@
                 </div>
                 <script>document.getElementById('customerLogin').addEventListener('click', function (e) {
 
-                        this.disabled = true;
+                    this.disabled = true;
 
-                        document.getElementById('login').style.display = 'inline-block';
+                    document.getElementById('login').style.display = 'inline-block';
 
-                        window.location.href = '/Customers/Login';
+                    window.location.href = '/Customers/Login';
 
                     });</script>
 
@@ -49,11 +49,11 @@
                 </div>
                 <script>document.getElementById('sLogin').addEventListener('click', function (e) {
 
-                        this.disabled = true;
+                    this.disabled = true;
 
-                        document.getElementById('staffLogin').style.display = 'inline-block';
+                    document.getElementById('staffLogin').style.display = 'inline-block';
 
-                        window.location.href = '/RestaurantWorkers/Login';
+                    window.location.href = '/RestaurantWorkers/Login';
 
                     });</script>
             }
@@ -70,11 +70,11 @@
                 <script>
                     document.getElementById('delete').addEventListener('click', function (e) {
 
-                        this.disabled = true;
+                    this.disabled = true;
 
-                        document.getElementById('deletebtn').style.display = 'inline-block';
+                    document.getElementById('deletebtn').style.display = 'inline-block';
 
-                        window.location.href = '/Customers/Delete?customerID="@Context.Request.Query["CustomerID"]';
+                    window.location.href = '/Customers/Delete?customerID="@Context.Request.Query["CustomerID"]';
 
                     });
 
@@ -91,11 +91,11 @@
                 <script>
                     document.getElementById('edit').addEventListener('click', function (e) {
 
-                        this.disabled = true;
+                    this.disabled = true;
 
-                        document.getElementById('editbtn').style.display = 'inline-block';
+                    document.getElementById('editbtn').style.display = 'inline-block';
 
-                        window.location.href = '/Customers/Edit?customerID="@Context.Request.Query["CustomerID"]';
+                    window.location.href = '/Customers/Edit?customerID="@Context.Request.Query["CustomerID"]';
 
                     });
 
@@ -110,11 +110,11 @@
                 </div>
                 <script>document.getElementById('logOut').addEventListener('click', function (e) {
 
-                        this.disabled = true;
+                    this.disabled = true;
 
-                        document.getElementById('loading').style.display = 'inline-block';
+                    document.getElementById('loading').style.display = 'inline-block';
 
-                        window.location.href = '/Home/Index';
+                    window.location.href = '/Home/Index';
 
                     });</script>
             }
@@ -123,7 +123,8 @@
 
     @if (Model.CustomerID != 0)
     {
-        if (ViewBag.LoyaltyPoints >= 1500)
+        <p>ViewBag.Status</p>
+        if (ViewBag.LoyaltyPoints >= 1500 || ViewBag.Status == "Gold")
         {
             <div style="background-color: rgba(255, 255, 255, 0.75); display: inline-block; border-radius: 10px; padding: 5px;">
                 <div class="uppercase tracking-wide text-2xl text-yellow-500 font-semibold font-bold" style="padding: 5px;">Gold Tier</div>
