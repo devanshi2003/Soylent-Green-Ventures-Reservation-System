@@ -257,6 +257,9 @@ else
                 High Chairs
             </th>
             <th>
+                Status
+            </th>
+            <th>
                 Special Notes
             </th>
             <th class="text-center">
@@ -278,6 +281,7 @@ else
                 <td>@(reservation.Customer?.PhoneNumber ?? reservation.Guest?.PhoneNumber)</td>
                 <td>@Html.DisplayFor(item => reservation.Area.Area)</td>
                 <td>@Html.DisplayFor(item => reservation.HighChairs)</td>
+                <td>@(reservation.Customer != null ? reservation.Customer.Status : "Guest")</td>
                 <td>@Html.DisplayFor(item => reservation.SpecialNotes)</td>
                 <td>
                     <div class="relative flex px-2">
