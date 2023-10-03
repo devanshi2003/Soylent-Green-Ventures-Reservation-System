@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -393,6 +394,7 @@ namespace SVG_Restaurants.Controllers
         {
             var item = await _context.Reservations
                 .FindAsync(id);
+
             if (item == null)
             {
                 return NotFound();
@@ -427,10 +429,16 @@ namespace SVG_Restaurants.Controllers
                 }
             }
 
+            var reservation = await _context.Reservations
+                .Where(r => r.ReservationId == id)
+                .FirstOrDefaultAsync();
+
+            reservation.Completed = true; 
+
             var WorkerId = HttpContext.Request.Query["WorkerId"];
             var RestaurantId = HttpContext.Request.Query["RestaurantId"];
 
-            _context.Reservations.Remove(item);
+            //_context.Reservations.Remove(item);
             await _context.SaveChangesAsync();
             return RedirectToAction("Home", "RestaurantWorkers", new { RestaurantId, WorkerId });
         }
