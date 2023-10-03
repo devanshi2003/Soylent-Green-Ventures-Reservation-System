@@ -1,0 +1,155 @@
+﻿@model SVG_Restaurants.ViewModels.RestaurantReservationVM
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+@*<style>
+        body {
+            background-color: #D0CFCF;
+        }
+    </style>*@
+
+@{
+    string cID = Context.Request.Query["CustomerId"];
+    string rID = Context.Request.Query["RestaurantId"];
+    string gID = Context.Request.Query["GuestId"];
+    string rvID = Context.Request.Query["ReservationId"];
+    string wID = Context.Request.Query["WorkerId"];
+}
+
+@if (rID == "1")
+{
+    <style type="text/css">
+        body {
+            background-color: #fcfcfc;
+        }
+    </style>
+}
+else if (rID == "2")
+{
+    <style type="text/css">
+        body {
+            background-color: #fff8dc;
+        }
+    </style>
+}
+else if (rID == "3")
+{
+    <style type="text/css">
+        body {
+            background-color: #dae1e6;
+        }
+    </style>
+}
+else
+{
+    <style type="text/css">
+        body {
+            background-color: white;
+        }
+    </style>
+}
+<!-- Table Section -->
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+    <!-- Card -->
+    <div class="flex flex-col">
+        <div class="-m-1.5 overflow-x-auto">
+            <div class="p-1.5 min-w-full inline-block align-middle">
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-slate-900 dark:border-gray-700">
+                    <!-- Header -->
+                    <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                                Completed Reservations for @Model.theRestaurant.RestaurantName
+                            </h2>
+                        </div>
+
+                        <div>
+                            <div class="inline-flex gap-x-2">
+
+                                @if (wID == "25")
+                                {
+                                    <a asp-controller="RestaurantWorkers" asp-action="Admin" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                        Go back
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-workerID="@wID" asp-route-restaurantID="@rID" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-gray text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                        Go Back
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Header -->
+                    <!-- Search form -->
+                    <form method="post" asp-controller="RestaurantWorkers" asp-action="CompletedReservations" asp-route-RestaurantId="@Model.RestaurantId" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" class="row mt-4 mb-4 px-6">
+                        <div class="col-2 ">
+                            <input asp-for="@Model.nameSearch" placeholder="Enter customer name..." class="form-control"
+                                   title="Search for customer by name" />
+                        </div>
+
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-outline-secondary">Search</button>
+                        </div>
+                    </form>                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="table" style="background-color: white; margin-top: 0;">
+    <thead>
+        <tr>
+            <th>
+                Reservation ID
+            </th>
+            <th>
+                Full Name
+            </th>
+            <th>
+                Number of People
+            </th>
+            <th>
+                Reservation Time
+            </th>
+            <th>
+                Banquet
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th>
+                Dining Area
+            </th>
+            <th>
+                High Chairs
+            </th>
+            <th>
+                Special Notes
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model.reservations)
+        {
+            <tr>
+                <th scope="row">@reservation.ReservationId</th>
+                @*<td>@(reservation.Customer?.CustomerId ?? -1)</td>
+            <td>@(reservation.Guest?.GuestId ?? -1)</td>*@
+                <td>@Html.DisplayFor(item => reservation.FullName)</td>
+                <td>@Html.DisplayFor(item => reservation.NumberOfPeople)</td>
+                <td>@Html.DisplayFor(item => reservation.ReservationTiming)</td>
+                <td>@Html.DisplayFor(item => reservation.Banquet.BanquetName)</td>
+                <td>@(reservation.Customer?.PhoneNumber ?? reservation.Guest?.PhoneNumber)</td>
+                <td>@Html.DisplayFor(item => reservation.Area.Area)</td>
+                <td>@Html.DisplayFor(item => reservation.HighChairs)</td>
+                <td>@Html.DisplayFor(item => reservation.SpecialNotes)</td>
+            </tr>
+        }
+    </tbody>
+</table>
