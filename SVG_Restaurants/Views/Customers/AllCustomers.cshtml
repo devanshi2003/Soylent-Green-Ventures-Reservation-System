@@ -105,7 +105,7 @@
                 @Html.DisplayFor(modelItem => item.LoyaltyPoints)
             </td>
             <td>
-                <a asp-controller="Reservations" class="btn btn-primary" asp-action="Create" asp-route-restaurantID="@rID" asp-route-customerId="@item.CustomerId" asp-route-workerId="@wID">Make Reservation</a>
+                <a asp-controller="Reservations" class="btn btn-primary" asp-action="Create" asp-route-RestaurantId="@rID" asp-route-CustomerId="@item.CustomerId" asp-route-WorkerId="@wID">Make Reservation</a>
             </td>
         </tr>
 }
