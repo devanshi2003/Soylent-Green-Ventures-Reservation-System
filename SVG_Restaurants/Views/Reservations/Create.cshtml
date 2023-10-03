@@ -54,10 +54,17 @@ else
     {
         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
             <span class="font-medium">Your reservation has been created!</span>
-            <a asp-controller="Home" asp-action="Index" asp-route-CustomerId="@cID"><span class="link-primary">Click here</span></a><span> to see your upcoming bookings</span>
+            @if(!string.IsNullOrEmpty(wID))
+            {
+                <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-RestaurantId="@rID" asp-route-WorkerId="@wID"><span class="link-primary">Click here</span></a>
+            }
+            else
+            {
+                <a asp-controller="Home" asp-action="Index" asp-route-CustomerId="@cID"><span class="link-primary">Click here</span></a>
+            }
+            <span> to go to home page, and see your upcoming bookings</span>
         </div>
     }
-
     else 
     {
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
@@ -618,13 +625,21 @@ else
 
                                     document.getElementById('return').style.display = 'inline-block';
 
-                                    window.location.href = '/Home/Index?CustomerId=@cID';
+                                    if(wID != null){
+                                        window.location.href = `/RestaurantWorkers/Home?RestaurantId=${rID}&WorkerId=${wID}`;
+                                    }
+                                    else{
+                                        window.location.href = '/Home/Index?CustomerId=@cID';
+                                    }
 
                                 });
 
                             </script>
 
                             <input type="submit" value="Create" class="btn" id="formButton" style="margin-top: 30px; " />
+                            <script>
+
+                            </script>
                         </div>
                     </form>
                 </div>
@@ -801,8 +816,7 @@ else
 
         const queryParams = new URLSearchParams(window.location.search);
         const restaurantID = queryParams.get("RestaurantId");
-        console.log(restaurantID)
-        console.log(inputElement)
+        console.log(`Restaurant ID is: ${restaurantID}`)
 
         inputElement.addEventListener("change", function () {
             const selectedDateTime = inputElement.value;
