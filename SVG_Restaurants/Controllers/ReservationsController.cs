@@ -407,7 +407,23 @@ namespace SVG_Restaurants.Controllers
                 if (customer != null)
                 {
                     customer.LoyaltyPoints += 50 * item.NumberOfPeople;
+
+                    if (customer.Status != "Gold") {
+                        if (customer.LoyaltyPoints >= 500 && customer.LoyaltyPoints < 1500)
+                        {
+                            customer.Status = "Silver";
+
+                        }
+                        else if (customer.LoyaltyPoints >= 1500)
+                        {
+                            customer.Status = "Gold";
+                        }
+                    }
+                   
+
                     await _context.SaveChangesAsync();
+
+                    
                 }
             }
 
