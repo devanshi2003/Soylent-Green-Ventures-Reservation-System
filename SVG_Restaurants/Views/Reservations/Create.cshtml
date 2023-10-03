@@ -329,7 +329,7 @@ else
                 <div class="col-md-3">
                 </div>
                 <div class="col-md-6">
-                    <form asp-action="Create" method="post" id="form2">
+                    <form asp-action="Create" method="post" asp-route-workerID="@wID"  id="form2">
                         @{
                             string guestID = Context.Request.Query["GuestId"];
                             string workerID = Context.Request.Query["WorkerId"];
@@ -495,12 +495,16 @@ else
                 <div class="col-md-6">
                     <form asp-action="Create" method="post">
 
+
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         @{
                             string customerID = Context.Request.Query["CustomerId"];
                             string restaurantID = Context.Request.Query["restaurantId"];
                         }
+
+                        <input type="hidden" value=@wID name="WorkerId"/>
+
                         <input type="hidden" asp-for="@Model.CustomerId" value=@customerID />
                         <input type="hidden" asp-for="@Model.RestaurantId" value=@restaurantID />
 
