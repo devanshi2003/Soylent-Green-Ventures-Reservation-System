@@ -46,7 +46,7 @@ namespace SVG_Restaurants.Controllers
             if (restaurant != null)
             {
                 // Restaurant with the specified ID was found, you can use it
-                vm.restaurantID = restaurantID;
+                vm.RestaurantId = restaurantID;
                 vm.theRestaurant = restaurant;
                 vm.reservations = _context.Reservations
                     .Include(c => c.Customer)
@@ -113,7 +113,7 @@ namespace SVG_Restaurants.Controllers
 
             if (user != null)
             {
-                ViewBag.WorkerID = user.WorkerId;
+                ViewBag.WorkerId = user.WorkerId;
 
                 if (vm.username == admin.Username)
                 {
@@ -129,7 +129,7 @@ namespace SVG_Restaurants.Controllers
                     }
                 }
                 else {
-                    return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = user.RestaurantId, workerID = user.WorkerId });
+                    return RedirectToAction("Home", "RestaurantWorkers", new { user.RestaurantId, user.WorkerId });
 
                 }
             }

@@ -6,11 +6,11 @@
 @{
 }
 @{
-    string cID = Context.Request.Query["customerID"];
-    string rID = Context.Request.Query["restaurantID"];
-    string gID = Context.Request.Query["GuestID"];
-    string rvID = Context.Request.Query["ReservationID"];
-    string wID = Context.Request.Query["workerID"];
+    string cID = Context.Request.Query["CustomerId"];
+    string rID = Context.Request.Query["RestaurantId"];
+    string gID = Context.Request.Query["GuestId"];
+    string rvID = Context.Request.Query["ReservationId"];
+    string wID = Context.Request.Query["WorkerId"];
 
 }
 
@@ -134,8 +134,8 @@ else
         </div>
     </div>
     <div class="mt-5 flex justify-end gap-x-2">
-        <form asp-action="Complete" asp-route-restaurantID="@Context.Request.Query["restaurantID"]" asp-route-workerID="@Context.Request.Query["workerID"]">
-            <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-restaurantID="@Context.Request.Query["restaurantID"]" asp-route-workerID="@Context.Request.Query["workerID"]" class="py-3 px-4 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">Back to List</a>
+        <form asp-action="Complete" asp-route-RestaurantId="@Context.Request.Query["RestaurantId"]" asp-route-WorkerId="@Context.Request.Query["WorkerId"]">
+            <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-RestaurantId="@Context.Request.Query["RestaurantId"]" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" class="py-3 px-4 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">Back to List</a>
             <input id="formButton1" type="submit" value="Complete" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" />
             <span id="cancel" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
         </form>
