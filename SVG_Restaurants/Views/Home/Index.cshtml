@@ -201,12 +201,23 @@
                             {
                                 @if (ViewBag.LoyaltyPoints >= 500)
                                 {
-                                    <span>
-                                        Congratulations! You are a Silver Tier member!
-                                    </span>
-                                    <span>
-                                        You have <b class="text-orange-500">@sum</b> more points to be Gold Tier.
-                                    </span>
+                                    if (ViewBag.Status == "Gold")
+                                    {
+                                        <span>
+                                            Congratulations! You are a Gold Tier member!
+                                        </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            Congratulations! You are a Silver Tier member!
+                                        </span>
+                                        <span>
+                                            You have <b class="text-orange-500">@sum</b> more points to be Gold Tier.
+                                        </span>
+                                    }
+
                                 }
                                 else
                                 {
@@ -217,9 +228,12 @@
                             }
                             else
                             {
-                                <span>
-                                    Congratulations! You are a Gold Tier member!
-                                </span>
+
+                                    <span>
+                                        Congratulations! You are a Gold Tier member!
+                                    </span>
+                              
+
                             }
                         </p>
 
