@@ -17,46 +17,42 @@
 {
     <div class="alert alert-success">
         @TempData["SuccessMessage"]
-
+        Remaining Points: @Model.customer.LoyaltyPoints
+        <a asp-action="Index" asp-controller="Home" asp-route-customerID="@Model.customer.CustomerId">Back to Home</a>
     </div>
-
-    <p>Gift card will be shown here </p>
 
 // $35 Card 
     @if (TempData["Points"] != null && TempData["Points"].ToString() == "1500")
     {
         <div>
+            <a id="downloadLink" style="display: block;" download="voucher.jpg">Download your Voucher here!</a>
             <img id="voucherImage" src="/img/GoldTierVoucher.png" alt="Voucher Image">
-            <a id="downloadLink" style="display: none;" download="voucher.jpg">Download Voucher</a>
         </div>
 
         <script>
             const imageUrl = "/img/GoldTierVoucher.png";
-        const imageElement = document.getElementById("voucherImage");
-        const downloadLink = document.getElementById("downloadLink");
+            const imageElement = document.getElementById("voucherImage");
+            const downloadLink = document.getElementById("downloadLink");
 
-        const randomNumber = Math.floor(Math.random() * 1000).toString();
+            const randomNumber = Math.floor(Math.random() * 1000).toString();
 
-        downloadLink.href = imageUrl;
-        downloadLink.download = "Voucher_" + randomNumber + ".jpg";
+            downloadLink.href = imageUrl;
+            downloadLink.download = "Voucher_" + randomNumber + ".jpg";
 
-        imageElement.addEventListener("click", function () {
-            // Show the download link when the image is clicked
-            downloadLink.style.display = "block";
-        });
-    </script>
+        </script>
+
     }
 
     //$10 Gift Card
     @if (TempData["Points"] != null && TempData["Points"].ToString() == "500")
     {
         <div>
+            <a id="downloadLink" style="display: block;" download="voucher.jpg">Download your Voucher here!</a>
             <img id="voucherImage" src="/img/SilverTierVoucher.png" alt="Voucher Image">
-            <a id="downloadLink" style="display: none;" download="voucher.jpg">Download Voucher</a>
         </div>
 
         <script>
-            const imageUrl = "/img/GoldTierVoucher.png";
+            const imageUrl = "/img/SilverTierVoucher.png";
             const imageElement = document.getElementById("voucherImage");
             const downloadLink = document.getElementById("downloadLink");
 
