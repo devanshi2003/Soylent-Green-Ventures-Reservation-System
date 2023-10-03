@@ -10,6 +10,9 @@
     body {
     background-color: #A9927D;
     }
+
+
+
 </style>
 
 <div class="text-center">
@@ -171,6 +174,7 @@
             </li>
         }
     </ul>
+  
     @if (Model.CustomerId != 0)
     {
         <div id="loyaltyPoints" style="padding-top: 20px;">
@@ -250,14 +254,14 @@
                             }
                         </p>
 
-                            <button class="bg-orange-500 text-white font-bold py-2 px-4 rounded-full" disabled style="display: inline-flex; align-items: center;">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v-1.5c0 .621.504 1.125 1.125 1.125z" />
-                                </svg>
-                                <div style="padding-left: 10px;">
+                        <button class="bg-orange-500 text-white font-bold py-2 px-4 rounded-full" disabled style="display: inline-flex; align-items: center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v-1.5c0 .621.504 1.125 1.125 1.125z" />
+                            </svg>
+                            <div style="padding-left: 10px;">
                                 <a id="redeemButton">Redeem Points</a>
                             </div>
-                            </button>
+                        </button>
 
                         <script>
                             const redeemButton = document.getElementById("redeemButton");
@@ -492,7 +496,7 @@
                 </div>
 
                 <div class="mt-7">
-                    <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville">
+                    <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville; font-size: 18px;">
                         Bamboo Leaf
                     </h3>
                     <p class="mt-3 mb-2 hover:text-black dark:text-black">
@@ -518,7 +522,7 @@
                 </div>
 
                 <div class="mt-7">
-                    <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville">
+                    <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville; font-size: 18px;">
                         La Oeste De La Mar
                     </h3>
                     <p class="mt-3 mb-2 dark:text-black">
@@ -545,7 +549,7 @@
                 </div>
 
                 <div class="mt-7">
-                    <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville">
+                    <h3 class="text-xl font-semibold text-sm mb-2 dark:text-black" style="font-family: Baskerville ; font-size: 18px;">
                         Mexikana
                     </h3>
                     <p class="mt-3 mb-2 dark:text-black">
@@ -565,9 +569,7 @@
         <!-- End Card Blog -->
     </div>
 
-    <script>
-
-        const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
+    <script>const upcomingBookingsLink = document.getElementById('upcomingBookingsLink');
         const allCards = document.getElementById('allCards');
         const upcomingBookings = document.getElementById('upcomingBookings');
         const loyaltyPoints = document.getElementById('loyaltyPoints');
@@ -609,6 +611,5 @@
 
         allCards.style.display = 'block';
         upcomingBookings.style.display = 'none';
-        loyaltyPoints.style.display = 'none';
-</script>
+        loyaltyPoints.style.display = 'none';</script>
 </body>
