@@ -131,7 +131,15 @@ namespace SVG_Restaurants.Controllers
             {
                 if (customer.LoyaltyPoints >= vm.pointsToRedeem)
                 {
-                   
+
+                    if (vm.pointsToRedeem == 500) {
+                        TempData["Points"] = "500";
+
+                    }
+                    else
+                    {
+                        TempData["Points"] = "1500";
+                    }
                     customer.LoyaltyPoints -= vm.pointsToRedeem;           
 
                     TempData["SuccessMessage"] = "Points redeemed successfully.";

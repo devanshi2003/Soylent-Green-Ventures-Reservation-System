@@ -22,14 +22,16 @@
 
     <p>Gift card will be shown here </p>
 
-    // $35 Card 
-    <div>
-        <img id="voucherImage" src="/img/GoldTierVoucher.png" alt="Voucher Image">
-        <a id="downloadLink" style="display: none;" download="voucher.jpg">Download Voucher</a>
-    </div>
+// $35 Card 
+    @if (TempData["Points"] != null && TempData["Points"].ToString() == "1500")
+    {
+        <div>
+            <img id="voucherImage" src="/img/GoldTierVoucher.png" alt="Voucher Image">
+            <a id="downloadLink" style="display: none;" download="voucher.jpg">Download Voucher</a>
+        </div>
 
-    <script>
-        const imageUrl = "/img/GoldTierVoucher.png";
+        <script>
+            const imageUrl = "/img/GoldTierVoucher.png";
         const imageElement = document.getElementById("voucherImage");
         const downloadLink = document.getElementById("downloadLink");
 
@@ -43,8 +45,32 @@
             downloadLink.style.display = "block";
         });
     </script>
+    }
 
+    //$10 Gift Card
+    @if (TempData["Points"] != null && TempData["Points"].ToString() == "500")
+    {
+        <div>
+            <img id="voucherImage" src="/img/SilverTierVoucher.png" alt="Voucher Image">
+            <a id="downloadLink" style="display: none;" download="voucher.jpg">Download Voucher</a>
+        </div>
 
+        <script>
+            const imageUrl = "/img/GoldTierVoucher.png";
+            const imageElement = document.getElementById("voucherImage");
+            const downloadLink = document.getElementById("downloadLink");
+
+            const randomNumber = Math.floor(Math.random() * 1000).toString();
+
+            downloadLink.href = imageUrl;
+            downloadLink.download = "Voucher_" + randomNumber + ".jpg";
+
+            imageElement.addEventListener("click", function () {
+                // Show the download link when the image is clicked
+                downloadLink.style.display = "block";
+            });
+        </script>
+    }
 }
 
 else
@@ -69,14 +95,14 @@ else
 
                                 <div class="flex">
                                     <input type="checkbox" class="checkbox" id="hs-default-checkbox" value="500">
-                                    <label for="hs-default-checkbox" class="text-sm text-gray-500 ml-3 dark:text-gray-400"> $10 Gift Card</label>
+                                    <label for="hs-default-checkbox" class="text-sm text-gray-500 ml-3 dark:text-gray-400"> $10 Voucher</label>
                                 </div>
 
                                 @if (Model.customer.LoyaltyPoints >= 1500)
                                 {
                                     <div class="flex">
                                         <input type="checkbox" class="checkbox" id="hs-checked-checkbox" value="1500">
-                                        <label for="hs-checked-checkbox" class="text-sm text-gray-500 ml-3 dark:text-gray-400"> $35 Gift Card</label>
+                                        <label for="hs-checked-checkbox" class="text-sm text-gray-500 ml-3 dark:text-gray-400"> $35 Voucher</label>
                                     </div>
 
                                 }
