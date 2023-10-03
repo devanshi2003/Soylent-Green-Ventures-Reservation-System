@@ -46,7 +46,7 @@ namespace SVG_Restaurants.Controllers
             if (restaurant != null)
             {
                 // Restaurant with the specified ID was found, you can use it
-                vm.restaurantID = restaurantID;
+                vm.RestaurantId = restaurantID;
                 vm.theRestaurant = restaurant;
                 vm.reservations = _context.Reservations
                     .Include(c => c.Customer)
@@ -54,7 +54,8 @@ namespace SVG_Restaurants.Controllers
                     .Include(r => r.Restaurant)
                     .Include(d => d.Area)
                     .Include(b => b.Banquet)
-                    .Where(r => r.RestaurantId == restaurantID)
+                    .Where(r => r.RestaurantId == restaurantID && r.Completed == false)
+                    .OrderBy(d => d.ReservationTiming)
                     .ToList();
 
                 // Return reservations that match search by name
@@ -74,6 +75,55 @@ namespace SVG_Restaurants.Controllers
                         );
 
                     vm.reservations = reservationQuery.ToList();
+                }
+                return View(vm);
+            }
+            else
+            {
+                // No matching restaurant was found, handle it accordingly
+                return NotFound(); // or any other action/result
+            }
+
+        }
+
+        public async Task<IActionResult> CompletedReservations(RestaurantReservationVM vm, int restaurantID)
+        {
+
+            var restaurant = await _context.Restaurants
+            .Where(c => c.RestaurantId == restaurantID)
+            .FirstOrDefaultAsync();
+
+            if (restaurant != null)
+            {
+                // Restaurant with the specified ID was found, you can use it
+                vm.RestaurantId = restaurantID;
+                vm.theRestaurant = restaurant;
+                vm.reservations = _context.Reservations
+                    .Include(c => c.Customer)
+                    .Include(g => g.Guest)
+                    .Include(r => r.Restaurant)
+                    .Include(d => d.Area)
+                    .Include(b => b.Banquet)
+                    .Where(r => r.RestaurantId == restaurantID && r.Completed == true)
+                    .ToList();
+
+                // Return reservations that match search by name
+                if (!string.IsNullOrEmpty(vm.nameSearch))
+                {
+                    var reservationQuery = vm.reservations
+                        .Where(c =>
+                            (
+                                (c.Customer?.FirstName != null && c.Customer?.LastName != null &&
+                                (c.Customer.FirstName + " " + c.Customer.LastName)
+                                    .IndexOf(vm.nameSearch, StringComparison.OrdinalIgnoreCase) >= 0)
+                                ||
+                                (c.Guest?.FirstName != null && c.Guest?.LastName != null &&
+                                (c.Guest.FirstName + " " + c.Guest.LastName)
+                                    .IndexOf(vm.nameSearch, StringComparison.OrdinalIgnoreCase) >= 0)
+                            )
+                        );
+
+                    vm.reservations = reservationQuery.Where(c=> c.Completed == true).ToList();
                 }
                 return View(vm);
             }
@@ -113,7 +163,7 @@ namespace SVG_Restaurants.Controllers
 
             if (user != null)
             {
-                ViewBag.WorkerID = user.WorkerId;
+                ViewBag.WorkerId = user.WorkerId;
 
                 if (vm.username == admin.Username)
                 {
@@ -129,7 +179,7 @@ namespace SVG_Restaurants.Controllers
                     }
                 }
                 else {
-                    return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = user.RestaurantId, workerID = user.WorkerId });
+                    return RedirectToAction("Home", "RestaurantWorkers", new { user.RestaurantId, user.WorkerId });
 
                 }
             }

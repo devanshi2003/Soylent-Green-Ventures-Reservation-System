@@ -110,7 +110,7 @@
             <!-- End Grid -->
 
             <div class="mt-5 flex justify-end gap-x-2">
-                <a asp-controller="Home" asp-action="Index" asp-route-customerID="@Model.CustomerId" id="backbtn"class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                <a asp-controller="Home" asp-action="Index" asp-route-CustomerId="@Model.CustomerId" id="backbtn"class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
                     Go back
                     <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
                 </a>
@@ -121,7 +121,7 @@
 
                         document.getElementById('loading').style.display = 'inline-block';
 
-                        window.location.href = '/Home/Index?customerID=@Model.CustomerId';
+                        window.location.href = '/Home/Index?CustomerId=@Model.CustomerId';
 
                     });
 

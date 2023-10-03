@@ -11,12 +11,11 @@
     </style>*@
 
 @{
-    string cID = Context.Request.Query["customerID"];
-    string rID = Context.Request.Query["restaurantID"];
-    string gID = Context.Request.Query["GuestID"];
-    string rvID = Context.Request.Query["ReservationID"];
-    string wID = Context.Request.Query["workerID"];
-
+    string cID = Context.Request.Query["CustomerId"];
+    string rID = Context.Request.Query["RestaurantId"];
+    string gID = Context.Request.Query["GuestId"];
+    string rvID = Context.Request.Query["ReservationId"];
+    string wID = Context.Request.Query["WorkerId"];
 }
 
 @if (rID == "1")
@@ -68,28 +67,40 @@ else
 
                         <div>
                             <div class="inline-flex gap-x-2">
-                                <a  class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-blue text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
-                                    Modify Reservation
-                                </a>
-
-                                <a href="@Url.Action("Create", "Guests", new { restaurantID = rID, workerID = wID })" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-medium bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                <a href="@Url.Action("AllCustomers", "Customers", new { RestaurantId = rID, WorkerId = wID })" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-medium bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                     <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                         <path d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                                     </svg>
-                                    Make a Reservation
+                                    Make a Reservation for Customer
                                 </a>
-
-
-                                <a asp-controller="Home" asp-action="Index" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
-                                    Log out
+                                <a href="@Url.Action("Create", "Guests", new { RestaurantId = rID, WorkerId = wID })" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-medium bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                    <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                    </svg>
+                                    Make a Reservation for Guest
                                 </a>
+                                <a asp-controller="RestaurantWorkers" asp-action="CompletedReservations" asp-route-restaurantID="@rID" asp-route-workerID="@wID" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                    View Completed Reservations
+                                 </a>
+                                @if(wID == "25")
+                                {
+                                    <a asp-controller="RestaurantWorkers" asp-action="Admin" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                        Go back
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Home" asp-action="Index" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                        Log out
+                                    </a>
+                                }
                             </div>
                         </div>
                     </div>
                     <!-- End Header -->
 
                     <!-- Search form -->
-                    <form method="post" asp-controller="RestaurantWorkers" asp-action="Home" asp-route-restaurantID="@Model.restaurantID" asp-route-workerID="@Context.Request.Query["workerID"]" class="row mt-4 mb-4 px-6">
+                    <form method="post" asp-controller="RestaurantWorkers" asp-action="Home" asp-route-RestaurantId="@Model.RestaurantId" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" class="row mt-4 mb-4 px-6">
                         <div class="col-2 ">
                             <input asp-for="@Model.nameSearch" placeholder="Enter customer name..." class="form-control"
                                    title="Search for customer by name" />
@@ -248,6 +259,9 @@ else
                 High Chairs
             </th>
             <th>
+                Status
+            </th>
+            <th>
                 Special Notes
             </th>
             <th class="text-center">
@@ -269,20 +283,21 @@ else
                 <td>@(reservation.Customer?.PhoneNumber ?? reservation.Guest?.PhoneNumber)</td>
                 <td>@Html.DisplayFor(item => reservation.Area.Area)</td>
                 <td>@Html.DisplayFor(item => reservation.HighChairs)</td>
+                <td>@(reservation.Customer != null ? reservation.Customer.Status : "Guest")</td>
                 <td>@Html.DisplayFor(item => reservation.SpecialNotes)</td>
                 <td>
                     <div class="relative flex px-2">
-                        <a asp-controller="Reservations" asp-action="Edit" asp-route-id="@reservation.ReservationId" asp-route-restaurantID="@reservation.RestaurantId" asp-route-workerID="@Context.Request.Query["workerID"]" class="px-2" title="Edit">
+                        <a asp-controller="Reservations" asp-action="Edit" asp-route-id="@reservation.ReservationId" asp-route-RestaurantId="@reservation.RestaurantId" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" class="px-2" title="Edit">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                             </svg>
                         </a>
-                        <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@reservation.ReservationId" asp-route-restaurantID="@reservation.RestaurantId" asp-route-workerID="@Context.Request.Query["workerID"]" class="px-2" title="Delete">
+                        <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@reservation.ReservationId" asp-route-RestaurantId="@reservation.RestaurantId" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" class="px-2" title="Delete">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                             </svg>
                         </a>
-                        <a asp-controller="Reservations" asp-action="Complete" asp-route-id="@reservation.ReservationId" asp-route-restaurantID="@reservation.RestaurantId" asp-route-workerID="@Context.Request.Query["workerID"]" >
+                        <a asp-controller="Reservations" asp-action="Complete" asp-route-id="@reservation.ReservationId" asp-route-RestaurantId="@reservation.RestaurantId" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>

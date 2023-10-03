@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Redeem";
-    string cID = Context.Request.Query["customerID"];
+    string cID = Context.Request.Query["CustomerId"];
 
 }
 
@@ -17,11 +17,56 @@
 {
     <div class="alert alert-success">
         @TempData["SuccessMessage"]
+        Remaining Points: @Model.customer.LoyaltyPoints
+        <a asp-action="Index" asp-controller="Home" asp-route-CustomerId="@Model.customer.CustomerId">Back to Home</a>
     </div>
 
-    <p>Gift card will be shown here </p>
-    // SHOW THE GIFT CARD HERE
+// $35 Card 
+    @if (TempData["Points"] != null && TempData["Points"].ToString() == "1500")
+    {
+        <div>
+            <a id="downloadLink" style="display: block;" download="voucher.jpg">Download your Voucher here!</a>
+            <img id="voucherImage" src="/img/GoldTierVoucher.png" alt="Voucher Image">
+        </div>
 
+        <script>
+            const imageUrl = "/img/GoldTierVoucher.png";
+            const imageElement = document.getElementById("voucherImage");
+            const downloadLink = document.getElementById("downloadLink");
+
+            const randomNumber = Math.floor(Math.random() * 1000).toString();
+
+            downloadLink.href = imageUrl;
+            downloadLink.download = "Voucher_" + randomNumber + ".jpg";
+
+        </script>
+
+    }
+
+    //$10 Gift Card
+    @if (TempData["Points"] != null && TempData["Points"].ToString() == "500")
+    {
+        <div>
+            <a id="downloadLink" style="display: block;" download="voucher.jpg">Download your Voucher here!</a>
+            <img id="voucherImage" src="/img/SilverTierVoucher.png" alt="Voucher Image">
+        </div>
+
+        <script>
+            const imageUrl = "/img/SilverTierVoucher.png";
+            const imageElement = document.getElementById("voucherImage");
+            const downloadLink = document.getElementById("downloadLink");
+
+            const randomNumber = Math.floor(Math.random() * 1000).toString();
+
+            downloadLink.href = imageUrl;
+            downloadLink.download = "Voucher_" + randomNumber + ".jpg";
+
+            imageElement.addEventListener("click", function () {
+                // Show the download link when the image is clicked
+                downloadLink.style.display = "block";
+            });
+        </script>
+    }
 }
 
 else
@@ -43,11 +88,24 @@ else
                                 <label for="af-submit-app-project-name" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
                                     Points Available: @Model.customer.LoyaltyPoints
                                 </label>
-                                <div class="space-y-2">
-                                    <p class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200"> Redeem points for dollars: </p>
-                                    <input type="range" id="pointSlider" asp-for="dollarsToRedeem" class="custom-slider" min="10" max="@(Model.customer.LoyaltyPoints / 50)" step="10" value="10">
-                                    <input type="text" id="selectedPoints" readonly>
+
+                                <div class="flex">
+                                    <input type="checkbox" class="checkbox" id="hs-default-checkbox" value="500">
+                                    <label for="hs-default-checkbox" class="text-sm text-gray-500 ml-3 dark:text-gray-400"> $10 Voucher</label>
                                 </div>
+
+                                @if (Model.customer.LoyaltyPoints >= 1500)
+                                {
+                                    <div class="flex">
+                                        <input type="checkbox" class="checkbox" id="hs-checked-checkbox" value="1500">
+                                        <label for="hs-checked-checkbox" class="text-sm text-gray-500 ml-3 dark:text-gray-400"> $35 Voucher</label>
+                                    </div>
+
+                                }
+
+                                <input type="hidden" id="points" name="pointsToRedeem" asp-for="pointsToRedeem" readonly>
+
+
                             </div>
                             <div class="mt-5 flex justify-center gap-x-2">
                                 <button type="submit" class="bg-orange-500 text-white font-bold py-2 px-4 rounded-full"  style="display: inline-flex; align-items: center;">
@@ -64,16 +122,22 @@ else
 
 }
 
-
 <script>
-    const slider = document.getElementById("pointSlider");
-    const selectedPoints = document.getElementById("selectedPoints");
+    const checkboxes = document.querySelectorAll('.checkbox');
+    const pointsToRedeemInput = document.getElementById('points');
 
-    // Set the initial value of the input field
-    selectedPoints.value = slider.value;
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', function () {
+            // Uncheck all other checkboxes
+            checkboxes.forEach((otherCheckbox) => {
+                if (otherCheckbox !== this) {
+                    otherCheckbox.checked = false;
+                }
+            });
 
-    slider.addEventListener("input", () => {
-        const value = slider.value;
-        selectedPoints.value = value;
+            // Update the hidden input with the selected checkbox value
+            pointsToRedeemInput.value = this.value;
+        });
     });
+
 </script>

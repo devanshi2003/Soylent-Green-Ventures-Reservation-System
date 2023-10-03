@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -54,8 +55,8 @@ namespace SVG_Restaurants.Controllers
         // GET: Reservations/Create
         public IActionResult Create()
         {
-            string rID = Request.Query["restaurantID"];
-            string wID = Request.Query["workerID"];
+            string rID = Request.Query["RestaurantId"];
+            string wID = Request.Query["WorkerId"];
             ViewBag.wID = wID;
 
             int parsedrID;
@@ -143,18 +144,18 @@ namespace SVG_Restaurants.Controllers
 
                         var totalPeople = sumOfNumberOfPeople + reservation.NumberOfPeople;
                         var restaurant = await _context.Restaurants.Where(c => c.RestaurantId == reservation.RestaurantId).FirstOrDefaultAsync();
-                        var workerID = form["workerID"];
+                        var WorkerId = form["WorkerId"];
 
                         if (totalPeople <= restaurant.SeatCapacity)
-                        {                          
-
+                        {
+                            reservation.Completed = false;
                             // Add the reservation to the database
                             _context.Add(reservation); // Add the reservation entity, not the ViewModel
                             await _context.SaveChangesAsync(); // Save changes to the database
 
-                            if (!string.IsNullOrEmpty(workerID))
+                            if (!string.IsNullOrEmpty(WorkerId))
                             {
-                                return RedirectToAction("Home", "RestaurantWorkers", new {reservation.RestaurantId, workerID = ViewBag.workerID});
+                                return RedirectToAction("Home", "RestaurantWorkers", new {RestaurantId = reservation.RestaurantId, WorkerId = WorkerId});
                             }
 
                             else if (reservation.CustomerId == null)
@@ -164,7 +165,7 @@ namespace SVG_Restaurants.Controllers
                             }                     
                             else
                             {
-                                return RedirectToAction("Create", "Reservations", new { customerID = reservation.CustomerId, restaurantID = reservation.RestaurantId, reservationID = reservation.ReservationId });
+                                return RedirectToAction("Create", "Reservations", new { reservation.CustomerId, reservation.RestaurantId, reservation.ReservationId });
                             }
                             }
 
@@ -255,7 +256,7 @@ namespace SVG_Restaurants.Controllers
                 return NotFound();
             }
 
-            string rID = Request.Query["restaurantID"];
+            string rID = Request.Query["RestaurantId"];
             int parsedrID;
 
             var diningAreas = _context.DiningAreas.ToList();
@@ -301,7 +302,7 @@ namespace SVG_Restaurants.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReservationId,CustomerId,GuestId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople,HighChairs,SpecialNotes")] Reservation reservation, int? workerID)
+        public async Task<IActionResult> Edit(int id, [Bind("ReservationId,CustomerId,GuestId,RestaurantId,AreaId,ReservationTiming,BanquetId,NumberOfPeople,HighChairs,SpecialNotes")] Reservation reservation, int? WorkerId)
         {
             ViewBag.updateSuccess = false;
             if (id != reservation.ReservationId)
@@ -316,9 +317,9 @@ namespace SVG_Restaurants.Controllers
                     _context.Update(reservation);
                     await _context.SaveChangesAsync();
                     ViewBag.updateSuccess = true;
-                    if(workerID.HasValue)
+                    if(WorkerId.HasValue)
                     {
-                        ViewBag.workerID = workerID;
+                        ViewBag.WorkerID = WorkerId;
                     }
                 }
                 catch (DbUpdateConcurrencyException)
@@ -370,7 +371,7 @@ namespace SVG_Restaurants.Controllers
             {
                 return NotFound();
             }
-            ViewBag.WorkerID = workerID;
+            ViewBag.WorkerId = workerID;
 
             var reservation = await _context.Reservations
                 .Include(r => r.Area)
@@ -393,6 +394,7 @@ namespace SVG_Restaurants.Controllers
         {
             var item = await _context.Reservations
                 .FindAsync(id);
+
             if (item == null)
             {
                 return NotFound();
@@ -407,16 +409,38 @@ namespace SVG_Restaurants.Controllers
                 if (customer != null)
                 {
                     customer.LoyaltyPoints += 50 * item.NumberOfPeople;
+
+                    if (customer.Status != "Gold") {
+                        if (customer.LoyaltyPoints >= 500 && customer.LoyaltyPoints < 1500)
+                        {
+                            customer.Status = "Silver";
+
+                        }
+                        else if (customer.LoyaltyPoints >= 1500)
+                        {
+                            customer.Status = "Gold";
+                        }
+                    }
+                   
+
                     await _context.SaveChangesAsync();
+
+                    
                 }
             }
 
-            var workerID = HttpContext.Request.Query["workerID"];
-            var restaurantID = HttpContext.Request.Query["restaurantID"];
+            var reservation = await _context.Reservations
+                .Where(r => r.ReservationId == id)
+                .FirstOrDefaultAsync();
 
-            _context.Reservations.Remove(item);
+            reservation.Completed = true; 
+
+            var WorkerId = HttpContext.Request.Query["WorkerId"];
+            var RestaurantId = HttpContext.Request.Query["RestaurantId"];
+
+            //_context.Reservations.Remove(item);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = restaurantID, workerID = workerID });
+            return RedirectToAction("Home", "RestaurantWorkers", new { RestaurantId, WorkerId });
         }
 
         // POST: Reservations/Delete/5
@@ -434,15 +458,15 @@ namespace SVG_Restaurants.Controllers
             {
                 customerId = (int)reservation.CustomerId;
             }
-            var workerID = HttpContext.Request.Query["workerID"];
-            var restaurantID = HttpContext.Request.Query["restaurantID"];
+            var WorkerId = HttpContext.Request.Query["WorkerId"];
+            var RestaurantId = HttpContext.Request.Query["RestaurantId"];
 
             _context.Reservations.Remove(reservation);
             await _context.SaveChangesAsync();
 
-            if (!string.IsNullOrEmpty(workerID))
+            if (!string.IsNullOrEmpty(WorkerId))
             {
-                return RedirectToAction("Home", "RestaurantWorkers", new { restaurantID = restaurantID, workerID = workerID });
+                return RedirectToAction("Home", "RestaurantWorkers", new { RestaurantId, WorkerId });
             }
 
             //return RedirectToAction(nameof(Index));

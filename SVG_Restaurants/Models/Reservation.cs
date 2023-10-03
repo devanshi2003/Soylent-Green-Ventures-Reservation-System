@@ -17,6 +17,9 @@ namespace SVG_Restaurants.Models
         [Required(ErrorMessage = "{0} is required.")]
         public int? AreaId { get; set; }
 
+        public bool? Completed { get; set; }
+
+
         [Display(Name = "Reservation Time")]
         [Required(ErrorMessage = "{0} is required.")]
         public DateTime? ReservationTiming { get; set; }
@@ -65,3 +68,4 @@ namespace SVG_Restaurants.Models
         }
     }
 }
+

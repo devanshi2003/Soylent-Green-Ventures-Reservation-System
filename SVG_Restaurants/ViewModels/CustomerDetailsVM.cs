@@ -4,7 +4,7 @@ namespace SVG_Restaurants.ViewModels
 {
     public class CustomerDetailsVM
     {
-        public int CustomerID { get; set; }
+        public int CustomerId { get; set; }
         public IEnumerable<Reservation>? Reservations { get; set; }
     }
 }

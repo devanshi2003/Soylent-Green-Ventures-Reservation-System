@@ -24,7 +24,7 @@ namespace SVG_Restaurants.Controllers
         {
             if(CustomerID.HasValue)
             {
-                vm.CustomerID = CustomerID;
+                vm.CustomerId = CustomerID;
             }
             vm.RestaurantId = RestaurantId;
 
@@ -37,7 +37,7 @@ namespace SVG_Restaurants.Controllers
         {
             if (CustomerID.HasValue)
             {
-                vm.CustomerID = CustomerID;
+                vm.CustomerId = CustomerID;
             }
             vm.RestaurantId = RestaurantId;
 
@@ -51,7 +51,7 @@ namespace SVG_Restaurants.Controllers
         {
             if (CustomerID.HasValue)
             {
-                vm.CustomerID = CustomerID;
+                vm.CustomerId = CustomerID;
             }
             vm.RestaurantId = RestaurantId;
 

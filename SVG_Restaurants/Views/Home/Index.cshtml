@@ -8,7 +8,7 @@
 </head>
 <style type="text/css">
     body {
-        background-color: #A9927D;
+    background-color: #A9927D;
     }
 
 
@@ -24,7 +24,7 @@
     <div class="row justify-content-end">
         @{
             // Display Login buttons if customerID is not present
-            if (@Model.CustomerID == 0)
+            if (@Model.CustomerId == 0)
             {
                 <div class="col-auto">
                     <a asp-controller="Customers" id="customerLogin" asp-action="Login" class="btn btn-outline">
@@ -35,11 +35,11 @@
                 </div>
                 <script>document.getElementById('customerLogin').addEventListener('click', function (e) {
 
-                        this.disabled = true;
+                    this.disabled = true;
 
-                        document.getElementById('login').style.display = 'inline-block';
+                    document.getElementById('login').style.display = 'inline-block';
 
-                        window.location.href = '/Customers/Login';
+                    window.location.href = '/Customers/Login';
 
                     });</script>
 
@@ -52,18 +52,18 @@
                 </div>
                 <script>document.getElementById('sLogin').addEventListener('click', function (e) {
 
-                        this.disabled = true;
+                    this.disabled = true;
 
-                        document.getElementById('staffLogin').style.display = 'inline-block';
+                    document.getElementById('staffLogin').style.display = 'inline-block';
 
-                        window.location.href = '/RestaurantWorkers/Login';
+                    window.location.href = '/RestaurantWorkers/Login';
 
                     });</script>
             }
             else
             {
                 <div class="col-auto">
-                    <a asp-controller="Customers" id="delete" asp-action="Delete" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">
+                    <a asp-controller="Customers" id="delete" asp-action="Delete" asp-route-CustomerId="@Context.Request.Query["CustomerId"]" class="btn btn-outline">
                         Delete Account
                         <span id="deletebtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
 
@@ -73,18 +73,19 @@
                 <script>
                     document.getElementById('delete').addEventListener('click', function (e) {
 
-                        this.disabled = true;
+                    this.disabled = true;
 
-                        document.getElementById('deletebtn').style.display = 'inline-block';
+                    document.getElementById('deletebtn').style.display = 'inline-block';
 
-                        window.location.href = '/Customers/Delete?customerID="@Context.Request.Query["CustomerID"]';
+
+                        window.location.href = '/Customers/Delete?CustomerId="@Context.Request.Query["CustomerId"]';
 
                     });
 
                 </script>
 
                 <div class="col-auto">
-                    <a asp-controller="Customers" id="edit" asp-action="Edit" asp-route-customerID="@Context.Request.Query["CustomerID"]" class="btn btn-outline">
+                    <a asp-controller="Customers" id="edit" asp-action="Edit" asp-route-CustomerId="@Context.Request.Query["CustomerId"]" class="btn btn-outline">
                         Edit Profile
                         <span id="editbtn" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
 
@@ -94,11 +95,12 @@
                 <script>
                     document.getElementById('edit').addEventListener('click', function (e) {
 
-                        this.disabled = true;
+                    this.disabled = true;
 
-                        document.getElementById('editbtn').style.display = 'inline-block';
+                    document.getElementById('editbtn').style.display = 'inline-block';
 
-                        window.location.href = '/Customers/Edit?customerID="@Context.Request.Query["CustomerID"]';
+
+                        window.location.href = '/Customers/Edit?CustomerId="@Context.Request.Query["CustomerId"]';
 
                     });
 
@@ -113,20 +115,20 @@
                 </div>
                 <script>document.getElementById('logOut').addEventListener('click', function (e) {
 
-                        this.disabled = true;
+                    this.disabled = true;
 
-                        document.getElementById('loading').style.display = 'inline-block';
+                    document.getElementById('loading').style.display = 'inline-block';
 
-                        window.location.href = '/Home/Index';
+                    window.location.href = '/Home/Index';
 
                     });</script>
             }
         }
     </div>
 
-    @if (Model.CustomerID != 0)
+    @if (Model.CustomerId != 0)
     {
-        if (ViewBag.LoyaltyPoints == 1500)
+        if (ViewBag.LoyaltyPoints >= 1500 || ViewBag.Status == "Gold")
         {
             <div style="background-color: rgba(255, 255, 255, 0.75); display: inline-block; border-radius: 10px; padding: 5px;">
                 <div class="uppercase tracking-wide text-2xl text-yellow-500 font-semibold font-bold" style="padding: 5px;">Gold Tier</div>
@@ -143,7 +145,7 @@
                 <div style="padding-right: 15px">
                     <h2 class="flex items-center text-2xl font-extrabold text-black">Welcome, @ViewBag.CustomerName</h2>
                 </div>
-                @if (ViewBag.LoyaltyPoints == 1500)
+                @if (ViewBag.LoyaltyPoints >= 1500)
                 {
                     <svg width="50" height="50" viewBox="0 0 140 140">
                         <path fill="gold">
@@ -165,18 +167,15 @@
         <li class="nav-item">
             <a id="upcomingBookingsLink" class="nav-link active btn-outline" aria-current="page" href="#">Upcoming Bookings</a>
         </li>
-        @if (Model.CustomerID != 0)
+        @if (Model.CustomerId != 0)
         {
             <li class="nav-item">
-                <a id="loyaltyPointsLink" class="nav-link active btn-outline" aria-current="page" href="#">LoyaltyPoints</a>
+                <a id="loyaltyPointsLink" class="nav-link active btn-outline" aria-current="page" href="#">Loyalty Points</a>
             </li>
         }
     </ul>
-
-
-
-
-    @if (Model.CustomerID != 0)
+  
+    @if (Model.CustomerId != 0)
     {
         <div id="loyaltyPoints" style="padding-top: 20px;">
             <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
@@ -208,25 +207,50 @@
                             {
                                 @if (ViewBag.LoyaltyPoints >= 500)
                                 {
-                                    <span>
-                                        Congratulations! You are a Silver Tier member!
-                                    </span>
-                                    <span>
-                                        You have <b class="text-orange-500">@sum</b> more points to be Gold Tier.
-                                    </span>
+                                    if (ViewBag.Status == "Gold")
+                                    {
+                                        <span>
+                                            Congratulations! You are a Gold Tier member!
+                                        </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            Congratulations! You are a Silver Tier member!
+                                        </span>
+                                        <span>
+                                            You have <b class="text-orange-500">@sum</b> more points to be Gold Tier.
+                                        </span>
+                                    }
+
                                 }
                                 else
                                 {
-                                    <span>
-                                        <b class="text-orange-500">@silverSum</b> more points to be Silver Tier.
-                                    </span>
+                                    if (ViewBag.Status == "Gold")
+                                    {
+                                        <span>
+                                            Congratulations! You are a Gold Tier member!
+                                        </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            <b class="text-orange-500">@silverSum</b> more points to be Silver Tier.
+                                        </span>
+                                    }
+
                                 }
                             }
                             else
                             {
+
                                 <span>
                                     Congratulations! You are a Gold Tier member!
                                 </span>
+                              
+
                             }
                         </p>
 
@@ -246,40 +270,8 @@
                                 if (@loyaltyPoints <500) {
                                     alert("You don't have enough points to redeem.");
                                 }
-                                else if (@loyaltyPoints >= 1500) {
-                                    const imageUrl = "/img/GoldTierVoucher.png";
-
-                                    const link = document.createElement("a");
-                                    link.href = imageUrl;
-
-                                    const randomNumber = Math.floor(Math.random() * 1000).toString();
-
-                                    link.download = "Voucher_" + randomNumber + ".jpg";
-
-                                    document.body.appendChild(link);
-
-                                    link.click();
-
-                                    document.body.removeChild(link);
-                                    window.location.href = `/Customers/Redeem?customerID=@Model.CustomerID`;
-                                }
                                 else {
-                                    const imageUrl = "/img/SilverTierVoucher.png";
-
-                                    const link = document.createElement("a");
-                                    link.href = imageUrl;
-
-                                    const randomNumber = Math.floor(Math.random() * 1000).toString();
-
-                                    link.download = "Voucher_" + randomNumber + ".jpg";
-
-                                    document.body.appendChild(link);
-
-                                    link.click();
-
-                                    document.body.removeChild(link);
-
-                                    window.location.href = `/Customers/Redeem?customerID=@Model.CustomerID`;
+                                    window.location.href = `/Customers/Redeem?CustomerId=@Model.CustomerId`;
                                 }
                             });
 
@@ -416,7 +408,7 @@
         </div>
     }
     @{
-        if (Model.CustomerID == 0)
+        if (Model.CustomerId == 0)
         {
             <div class="text-center">
                 <div id="upcomingBookings">
@@ -442,12 +434,12 @@
 
                                 <div class="flex flex-col justify-center items-center h-[30vh]">
                                     <div class="relative flex flex-col items-center rounded-[20px] w-[700px] max-w-[95%] mx-auto bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:!shadow-none p-3">
-                                        <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@reservation.ReservationId" asp-route-restaurantID="@reservation.RestaurantId" asp-route-customerID="@Model.CustomerID" class="absolute top-2 right-2">
+                                        <a asp-controller="Reservations" asp-action="Delete" asp-route-id="@reservation.ReservationId" asp-route-RestaurantId="@reservation.RestaurantId" asp-route-CustomerId="@Model.CustomerId" class="absolute top-2 right-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                             </svg>
                                         </a>
-                                        <a asp-controller="Reservations" asp-action="Edit" asp-route-id="@reservation.ReservationId" asp-route-restaurantID="@reservation.RestaurantId" asp-route-customerID="@Model.CustomerID" class="absolute top-8 right-2">
+                                        <a asp-controller="Reservations" asp-action="Edit" asp-route-id="@reservation.ReservationId" asp-route-RestaurantId="@reservation.RestaurantId" asp-route-CustomerId="@Model.CustomerId" class="absolute top-8 right-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                             </svg>
@@ -493,9 +485,9 @@
     <!-- Card Blog -->
     <div id="allCards" class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <!-- Grid -->
-        <div class="row">
+        <div class="row" style="gap: 20px;">
             <!-- Card -->
-            <a asp-controller="Restaurants" asp-action="BambooLeaf" asp-route-customerID="@Context.Request.Query["CustomerID"]" asp-route-restaurantID="1" class="col-4 group rounded-xl overflow-hidden" style="width: 380px" id="restaurantCard">
+            <a asp-controller="Restaurants" asp-action="BambooLeaf" asp-route-CustomerId="@Context.Request.Query["CustomerId"]" asp-route-RestaurantId="1" class="col-4 group rounded-xl overflow-hidden" style="width: 380px; padding: 0; margin: 0;" id="restaurantCard">
                 <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
                     <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:text-black group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Bamboo Restaurant.jpg" alt="Image Description">
                     <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
@@ -524,7 +516,7 @@
             <!-- End Card -->
             <div class="custom-col" style="width: 10px"></div>
             <!-- Card -->
-            <a asp-controller="Restaurants" asp-action="LaOeste" asp-route-customerID="@Context.Request.Query["CustomerID"]" asp-route-restaurantID="2" class="col-4 group rounded-xl overflow-hidden" style="width: 380px" id="restaurantCard">
+            <a asp-controller="Restaurants" asp-action="LaOeste" asp-route-CustomerId="@Context.Request.Query["CustomerId"]" asp-route-RestaurantId="2" class="col-4 group rounded-xl overflow-hidden" style="width: 380px; padding: 0; margin: 0;" id="restaurantCard">
                 <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
                     <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Brazilian Restaurant.jpg" alt="Image Description">
                 </div>
@@ -548,7 +540,7 @@
             <!-- End Card -->
             <div class="custom-col" style="width: 10px"></div>
             <!-- Card -->
-            <a asp-controller="Restaurants" asp-action="Mexikana" asp-route-customerID="@Context.Request.Query["CustomerID"]" asp-route-restaurantID="3" style="width: 380px" class="col-4 group rounded-xl overflow-hidden" id="restaurantCard">
+            <a asp-controller="Restaurants" asp-action="Mexikana" asp-route-CustomerId="@Context.Request.Query["CustomerId"]" asp-route-RestaurantId="3" style="width: 380px; padding: 0; margin: 0;" class="col-4 group rounded-xl overflow-hidden" id="restaurantCard">
                 <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
                     <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Mexican Restaurant.jpg" alt="Image Description">
                     <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">

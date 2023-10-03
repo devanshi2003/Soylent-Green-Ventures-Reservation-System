@@ -33,8 +33,30 @@ namespace SVG_Restaurants.Controllers
             //return View("Login");
         }
 
-        // GET: Customers
-        public async Task<IActionResult> Index(UserCredentialsVM vm)
+        public async Task<IActionResult> AllCustomers(string nameSearch)
+        {
+            var users = await _context.Customers.ToListAsync();
+
+            if (!string.IsNullOrEmpty(nameSearch))
+            {
+                users = users.Where(c =>
+                    (
+                        c.FirstName != null && c.LastName != null &&
+                        (c.FirstName + " " + c.LastName).IndexOf(nameSearch, StringComparison.OrdinalIgnoreCase) >= 0
+                    ) ||
+                    (
+                        c.FirstName != null && c.FirstName.Contains(nameSearch, StringComparison.OrdinalIgnoreCase)
+                    ) ||
+                    (
+                        c.LastName != null && c.LastName.Contains(nameSearch, StringComparison.OrdinalIgnoreCase)
+                    )
+                ).ToList();
+            }
+
+            return View(users);
+        }
+            // GET: Customers
+            public async Task<IActionResult> Index(UserCredentialsVM vm)
         {
 
             // Check if a user with the provided username and password exists
@@ -44,12 +66,12 @@ namespace SVG_Restaurants.Controllers
 
             if (user != null)
             {
-                if (!string.IsNullOrEmpty(vm.restaurantID))
+                if (!string.IsNullOrEmpty(vm.RestaurantId))
                 {
 
-                    return RedirectToAction("Create", "Reservations", new { customerID = user.CustomerId, vm.restaurantID });
+                    return RedirectToAction("Create", "Reservations", new { user.CustomerId, vm.RestaurantId });
                 }
-                return RedirectToAction("Index", "Home", new { customerID = user.CustomerId });
+                return RedirectToAction("Index", "Home", new { user.CustomerId });
             }
             else
             {
@@ -87,7 +109,7 @@ namespace SVG_Restaurants.Controllers
         public async Task<IActionResult> Redeem(RedeemViewModel vm)
         {
 
-            string cID = Request.Query["customerID"];
+            string cID = Request.Query["CustomerId"];
             int customerId;
             
 
@@ -107,18 +129,25 @@ namespace SVG_Restaurants.Controllers
 
             if (customer != null)
             {
-                if (customer.LoyaltyPoints >= vm.dollarsToRedeem)
+                if (customer.LoyaltyPoints >= vm.pointsToRedeem)
                 {
 
-                   
-                    customer.LoyaltyPoints -= vm.dollarsToRedeem*50;
+                    if (vm.pointsToRedeem == 500) {
+                        TempData["Points"] = "500";
+
+                    }
+                    else
+                    {
+                        TempData["Points"] = "1500";
+                    }
+                    customer.LoyaltyPoints -= vm.pointsToRedeem;           
 
                     TempData["SuccessMessage"] = "Points redeemed successfully.";
 
                     _context.SaveChanges();
 
                   
-                    return RedirectToAction("Redeem", "Customers", new { customerID = vm.CustomerId }); // Redirect to a success page or another appropriate page
+                    return RedirectToAction("Redeem", "Customers", new { vm.CustomerId }); // Redirect to a success page or another appropriate page
                 }
                 else
                 {
@@ -142,6 +171,14 @@ namespace SVG_Restaurants.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var existingCustomer = await _context.Customers.FirstOrDefaultAsync(c => c.Username == customer.Username);
+                if (existingCustomer != null)
+                {
+                    ModelState.AddModelError("Username", "The username is already taken.");
+                    return View(customer);
+                }
+
                 customer.LoyaltyPoints = 0;
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
@@ -158,7 +195,7 @@ namespace SVG_Restaurants.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(vm.CustomerID);
+            var customer = await _context.Customers.FindAsync(vm.CustomerId);
             if (customer == null)
             {
                 return NotFound();
@@ -229,15 +266,15 @@ namespace SVG_Restaurants.Controllers
         }
 
         // GET: Customers/Delete/5
-        public async Task<IActionResult> Delete(int customerID)
+        public async Task<IActionResult> Delete(int CustomerId)
         {
-            if (customerID == null || _context.Customers == null)
+            if (CustomerId == null || _context.Customers == null)
             {
                 return NotFound();
             }
 
             var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.CustomerId == customerID);
+                .FirstOrDefaultAsync(m => m.CustomerId == CustomerId);
             if (customer == null)
             {
                 return NotFound();
@@ -249,17 +286,17 @@ namespace SVG_Restaurants.Controllers
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int CustomerID)
+        public async Task<IActionResult> DeleteConfirmed(int CustomerId)
         {
             try
             {
                 // Attempt to find the customer with the specified CustomerId
-                var customer = _context.Customers.Single(c => c.CustomerId == CustomerID);
+                var customer = _context.Customers.Single(c => c.CustomerId == CustomerId);
 
                 // Remove the customer entity
-                var customerReservation = _context.Reservations.Where(c => c.CustomerId == CustomerID);
+                var customerReservation = _context.Reservations.Where(c => c.CustomerId == CustomerId);
 
-                var customerReservations = _context.Reservations.Where(r => r.CustomerId == CustomerID).ToList();
+                var customerReservations = _context.Reservations.Where(r => r.CustomerId == CustomerId).ToList();
 
                 if (customerReservations.Count > 0)
                 {

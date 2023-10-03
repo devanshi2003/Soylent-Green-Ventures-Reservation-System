@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SVG_Restaurants.Models;
 using SVG_Restaurants.ViewModels;
 using System.Diagnostics;
+using System.Linq;
 
 namespace SVG_Restaurants.Controllers
 {
@@ -21,10 +22,10 @@ namespace SVG_Restaurants.Controllers
         {
             var viewModel = new CustomerDetailsVM
             {
-                CustomerID = customerID,
+                CustomerId = customerID,
                 Reservations = _context.Reservations
                     .Include(r => r.Restaurant)
-                    .Where(r => r.CustomerId == customerID)
+                    .Where(r => r.CustomerId == customerID && r.Completed == false)
                     .OrderBy(r => r.ReservationTiming)
                     .ToList(),
             };
@@ -32,6 +33,12 @@ namespace SVG_Restaurants.Controllers
             ViewBag.LoyaltyPoints = _context.Customers
                 .Where(c => c.CustomerId == customerID)
                 .Select(c => c.LoyaltyPoints ?? 0)
+                .FirstOrDefault();
+
+            ViewBag.Status=
+                _context.Customers
+                .Where(c => c.CustomerId == customerID)
+                .Select(c => c.Status ?? "0")
                 .FirstOrDefault();
 
             ViewBag.CustomerName = _context.Customers
