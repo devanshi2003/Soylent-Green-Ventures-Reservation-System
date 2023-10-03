@@ -154,7 +154,7 @@ namespace SVG_Restaurants.Controllers
 
                             if (!string.IsNullOrEmpty(WorkerId))
                             {
-                                return RedirectToAction("Home", "RestaurantWorkers", new {reservation.RestaurantId, ViewBag.WorkerId});
+                                return RedirectToAction("Home", "RestaurantWorkers", new {RestaurantId = reservation.RestaurantId, WorkerId = WorkerId});
                             }
 
                             else if (reservation.CustomerId == null)
