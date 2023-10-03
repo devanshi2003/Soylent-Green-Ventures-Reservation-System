@@ -239,39 +239,7 @@
                                 if (@loyaltyPoints <500) {
                                     alert("You don't have enough points to redeem.");
                                 }
-                                else if (@loyaltyPoints >= 1500) {
-                                    const imageUrl = "/img/GoldTierVoucher.png";
-
-                                    const link = document.createElement("a");
-                                    link.href = imageUrl;
-
-                                    const randomNumber = Math.floor(Math.random() * 1000).toString();
-
-                                    link.download = "Voucher_" + randomNumber + ".jpg";
-
-                                    document.body.appendChild(link);
-
-                                    link.click();
-
-                                    document.body.removeChild(link);
-                                    window.location.href = `/Customers/Redeem?customerID=@Model.CustomerID`;
-                                }
                                 else {
-                                    const imageUrl = "/img/SilverTierVoucher.png";
-
-                                    const link = document.createElement("a");
-                                    link.href = imageUrl;
-
-                                    const randomNumber = Math.floor(Math.random() * 1000).toString();
-
-                                    link.download = "Voucher_" + randomNumber + ".jpg";
-
-                                    document.body.appendChild(link);
-
-                                    link.click();
-
-                                    document.body.removeChild(link);
-
                                     window.location.href = `/Customers/Redeem?customerID=@Model.CustomerID`;
                                 }
                             });
