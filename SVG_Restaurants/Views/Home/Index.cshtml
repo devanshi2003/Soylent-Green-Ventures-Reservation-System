@@ -454,9 +454,9 @@
     <!-- Card Blog -->
     <div id="allCards" class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <!-- Grid -->
-        <div class="row">
+        <div class="row" style="gap: 20px;">
             <!-- Card -->
-            <a asp-controller="Restaurants" asp-action="BambooLeaf" asp-route-CustomerId="@Context.Request.Query["CustomerId"]" asp-route-RestaurantId="1" class="col-4 group rounded-xl overflow-hidden" style="width: 380px" id="restaurantCard">
+            <a asp-controller="Restaurants" asp-action="BambooLeaf" asp-route-CustomerId="@Context.Request.Query["CustomerId"]" asp-route-RestaurantId="1" class="col-4 group rounded-xl overflow-hidden" style="width: 380px; padding: 0; margin: 0;" id="restaurantCard">
                 <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
                     <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:text-black group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Bamboo Restaurant.jpg" alt="Image Description">
                     <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
@@ -485,7 +485,7 @@
             <!-- End Card -->
             <div class="custom-col" style="width: 10px"></div>
             <!-- Card -->
-            <a asp-controller="Restaurants" asp-action="LaOeste" asp-route-CustomerId="@Context.Request.Query["CustomerId"]" asp-route-RestaurantId="2" class="col-4 group rounded-xl overflow-hidden" style="width: 380px" id="restaurantCard">
+            <a asp-controller="Restaurants" asp-action="LaOeste" asp-route-CustomerId="@Context.Request.Query["CustomerId"]" asp-route-RestaurantId="2" class="col-4 group rounded-xl overflow-hidden" style="width: 380px; padding: 0; margin: 0;" id="restaurantCard">
                 <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
                     <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Brazilian Restaurant.jpg" alt="Image Description">
                 </div>
@@ -509,7 +509,7 @@
             <!-- End Card -->
             <div class="custom-col" style="width: 10px"></div>
             <!-- Card -->
-            <a asp-controller="Restaurants" asp-action="Mexikana" asp-route-CustomerId="@Context.Request.Query["CustomerId"]" asp-route-RestaurantId="3" style="width: 380px" class="col-4 group rounded-xl overflow-hidden" id="restaurantCard">
+            <a asp-controller="Restaurants" asp-action="Mexikana" asp-route-CustomerId="@Context.Request.Query["CustomerId"]" asp-route-RestaurantId="3" style="width: 380px; padding: 0; margin: 0;" class="col-4 group rounded-xl overflow-hidden" id="restaurantCard">
                 <div class="relative pt-[50%] sm:pt-[70%] rounded-xl overflow-hidden">
                     <img class="w-full h-full absolute top-0 left-0 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl" src="/img/Mexican Restaurant.jpg" alt="Image Description">
                     <span class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
