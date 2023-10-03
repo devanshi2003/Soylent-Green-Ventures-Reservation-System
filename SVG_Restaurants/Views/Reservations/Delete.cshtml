@@ -145,18 +145,30 @@ else
                 @if (wID == null) {
                     <a asp-controller="Home" asp-action="Index" asp-route-CustomerId="@customerId" class="btn" id="returnButton" style="margin-right: 30px;">Go back</a>
                     <span id="home" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+                    <input id="formButton" type="submit" value="Cancel Booking" class="btn btn-danger" />
+                    <span id="cancel" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                 }
                 else
                 {
-                    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-RestaurantId="@Context.Request.Query["RestaurantId"]" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" class="py-3 px-4 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">Back to List</a>
+                    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-RestaurantId="@Context.Request.Query["RestaurantId"]" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" class="py-3 px-4 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">Back home</a>
                     <span id="home" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+                    <input id="deleteButton" type="submit" value="Cancel Booking" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" />
+                    <span id="cancel" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
                 }
-                <input id="formButton" type="submit" value="Cancel Booking" class="btn btn-danger" />
-                <span id="cancel" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
 
             </div>
             <script>
                 document.getElementById('formButton').addEventListener('click', function (e) {
+
+                    this.disabled = true;
+
+                    document.getElementById('cancel').style.display = 'inline-block';
+
+                    setTimeout(function () {
+                        document.querySelector('form').submit();
+                    }, 300);
+                });
+                document.getElementById('deleteButton').addEventListener('click', function (e) {
 
                     this.disabled = true;
 
@@ -197,4 +209,14 @@ else
             // Show an alert when the button is clicked
             alert('You have successfully cancelled your booking.');
         });
-    });</script>
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var logOutButton = document.getElementById('deleteButton');
+
+        logOutButton.addEventListener('click', function () {
+            // Show an alert when the button is clicked
+            alert("You have successfully cancelled this customer's booking.");
+        });
+    });
+
+</script>
