@@ -10,25 +10,51 @@
     body {
         background-color: #A9927D;
     }
+
+    .flex {
+        display: flex;
+        justify-content: center; /* Horizontal centering */
+        align-items: center; /* Vertical centering */
+    }
+
+    .download-link {
+        padding: 5px 5px; /* Add padding for better clickability */
+        padding-bottom: 10px;
+        background-color: orange; /* Add background color */
+        color: #fff; /* Text color */
+        border-radius: 5px; /* Add rounded corners */
+        font-weight: bold; /* Bold text */
+    }
+    /* Center the div horizontally and vertically */
+    .centered-div {
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
 </style>
 
 
 @if (TempData["SuccessMessage"] != null)
 {
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
-        Remaining Points: @Model.customer.LoyaltyPoints
-        <a asp-action="Index" asp-controller="Home" asp-route-CustomerId="@Model.customer.CustomerId">Back to Home</a>
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+            Remaining Points: @Model.customer.LoyaltyPoints
+            <p>
+                <a asp-action="Index" asp-controller="Home" asp-route-CustomerId="@Model.customer.CustomerId">Back to Home</a>
+            </p>
+
+
     </div>
 
 // $35 Card 
     @if (TempData["Points"] != null && TempData["Points"].ToString() == "1500")
     {
-        <div>
-            <a id="downloadLink" style="display: block;" download="voucher.jpg">Download your Voucher here!</a>
-            <img id="voucherImage" src="/img/GoldTierVoucher.png" alt="Voucher Image">
-        </div>
 
+            <a id="downloadLink" class="download-link" download="voucher.jpg">Download your Voucher here!</a>
+            <img id="voucherImage" src="/img/GoldTierVoucher.png" alt="Voucher Image" style="width: 650px; height: 300px;" class="pt-4">
+            
         <script>
             const imageUrl = "/img/GoldTierVoucher.png";
             const imageElement = document.getElementById("voucherImage");
@@ -47,8 +73,8 @@
     @if (TempData["Points"] != null && TempData["Points"].ToString() == "500")
     {
         <div>
-            <a id="downloadLink" style="display: block;" download="voucher.jpg">Download your Voucher here!</a>
-            <img id="voucherImage" src="/img/SilverTierVoucher.png" alt="Voucher Image">
+            <a id="downloadLink" class="download-link" download="voucher.jpg">Download your Voucher here!</a>
+            <img id="voucherImage" src="/img/SilverTierVoucher.png" alt="Voucher Image" style="width: 650px; height: 300px;" class="pt-4">
         </div>
 
         <script>
@@ -61,9 +87,6 @@
             downloadLink.href = imageUrl;
             downloadLink.download = "Voucher_" + randomNumber + ".jpg";
 
-            imageElement.addEventListener("click", function () {
-                // Show the download link when the image is clicked
-                downloadLink.style.display = "block";
             });
         </script>
     }
@@ -76,20 +99,17 @@ else
     <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <form asp-action="RedeemPoints" method="post">
             <input type="hidden" asp-for="CustomerId" value="@cID" />
-
             <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
                 <div class="md:flex flex-col">
                     <div class="p-8">
-                        <h3 class="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-300 dark:group-hover:text-white">
-                            Redeem Points for Gift Card
-                        </h3>
+                        <h1 class=" text-center block text-2xl font-bold text-gray-800 dark:text-white" id="redeem">Redeem Points</h1>
                         <div class="pt-0 p-4 sm:pt-0 sm:p-7">
-                            <div class="space-y-4 sm:space-y-6">
-                                <label for="af-submit-app-project-name" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
+                            <div class="space-y-4 sm:space-y-6 text-center">
+                                <label for="af-submit-app-project-name" class="text-center inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-gray-200">
                                     Points Available: @Model.customer.LoyaltyPoints
                                 </label>
 
-                                <div class="flex">
+                                <div class="flex justify-center items-center">
                                     <input type="checkbox" class="checkbox" id="hs-default-checkbox" value="500">
                                     <label for="hs-default-checkbox" class="text-sm text-gray-500 ml-3 dark:text-gray-400"> $10 Voucher</label>
                                 </div>
