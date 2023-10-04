@@ -4,11 +4,30 @@
     ViewData["Title"] = "Home";
 }
 
-@*<style>
-        body {
-            background-color: #D0CFCF;
-        }
-    </style>*@
+<style>
+.custom-gold-bg {
+    background-color: #FFB81F; /* Background color in light mode */
+}
+
+.custom-gold-text {
+    color: black; /* Text color in light mode */
+}
+
+.custom-silver-bg {
+    background-color: #B3B3B3; /* Background color in light mode */
+}
+
+.custom-silver-text {
+    color: black; /* Text color in light mode */
+}
+
+
+.table th,
+.table td {
+    text-align: center;
+}
+
+</style>
 
 @{
     string cID = Context.Request.Query["CustomerId"];
@@ -61,7 +80,7 @@ else
 }
 
 <!-- Table Section -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-[-40px]">
     <!-- Card -->
     <div class="flex flex-col">
         <div class="-m-1.5 overflow-x-auto">
@@ -77,30 +96,30 @@ else
 
                         <div>
                             <div class="inline-flex gap-x-2">
-                                <a href="@Url.Action("AllCustomers", "Customers", new { RestaurantId = rID, WorkerId = wID })" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-medium bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                <a href="@Url.Action("AllCustomers", "Customers", new { RestaurantId = rID, WorkerId = wID })" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border border-green-200 font-medium bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-green-800">
                                     <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                         <path d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                                     </svg>
                                     Make a Reservation for Customer
                                 </a>
-                                <a href="@Url.Action("Create", "Guests", new { RestaurantId = rID, WorkerId = wID })" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-medium bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                <a href="@Url.Action("Create", "Guests", new { RestaurantId = rID, WorkerId = wID })" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border font-medium bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-green-800">
                                     <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                         <path d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                                     </svg>
                                     Make a Reservation for Guest
                                 </a>
-                                <a asp-controller="RestaurantWorkers" asp-action="CompletedReservations" asp-route-restaurantID="@rID" asp-route-workerID="@wID" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                <a asp-controller="RestaurantWorkers" asp-action="CompletedReservations" asp-route-restaurantID="@rID" asp-route-workerID="@wID" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border-2 border-gray-200 font-semibold text-gray-500 hover:text-white hover:bg-gray-500 hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2 transition-all text-sm  dark:hover:bg-gray-600 dark:border-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-800">
                                     View Completed Reservations
                                  </a>
                                 @if(wID == "25")
                                 {
-                                    <a asp-controller="RestaurantWorkers" asp-action="Admin" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                    <a asp-controller="RestaurantWorkers" asp-action="Admin" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-gray-800 text-white shadow-sm align-middle hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:text-gray-400 dark:border-gray-700 dark:hover:text-white dark:focus:ring-offset-gray-800">
                                         Go back
                                     </a>
                                 }
                                 else
                                 {
-                                    <a asp-controller="Home" asp-action="Index" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                    <a asp-controller="Home" asp-action="Index" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-gray-800 text-white shadow-sm align-middle hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:text-gray-400 dark:border-gray-700 dark:hover:text-white dark:focus:ring-offset-gray-800">
                                         Log out
                                     </a>
                                 }
@@ -117,132 +136,19 @@ else
                         </div>
 
                         <div class="col-2">
-                            <button type="submit" class="btn btn-outline-secondary">Search</button>
+                            <button type="submit" class="btn btn-outline-secondary bg-blue-500 text-white hover:bg-blue-600">Search</button>
                         </div>
                     </form>
 
-                    <!-- Table -->
-                    <!--<table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-
-                        <thead class="bg-gray-50 dark:bg-slate-800">
-                            <tr>
-                                <th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
-                                            Reservation ID
-                                        </span>
-                                    </div>
-                                </th>-->
-                    @*<th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
-                            <div class="flex items-center gap-x-2">
-                                <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
-                                    Customer ID
-                                </span>
-                            </div>
-                        </th>
-
-                        <th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
-                            <div class="flex items-center gap-x-2">
-                                <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
-                                    Guest ID
-                                </span>
-                            </div>
-                        </th>*@
-
-                    <!--<th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
-                                        Customer Name
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-2 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Number of People
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Reservation Time
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Banquet
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Phone Number
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Dining Area
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-4 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        High Chairs
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Special Notes
-                                    </span>
-                                </div>
-                            </th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        foreach (var reservation in Model.reservations)
-                        {-->
-                    @*<tr>
-                            <th scope="row">@reservation.ReservationId</th>
-
-                            <td>@(reservation.Customer?.FullName ?? reservation.Guest?.FullName)</td>
-                            <td>@Html.DisplayFor(item => reservation.NumberOfPeople)</td>
-                            <td>@Html.DisplayFor(item => reservation.ReservationTiming)</td>
-                            <td>@Html.DisplayFor(item => reservation.Banquet.BanquetName)</td>
-                            <td>@(reservation.Customer?.PhoneNumber ?? reservation.Guest?.PhoneNumber)</td>
-                            <td>@Html.DisplayFor(item => reservation.Area.Area)</td>
-                            <td>@Html.DisplayFor(item => reservation.HighChairs)</td>
-                            <td>@Html.DisplayFor(item => reservation.SpecialNotes)</td>
-                        </tr>*@
-                    <!--}
-                            </tbody>
-
-                        </table>-->
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
+<div class="pb-lg-5">
 <table class="table" style="background-color: white; margin-top: 0;">
-    <thead>
+        <thead class="bg-gray-200">
         <tr>
             <th>
                 Reservation ID
@@ -293,7 +199,38 @@ else
                 <td>@(reservation.Customer?.PhoneNumber ?? reservation.Guest?.PhoneNumber)</td>
                 <td>@Html.DisplayFor(item => reservation.Area.Area)</td>
                 <td>@Html.DisplayFor(item => reservation.HighChairs)</td>
-                <td>@(reservation.Customer != null ? reservation.Customer.Status : "Guest")</td>
+                <td>@*@(reservation.Customer != null ? reservation.Customer.Status : "Guest")*@
+                    @if (reservation.Customer != null)
+                    {
+                        if (reservation.Customer.Status == "Gold")
+                        {
+                                <span class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium custom-gold-bg custom-gold-text">
+                                    <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                    </svg>
+                                    Gold
+                                </span>
+
+                        }
+                        else if (reservation.Customer.Status == "Silver")
+                        {
+                           
+                                <span class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium custom-silver-bg custom-silver-text">
+                                    <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                    </svg>
+                                    Silver
+                                </span>
+                     
+                        }
+
+                    }
+                    else
+                    {
+                        <p>Guest</p>
+                    }
+
+                </td>
                 <td>@Html.DisplayFor(item => reservation.SpecialNotes)</td>
                 <td>
                     <div class="relative flex px-2">
@@ -318,3 +255,4 @@ else
         }
     </tbody>
 </table>
+</div>
