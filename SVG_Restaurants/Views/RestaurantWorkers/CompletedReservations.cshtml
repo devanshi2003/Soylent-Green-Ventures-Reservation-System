@@ -9,6 +9,9 @@
 .table td {
     text-align: center;
 }
+.middle{
+    text-align: center
+}
 
 </style>
 
@@ -53,7 +56,7 @@ else
     </style>
 }
 <!-- Table Section -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-[-40px]">
     <!-- Card -->
     <div class="flex flex-col">
         <div class="-m-1.5 overflow-x-auto">
@@ -61,24 +64,23 @@ else
                 <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-slate-900 dark:border-gray-700">
                     <!-- Header -->
                     <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                        <div class="align-content-center">
+                            <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 middle">
                                 Completed Reservations for @Model.theRestaurant.RestaurantName
                             </h2>
                         </div>
 
                         <div>
                             <div class="inline-flex gap-x-2">
-
                                 @if (wID == "25")
                                 {
-                                    <a asp-controller="RestaurantWorkers" asp-action="Admin" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                    <a asp-controller="RestaurantWorkers" asp-action="Admin" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-yellow-500 text-white shadow-sm align-middle hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:text-gray-400 dark:border-gray-700 dark:hover:text-white dark:focus:ring-offset-gray-800">
                                         Go back
                                     </a>
                                 }
                                 else
                                 {
-                                    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-workerID="@wID" asp-route-restaurantID="@rID" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-gray text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-workerID="@wID" asp-route-restaurantID="@rID" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-gray-800 text-white shadow-sm align-middle hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:text-gray-400 dark:border-gray-700 dark:hover:text-white dark:focus:ring-offset-gray-800">
                                         Go Back
                                     </a>
                                 }
@@ -88,24 +90,23 @@ else
                     <!-- End Header -->
                     <!-- Search form -->
                     <form method="post" asp-controller="RestaurantWorkers" asp-action="CompletedReservations" asp-route-RestaurantId="@Model.RestaurantId" asp-route-WorkerId="@Context.Request.Query["WorkerId"]" class="row mt-4 mb-4 px-6">
-                        <div class="col-2 ">
-                            <input asp-for="@Model.nameSearch" placeholder="Enter customer name..." class="form-control"
-                                   title="Search for customer by name" />
+                        <div class="col-2">
+                            <input asp-for="@Model.nameSearch" placeholder="Enter customer name..." class="form-control" title="Search for customer by name" />
                         </div>
 
                         <div class="col-2">
-                            <button type="submit" class="btn btn-outline-secondary">Search</button>
+                            <button type="submit" class="btn btn-outline-secondary bg-blue-500 text-white hover:bg-blue-600">Search</button>
                         </div>
-                    </form>                  
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="p-5">
-<table class="table" style="background-color: white; margin-top: 0;">
-    <thead>
+
+<table class="table" margin-top: 0;">
+    <thead class="bg-gray-200">
         <tr>
             <th>
                 Reservation ID
