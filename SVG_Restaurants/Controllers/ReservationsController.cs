@@ -117,7 +117,7 @@ namespace SVG_Restaurants.Controllers
                 if (!customer_exist)
                 {
                     TempData["CustomerDoesntExist"] = "Customer does not exist !!!";
-                    return RedirectToAction("Create", "Reservations");
+                    return RedirectToAction("Create", "Reservations", new { RestaurantId = reservation.RestaurantId });
                 }
 
                 var timeFrames = new List<(int startHour, int endHour)>
