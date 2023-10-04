@@ -167,7 +167,7 @@ namespace SVG_Restaurants.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,FirstName,LastName,Email,PhoneNumber,Username,Password,LoyaltyPoints")] Customer customer)
+        public async Task<IActionResult> Create([Bind("CustomerId,FirstName,LastName,Email,PhoneNumber,Username,Password,LoyaltyPoints,Status")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -180,6 +180,8 @@ namespace SVG_Restaurants.Controllers
                 }
 
                 customer.LoyaltyPoints = 0;
+                customer.Status = "None";
+
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Login", "Customers");
@@ -209,7 +211,7 @@ namespace SVG_Restaurants.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public async Task<IActionResult> Edit([Bind("CustomerId,FirstName,LastName,Email,PhoneNumber,Username,Password,LoyaltyPoints")] Customer customer)
-        public async Task<IActionResult> Edit([Bind("CustomerId,FirstName,LastName,Email,PhoneNumber,Username,Password,LoyaltyPoints")] Customer customer, string? NewPassword)
+        public async Task<IActionResult> Edit([Bind("CustomerId,FirstName,LastName,Email,PhoneNumber,Username,Password,LoyaltyPoints,Status")] Customer customer, string? NewPassword)
         {
             ViewBag.submissionSuccess = false;
             bool isPasswordChanged = false;
@@ -219,6 +221,7 @@ namespace SVG_Restaurants.Controllers
                 try
                 {
                     var existingCustomer = await _context.Customers.FindAsync(customer.CustomerId);
+
 
                     if (existingCustomer.Password != customer.Password)
                     {
@@ -231,6 +234,7 @@ namespace SVG_Restaurants.Controllers
                     existingCustomer.Email = customer.Email;
                     existingCustomer.PhoneNumber = customer.PhoneNumber;
                     existingCustomer.Username = customer.Username;
+                    existingCustomer.Status = existingCustomer.Status;
 
                     // Update the password if a new one is provided
                     if (!string.IsNullOrEmpty(NewPassword))
