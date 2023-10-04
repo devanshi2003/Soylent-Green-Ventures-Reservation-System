@@ -507,7 +507,7 @@ else
 
                         @{
                             string customerID = Context.Request.Query["CustomerId"];
-                            string restaurantID = Context.Request.Query["restaurantId"];
+                            string restaurantID = Context.Request.Query["RestaurantId"];
                         }
 
                         <input type="hidden" value=@wID name="WorkerId"/>
@@ -702,7 +702,7 @@ else
 
     document.addEventListener("DOMContentLoaded", function () {
         const currentUrl = new URL(window.location.href);
-        const restaurantID = currentUrl.searchParams.get("restaurantID");
+        const restaurantID = currentUrl.searchParams.get("RestaurantId");
         const inputElement = document.getElementById("datetime");
         const errorContainer = document.getElementById("error-container");
 
@@ -788,7 +788,7 @@ else
     const currentUrl = new URL(window.location.href);
 
     // Get the restaurantID query parameter value
-    const restaurantID = currentUrl.searchParams.get("restaurantID");
+    const restaurantID = currentUrl.searchParams.get("RestaurantId");
     let disabledDates = getSundaysInYear(2023);
 
 
