@@ -103,9 +103,38 @@
                     </label>
                 </div>
                 <div class="sm:col-span-9">
-                    <input asp-for="PhoneNumber" class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" placeholder="Enter phone number">
+                    <input asp-for="PhoneNumber" 
+                        type="tel" 
+                        maxlength="16" class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" 
+                        placeholder="Enter phone number"
+                        oninput="handlingChange(event)"
+                    >
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
+                <script>
+                    function handlingChange(event) {
+                        event.target.value = formattingNumber(event.target.value);
+                    }
+
+                    function formattingNumber(input) {
+                        let digitsonly = input.replace(/\D/g, "");
+
+                        //The area code that is in the brackets, assuming that, area code is only 2 digits (We don't mind the 3 digits countries here lel)
+                        let country_code = digitsonly.slice(0, 2); 
+                        let remain_lead = digitsonly.slice(2, 5); //The first 3 numbers
+                        let remain_next = digitsonly.slice(5, 8); //The next 3 numbers block
+                        let remain_end = digitsonly.slice(8); //The end
+
+                        input = remain_lead.length > 0 ? `(${country_code}) ${remain_lead}` : `${country_code}`;
+                        if (remain_next.length > 0) {
+                            input += `-${remain_next}`;
+                        }
+                        if (remain_end.length > 0) {
+                            input += `-${remain_end}`;
+                        }
+                        return input;
+                    }
+                </script>
             </div>
             <!-- End Grid -->
 
