@@ -113,7 +113,12 @@ namespace SVG_Restaurants.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                bool customer_exist = _context.Customers.Any(customer => customer.CustomerId == reservation.CustomerId);
+                if (!customer_exist)
+                {
+                    TempData["CustomerDoesntExist"] = "Customer does not exist !!!";
+                    return RedirectToAction("Create", "Reservations", new { RestaurantId = reservation.RestaurantId });
+                }
 
                 var timeFrames = new List<(int startHour, int endHour)>
                 {
