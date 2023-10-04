@@ -8,78 +8,92 @@
     body {
         background-color: #D0CFCF;
     }
+    .banner{
+        background-color: #9A9898
+    }
+
 </style>
 
-<h1 class="text-3xl text-gray-800 font-bold sm:text-3xl lg:leading-tight dark:text-gray-200">
-    Manage and Create Staff Accounts
-</h1>
+<a asp-controller="Home" asp-action="Index" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-gray-500 text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" style="width:140px;">
+    Log Out
+    <span id="log" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+</a>
+<script>
+    document.getElementById('logOut').addEventListener('click', function (e) {
 
-<div class="mt-16 max-w-xs flex flex-col rounded-md shadow-sm">
-    <a asp-controller="RestaurantWorkers" asp-action="Create" asp-route-RestaurantId=1 id="createAcc" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-        Create Account
-        <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
-    </a>
-    <script>
-        document.getElementById('createAcc').addEventListener('click', function (e) {
+        this.disabled = true;
 
-            this.disabled = true;
+        document.getElementById('log').style.display = 'inline-block';
 
-            document.getElementById('loading').style.display = 'inline-block';
+        window.location.href = '/RestaurantWorkers/WorkerDetails';
 
-            window.location.href = '/RestaurantWorkers/Create?RestaurantId=1';
+    });
 
-        });
+</script>
 
-    </script>
-
-    <a asp-controller="RestaurantWorkers" asp-action="WorkerDetails" id="editAcc" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-        Edit Account
-        <span id="edit" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
-    </a>
-    <script>
-        document.getElementById('editAcc').addEventListener('click', function (e) {
-
-            this.disabled = true;
-
-            document.getElementById('edit').style.display = 'inline-block';
-
-            window.location.href = '/RestaurantWorkers/WorkerDetails';
-
-        });
-
-    </script>
-
-    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-WorkerId="25" asp-route-RestaurantId="3" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-        Mexicana
-        <span id="log" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
-    </a>
-
-    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-WorkerId="25" asp-route-RestaurantId="2" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-        La Oeste
-        <span id="log" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
-    </a>
-
-    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-WorkerId="25" asp-route-RestaurantId="1" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-        Bamboo Leaf
-        <span id="log" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
-    </a>
-
-    <a asp-controller="Home" asp-action="Index" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-        Log Out
-        <span id="log" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
-    </a>
-    <script>
-        document.getElementById('logOut').addEventListener('click', function (e) {
-
-            this.disabled = true;
-
-            document.getElementById('log').style.display = 'inline-block';
-
-            window.location.href = '/RestaurantWorkers/WorkerDetails';
-
-        });
-
-    </script>
+<div class="alert  text-center banner mt-4 mb-3" role="alert">
+    <span style="font-weight: bold; font-size: 28px;">Manage and Create Staff Accounts</span>
 </div>
+
+
+<div class="container text-center pt-xxl-5 pb-xl-5" style="width:450px;">
+    <div class="row">
+        <div class="col">
+            <a asp-controller="RestaurantWorkers" asp-action="Create" asp-route-RestaurantId=1 id="createAcc" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" style="width:180px;">
+                Create Account
+                <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+            </a>
+            <script>
+                document.getElementById('createAcc').addEventListener('click', function (e) {
+                    this.disabled = true;
+                    document.getElementById('loading').style.display = 'inline-block';
+                    window.location.href = '/RestaurantWorkers/Create?RestaurantId=1';
+                });
+            </script>
+        </div>
+        <div class="col">
+            <a asp-controller="RestaurantWorkers" asp-action="WorkerDetails" id="editAcc" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" style="width:180px;">
+                Edit Account
+                <span id="edit" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+            </a>
+            <script>
+                document.getElementById('editAcc').addEventListener('click', function (e) {
+                    this.disabled = true;
+                    document.getElementById('edit').style.display = 'inline-block';
+                    window.location.href = '/RestaurantWorkers/WorkerDetails';
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+   
+<div class="alert alert-dark text-center banner mt-4" role="alert">
+    <span style="font-weight: bold; font-size: 28px;">View Restaurant Information</span>
+</div>
+
+<div class="container text-center pt-xxl-5 pb-xl-5" style="width:650px;">
+    <div class="row">
+        <div class="col">
+            <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-WorkerId="25" asp-route-RestaurantId="3" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" style="width:180px;">
+                Mexicana
+                <span id="log" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-WorkerId="25" asp-route-RestaurantId="2" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" style="width:180px;">
+                La Oeste
+                <span id="log" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-WorkerId="25" asp-route-RestaurantId="1" id="logOut" type="button" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-300 text-black hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" style="width:180px;">
+                Bamboo Leaf
+                <span id="log" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full" style="display: none;" aria-label="Loading"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
 
 
