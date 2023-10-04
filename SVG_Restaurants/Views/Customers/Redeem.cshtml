@@ -38,15 +38,17 @@
 
 @if (TempData["SuccessMessage"] != null)
 {
-        <div class="alert alert-success">
-            @TempData["SuccessMessage"]
-            Remaining Points: @Model.customer.LoyaltyPoints
-            <p>
-                <a asp-action="Index" asp-controller="Home" asp-route-CustomerId="@Model.customer.CustomerId">Back to Home</a>
-            </p>
-
-
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+        <br>
+        Remaining Points: @Model.customer.LoyaltyPoints
+        <p>
+            <a asp-action="Index" asp-controller="Home" asp-route-CustomerId="@Model.customer.CustomerId" class="text-blue-500 hover:underline">
+                &larr; Back to Home
+            </a>
+        </p>
     </div>
+
 
 // $35 Card 
     @if (TempData["Points"] != null && TempData["Points"].ToString() == "1500")
