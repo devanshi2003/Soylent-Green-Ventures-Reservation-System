@@ -46,6 +46,10 @@ body {
     letter-spacing: 0.05em;
 }
 
+    #restaurantsLink:hover, #upcomingBookingsLink:hover, #loyaltyPointsLink:hover {
+        background: #362417;
+    }
+
 #formButton {
     color: #F2F4F3;
     background-color: rgba(94,80,63, 1);
