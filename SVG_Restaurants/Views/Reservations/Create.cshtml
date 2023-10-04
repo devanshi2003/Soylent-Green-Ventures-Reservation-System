@@ -146,6 +146,12 @@ else
                     25 Gouger Street
                     Adelaide
                 </p>
+                <div class="text-l leading-8 text-gray-700 mt-2 mb-2">
+                    <p><b>Sittings:</b></p>
+                    <p>Lunchtime 12-2PM </p>
+                    <p>First dinner 5-7PM</p>
+                    <p>Second dinner 7-9PM</p>
+                </div>
                 <p class="text-l leading-8 text-gray-700"><b>Open:</b> Tuesdays to Sundays</p>
                 <br />
                 <p class="text-2xl leading-8 text-gray-700"><b>Special Banquets</b></p>
@@ -402,10 +408,11 @@ else
                                 <div class="">
                                     <label asp-for="@Model.HighChairs"
                                            class="mb-3 block text-base font-medium text-[#07074D]">
-                                        Baby Seats
+                                        High Chairs
                                     </label>
                                     <input type="number" asp-for="@Model.HighChairs" value="0" min="0" max="4" 
                                            class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                    <span asp-validation-for="@Model.HighChairs" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -560,10 +567,11 @@ else
                                 <div class="">
                                     <label asp-for="@Model.HighChairs"
                                            class="mb-3 block text-base font-medium text-[#07074D]">
-                                        Baby Seats
+                                        High Chairs
                                     </label>
                                     <input type="number" asp-for="@Model.HighChairs" value="0" min="0" max="4"
                                            class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                    <span asp-validation-for="@Model.HighChairs" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -714,6 +722,8 @@ else
             }
             if (restaurantID === "2" && (selectedDateTime.getHours() >= 14 && selectedDateTime.getHours() < 17)) {
                 displayErrorMessage("Restaurant closed during this time.");
+            } else {
+                displayErrorMessage("");
             }
         });
     });

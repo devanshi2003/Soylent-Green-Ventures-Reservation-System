@@ -33,7 +33,8 @@ namespace SVG_Restaurants.Models
         public int? NumberOfPeople { get; set; }
         public int? GuestId { get; set; }
 
-        [Display(Name = "Baby Seats")]
+        [Range(0,4, ErrorMessage = "You can choose up to 4 chairs.")]
+        [Display(Name = "High Chairs")]
         public int? HighChairs { get; set; }
 
         [Display(Name = "Special Notes")]
