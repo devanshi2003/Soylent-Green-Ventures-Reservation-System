@@ -12,8 +12,33 @@
     string wID = Context.Request.Query["WorkerId"];
 
 }
+
+<style>
+    .custom-gold-bg {
+        background-color: #FFB81F; /* Background color in light mode */
+    }
+
+    .custom-gold-text {
+        color: black; /* Text color in light mode */
+    }
+
+    .custom-silver-bg {
+        background-color: #B3B3B3; /* Background color in light mode */
+    }
+
+    .custom-silver-text {
+        color: black; /* Text color in light mode */
+    }
+
+
+    .table th,
+    .table td {
+        text-align: center;
+    }
+
+</style>
 <!-- Table Section -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-[-40px]">
     <!-- Card -->
     <div class="flex flex-col">
         <div class="-m-1.5 overflow-x-auto">
@@ -29,7 +54,7 @@
 
                         <div>
                             <div class="inline-flex gap-x-2">
-                                    <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-WorkerId="@wID" asp-route-RestaurantId="@rID" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800">
+                                <a asp-controller="RestaurantWorkers" asp-action="Home" asp-route-WorkerId="@wID" asp-route-RestaurantId="@rID" class="btn py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-gray-800 text-white shadow-sm align-middle hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:text-gray-400 dark:border-gray-700 dark:hover:text-white dark:focus:ring-offset-gray-800">
                                         Go back
                                     </a>
                             </div>
@@ -44,7 +69,7 @@
                         </div>
 
                         <div class="col-2">
-                            <button type="submit" class="btn btn-outline-secondary">Search</button>
+                            <button type="submit" class="btn btn-outline-secondary bg-blue-500 text-white hover:bg-blue-600">Search</button>
                         </div>
                     </form>
                 </div>
@@ -99,7 +124,27 @@
                 @Html.DisplayFor(modelItem => item.Username)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @if (item.Status == "Gold")
+                {
+                <span class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium custom-gold-bg custom-gold-text">
+                    <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    Gold
+                </span>
+
+                }
+                else if (item.Status == "Silver")
+                {
+
+                <span class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium custom-silver-bg custom-silver-text">
+                    <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    Silver
+                </span>
+
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LoyaltyPoints)
