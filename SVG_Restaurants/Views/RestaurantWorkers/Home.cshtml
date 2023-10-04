@@ -194,7 +194,14 @@ else
                     <td>@(reservation.Guest?.GuestId ?? -1)</td>*@
                 <td>@Html.DisplayFor(item => reservation.FullName)</td>
                 <td>@Html.DisplayFor(item => reservation.NumberOfPeople)</td>
-                <td>@Html.DisplayFor(item => reservation.ReservationTiming)</td>
+                <td>
+                        @{
+                            DateTime? reservationTiming = reservation.ReservationTiming;
+                            string formattedDate = reservationTiming?.ToString("d MMMM yyyy h:mm tt") ?? "N/A";
+                        }
+                        @formattedDate
+                   
+                 </td>
                 <td>@Html.DisplayFor(item => reservation.Banquet.BanquetName)</td>
                 <td>@(reservation.Customer?.PhoneNumber ?? reservation.Guest?.PhoneNumber)</td>
                 <td>@Html.DisplayFor(item => reservation.Area.Area)</td>
