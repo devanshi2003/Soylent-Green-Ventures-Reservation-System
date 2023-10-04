@@ -129,7 +129,7 @@
                 <!-- Your image is placed within this container -->
                 <img src="/img/LaOeste.png" alt="Image of La Oeste Restaurant Logo" class="h-10" />
             </div>
-            <p class="text-xl text-sm mb-2 dark:text-black" style="font-family: Baskerville">Vibrant Brazilian in the heart of Adelaide</p>
+            <p class="text-xl text-sm mb-2 dark:text-black">Vibrant Brazilian in the heart of Adelaide</p>
         </div>
     </div>
 
@@ -149,26 +149,30 @@
             <div class="row content-container">
 
 
-                <h2 class="text-xl font-semibold text-sm mb-2" style="font-family: Cambria; color: #000000; "><b>You can find us at:</b></h2>
-                <p class="text-l font-semibold text-sm mb-2 " style="font-family: Cambria; color: #000000 ">
-                    40 120 North Terrace
+                <h2 class="text-xl leading-8 text-black"><b>You can find us at:</b></h2>
+                <p class="text-l font-semibold mb-2">
+                    40/120 North Terrace,
                     Adelaide
                 </p>
 
                 <br />
-                <p class="text-l font-semibold text-sm mb-2 " style="font-family: Cambria; color: #000000 ">
-                    Sittings:<br />
+
+                <p class="text-l font-bold">
+                    Open:
+                </p>
+                <p class="text-l font-semibold mb-2">
+                    Wednesday to Sunday
+                </p>
+                <br />
+
+                <p class="font-bold">Sittings:</p>
+                <p class="text-l font-semibold mb-2">
                     Brunch 10AM-12PM <br />
                     Lunch 12-2PM <br />
                     First dinner 5-7PM <br />
                     Second dinner 7-9PM <br />
                 </p>
 
-                <br />
-                <p class="text-l font-semibold text-sm mb-2" style="font-family: Cambria; color: #000000 ">
-                    Open:<br />
-                    Wednesday to Sunday<br />
-                </p>
                 <br />
 
 
@@ -197,7 +201,7 @@
         <div class="column text-center" style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1;">
             <div class="flex flex-col justify-center items-center h-[10vh]">
                 <div style="margin-top: 0px;">
-                    <a href="~/Home/Index?CustomerId=@Model.CustomerId" id="back"class="btn btn-custom" style="margin-top: 1px; font-family: Cambria; width: 250px; margin-right: 20px;">
+                    <a href="~/Home/Index?CustomerId=@Model.CustomerId" id="back"class="btn btn-custom" style="margin-top: 1px; width: 250px; margin-right: 20px;">
                         Go Back
                         <span id="loading" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
 
@@ -215,7 +219,7 @@
                         });
 
                     </script>
-                    <a href="~/Reservations/Create?CustomerId=@Model.CustomerId&RestaurantId=2" id="book" class="btn btn-custom" style="margin-top: 1px; font-family: Cambria; width: 250px; margin-right: 20px;">
+                    <a href="~/Reservations/Create?CustomerId=@Model.CustomerId&RestaurantId=2" id="book" class="btn btn-custom" style="margin-top: 1px; width: 250px; margin-right: 20px;">
                         Make a Reservation
                         <span id="reservation" class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-black rounded-full" style="display: none;" aria-label="Loading"></span>
                         </a>
@@ -245,7 +249,7 @@
 
 
     <div style="margin-top: 100px; margin-bottom: 20px; text-align: center; position: relative;">
-        <p class="text-xl font-semibold text-sm" style="font-family: Sans-serif; color:#F5F5DC; display: inline-block; padding: 0 10px; position: relative; z-index: 1;">sRestaurant Reviews</p>
+        <p class="text-xl font-semibold text-sm" style="font-family: Sans-serif; color:#F5F5DC; display: inline-block; padding: 0 10px; position: relative; z-index: 1;">Restaurant Reviews</p>
         <p style="position: absolute; width: 50%; top: 50%; transform: translateY(-50%); left: 0; right: 0; margin: 0 auto; border-bottom: 1px solid #000;"></p>
     </div>
 
