@@ -448,8 +448,8 @@ else
                                            title="clear" data-clear>
                                         </a>
                                     </div>
+                                    <div id="time-error-container" class="text-danger"></div>
                                     <div id="error-container" class="text-danger"></div>
-
                                     <div id="availableSeatsMessage"><strong>Available seats:</strong> <span id="availableSeatsCount"></span></div>
 
                                 </div>
@@ -610,8 +610,8 @@ else
                                     </div>
 
                                 </div>
+                                <div id="time-error-container" class="text-danger"></div>
                                 <div id="error-container" class="text-danger"></div>
-
                                 <div id="availableSeatsMessage"><strong>Available seats:</strong> <span id="availableSeatsCount"></span></div>
 
                             </div>
@@ -789,11 +789,12 @@ else
 
     // Get the restaurantID query parameter value
     const restaurantID = currentUrl.searchParams.get("restaurantID");
-
-    let maxTime = new Date();
-    let minTime = new Date();
-
     let disabledDates = getSundaysInYear(2023);
+
+
+    const currentDate = new Date(); // Get the current date and time
+    let minTime = new Date(currentDate); // Clone the current date and time
+    let maxTime = new Date(currentDate);
 
 
     // Set the maximum time and minimum time based on the restaurantID
@@ -820,7 +821,7 @@ else
     }
 
     // Initialize Flatpickr with date and time options
-    flatpickr("#datetime", {
+    const flatpickrInstance = flatpickr = flatpickr("#datetime", {
         enableTime: true,
         dateFormat: 'M j, Y h:i K',
         minDate: 'today', // Set the minimum date to today
@@ -828,6 +829,37 @@ else
         minTime: minTime, // Set the min time for all days
         maxTime: maxTime // Set the maximum time for all days
     });
+
+    const errorContainer = document.getElementById("time-error-container");
+
+    flatpickrInstance.config.onChange.push(function (selectedDates) {
+        const selectedDateTime = selectedDates[0]; // Assuming a single date is selected
+
+        // Get the current date and time
+        const currentDate = new Date();
+
+        // Check if the selected date is today
+        if (selectedDateTime.toDateString() === currentDate.toDateString()) {
+            const selectedTime = selectedDateTime.getHours() * 60 + selectedDateTime.getMinutes();
+            const currentTime = currentDate.getHours() * 60 + currentDate.getMinutes();
+
+            // Check if the selected time is greater than the current time
+            if (selectedTime < currentTime) {
+                // Display an error message in the error container
+                const errorMessage = "Selected time is earlier than the current time.";
+                errorContainer.innerHTML = `<div class="error-message">${errorMessage}</div>`;
+                // You can apply CSS styles to the error message div as needed
+            } else {
+                // Clear the error message if the selected time is valid
+                errorContainer.innerHTML = "";
+            }
+        } else {
+            // Clear the error message if the selected date is not today
+            errorContainer.innerHTML = "";
+        }
+    });
+
+
     </script>
 
 
