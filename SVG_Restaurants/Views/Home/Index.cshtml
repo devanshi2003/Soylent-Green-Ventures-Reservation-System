@@ -145,7 +145,7 @@
                 <div style="padding-right: 15px">
                     <h2 class="flex items-center text-2xl font-extrabold text-black">Welcome, @ViewBag.CustomerName</h2>
                 </div>
-                @if (ViewBag.LoyaltyPoints >= 1500)
+                @if (ViewBag.LoyaltyPoints >= 1500 || ViewBag.Status == "Gold")
                 {
                     <svg width="50" height="50" viewBox="0 0 140 140">
                         <path fill="gold">
