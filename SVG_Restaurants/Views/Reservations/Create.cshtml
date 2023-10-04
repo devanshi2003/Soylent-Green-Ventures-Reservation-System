@@ -369,7 +369,7 @@ else
                                            class="mb-3 block text-base font-medium text-[#07074D]">
                                         Number of guests
                                     </label>
-                                    <input type="number" asp-for="@Model.NumberOfPeople" id="numberOfPeopleInput" placeholder="5" min="0"
+                                    <input type="number" asp-for="@Model.NumberOfPeople" id="numberOfPeopleInput" placeholder="0" min="0"
                                            class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                     <span asp-validation-for="@Model.NumberOfPeople" class="text-danger"></span>
                                 </div>
@@ -434,7 +434,6 @@ else
                                 <label asp-for="@Model.ReservationTiming" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start"></label>
                                 <span asp-validation-for="@Model.ReservationTiming" class="text-danger"></span>
 
-                                <div id="error-container" class="text-danger"></div>
 
                                 <div class="flatpickr mx-auto col-span-6 sm:col-span-6">
                                     <div class="flex align-middle align-content-center">
@@ -449,6 +448,7 @@ else
                                            title="clear" data-clear>
                                         </a>
                                     </div>
+                                    <div id="error-container" class="text-danger"></div>
 
                                     <div id="availableSeatsMessage"><strong>Available seats:</strong> <span id="availableSeatsCount"></span></div>
 
@@ -526,7 +526,7 @@ else
                                            class="mb-3 block text-base font-medium text-[#07074D]">
                                         Number of guests
                                     </label>
-                                    <input type="number" asp-for="@Model.NumberOfPeople" id="numberOfPeopleInput" placeholder="5" min="0"
+                                    <input type="number" asp-for="@Model.NumberOfPeople" id="numberOfPeopleInput" placeholder="0" min="0"
                                            class="w-full h-16 appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                     <span asp-validation-for="@Model.NumberOfPeople" class="text-danger"></span>
                                 </div>
@@ -593,7 +593,6 @@ else
                                 <label asp-for="@Model.ReservationTiming" class="mb-3 block text-base font-medium text-[#07074D] justify-content-start"></label>
                                 <span asp-validation-for="@Model.ReservationTiming" class="text-danger"></span>
 
-                                <div id="error-container" class="text-danger"></div>
 
                                 <div class="flatpickr mx-auto col-span-6 sm:col-span-6">
                                     <div class="flex align-middle align-content-center">
@@ -611,6 +610,8 @@ else
                                     </div>
 
                                 </div>
+                                <div id="error-container" class="text-danger"></div>
+
                                 <div id="availableSeatsMessage"><strong>Available seats:</strong> <span id="availableSeatsCount"></span></div>
 
                             </div>
@@ -671,7 +672,7 @@ else
             textToToggle.style.display = "none";
         }
     });
-    
+
     function toggleViewMenu() {
         var element = document.getElementById("viewMenu");
         if (element.classList.contains("column") && element.classList.contains("text-center")) {
@@ -701,7 +702,7 @@ else
 
     document.addEventListener("DOMContentLoaded", function () {
         const currentUrl = new URL(window.location.href);
-        const restaurantID = currentUrl.searchParams.get("RestaurantId");
+        const restaurantID = currentUrl.searchParams.get("restaurantID");
         const inputElement = document.getElementById("datetime");
         const errorContainer = document.getElementById("error-container");
 
@@ -722,8 +723,6 @@ else
             }
             if (restaurantID === "2" && (selectedDateTime.getHours() >= 14 && selectedDateTime.getHours() < 17)) {
                 displayErrorMessage("Restaurant closed during this time.");
-            } else {
-                displayErrorMessage("");
             }
         });
     });
@@ -789,7 +788,7 @@ else
     const currentUrl = new URL(window.location.href);
 
     // Get the restaurantID query parameter value
-    const restaurantID = currentUrl.searchParams.get("RestaurantId");
+    const restaurantID = currentUrl.searchParams.get("restaurantID");
 
     let maxTime = new Date();
     let minTime = new Date();
@@ -798,19 +797,26 @@ else
 
 
     // Set the maximum time and minimum time based on the restaurantID
+
+
     if (restaurantID === "3") {   //Mexikana ID = 3
         minTime.setHours(17, 0, 0, 0);
         maxTime.setHours(23, 0, 0, 0);
+
     }
     else if (restaurantID === "2") {   //La Oesta - ID = 2
         minTime.setHours(10, 0, 0, 0);
         maxTime.setHours(21, 0, 0, 0);
         disabledDates = [...getMondaysInYear(2023), ...getTuesdaysInYear(2023)];
+
+
     }
     else { // Bamboo ID = 1
+
         minTime.setHours(12, 0, 0, 0);
         maxTime.setHours(21, 0, 0, 0);
         disabledDates = getMondaysInYear(2023);
+
     }
 
     // Initialize Flatpickr with date and time options
@@ -821,7 +827,8 @@ else
         disable: disabledDates,
         minTime: minTime, // Set the min time for all days
         maxTime: maxTime // Set the maximum time for all days
-    });</script>
+    });
+    </script>
 
 
 <script>
@@ -829,8 +836,9 @@ else
         const inputElement = document.getElementById("datetime");
 
         const queryParams = new URLSearchParams(window.location.search);
-        const restaurantID = queryParams.get("RestaurantId");
-        console.log(`Restaurant ID is: ${restaurantID}`)
+        const restaurantID = queryParams.get("restaurantID");
+        console.log(restaurantID)
+        console.log(inputElement)
 
         inputElement.addEventListener("change", function () {
             const selectedDateTime = inputElement.value;
@@ -881,8 +889,8 @@ else
     }
 
         /*        .column:nth-child(odd) {
-                background-color: #c4ccd2;
-            }*/
+                    background-color: #c4ccd2;
+                }*/
 
         /* Adjust the width of the left column */
         .column:nth-child(1) {
