@@ -4,11 +4,13 @@
     ViewData["Title"] = "Home";
 }
 
-@*<style>
-        body {
-            background-color: #D0CFCF;
-        }
-    </style>*@
+<style>
+.table th,
+.table td {
+    text-align: center;
+}
+
+</style>
 
 @{
     string cID = Context.Request.Query["CustomerId"];
@@ -101,7 +103,7 @@ else
     </div>
 </div>
 
-
+<div class="p-5">
 <table class="table" style="background-color: white; margin-top: 0;">
     <thead>
         <tr>
@@ -153,3 +155,4 @@ else
         }
     </tbody>
 </table>
+</div>
