@@ -4,11 +4,23 @@
     ViewData["Title"] = "Home";
 }
 
-@*<style>
-        body {
-            background-color: #D0CFCF;
-        }
-    </style>*@
+<style>
+.custom-gold-bg {
+    background-color: #FFB81F; /* Background color in light mode */
+}
+
+.custom-gold-text {
+    color: black; /* Text color in light mode */
+}
+
+.custom-silver-bg {
+    background-color: #B3B3B3; /* Background color in light mode */
+}
+
+.custom-silver-text {
+    color: black; /* Text color in light mode */
+}
+</style>
 
 @{
     string cID = Context.Request.Query["CustomerId"];
@@ -121,119 +133,6 @@ else
                         </div>
                     </form>
 
-                    <!-- Table -->
-                    <!--<table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-
-                        <thead class="bg-gray-50 dark:bg-slate-800">
-                            <tr>
-                                <th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
-                                    <div class="flex items-center gap-x-2">
-                                        <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
-                                            Reservation ID
-                                        </span>
-                                    </div>
-                                </th>-->
-                    @*<th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
-                            <div class="flex items-center gap-x-2">
-                                <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
-                                    Customer ID
-                                </span>
-                            </div>
-                        </th>
-
-                        <th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
-                            <div class="flex items-center gap-x-2">
-                                <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
-                                    Guest ID
-                                </span>
-                            </div>
-                        </th>*@
-
-                    <!--<th scope="col" class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium  tracking-wide text-gray-800 dark:text-gray-200">
-                                        Customer Name
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-2 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Number of People
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Reservation Time
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Banquet
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Phone Number
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Dining Area
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-4 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        High Chairs
-                                    </span>
-                                </div>
-                            </th>
-
-                            <th scope="col" class="px-6 py-3 text-left">
-                                <div class="flex items-center gap-x-2">
-                                    <span class="text-xs font-medium tracking-wide text-gray-800 dark:text-gray-200">
-                                        Special Notes
-                                    </span>
-                                </div>
-                            </th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        foreach (var reservation in Model.reservations)
-                        {-->
-                    @*<tr>
-                            <th scope="row">@reservation.ReservationId</th>
-
-                            <td>@(reservation.Customer?.FullName ?? reservation.Guest?.FullName)</td>
-                            <td>@Html.DisplayFor(item => reservation.NumberOfPeople)</td>
-                            <td>@Html.DisplayFor(item => reservation.ReservationTiming)</td>
-                            <td>@Html.DisplayFor(item => reservation.Banquet.BanquetName)</td>
-                            <td>@(reservation.Customer?.PhoneNumber ?? reservation.Guest?.PhoneNumber)</td>
-                            <td>@Html.DisplayFor(item => reservation.Area.Area)</td>
-                            <td>@Html.DisplayFor(item => reservation.HighChairs)</td>
-                            <td>@Html.DisplayFor(item => reservation.SpecialNotes)</td>
-                        </tr>*@
-                    <!--}
-                            </tbody>
-
-                        </table>-->
                 </div>
             </div>
         </div>
@@ -293,7 +192,40 @@ else
                 <td>@(reservation.Customer?.PhoneNumber ?? reservation.Guest?.PhoneNumber)</td>
                 <td>@Html.DisplayFor(item => reservation.Area.Area)</td>
                 <td>@Html.DisplayFor(item => reservation.HighChairs)</td>
-                <td>@(reservation.Customer != null ? reservation.Customer.Status : "Guest")</td>
+                <td>@*@(reservation.Customer != null ? reservation.Customer.Status : "Guest")*@
+                    @if (reservation.Customer != null)
+                    {
+                        if (reservation.Customer.Status == "Gold")
+                        {
+                            <div class="px-6 py-3">
+                                <span class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium custom-gold-bg custom-gold-text">
+                                    <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                    </svg>
+                                    Gold
+                                </span>
+                            </div>
+
+                        }
+                        else if (reservation.Customer.Status == "Silver")
+                        {
+                            <div class="px-6 py-3">
+                                <span class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium custom-silver-bg custom-silver-text">
+                                    <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                    </svg>
+                                    Silver
+                                </span>
+                            </div>
+                        }
+
+                    }
+                    else
+                    {
+                        <p>Guest</p>
+                    }
+
+                </td>
                 <td>@Html.DisplayFor(item => reservation.SpecialNotes)</td>
                 <td>
                     <div class="relative flex px-2">
