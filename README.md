@@ -26,12 +26,12 @@ This project is a reservation system created to allow customers and restaurant s
 - C#
 - JavaScript
 
-### Authors 
-- Sharon A.
-- Shanessa G.
-- Henry N.
-- Ngoc Mai N.
-- Devanshi P.
-- Yunmei Y.
+### Contributors 
+- Sharon A. @sharonachandy
+- Shanessa G. @shanessa-george
+- Henry N. @HenryNg101
+- Ngoc Mai N. @nnmai-mabel
+- Devanshi P. @devanshi2003
+- Yunmei Y. @yeyyy013
 
 
