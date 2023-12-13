@@ -1,0 +1,189 @@
+CREATE TABLE Restaurants
+(
+    RestaurantID INT PRIMARY KEY,
+	RestaurantAddress NVARCHAR(255),
+    RestaurantName NVARCHAR (300)
+);
+
+CREATE TABLE Customers
+(
+    CustomerID INT IDENTITY(1,1) PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Email VARCHAR(100),
+    PhoneNumber VARCHAR(20), 
+    Username NVARCHAR(20), 
+    Password NVARCHAR(50),
+    LoyaltyPoints INT DEFAULT 0
+);
+
+CREATE TABLE RestaurantWorkers
+(
+    WorkerID INT IDENTITY(1,1) PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Email VARCHAR(100),
+    PhoneNumber VARCHAR(20),
+    Username NVARCHAR(20),
+    Password NVARCHAR(50),
+    RestaurantID INT,
+    FOREIGN KEY (RestaurantID) REFERENCES Restaurants(RestaurantID)
+);
+
+
+CREATE TABLE DiningAreas (
+    AreaID INT PRIMARY KEY ,
+    Area VARCHAR(255),
+    RestaurantID INT,
+    FOREIGN KEY (RestaurantID) REFERENCES Restaurants(RestaurantID)
+);
+
+
+CREATE TABLE Banquets (
+    BanquetID INT PRIMARY KEY,
+    BanquetName VARCHAR(255),
+    RestaurantID INT,
+    FOREIGN KEY (RestaurantID) REFERENCES Restaurants(RestaurantID)
+);
+
+
+CREATE TABLE Reservation
+(
+    ReservationID INT IDENTITY(1,1) PRIMARY KEY,
+    CustomerID INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+    RestaurantID INT,
+    FOREIGN KEY (RestaurantID) REFERENCES Restaurants(RestaurantID),
+    AreaID INT,
+    FOREIGN KEY (AreaID) REFERENCES DiningAreas(AreaID),
+    ReservationTiming DATETIME,
+    BanquetID int,
+    FOREIGN KEY (BanquetID) REFERENCES Banquets(BanquetID),
+    NumberOfPeople INT 
+
+);
+
+CREATE TABLE RestaurantHours
+(
+    RestaurantID INT,
+    FOREIGN KEY (RestaurantID) REFERENCES Restaurants(RestaurantID),
+    closedDateTo DATETIME,
+    closedDateFrom DATETIME
+);
+
+
+-- Insert data into the Customers table
+INSERT INTO Customers (FirstName, LastName, Email, PhoneNumber, Username, Password)
+VALUES
+    ('John', 'Doe', 'johndoe@example.com', '555-123-4567', 'johnd', 'password123'),
+    ('Jane', 'Smith', 'janesmith@example.com', '555-987-6543', 'janes', 'securepass');
+
+-- Insert data into the Restaurants table
+INSERT INTO Restaurants (RestaurantID, RestaurantName, RestaurantAddress)
+VALUES
+    (1, 'Bamboo Leaf', '25 Gouger Street Adelaide'),
+    (2, 'La Oeste De La Mar', '40 120 North Terrace Adelaide'),
+	(3, 'Mexicana', '40 Fullarton Road Norwood');
+
+-- Insert restaurant workers for each restaurant
+INSERT INTO RestaurantWorkers (FirstName, LastName, Email, PhoneNumber, Username, Password, RestaurantID)
+VALUES
+    ('Worker1', 'Restaurant1', 'worker1@example.com', '555-111-1111', 'worker1', 'passwordhash1', 1),
+    ('Worker2', 'Restaurant2', 'worker2@example.com', '555-222-2222', 'worker2', 'passwordhash2', 2),
+    ('Worker3', 'Restaurant3', 'worker3@example.com', '555-333-3333', 'worker3', 'passwordhash3', 3);
+
+-- Insert data into the Reservation table
+INSERT INTO Reservation (CustomerID, RestaurantID, ReservationTiming, NumberOfPeople)
+VALUES
+    (1, 1, '2023-09-15 19:00:00', 4),
+    (2, 2, '2023-09-16 20:00:00', 2),
+    (1, 3, '2023-07-16 20:00:00', 3);
+
+
+-- Insert data into the RestaurantHours table
+INSERT INTO RestaurantHours (RestaurantID, closedDateTo, closedDateFrom)
+VALUES
+    (1, '2023-09-10 00:00:00', '2023-09-11 00:00:00'),
+    (1, '2023-09-17 00:00:00', '2023-09-18 00:00:00'),
+    (2, '2023-09-12 00:00:00', '2023-09-14 00:00:00');
+
+
+-- Insert data into the DiningAreas table
+INSERT INTO DiningAreas (AreaID, Area, RestaurantID)
+VALUES
+    (1, 'Main Dining Area', 1),
+    (2, 'Private Dining Room', 1),
+    (3, 'Patio', 2),
+    (4, 'Terrace', 2),
+    (5, 'Main Dining Area', 3),
+    (6, 'Private Dining Room', 3);
+
+
+-- Insert data into the Banquets table
+INSERT INTO Banquets (BanquetID, BanquetName, RestaurantID)
+VALUES
+    (1, 'Satay Chicken', 1),
+    (2, 'Steam prawn dumplings', 1),
+    (3, 'S+P Squid', 1),
+    (4, 'Roast Pork', 1),
+    (5, 'Asian green', 1),
+    (6, 'Sticky pork', 1),
+    (7, 'Crispy beef', 1),
+
+    (8, 'Papas Fritas', 3),
+    (9, 'Korean Fried Chicken Tacos', 3),
+    (10, 'Smokey chicken', 3),
+    (11, 'Taquitos dorados', 3),
+    (12, 'Nachos', 3),
+
+(13, 'Satay chicken', 1),
+(14, 'S+P Eggplant', 1),
+(15, 'Crying Tiger Salad', 1),
+(16, 'Steam prawn dumplings', 1),
+(17, 'Ribs', 1),
+(18, 'Barramundi curry', 1);
+
+
+
+-- Update the Reservation table with area and banquet references
+UPDATE Reservation
+SET AreaID = 1, BanquetID = 1
+WHERE ReservationID = 1;
+
+UPDATE Reservation
+SET AreaID = 3
+WHERE ReservationID = 2;
+
+UPDATE Reservation
+SET AreaID = 6,BanquetID = 8
+WHERE ReservationID = 2;
+
+
+CREATE TABLE Guests
+(
+    GuestID INT IDENTITY(1,1) PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Email VARCHAR(100),
+    PhoneNumber VARCHAR(20), 
+);
+
+INSERT INTO Guests (FirstName, LastName, Email, PhoneNumber)
+VALUES
+    ('Guest1', 'Smith', 'guest1@example.com', '555-444-1111'),
+    ('Guest2', 'Johnson', 'guest2@example.com', '555-555-2222');
+
+ALTER TABLE Reservation
+ADD GuestID INT,
+FOREIGN KEY (GuestID) REFERENCES Guests(GuestID);
+
+INSERT INTO Reservation (CustomerID, RestaurantID, GuestID, ReservationTiming, NumberOfPeople)
+VALUES
+    (NULL, 1, 1, '2023-09-15 19:00:00', 4),
+    (NULL, 2, 2, '2023-09-16 20:00:00', 2);
+
+
+
+
+
+
